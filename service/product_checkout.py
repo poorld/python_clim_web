@@ -178,8 +178,8 @@ def saveCart(soup: BeautifulSoup):
     product_code = soup.find('input', {'name': 'productCode'})['value']
     
     stock = soup.find('input', {'id': f'stock{product_code}'})['value']
-    count = min(float(stock), max_money / float(price))
-    count = int(count)
+    # count = min(float(stock), max_money / float(price))
+    count = int(stock)
     param_save_cart = {'typeCode': 0, 'price': 0, 'productCode': 0, 'count': 0}
     param_save_cart.update({
         'typeCode': type_code,
@@ -251,7 +251,20 @@ def checkout(checkId, count):
     # table_html = str(table)
     # print('table_html', table_html)
 
+    # {'rankCode': '68', 'tagCode': '30', 'shippingMethod': '1', 'thirdcode': None, 'receiver': '李不帅', 'recvphone': '18529551929', 'provincecode': 19, 'citycode': 202, 'countycode': 1754, 'recvaddr': '化龙镇山门大道700号', 'exchangeRate': '1', 'paid': '4821.0', 'rmbAmount': '4821.00', 'cartCodes': '70708', 'itemPrice': '1607.0', 'itemRmbAmount': '1607.00', 'defectNo': '', 'productcode': '101877501', 'counts': 3}
     print('settleData', settleData)
+
+    wxpush = PushPlus()
+
+    # 校验总价
+    int_price = int(float(settleData['itemPrice']))
+    int_total_price = int_price * count
+    int_rmb_amount = int(float(settleData['rmbAmount']))
+    print('int_total_price', int_total_price)
+    print('int_rmb_amount', int_rmb_amount)
+    if int_total_price != int_rmb_amount:
+        wxpush.sendMsg(name, f'下单失败!单价{int_price},数量{count},计算总价{int_total_price},系统总价{int_rmb_amount}') 
+        return False
 
     
     resp = requests.post(url=url_settle_save, headers=headers, params=settleData)
@@ -260,7 +273,7 @@ def checkout(checkId, count):
     print('content:', )
     # return resp.status_code == 200
     data = resp.json()
-    wxpush = PushPlus()
+    
     if data['resultCode'] == 0:
         
         wxpush.sendMsg(name, f'下单 {name},数量{settleData["counts"]},金额{settleData["itemPrice"]}')
