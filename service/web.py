@@ -255,10 +255,8 @@ def orders():
             save_orders_history(order)
     print('new_orders', new_orders)
 
-    # 如果有新订单，推送到SSE客户端
-    for order in new_orders:
-        push_order_to_clients(order)
-
+    # 注意：订单推送已在下单函数中直接处理，这里不需要重复推送
+    # 这个路由主要用于兼容旧的轮询方式和调试
     return jsonify({'orders': new_orders})
 
 # SSE订单推送端点
@@ -271,14 +269,22 @@ def stream():
         while True:
             try:
                 # 减少超时时间，提高响应速度
-                order = order_queue.get(timeout=1)
-                # 发送订单数据
-                data = json.dumps({
-                    "type": "new_order",
-                    "order": order,
-                    "timestamp": time.time()
-                })
-                print(f"📤 SSE发送订单: {order}")
+                message = order_queue.get(timeout=1)
+
+                # 处理不同类型的消息
+                if isinstance(message, dict):
+                    # 订单移除消息
+                    data = json.dumps(message)
+                    print(f"📤 SSE发送消息: {message}")
+                else:
+                    # 新订单消息（兼容旧格式）
+                    data = json.dumps({
+                        "type": "new_order",
+                        "order": message,
+                        "timestamp": time.time()
+                    })
+                    print(f"📤 SSE发送订单: {message}")
+
                 yield f"data: {data}\n\n"
                 order_queue.task_done()
             except queue.Empty:
@@ -350,6 +356,27 @@ def push_order_to_clients(order):
         print(f"📤 订单 {order} 已推送到队列，队列大小: {order_queue.qsize()}")
     except queue.Full:
         print("❌ 订单队列已满，跳过推送")
+
+def remove_paid_orders(paid_orders):
+    """移除已付款的订单"""
+    from common.orders import orders
+
+    for order in paid_orders:
+        if order in orders:
+            orders.remove(order)
+            print(f"🗑️ 已从订单列表移除: {order}")
+
+            # 推送移除订单的消息到前端
+            try:
+                removal_data = {
+                    "type": "remove_order",
+                    "order": order,
+                    "timestamp": time.time()
+                }
+                order_queue.put(removal_data, block=False)
+                print(f"📤 订单移除消息已推送: {order}")
+            except queue.Full:
+                print("❌ 订单队列已满，跳过移除消息推送")
 
 # 主页
 @app.route('/')
@@ -636,3 +663,13 @@ if __name__ == '__main__':
         else:
             print(f"❌ Flask启动失败: {e}")
             raise
+
+# 手动检查订单状态
+@app.route('/api/check_order_status', methods=['POST'])
+def api_check_order_status():
+    try:
+        from service.product_checkout import check_order_payment_status
+        check_order_payment_status()
+        return jsonify({'success': True, 'message': '订单状态检查完成'})
+    except Exception as e:
+        return jsonify({'success': False, 'message': f'检查失败: {str(e)}'})

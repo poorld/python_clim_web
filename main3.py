@@ -34,4 +34,10 @@ if __name__ == "__main__":
     else:
         print("⏸️ 监控状态为关闭，不启动监控线程")
 
+    # 启动订单状态检查线程
+    from jobs.job_checkout import OrderStatusCheckThread
+    order_check_thread = OnceJobThread(OrderStatusCheckThread())
+    order_check_thread.start()
+    print("🔍 订单状态检查线程已启动")
+
     print("🎛️ 监控间隔可在Web界面动态调整: http://localhost:5000")

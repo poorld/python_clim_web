@@ -22,11 +22,21 @@ class CheckoutStrategy(ABC):
 
 
 class TestModeStrategy(CheckoutStrategy):
-    """测试模式策略：单轮检测，合并订单，只弹一次付款"""
+    """测试模式策略：根据建单模式设置决定测试行为"""
 
     def execute(self, keywords):
-        print("🧪 测试模式：检测所有款号，合并成一个订单")
+        from common.status import get_global_batch_order_mode
+        batch_mode = get_global_batch_order_mode()
 
+        if batch_mode:
+            print("🧪 测试统一建单模式：检测所有款号，合并成一个订单，只弹一次付款")
+            self._test_batch_mode(keywords)
+        else:
+            print("🧪 测试单独建单模式：检测所有款号，每个有货商品立即下单")
+            self._test_single_mode(keywords)
+
+    def _test_batch_mode(self, keywords):
+        """测试统一建单模式"""
         try:
             # 测试模式：只重置检测轮次，不清空购物车
             from service.product_checkout import state
@@ -38,28 +48,95 @@ class TestModeStrategy(CheckoutStrategy):
                 state.batch_round_count = 0
                 # 不清空 batch_cart_items，让商品能够累积
 
-                print(f"🔄 [TEST] 测试模式状态重置:")
+                print(f"🔄 [TEST-BATCH] 测试统一建单模式状态重置:")
                 print(f"   保留购物车: {old_cart_count} 件商品")
                 print(f"   清空关键词记录: {old_keywords_count} → 0")
                 print(f"   重置轮次计数: → 0")
-            print("🔄 测试检测开始...")
+            print("🔄 测试统一建单检测开始...")
 
             # 并发检测所有关键词
             results = self._concurrent_check(keywords)
 
             # 检查结果
             success_count = sum(1 for result in results.values() if result)
-            print(f"📊 测试检测完成：{success_count}/{len(keywords)} 个关键词有货")
+            print(f"📊 测试统一建单检测完成：{success_count}/{len(keywords)} 个关键词有货")
 
             # 执行批量下单
-            self._execute_checkout("测试")
+            self._execute_checkout("测试统一建单")
 
-            print("🎉 测试模式完成")
+            print("🎉 测试统一建单模式完成")
 
         except Exception as e:
-            print(f"❌ 测试模式执行出错: {e}")
+            print(f"❌ 测试统一建单模式执行出错: {e}")
             import traceback
             traceback.print_exc()
+
+    def _test_single_mode(self, keywords):
+        """测试单独建单模式：每个商品立即下单，不使用购物车"""
+        try:
+            from service.product_checkout import reset_batch_round, query_product, selectBuyDefect, check_cart, config
+            from common.status import set_test_mode
+
+            # 重置状态
+            reset_batch_round()
+            print("🔄 [TEST-SINGLE] 测试单独建单模式状态重置完成")
+            print("🔄 测试单独建单检测开始...")
+
+            # 临时关闭测试模式，让每个商品都能立即下单
+            set_test_mode(False)
+
+            # 串行检测所有关键词，每个有货商品立即下单
+            success_count = 0
+            for i, keyword in enumerate(keywords, 1):
+                print(f"🔍 [{i}/{len(keywords)}] 测试关键词: {keyword}")
+
+                try:
+                    # 查询商品
+                    product = query_product(keyword)
+                    if product:
+                        print(f"📦 关键词 {keyword} 有库存，准备立即下单")
+
+                        # 加入购物车
+                        param_save_cart = selectBuyDefect(product['sku'])
+                        if param_save_cart:
+                            product_code_value = param_save_cart.get('productCode') or param_save_cart.get('product_code')
+                            count = param_save_cart.get('count', 1)
+
+                            if product_code_value:
+                                # 立即下单（不等待，不合并）
+                                checkout_result = check_cart(product_code_value, count, config.PAY_TYPE_WECHAT)
+                                if checkout_result:
+                                    success_count += 1
+                                    print(f"✅ 关键词 {keyword} 测试成功，已立即下单（第{success_count}个订单）")
+                                    # 注意：订单推送已在 checkout 函数中处理，这里不需要重复推送
+                                else:
+                                    print(f"❌ 关键词 {keyword} 下单失败")
+                            else:
+                                print(f"❌ 关键词 {keyword} 获取商品代码失败")
+                        else:
+                            print(f"❌ 关键词 {keyword} 加入购物车失败")
+                    else:
+                        print(f"📦 关键词 {keyword} 暂无库存")
+
+                except Exception as e:
+                    print(f"❌ 处理关键词 {keyword} 时出错: {e}")
+
+            # 恢复测试模式
+            set_test_mode(True)
+
+            print(f"📊 测试单独建单检测完成：{success_count}/{len(keywords)} 个关键词有货并已下单")
+            print("🎉 测试单独建单模式完成")
+
+        except Exception as e:
+            print(f"❌ 测试单独建单模式执行出错: {e}")
+            import traceback
+            traceback.print_exc()
+            # 确保恢复测试模式
+            try:
+                from common.status import set_test_mode
+                set_test_mode(True)
+            except:
+                pass
 
     def _concurrent_check(self, keywords):
         """并发检测关键词"""
@@ -285,6 +362,31 @@ class RefreshThread(ThreadHandler):
 
         # 执行检测
         context.execute_checkout(keywords)
+
+
+class OrderStatusCheckThread(ThreadHandler):
+    """订单状态检查线程：定期检查订单付款状态"""
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.check_interval = 5  # 5秒检查一次
+
+    def startup(self) -> None:
+        print("🔍 订单状态检查线程已启动")
+
+    def shutdown(self) -> None:
+        print("🔍 订单状态检查线程已停止")
+
+    def handle(self) -> None:
+        try:
+            from service.product_checkout import check_order_payment_status
+            check_order_payment_status()
+        except Exception as e:
+            print(f"❌ 订单状态检查出错: {e}")
+
+        # 等待指定间隔
+        import time
+        time.sleep(self.check_interval)
 
 class MonitorOnlyStrategy(CheckoutStrategy):
     """监控模式策略：只检测库存，发送通知，不下单，不轮询"""

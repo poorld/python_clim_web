@@ -500,7 +500,13 @@
                                 </div>
                                 <small class="text-muted">
                                     <i class="bi bi-info-circle"></i>
-                                    测试模式：检测所有款号，有货商品合并成一个订单，只弹一次付款窗口
+                                    <span id="testModeDescription">
+                                        {% if batch_order_mode %}
+                                        测试统一建单：检测所有款号，有货商品合并成一个订单，只弹一次付款窗口
+                                        {% else %}
+                                        测试单独建单：检测所有款号，每个有货商品立即下单（多次付款）
+                                        {% endif %}
+                                    </span>
                                 </small>
                             </div>
 
@@ -600,9 +606,14 @@
                     </div>
 
                     <!-- 订单列表 -->
-                    <h3 class="section-title">
-                        <i class="bi bi-receipt"></i> 订单列表
-                        <span class="badge bg-primary ms-2" id="orderCount">0</span>
+                    <h3 class="section-title d-flex justify-content-between align-items-center">
+                        <div>
+                            <i class="bi bi-receipt"></i> 订单列表
+                            <span class="badge bg-primary ms-2" id="orderCount">0</span>
+                        </div>
+                        <button class="btn btn-outline-secondary btn-sm" onclick="checkOrderStatus()" title="检查订单付款状态">
+                            <i class="bi bi-arrow-clockwise"></i> 检查状态
+                        </button>
                     </h3>
 
                     <div class="card border-0 shadow-sm">
@@ -825,6 +836,7 @@
                     // 更新UI
                     const label = document.getElementById('batchModeLabel');
                     const badge = document.querySelector('.status-badge.status-mode');
+                    const testDescription = document.getElementById('testModeDescription');
 
                     if (enabled) {
                         label.textContent = '统一建单';
@@ -833,12 +845,18 @@
                             badge.className = 'status-badge status-info';
                             badge.innerHTML = '<i class="bi bi-collection"></i> 建单模式: 统一建单';
                         }
+                        if (testDescription) {
+                            testDescription.textContent = '测试统一建单：检测所有款号，有货商品合并成一个订单，只弹一次付款窗口';
+                        }
                     } else {
                         label.textContent = '单独建单';
                         label.className = 'badge bg-success';
                         if (badge) {
                             badge.className = 'status-badge status-success';
                             badge.innerHTML = '<i class="bi bi-lightning"></i> 建单模式: 单独建单';
+                        }
+                        if (testDescription) {
+                            testDescription.textContent = '测试单独建单：检测所有款号，每个有货商品立即下单（多次付款）';
                         }
                     }
 
@@ -1151,6 +1169,8 @@
                         console.log('SSE连接确认');
                     } else if (data.type === 'new_order') {
                         handleNewOrder(data.order);
+                    } else if (data.type === 'remove_order') {
+                        handleRemoveOrder(data.order);
                     } else if (data.type === 'heartbeat') {
                         console.log('SSE心跳包');
                     }
@@ -1172,6 +1192,7 @@
 
         function handleNewOrder(order) {
             console.log('🚀 收到新订单:', order);
+            console.log('🔍 当前已打开的支付页面:', Array.from(openedPaymentTabs));
 
             // 🎯 立即添加到后端历史记录，防止重复推送
             addOrderToHistory(order);
@@ -1222,6 +1243,7 @@
             // 🚀 智能打开支付页面
             const selectedPayType = document.querySelector('input[name="payType"]:checked')?.value || '2';
             console.log('🚀 准备弹窗支付页面:', order, '支付类型:', selectedPayType);
+            console.log('🔍 检查订单是否已在打开列表中:', openedPaymentTabs.has(order));
             smartPaymentOpen(order, selectedPayType);
 
             // 添加进入动画
@@ -1239,6 +1261,87 @@
 
             // 显示成功提示
             showToast(`🎉 新订单生成: ${order}`, 'success');
+        }
+
+        function handleRemoveOrder(order) {
+            console.log('🗑️ 收到订单移除消息:', order);
+
+            const ordersDiv = document.getElementById('orders');
+            const orderCountBadge = document.getElementById('orderCount');
+
+            // 查找并移除对应的订单元素
+            const orderItems = ordersDiv.querySelectorAll('.order-item');
+            let removed = false;
+
+            orderItems.forEach(item => {
+                const orderCode = item.querySelector('.order-code');
+                if (orderCode && orderCode.textContent.includes(order)) {
+                    // 添加移除动画
+                    item.style.transition = 'all 0.5s ease';
+                    item.style.opacity = '0';
+                    item.style.transform = 'translateX(20px)';
+
+                    setTimeout(() => {
+                        item.remove();
+                        orderCount--;
+
+                        // 更新订单计数
+                        if (orderCount > 0) {
+                            orderCountBadge.textContent = orderCount;
+                            orderCountBadge.className = 'badge bg-success ms-2';
+                        } else {
+                            orderCountBadge.textContent = '0';
+                            orderCountBadge.className = 'badge bg-secondary ms-2';
+
+                            // 如果没有订单了，显示提示
+                            if (ordersDiv.children.length === 0) {
+                                ordersDiv.innerHTML = '<div class="no-orders text-muted text-center py-3"><i class="bi bi-inbox"></i> 暂无待付款订单</div>';
+                            }
+                        }
+                    }, 500);
+
+                    removed = true;
+                    console.log(`✅ 已移除订单: ${order}`);
+                }
+            });
+
+            if (removed) {
+                // 从已打开支付页面记录中移除
+                openedPaymentTabs.delete(order);
+
+                // 显示提示
+                showToast(`💳 订单 ${order} 已付款，已从列表移除`, 'info');
+            } else {
+                console.log(`⚠️ 未找到订单: ${order}`);
+            }
+        }
+
+        // 手动检查订单状态
+        async function checkOrderStatus() {
+            try {
+                console.log('🔍 手动检查订单状态...');
+                showToast('正在检查订单状态...', 'info');
+
+                const response = await fetch('/api/check_order_status', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    console.log('✅ 订单状态检查成功');
+                    showToast('订单状态检查完成', 'success');
+                } else {
+                    console.log('❌ 订单状态检查失败:', result.message);
+                    showToast(result.message, 'error');
+                }
+            } catch (error) {
+                console.error('❌ 检查订单状态失败:', error);
+                showToast('检查订单状态失败，请重试', 'error');
+            }
         }
 
         // 兼容性：保留fetchOrders函数作为备用

@@ -50,8 +50,12 @@ def get_global_orders_history():
 orders = []
 def set_orders(_orders):
     global orders
-    # orders = _orders
-    orders.append(_orders)
+    # 去重：只有当订单不存在时才添加
+    if _orders not in orders:
+        orders.append(_orders)
+        print(f"📝 新订单已添加到列表: {_orders}")
+    else:
+        print(f"⚠️ 订单已存在，跳过添加: {_orders}")
 
 def get_orders():
     global orders

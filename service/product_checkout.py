@@ -751,11 +751,21 @@ def checkout(checkId, count, payType='2'):
                 except Exception as e:
                     print(f"⚠️ 发送通知失败: {e}")
 
-                # 刷新订单列表
+                # 直接推送当前订单号到Web界面（不刷新整个订单列表，避免重复）
                 try:
-                    refresh_orders()
+                    from service.web import push_order_to_clients
+                    from common.orders import set_orders
+
+                    # 将订单号添加到订单列表
+                    set_orders(order_code)
+
+                    # 立即推送订单号
+                    print(f"🚀 直接推送订单号: {order_code}")
+                    push_order_to_clients(order_code)
                 except Exception as e:
-                    print(f"⚠️ 刷新订单列表失败: {e}")
+                    print(f"❌ 直接推送订单失败: {e}")
+                    import traceback
+                    traceback.print_exc()
 
                 return True
             else:
@@ -843,19 +853,7 @@ def process_keyword(keyword):
                     print(f"关键字 {keyword} 自动下单成功")
                     save_keyword_status(keyword)
 
-                    # 立即推送订单到Web界面
-                    try:
-                        from service.web import push_order_to_clients
-                        from common.orders import get_orders
-
-                        # 获取最新订单并推送
-                        latest_orders = get_orders()
-                        if latest_orders:
-                            for order_code in latest_orders[-1:]:  # 只推送最新的订单
-                                push_order_to_clients(order_code)
-                    except Exception as e:
-                        print(f"推送订单失败: {e}")
-
+                    # 注意：订单推送已在 checkout 函数中处理，这里不需要重复推送
                     return True
             else:
                 # 通知模式
@@ -875,27 +873,120 @@ def process_keyword(keyword):
 
     
 def refresh_orders():
+    """刷新订单列表，只获取待付款的订单"""
     print('getOrder')
     resp = requests.get(url=config.URL_ORDERLIST, headers=headers)
     soup = BeautifulSoup(resp.content, "html.parser", from_encoding="utf-8")
-    # print('soup', soup)
-    # 查找所有包含 'javascript:showOrder' 的 <a> 标签
-    links = soup.find_all('a', href=True)
+
+    # 查找订单表格
+    tbody = soup.find('tbody')
+    if not tbody:
+        print("未找到订单表格")
+        return []
+
     orders = []
-    for link in links:
-        href = link['href']
-        # 使用正则表达式提取订单号
-        # 确保 href 属性包含 showOrder 调用
-        if 'showOrder' in href:
-            match = re.search(r"showOrder\('(\w+)'\)", href)
-            if match:
-                order_number = match.group(1)
-                print(f"提取的订单号: {order_number}")
-                orders.append(order_number)
-    if orders:
-        for ord in orders:
-            set_orders(ord)
+    rows = tbody.find_all('tr')
+
+    for row in rows:
+        try:
+            tds = row.find_all('td')
+            if len(tds) >= 6:
+                # 提取订单号
+                order_link = tds[0].find('a')
+                if order_link and 'showOrder' in order_link.get('href', ''):
+                    match = re.search(r"showOrder\('(\w+)'\)", order_link['href'])
+                    if match:
+                        order_number = match.group(1)
+
+                        # 提取订单状态
+                        order_status = tds[5].get_text(strip=True)
+
+                        # 只处理待付款的订单
+                        if order_status == '待付款':
+                            print(f"发现待付款订单: {order_number}")
+                            orders.append(order_number)
+                            set_orders(order_number)
+                        else:
+                            print(f"订单 {order_number} 状态为 '{order_status}'，跳过")
+        except Exception as e:
+            print(f"解析订单行时出错: {e}")
+            continue
+
+    print(f"共找到 {len(orders)} 个待付款订单")
     return orders
+
+def check_order_payment_status():
+    """检查订单付款状态，移除已付款的订单"""
+    from common.orders import get_orders
+    from service.web import remove_paid_orders
+
+    current_orders = get_orders()
+    if not current_orders:
+        return
+
+    print(f"🔍 检查 {len(current_orders)} 个订单的付款状态...")
+
+    try:
+        # 获取待付款订单状态（statuscode=10是待付款订单）
+        resp = requests.get(url=config.URL_ORDERLIST, headers=headers)
+        soup = BeautifulSoup(resp.content, "html.parser", from_encoding="utf-8")
+
+        tbody = soup.find('tbody')
+        if not tbody:
+            return
+
+        # 提取订单总数信息
+        try:
+            message_div = soup.find('div', class_='message')
+            if message_div:
+                total_text = message_div.get_text()
+                total_match = re.search(r'共.*?(\d+).*?条记录', total_text)
+                if total_match:
+                    total_count = int(total_match.group(1))
+                    print(f"📊 当前待付款订单总数: {total_count}")
+        except Exception as e:
+            print(f"⚠️ 提取订单总数失败: {e}")
+
+        # 获取当前待付款订单列表
+        pending_orders = set()
+        rows = tbody.find_all('tr')
+
+        for row in rows:
+            try:
+                tds = row.find_all('td')
+                if len(tds) >= 1:
+                    # 提取订单号
+                    order_link = tds[0].find('a')
+                    if order_link and 'showOrder' in order_link.get('href', ''):
+                        match = re.search(r"showOrder\('(\w+)'\)", order_link['href'])
+                        if match:
+                            order_number = match.group(1)
+                            pending_orders.add(order_number)
+                            print(f"📋 发现待付款订单: {order_number}")
+            except Exception as e:
+                continue
+
+        print(f"📊 服务器端待付款订单: {list(pending_orders)}")
+        print(f"📊 本地订单列表: {current_orders}")
+
+        # 检查哪些订单不在待付款列表中（说明已付款）
+        paid_orders = []
+        for order in current_orders:
+            if order not in pending_orders:
+                paid_orders.append(order)
+                print(f"✅ 订单 {order} 已付款（不在待付款列表中）")
+            else:
+                print(f"📋 订单 {order} 仍为待付款状态")
+
+        # 移除已付款的订单
+        if paid_orders:
+            remove_paid_orders(paid_orders)
+            print(f"🗑️ 已移除 {len(paid_orders)} 个已付款订单")
+        else:
+            print("📋 所有订单仍为待付款状态")
+
+    except Exception as e:
+        print(f"❌ 检查订单状态失败: {e}")
 
 # 添加查询商品总数的函数
 def query_product_count():
@@ -1051,11 +1142,28 @@ def process_keyword_direct(keyword):
                     return False
 
                 print(f"📦 关键词 {keyword} 获取到商品代码: {product_code_value}, 数量: {count}")
-                # 自动下单模式或测试模式
-                if batch_mode or test_mode:
-                    # 统一建单模式或测试模式：加入购物车
-                    print(f"🔄 [PROCESS] 关键词 {keyword} 进入购物车流程 (batch_mode={batch_mode}, test_mode={test_mode})")
+                # 判断处理模式：测试模式遵循当前建单模式设置
+                if test_mode:
+                    # 测试模式：根据当前建单模式设置决定行为
+                    if batch_mode:
+                        print(f"🧪 [TEST] 测试统一建单模式：关键词 {keyword} 加入购物车")
+                        mode_name = "测试统一建单"
+                        use_cart = True
+                    else:
+                        print(f"🧪 [TEST] 测试单独建单模式：关键词 {keyword} 立即下单")
+                        mode_name = "测试单独建单"
+                        use_cart = False
+                elif batch_mode:
+                    print(f"🛒 [BATCH] 统一建单模式：关键词 {keyword} 加入购物车")
+                    mode_name = "统一建单"
+                    use_cart = True
+                else:
+                    print(f"⚡ [SINGLE] 单独建单模式：关键词 {keyword} 立即下单")
+                    mode_name = "单独建单"
+                    use_cart = False
 
+                if use_cart:
+                    # 购物车模式：加入购物车等待批量处理
                     cart_result = selectBuyDefect(product['sku'])
                     print(f"🔄 [PROCESS] selectBuyDefect 结果: {cart_result}")
 
@@ -1073,18 +1181,7 @@ def process_keyword_direct(keyword):
                         print(f"🔄 [PROCESS] 准备调用 add_to_batch_cart")
                         add_to_batch_cart(product_info, cart_result)
 
-                        if test_mode:
-                            print(f"✅ [PROCESS] 关键字 {keyword} 商品已加入测试购物车")
-                        else:
-                            print(f"✅ [PROCESS] 关键字 {keyword} 商品已加入批量购物车")
-
-                        # 显示商品详细信息
-                        # print(f"📦 商品信息:")
-                        # print(f"   名称: {product_info['name']}")
-                        # print(f"   价格: {product_info.get('price', product_info.get('distribution_price', '未知'))}")
-                        # print(f"   图片: {product_info.get('image_url', '无图片')}")
-                        # print(f"   库存: {count}")
-                        # print(f"   购物车ID: {cart_result['cart_id']}")
+                        print(f"✅ [PROCESS] {mode_name}：关键字 {keyword} 商品已加入购物车")
 
                         # 发送带图片的HTML日志到Web界面
                         image_url = product_info.get('image_url', '')
@@ -1098,7 +1195,7 @@ def process_keyword_direct(keyword):
                     else:
                         print(f"❌ [PROCESS] 关键词 {keyword} selectBuyDefect 失败")
 
-                        # 更新批量模式检测记录
+                        # 更新检测记录
                         if batch_mode or test_mode:
                             with state.batch_lock:
                                 if keyword in state.processed_keywords_batch:
@@ -1107,10 +1204,10 @@ def process_keyword_direct(keyword):
 
                         return True
                 else:
-                    # 单独建单模式：立即下单（默认使用微信支付）
+                    # 立即下单模式：立即下单（默认使用微信支付）
                     checkout_result = check_cart(product_code_value, count, config.PAY_TYPE_WECHAT)
                     if checkout_result:
-                        print(f"关键字 {keyword} 自动下单成功")
+                        print(f"✅ [PROCESS] {mode_name}：关键字 {keyword} 自动下单成功")
 
                         # 更新单独建单模式检测记录
                         batch_mode = get_global_batch_order_mode()
@@ -1120,19 +1217,7 @@ def process_keyword_direct(keyword):
                                     state.processed_keywords_batch[keyword]['count'] += 1
                                     state.processed_keywords_batch[keyword]['last_stock'] = count
 
-                        # 立即推送订单到Web界面
-                        try:
-                            from service.web import push_order_to_clients
-                            from common.orders import get_orders
-
-                            # 获取最新订单并推送
-                            latest_orders = get_orders()
-                            if latest_orders:
-                                for order_code in latest_orders[-1:]:  # 只推送最新的订单
-                                    push_order_to_clients(order_code)
-                        except Exception as e:
-                            print(f"推送订单失败: {e}")
-
+                        # 注意：订单推送已在 checkout 函数中处理，这里不需要重复推送
                         return True
         else:
             # 通知模式：只发送通知，不加购物车，不下单
