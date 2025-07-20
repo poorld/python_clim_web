@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能监控系统</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        /* body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            position: relative;
+            overflow-x: hidden;
+        } */
+
+        body {
+            background: url('/static/images/08.jpg') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+        .main-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+        .status-badge {
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+        .status-on {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+            animation: pulse 2s infinite;
+        }
+        .status-off {
+            background: linear-gradient(45deg, #dc3545, #fd7e14);
+            color: white;
+        }
+        .status-info {
+            background: linear-gradient(45deg, #17a2b8, #138496);
+            color: white;
+        }
+        .status-success {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .btn-custom {
+            border-radius: 25px;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        /* 监控间隔按钮样式 */
+        .interval-btn {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .interval-btn.active {
+            background-color: var(--bs-primary) !important;
+            border-color: var(--bs-primary) !important;
+            color: white !important;
+            box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+        }
+
+        .interval-btn.active::after {
+            content: '✓';
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #28a745;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        .form-control {
+            border-radius: 15px;
+            border: 2px solid #e9ecef;
+            padding: 0.75rem 1rem;
+            transition: all 0.3s ease;
+        }
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+        .keywords-display {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border-left: 5px solid #667eea;
+        }
+        .keyword-tag {
+            display: inline-block;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.4rem 0.8rem;
+            margin: 0.2rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        .section-title {
+            color: #495057;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+        .nav-link {
+            color: #667eea !important;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #764ba2 !important;
+            transform: translateY(-1px);
+        }
+        .orders-container {
+            max-height: 400px;
+            overflow-y: auto;
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 1rem;
+        }
+        .order-item {
+            background: white;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            border-left: 4px solid #28a745;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        .order-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .order-code {
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            color: #495057;
+        }
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+        .no-orders {
+            text-align: center;
+            color: #6c757d;
+            padding: 2rem;
+        }
+        .log-container {
+            height: 400px;
+            overflow-y: auto;
+            background: #1e1e1e;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+        .log-item {
+            padding: 0.5rem 1rem;
+            border-bottom: 1px solid #333;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+        .log-item:hover {
+            background: rgba(255,255,255,0.05);
+        }
+        .log-timestamp {
+            color: #6c757d;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        .log-default { color: #ffffff; }
+        .log-info { color: #17a2b8; }
+        .log-success { color: #28a745; }
+        .log-warning { color: #ffc107; }
+        .log-error { color: #dc3545; }
+        .log-scroll-indicator {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            display: none;
+        }
+        .interval-control {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border-left: 5px solid #17a2b8;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        .interval-control:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .btn-group .btn {
+            font-size: 0.85rem;
+            padding: 0.5rem 0.75rem;
+        }
+        #currentIntervalDisplay {
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+        }
+        .form-switch .form-check-input {
+            width: 3rem;
+            height: 1.5rem;
+            border-radius: 1rem;
+        }
+        .form-switch .form-check-input:checked {
+            background-color: #198754;
+            border-color: #198754;
+        }
+        .form-switch .form-check-input:focus {
+            box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
+        }
+        .switch-container {
+            background: rgba(255,255,255,0.8);
+            border-radius: 10px;
+            padding: 1rem;
+            border-left: 4px solid #17a2b8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+
+        <div class="main-container p-4">
+            <!-- 页面标题和状态 -->
+            <div class="text-center mb-4">
+                
+                <div class="row justify-content-center">
+                    <div class="col-auto">
+                        <div class="status-badge {{ 'status-on' if monitor_status else 'status-off' }}">
+                            <i class="bi bi-{{ 'play-circle' if monitor_status else 'pause-circle' }}"></i>
+                            监控状态: {{ '运行中' if monitor_status else '已停止' }}
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="status-badge {{ 'status-on' if auto_order_status else 'status-off' }}">
+                            <i class="bi bi-{{ 'cart-check' if auto_order_status else 'cart-x' }}"></i>
+                            自动下单: {{ '已开启' if auto_order_status else '已关闭' }}
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="status-badge status-on" id="intervalBadge">
+                            <i class="bi bi-stopwatch"></i>
+                            检查间隔: <span id="currentInterval">{{ monitor_interval }}</span>秒
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="status-badge {{ 'status-info' if batch_order_mode else 'status-success' }}">
+                            <i class="bi bi-{{ 'collection' if batch_order_mode else 'lightning' }}"></i>
+                            建单模式: {{ '统一建单' if batch_order_mode else '单独建单' }}
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="status-badge status-info">
+                            <i class="bi bi-clock-history"></i>
+                            本小时: <span id="hourlyRefreshCount">{{ hourly_refresh_count }}</span>次
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="status-badge status-info">
+                            <i class="bi bi-calendar-day"></i>
+                            今日刷新: <span id="dailyRefreshCount">{{ daily_refresh_count }}</span>次
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% if error_message %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="bi bi-exclamation-triangle"></i> {{ error_message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            {% endif %}
+
+            <div class="row">
+                <!-- 左侧：操作面板 -->
+                <div class="col-lg-6">
+                    <h3 class="section-title">
+                        <i class="bi bi-gear"></i> 操作面板
+                    </h3>
+                    
+                    <!-- 添加规格 -->
+                    <div class="card mb-4 border-0 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title text-success">
+                                <i class="bi bi-plus-circle"></i> 添加规格
+                            </h5>
+                            <div id="addKeywordForm">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text bg-success text-white">
+                                        <i class="bi bi-tag"></i>
+                                    </span>
+                                    <input type="text" id="addKeywordInput" class="form-control"
+                                           placeholder="输入规格名称" required>
+                                    <button type="button" class="btn btn-success btn-custom" onclick="addKeyword()">
+                                        <i class="bi bi-plus"></i> 添加
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 删除规格 -->
+                    <div class="card mb-4 border-0 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title text-danger">
+                                <i class="bi bi-trash"></i> 删除规格
+                            </h5>
+                            <div id="deleteKeywordForm">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text bg-danger text-white">
+                                        <i class="bi bi-tag"></i>
+                                    </span>
+                                    <input type="text" id="deleteKeywordInput" class="form-control"
+                                           placeholder="输入规格名称" required>
+                                    <button type="button" class="btn btn-danger btn-custom" onclick="deleteKeyword()">
+                                        <i class="bi bi-trash"></i> 删除
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 系统控制 -->
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body switch-container">
+                            <h5 class="card-title text-primary">
+                                <i class="bi bi-toggles2"></i> 系统控制
+                            </h5>
+
+                            <!-- 监控开关 -->
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <label class="form-label fw-bold mb-1">监控开关</label>
+                                        <div>
+                                            <small class="text-muted">
+                                                <i class="bi bi-info-circle"></i>
+                                                开启后系统将自动检查商品库存变化
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="monitorSwitch"
+                                               {{ 'checked' if monitor_status else '' }}
+                                               onchange="toggleMonitor(this.checked)">
+                                        <label class="form-check-label" for="monitorSwitch">
+                                            <span id="monitorLabel" class="badge {{ 'bg-success' if monitor_status else 'bg-secondary' }}">
+                                                {{ '启用' if monitor_status else '关闭' }}
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 自动下单开关 -->
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <label class="form-label fw-bold mb-1">自动下单开关</label>
+                                        <div>
+                                            <small class="text-muted">
+                                                <i class="bi bi-info-circle"></i>
+                                                开启后发现库存将自动下单，关闭后仅发送通知
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="autoOrderSwitch"
+                                               {{ 'checked' if auto_order_status else '' }}
+                                               onchange="toggleAutoOrder(this.checked)">
+                                        <label class="form-check-label" for="autoOrderSwitch">
+                                            <span id="autoOrderLabel" class="badge {{ 'bg-warning' if auto_order_status else 'bg-secondary' }}">
+                                                {{ '开启' if auto_order_status else '关闭' }}
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 建单模式开关 -->
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <label class="form-label fw-bold mb-1">建单模式</label>
+                                        <div>
+                                            <small class="text-muted">
+                                                <i class="bi bi-info-circle"></i>
+                                                单独建单：有货立即下单；统一建单：等待所有款号检测完成后批量下单
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="batchModeSwitch"
+                                               {{ 'checked' if batch_order_mode else '' }}
+                                               onchange="toggleBatchMode(this.checked)">
+                                        <label class="form-check-label" for="batchModeSwitch">
+                                            <span id="batchModeLabel" class="badge {{ 'bg-info' if batch_order_mode else 'bg-success' }}">
+                                                {{ '统一建单' if batch_order_mode else '单独建单' }}
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 支付方式选择 -->
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">
+                                    <i class="bi bi-credit-card"></i> 支付方式
+                                </label>
+                                <div class="btn-group w-100" role="group">
+                                    <input type="radio" class="btn-check" name="payType" id="payType1" value="1">
+                                    <label class="btn btn-outline-success" for="payType1">
+                                        <i class="bi bi-alipay"></i> 支付宝
+                                    </label>
+
+                                    <input type="radio" class="btn-check" name="payType" id="payType2" value="2" checked>
+                                    <label class="btn btn-outline-primary" for="payType2">
+                                        <i class="bi bi-wechat"></i> 微信支付
+                                    </label>
+                                </div>
+                                <small class="text-muted">
+                                    <i class="bi bi-info-circle"></i>
+                                    选择默认的支付方式，影响弹窗的支付链接
+                                </small>
+                            </div>
+
+                            <!-- 测试按钮 -->
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">
+                                    <i class="bi bi-flask"></i> 系统测试
+                                </label>
+                                <div class="d-grid">
+                                    <button id="testOrderBtn" type="button" class="btn btn-outline-primary btn-custom w-100" onclick="startTestOrder()">
+                                        <i class="bi bi-play-circle"></i> 测试下单 (只弹一次付款)
+                                    </button>
+                                </div>
+                                <small class="text-muted">
+                                    <i class="bi bi-info-circle"></i>
+                                    测试模式：检测所有款号，有货商品合并成一个订单，只弹一次付款窗口
+                                </small>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 右侧：规格列表和订单 -->
+                <div class="col-lg-6">
+                    <!-- 规格列表 -->
+                    <h3 class="section-title">
+                        <i class="bi bi-list-ul"></i> 当前规格
+                    </h3>
+                    <div class="keywords-display mb-4">
+                        {% if keywords %}
+                            {% for keyword in keywords %}
+                                <span class="keyword-tag">
+                                    <i class="bi bi-tag-fill"></i> {{ keyword }}
+                                </span>
+                            {% endfor %}
+                        {% else %}
+                            <div class="text-center text-muted">
+                                <i class="bi bi-inbox" style="font-size: 3rem;"></i>
+                                <p class="mt-2">暂无规格，请添加规格开始监控</p>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- 监控间隔调整 -->
+                    <div class="mb-4 interval-control">
+                        <h3 class="section-title">
+                            <i class="bi bi-speedometer2"></i> 监控间隔调整
+                        </h3>
+
+                        <!-- 当前间隔显示 -->
+                        <div class="alert alert-info mb-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>当前间隔:</strong>
+                                    <span class="badge bg-primary fs-6" id="currentIntervalDisplay">{{ monitor_interval }}秒</span>
+                                </div>
+                                <div>
+                                    <small class="text-muted">
+                                        <span id="intervalStatus">
+                                            {% if monitor_interval <= 5 %}
+                                                🔥 高频模式 - 适合抢购
+                                            {% elif monitor_interval <= 30 %}
+                                                ⚡ 正常模式 - 日常监控
+                                            {% else %}
+                                                🛡️ 低频模式 - 节省资源
+                                            {% endif %}
+                                        </span>
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 快速设置按钮 -->
+                        <div class="mb-3">
+                            <label class="form-label">快速设置:</label>
+                            <div class="btn-group w-100" role="group">
+                                <button type="button" class="btn btn-outline-danger interval-btn" id="interval-btn-1" data-interval="1" onclick="setQuickInterval(1)">
+                                    🔥 抢购 (1秒)
+                                </button>
+                                <button type="button" class="btn btn-outline-warning interval-btn" id="interval-btn-5" data-interval="5" onclick="setQuickInterval(5)">
+                                    ⚡ 快速 (5秒)
+                                </button>
+                                <button type="button" class="btn btn-outline-success interval-btn" id="interval-btn-15" data-interval="15" onclick="setQuickInterval(15)">
+                                    🔄 正常 (15秒)
+                                </button>
+                                <button type="button" class="btn btn-outline-info interval-btn" id="interval-btn-60" data-interval="60" onclick="setQuickInterval(60)">
+                                    🛡️ 低频 (60秒)
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 自定义间隔设置 -->
+                        <form id="intervalForm" method="post" action="{{ url_for('set_interval') }}">
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-stopwatch"></i>
+                                </span>
+                                <input type="number" name="interval" class="form-control" id="intervalInput"
+                                       value="{{ monitor_interval }}" min="1" max="300" required
+                                       placeholder="输入间隔秒数">
+                                <span class="input-group-text">秒</span>
+                                <button type="button" class="btn btn-info btn-custom" onclick="setCustomInterval()">
+                                    <i class="bi bi-check-circle"></i> 更新
+                                </button>
+                            </div>
+                            <small class="text-muted">
+                                <i class="bi bi-info-circle"></i>
+                                输入数值调整间隔，范围: 1-300秒
+                            </small>
+                        </form>
+                    </div>
+
+                    <!-- 订单列表 -->
+                    <h3 class="section-title">
+                        <i class="bi bi-receipt"></i> 订单列表
+                        <span class="badge bg-primary ms-2" id="orderCount">0</span>
+                    </h3>
+
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-0">
+                            <div class="loading-spinner" id="loadingSpinner">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">加载中...</span>
+                                </div>
+                                <p class="mt-2 text-muted">正在获取订单...</p>
+                            </div>
+
+                            <div class="orders-container" id="orders">
+                                <div class="no-orders">
+                                    <i class="bi bi-inbox" style="font-size: 3rem; color: #dee2e6;"></i>
+                                    <p class="mt-2">暂无新订单</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 日志监控区域 -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header bg-dark text-white">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">
+                                    <i class="bi bi-terminal"></i> 系统日志
+                                    <span class="badge bg-success ms-2" id="logStatus">离线</span>
+                                </h5>
+                                <div>
+                                    <button class="btn btn-sm btn-outline-light me-2" onclick="clearLogs()">
+                                        <i class="bi bi-trash"></i> 清空
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-light" onclick="toggleAutoScroll()" id="autoScrollBtn">
+                                        <i class="bi bi-arrow-down"></i> 自动滚动
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="log-container" id="logContainer">
+                                <div class="log-item text-muted text-center p-3">
+                                    <i class="bi bi-hourglass-split"></i> 等待日志连接...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let orderCount = 0;
+        let openedPaymentTabs = new Set(); // 记录已打开的支付页面
+
+        function openNewTab(pay_url, order_code) {
+            console.log('🔗 openNewTab 被调用:', pay_url, order_code);
+
+            // 避免重复打开同一订单的支付页面
+            if (openedPaymentTabs.has(order_code)) {
+                console.log(`⚠️ 订单 ${order_code} 的支付页面已打开`);
+                return;
+            }
+
+            try {
+                console.log('🚀 尝试打开新标签页...');
+                const newTab = window.open(pay_url, "_blank");
+                if (newTab) {
+                    openedPaymentTabs.add(order_code);
+                    console.log(`✅ 已打开订单 ${order_code} 的支付页面`);
+                    showToast(`支付页面已打开: ${order_code}`, 'success');
+
+                    // 5分钟后从记录中移除（允许重新打开）
+                    setTimeout(() => {
+                        openedPaymentTabs.delete(order_code);
+                    }, 5 * 60 * 1000);
+                } else {
+                    // 浏览器阻止了弹窗
+                    console.log('❌ 浏览器阻止了弹窗');
+                    showToast('浏览器阻止了支付页面弹窗，请手动点击支付按钮', 'warning');
+                }
+            } catch (error) {
+                console.error('❌ 打开支付页面失败:', error);
+                showToast('打开支付页面失败，请手动点击支付按钮', 'error');
+            }
+        }
+
+        // ==================== 异步开关函数 ====================
+
+        // 异步监控开关
+        async function toggleMonitor(enabled) {
+            try {
+                console.log('🔄 切换监控状态:', enabled);
+
+                const response = await fetch('/api/toggle_monitor', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({enabled: enabled})
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    // 更新UI
+                    const label = document.getElementById('monitorLabel');
+                    const badge = document.querySelector('.status-badge.status-monitor');
+
+                    if (enabled) {
+                        label.textContent = '启用';
+                        label.className = 'badge bg-success';
+                        if (badge) {
+                            badge.className = 'status-badge status-on';
+                            badge.innerHTML = '<i class="bi bi-eye"></i> 监控状态: 启用';
+                        }
+                    } else {
+                        label.textContent = '关闭';
+                        label.className = 'badge bg-secondary';
+                        if (badge) {
+                            badge.className = 'status-badge status-off';
+                            badge.innerHTML = '<i class="bi bi-eye-slash"></i> 监控状态: 关闭';
+                        }
+                    }
+
+                    showToast(result.message, 'success');
+                } else {
+                    // 恢复开关状态
+                    document.getElementById('monitorSwitch').checked = !enabled;
+                    showToast(result.message, 'error');
+                }
+            } catch (error) {
+                console.error('❌ 监控开关切换失败:', error);
+                document.getElementById('monitorSwitch').checked = !enabled;
+                showToast('操作失败，请重试', 'error');
+            }
+        }
+
+        // 异步自动下单开关
+        async function toggleAutoOrder(enabled) {
+            try {
+                console.log('🔄 切换自动下单状态:', enabled);
+
+                const response = await fetch('/api/toggle_auto_order', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({enabled: enabled})
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    // 更新自动下单UI
+                    const label = document.getElementById('autoOrderLabel');
+                    const badge = document.querySelector('.status-badge.status-auto');
+
+                    if (enabled) {
+                        label.textContent = '开启';
+                        label.className = 'badge bg-warning';
+                        if (badge) {
+                            badge.className = 'status-badge status-on';
+                            badge.innerHTML = '<i class="bi bi-cart-check"></i> 自动下单: 开启';
+                        }
+                    } else {
+                        label.textContent = '关闭';
+                        label.className = 'badge bg-secondary';
+                        if (badge) {
+                            badge.className = 'status-badge status-off';
+                            badge.innerHTML = '<i class="bi bi-cart-x"></i> 自动下单: 关闭';
+                        }
+                    }
+
+                    // 如果监控状态也改变了，更新监控UI
+                    if (result.monitor_enabled !== undefined) {
+                        const monitorSwitch = document.getElementById('monitorSwitch');
+                        const monitorLabel = document.getElementById('monitorLabel');
+                        const monitorBadge = document.querySelector('.status-badge.status-monitor');
+
+                        monitorSwitch.checked = result.monitor_enabled;
+                        if (result.monitor_enabled) {
+                            monitorLabel.textContent = '启用';
+                            monitorLabel.className = 'badge bg-success';
+                            if (monitorBadge) {
+                                monitorBadge.className = 'status-badge status-on';
+                                monitorBadge.innerHTML = '<i class="bi bi-eye"></i> 监控状态: 启用';
+                            }
+                        }
+                    }
+
+                    showToast(result.message, 'success');
+                } else {
+                    // 恢复开关状态
+                    document.getElementById('autoOrderSwitch').checked = !enabled;
+                    showToast(result.message, 'error');
+                }
+            } catch (error) {
+                console.error('❌ 自动下单开关切换失败:', error);
+                document.getElementById('autoOrderSwitch').checked = !enabled;
+                showToast('操作失败，请重试', 'error');
+            }
+        }
+
+        // 异步建单模式开关
+        async function toggleBatchMode(enabled) {
+            try {
+                console.log('🔄 切换建单模式:', enabled);
+
+                const response = await fetch('/api/toggle_batch_mode', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({enabled: enabled})
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    // 更新UI
+                    const label = document.getElementById('batchModeLabel');
+                    const badge = document.querySelector('.status-badge.status-mode');
+
+                    if (enabled) {
+                        label.textContent = '统一建单';
+                        label.className = 'badge bg-info';
+                        if (badge) {
+                            badge.className = 'status-badge status-info';
+                            badge.innerHTML = '<i class="bi bi-collection"></i> 建单模式: 统一建单';
+                        }
+                    } else {
+                        label.textContent = '单独建单';
+                        label.className = 'badge bg-success';
+                        if (badge) {
+                            badge.className = 'status-badge status-success';
+                            badge.innerHTML = '<i class="bi bi-lightning"></i> 建单模式: 单独建单';
+                        }
+                    }
+
+                    showToast(result.message, 'success');
+                } else {
+                    // 恢复开关状态
+                    document.getElementById('batchModeSwitch').checked = !enabled;
+                    showToast(result.message, 'error');
+                }
+            } catch (error) {
+                console.error('❌ 建单模式切换失败:', error);
+                document.getElementById('batchModeSwitch').checked = !enabled;
+                showToast('操作失败，请重试', 'error');
+            }
+        }
+
+        // 更新间隔按钮高亮状态
+        function updateIntervalButtonHighlight(currentInterval) {
+            // 移除所有按钮的active类
+            document.querySelectorAll('.interval-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // 高亮当前间隔对应的按钮
+            const targetBtn = document.getElementById(`interval-btn-${currentInterval}`);
+            if (targetBtn) {
+                targetBtn.classList.add('active');
+                console.log(`🎨 高亮间隔按钮: ${currentInterval}秒`);
+            } else {
+                console.log(`🎨 当前间隔 ${currentInterval}秒 没有对应的快速按钮`);
+            }
+        }
+
+        // 页面加载时初始化按钮高亮
+        function initializeIntervalHighlight() {
+            const currentInterval = parseInt(document.getElementById('intervalInput').value);
+            updateIntervalButtonHighlight(currentInterval);
+        }
+
+        // 异步监控间隔设置
+        async function setCustomInterval() {
+            const intervalInput = document.getElementById('intervalInput');
+            const interval = parseInt(intervalInput.value);
+
+            if (!interval || interval < 1 || interval > 300) {
+                showToast('间隔必须在1-300秒之间', 'warning');
+                return;
+            }
+
+            await setIntervalAsync(interval);
+        }
+
+        async function setQuickInterval(seconds) {
+            document.getElementById('intervalInput').value = seconds;
+            await setIntervalAsync(seconds);
+        }
+
+        async function setIntervalAsync(interval) {
+            try {
+                console.log('🔄 设置监控间隔:', interval);
+
+                const response = await fetch('/api/set_interval', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({interval: interval})
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    // 更新页面显示
+                    updatePageInterval(interval);
+
+                    // 更新按钮高亮状态
+                    updateIntervalButtonHighlight(interval);
+
+                    // 更新状态显示
+                    const statusElement = document.getElementById('intervalStatus');
+                    let modeText = '';
+                    if (interval <= 5) modeText = '🔥 高频模式 - 适合抢购';
+                    else if (interval <= 30) modeText = '⚡ 正常模式 - 日常监控';
+                    else modeText = '🛡️ 低频模式 - 节省资源';
+
+                    if (statusElement) {
+                        statusElement.textContent = modeText;
+                    }
+
+                    showToast(result.message, 'success');
+                } else {
+                    showToast(result.message, 'error');
+                }
+            } catch (error) {
+                console.error('❌ 设置监控间隔失败:', error);
+                showToast('设置失败，请重试', 'error');
+            }
+        }
+
+        // 立即添加订单到历史记录，防止重复推送
+        async function addOrderToHistory(order) {
+            try {
+                console.log('📝 立即添加订单到历史记录:', order);
+
+                const response = await fetch('/api/add_order_history', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({order: order})
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    console.log('✅ 订单已添加到历史记录:', order);
+                } else {
+                    console.log('⚠️ 订单已存在于历史记录:', order);
+                }
+            } catch (error) {
+                console.error('❌ 添加订单到历史记录失败:', error);
+            }
+        }
+
+        // 异步关键词管理
+        async function addKeyword() {
+            const input = document.getElementById('addKeywordInput');
+            const keyword = input.value.trim();
+
+            if (!keyword) {
+                showToast('请输入关键词', 'warning');
+                return;
+            }
+
+            try {
+                console.log('🔄 添加关键词:', keyword);
+
+                const response = await fetch('/api/add_keyword', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({keyword: keyword})
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    input.value = ''; // 清空输入框
+                    showToast(result.message, 'success');
+
+                    // 刷新关键词列表
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1000);
+                } else {
+                    showToast(result.message, 'error');
+                }
+            } catch (error) {
+                console.error('❌ 添加关键词失败:', error);
+                showToast('添加失败，请重试', 'error');
+            }
+        }
+
+        async function deleteKeyword() {
+            const input = document.getElementById('deleteKeywordInput');
+            const keyword = input.value.trim();
+
+            if (!keyword) {
+                showToast('请输入要删除的关键词', 'warning');
+                return;
+            }
+
+            try {
+                console.log('🔄 删除关键词:', keyword);
+
+                const response = await fetch('/api/delete_keyword', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({keyword: keyword})
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    input.value = ''; // 清空输入框
+                    showToast(result.message, 'success');
+
+                    // 刷新关键词列表
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1000);
+                } else {
+                    showToast(result.message, 'error');
+                }
+            } catch (error) {
+                console.error('❌ 删除关键词失败:', error);
+                showToast('删除失败，请重试', 'error');
+            }
+        }
+
+        // 异步测试下单
+        async function startTestOrder() {
+            const testBtn = document.getElementById('testOrderBtn');
+            const originalText = testBtn.innerHTML;
+
+            try {
+                // 禁用按钮并显示加载状态
+                testBtn.disabled = true;
+                testBtn.innerHTML = '<i class="bi bi-hourglass-split"></i> 测试中...';
+
+                console.log('🧪 开始异步测试下单...');
+                showToast('测试模式启动中...', 'info');
+
+                const response = await fetch('/test_order', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    console.log('✅ 测试启动成功:', result.message);
+                    showToast(result.message, 'success');
+                } else {
+                    console.log('❌ 测试启动失败:', result.message);
+                    showToast(result.message, 'error');
+                }
+
+            } catch (error) {
+                console.error('❌ 测试请求失败:', error);
+                showToast('测试请求失败，请重试', 'error');
+            } finally {
+                // 恢复按钮状态
+                setTimeout(() => {
+                    testBtn.disabled = false;
+                    testBtn.innerHTML = originalText;
+                }, 2000);
+            }
+        }
+
+        // 智能支付页面管理
+        function smartPaymentOpen(order_code, payType = '2') {
+            console.log('💳 smartPaymentOpen 被调用:', order_code, payType);
+
+            // 根据支付类型生成不同的支付链接
+            let pay_url;
+            if (payType === '1') {
+                // 支付宝支付
+                pay_url = 'https://fenxiao.clim.cn/alipay/topay.do?code=' + order_code;
+            } else {
+                // 微信支付（默认）
+                pay_url = 'https://fenxiao.clim.cn/pay/topay.do?code=' + order_code + '&payType=2';
+            }
+
+            console.log('💳 生成支付链接:', pay_url);
+            openNewTab(pay_url, order_code);
+            // 检查用户是否在当前页面（避免在后台时打开过多标签页）
+            // if (document.visibilityState === 'visible') {
+            //     console.log('💳 页面可见，准备弹窗');
+            //     openNewTab(pay_url, order_code);
+            // } else {
+            //     console.log('💳 页面不可见，跳过弹窗');
+            //     // 页面在后台，显示通知而不是直接打开
+            //     showToast(`新订单 ${order_code} 已生成，请点击支付按钮`, 'info');
+            // }
+        }
+
+        // SSE连接和订单处理
+        let eventSource = null;
+        let logEventSource = null;
+        let autoScroll = true;
+        let logCount = 0;
+        let currentInterval = parseInt('{{ monitor_interval }}');
+
+        // 间隔调整相关函数 - 确保使用异步版本
+        function setQuickInterval(seconds) {
+            document.getElementById('intervalInput').value = seconds;
+            // 使用异步API而不是表单提交
+            setIntervalAsync(seconds);
+        }
+
+        // 实时更新页面上的间隔显示
+        function updatePageInterval(newInterval) {
+            document.getElementById('currentInterval').textContent = newInterval;
+            document.getElementById('currentIntervalDisplay').textContent = newInterval + '秒';
+            currentInterval = newInterval;
+        }
+
+        // Switch开关控制函数
+        // 旧的同步版本已删除，使用上面的异步版本
+
+        // 旧的同步版本已删除，使用上面的异步版本
+
+        // 旧的同步版本已删除，使用上面的异步版本
+
+        function connectSSE() {
+            if (eventSource) {
+                eventSource.close();
+            }
+
+            eventSource = new EventSource('/stream');
+
+            eventSource.onopen = function(event) {
+                console.log('SSE连接已建立');
+                showToast('实时订单推送已连接', 'success');
+            };
+
+            eventSource.onmessage = function(event) {
+                try {
+                    const data = JSON.parse(event.data);
+
+                    if (data.type === 'connected') {
+                        console.log('SSE连接确认');
+                    } else if (data.type === 'new_order') {
+                        handleNewOrder(data.order);
+                    } else if (data.type === 'heartbeat') {
+                        console.log('SSE心跳包');
+                    }
+                } catch (error) {
+                    console.error('解析SSE数据失败:', error);
+                }
+            };
+
+            eventSource.onerror = function(event) {
+                console.error('SSE连接错误:', event);
+                showToast('订单推送连接中断，正在重连...', 'error');
+
+                // 3秒后重连
+                setTimeout(() => {
+                    connectSSE();
+                }, 3000);
+            };
+        }
+
+        function handleNewOrder(order) {
+            console.log('🚀 收到新订单:', order);
+
+            // 🎯 立即添加到后端历史记录，防止重复推送
+            addOrderToHistory(order);
+
+            const ordersDiv = document.getElementById('orders');
+            const orderCountBadge = document.getElementById('orderCount');
+
+            // 如果是第一个订单，清空"暂无订单"提示
+            if (ordersDiv.querySelector('.no-orders')) {
+                ordersDiv.innerHTML = '';
+            }
+
+            // 创建订单元素
+            const orderItem = document.createElement('div');
+            orderItem.className = 'order-item';
+
+            // 根据选择的支付方式生成链接
+            const payType = document.querySelector('input[name="payType"]:checked')?.value || '2';
+            let pay_url;
+            if (payType === '1') {
+                // 支付宝支付
+                pay_url = 'https://fenxiao.clim.cn/alipay/topay.do?code=' + order;
+            } else {
+                // 微信支付
+                pay_url = 'https://fenxiao.clim.cn/pay/topay.do?code=' + order + '&payType=2';
+            }
+
+            orderItem.innerHTML = `
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <div class="order-code">
+                            <i class="bi bi-receipt-cutoff"></i> ${order}
+                        </div>
+                        <small class="text-muted">
+                            <i class="bi bi-clock"></i> ${new Date().toLocaleTimeString()}
+                        </small>
+                    </div>
+                    <button class="btn btn-primary btn-sm" onclick="openNewTab('${pay_url}', '${order}')">
+                        <i class="bi bi-box-arrow-up-right"></i> 支付
+                    </button>
+                </div>
+            `;
+
+            // 添加到订单列表顶部
+            ordersDiv.insertBefore(orderItem, ordersDiv.firstChild);
+            orderCount++;
+
+            // 🚀 智能打开支付页面
+            const selectedPayType = document.querySelector('input[name="payType"]:checked')?.value || '2';
+            console.log('🚀 准备弹窗支付页面:', order, '支付类型:', selectedPayType);
+            smartPaymentOpen(order, selectedPayType);
+
+            // 添加进入动画
+            orderItem.style.opacity = '0';
+            orderItem.style.transform = 'translateX(-20px)';
+            orderItem.style.transition = 'all 0.5s ease';
+            setTimeout(() => {
+                orderItem.style.opacity = '1';
+                orderItem.style.transform = 'translateX(0)';
+            }, 50);
+
+            // 更新订单计数
+            orderCountBadge.textContent = orderCount;
+            orderCountBadge.className = 'badge bg-success ms-2';
+
+            // 显示成功提示
+            showToast(`🎉 新订单生成: ${order}`, 'success');
+        }
+
+        // 兼容性：保留fetchOrders函数作为备用
+        function fetchOrders() {
+            fetch('/orders')
+            .then(response => response.json())
+            .then(data => {
+                if (data.orders && data.orders.length > 0) {
+                    data.orders.forEach(order => {
+                        handleNewOrder(order);
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('获取订单失败:', error);
+            });
+        }
+
+        // 更新刷新统计
+        function updateRefreshCount() {
+            fetch('/api/refresh_stats')
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const dailyElement = document.getElementById('dailyRefreshCount');
+                    const hourlyElement = document.getElementById('hourlyRefreshCount');
+
+                    if (dailyElement) {
+                        dailyElement.textContent = data.daily_count;
+                    }
+                    if (hourlyElement) {
+                        hourlyElement.textContent = data.hourly_count;
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('获取刷新统计失败:', error);
+            });
+        }
+
+        // 日志SSE连接
+        function connectLogSSE() {
+            console.log('🔄 正在连接日志SSE...');
+
+            if (logEventSource) {
+                logEventSource.close();
+            }
+
+            // 更新状态为连接中
+            document.getElementById('logStatus').textContent = '连接中';
+            document.getElementById('logStatus').className = 'badge bg-warning ms-2';
+
+            try {
+                logEventSource = new EventSource('/logs');
+
+                logEventSource.onopen = function(event) {
+                    console.log('✅ 日志SSE连接已建立');
+                    document.getElementById('logStatus').textContent = '在线';
+                    document.getElementById('logStatus').className = 'badge bg-success ms-2';
+                };
+
+                logEventSource.onmessage = function(event) {
+                    try {
+                        console.log('📨 收到日志SSE消息:', event.data);
+                        const data = JSON.parse(event.data);
+
+                        if (data.type === 'connected') {
+                            console.log('🔗 日志SSE连接确认');
+                            addLogMessage('系统', '📡 日志推送已连接', 'success');
+                        } else if (data.type === 'log') {
+                            addLogMessage(data.timestamp, data.message, data.level);
+                        } else if (data.type === 'heartbeat') {
+                            console.log('💓 日志SSE心跳包');
+                        } else if (data.type === 'error') {
+                            console.error('🔴 服务器日志错误:', data.message);
+                            addLogMessage('系统', `❌ 服务器错误: ${data.message}`, 'error');
+                        }
+                    } catch (error) {
+                        console.error('🔴 解析日志SSE数据失败:', error, event.data);
+                        addLogMessage('系统', `❌ 数据解析错误: ${error.message}`, 'error');
+                    }
+                };
+
+                logEventSource.onerror = function(event) {
+                    console.error('🔴 日志SSE连接错误:', event);
+                    document.getElementById('logStatus').textContent = '离线';
+                    document.getElementById('logStatus').className = 'badge bg-danger ms-2';
+                    addLogMessage('系统', '❌ 日志连接中断，3秒后重连...', 'warning');
+
+                    // 3秒后重连
+                    setTimeout(() => {
+                        console.log('🔄 重新连接日志SSE...');
+                        connectLogSSE();
+                    }, 3000);
+                };
+
+            } catch (error) {
+                console.error('🔴 创建日志SSE连接失败:', error);
+                document.getElementById('logStatus').textContent = '错误';
+                document.getElementById('logStatus').className = 'badge bg-danger ms-2';
+                addLogMessage('系统', `❌ 连接创建失败: ${error.message}`, 'error');
+            }
+        }
+
+        // 添加日志消息
+        function addLogMessage(timestamp, message, level) {
+            const logContainer = document.getElementById('logContainer');
+
+            // 如果是第一条日志，清空等待提示
+            if (logContainer.querySelector('.text-muted')) {
+                logContainer.innerHTML = '';
+            }
+
+            const logItem = document.createElement('div');
+            logItem.className = `log-item log-${level}`;
+            logItem.innerHTML = `<span class="log-timestamp">[${timestamp}]</span>${message}`;
+
+            logContainer.appendChild(logItem);
+            logCount++;
+
+            // 限制日志数量（保持最新1000条）
+            if (logCount > 1000) {
+                logContainer.removeChild(logContainer.firstChild);
+                logCount--;
+            }
+
+            // 自动滚动到底部
+            if (autoScroll) {
+                logContainer.scrollTop = logContainer.scrollHeight;
+            }
+        }
+
+        // 清空日志
+        function clearLogs() {
+            document.getElementById('logContainer').innerHTML = '';
+            logCount = 0;
+            addLogMessage('系统', '日志已清空', 'info');
+        }
+
+        // 切换自动滚动
+        function toggleAutoScroll() {
+            autoScroll = !autoScroll;
+            const btn = document.getElementById('autoScrollBtn');
+            if (autoScroll) {
+                btn.innerHTML = '<i class="bi bi-arrow-down"></i> 自动滚动';
+                btn.className = 'btn btn-sm btn-outline-light';
+            } else {
+                btn.innerHTML = '<i class="bi bi-pause"></i> 已暂停';
+                btn.className = 'btn btn-sm btn-warning';
+            }
+        }
+
+        function showToast(message, type) {
+            const toastContainer = document.getElementById('toastContainer') || createToastContainer();
+            const toast = document.createElement('div');
+
+            // 根据类型设置样式和图标
+            let bgClass, iconClass;
+            switch(type) {
+                case 'success':
+                    bgClass = 'bg-success';
+                    iconClass = 'bi-check-circle';
+                    break;
+                case 'error':
+                    bgClass = 'bg-danger';
+                    iconClass = 'bi-exclamation-triangle';
+                    break;
+                case 'warning':
+                    bgClass = 'bg-warning text-dark';
+                    iconClass = 'bi-exclamation-circle';
+                    break;
+                case 'info':
+                    bgClass = 'bg-info';
+                    iconClass = 'bi-info-circle';
+                    break;
+                default:
+                    bgClass = 'bg-primary';
+                    iconClass = 'bi-bell';
+            }
+
+            toast.className = `toast align-items-center text-white ${bgClass} border-0`;
+            toast.setAttribute('role', 'alert');
+            toast.innerHTML = `
+                <div class="d-flex">
+                    <div class="toast-body">
+                        <i class="bi ${iconClass}"></i>
+                        ${message}
+                    </div>
+                    <button type="button" class="btn-close ${type === 'warning' ? 'btn-close-dark' : 'btn-close-white'} me-2 m-auto" data-bs-dismiss="toast"></button>
+                </div>
+            `;
+            toastContainer.appendChild(toast);
+            const bsToast = new bootstrap.Toast(toast, {
+                delay: type === 'success' ? 3000 : 5000 // 成功消息3秒，其他5秒
+            });
+            bsToast.show();
+
+            // 自动清理DOM
+            toast.addEventListener('hidden.bs.toast', () => {
+                toast.remove();
+            });
+        }
+
+        function createToastContainer() {
+            const container = document.createElement('div');
+            container.id = 'toastContainer';
+            container.className = 'toast-container position-fixed top-0 end-0 p-3';
+            container.style.zIndex = '9999';
+            document.body.appendChild(container);
+            return container;
+        }
+
+        // 页面加载完成后启动SSE连接
+        document.addEventListener('DOMContentLoaded', function() {
+            // 添加页面加载动画
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.5s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+
+            // 🎨 初始化间隔按钮高亮
+            initializeIntervalHighlight();
+
+            // 🚀 启动SSE实时订单推送
+            connectSSE();
+
+            // 🚀 启动日志SSE实时推送
+            connectLogSSE();
+
+            // 🔄 启动刷新次数定时更新
+            updateRefreshCount();
+            setInterval(updateRefreshCount, 5000); // 每5秒更新一次
+
+            // 备用：每30秒检查一次订单（防止SSE断线）
+            // setInterval(fetchOrders, 10000);
+        });
+
+        // 页面卸载时关闭SSE连接
+        window.addEventListener('beforeunload', function() {
+            if (eventSource) {
+                eventSource.close();
+            }
+            if (logEventSource) {
+                logEventSource.close();
+            }
+        });
+
+        // 表单提交反馈
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                const btn = this.querySelector('button[type="submit"]');
+                const originalText = btn.innerHTML;
+
+                // 特殊处理间隔设置表单
+                if (this.action.includes('set_interval')) {
+                    const intervalInput = this.querySelector('input[name="interval"]');
+                    const newInterval = parseInt(intervalInput.value);
+
+                    if (newInterval < 1 || newInterval > 300) {
+                        e.preventDefault();
+                        showToast('间隔必须在1-300秒之间', 'warning');
+                        return;
+                    }
+
+                    btn.innerHTML = '<i class="bi bi-hourglass-split"></i> 更新中...';
+
+                    // 立即更新页面显示
+                    updatePageInterval(newInterval);
+
+                    let modeText = '';
+                    if (newInterval <= 5) modeText = '🔥 高频抢购模式';
+                    else if (newInterval <= 30) modeText = '⚡ 正常监控模式';
+                    else modeText = '🛡️ 低频节能模式';
+
+                    showToast(`监控间隔已调整为 ${newInterval} 秒 (${modeText})`, 'success');
+                } else {
+                    btn.innerHTML = '<i class="bi bi-hourglass-split"></i> 处理中...';
+                }
+
+                btn.disabled = true;
+
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>
+
+

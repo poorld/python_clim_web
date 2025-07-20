@@ -2,70 +2,36 @@
 # -*- coding: utf-8 -*-
 
 keywords = []
-intensify_keywords = []
-
 file_name_keywords = 'keywords.txt'
-file_name_intensify_keywords = 'intensify_keywords.txt'
 
-def save_keyword(keyword, intensify = False):
+def save_keyword(keyword):
     global keywords
-    global intensify_keywords
-    if intensify:
+    if keyword not in keywords:
         keywords.append(keyword)
-        """保存成功处理的关键字到文件中"""
-        with open(file_name_intensify_keywords, 'a') as f:
-            f.write(f"{keyword}\n")
-    else:
-        keywords.append(keyword)
-        """保存成功处理的关键字到文件中"""
+        """保存关键字到文件中"""
         with open(file_name_keywords, 'a') as f:
             f.write(f"{keyword}\n")
 
-def remove_keyword(keyword, intensify = False):
+def remove_keyword(keyword):
     global keywords
-    global intensify_keywords
-    if intensify:
-        # Remove keyword
-        intensify_keywords.remove(keyword)
-        print('intensify_keywords', intensify_keywords)
-        with open(file_name_intensify_keywords, 'w') as f:
-            for keyword in intensify_keywords:
-                f.write(f"{keyword}\n")
-        
-    else:
+    if keyword in keywords:
         # Remove keyword
         keywords.remove(keyword)
         print('keywords', keywords)
         with open(file_name_keywords, 'w') as f:
-            for keyword in keywords:
-                f.write(f"{keyword}\n")
+            for kw in keywords:
+                f.write(f"{kw}\n")
 
-def load_keywords(intensify = False):
+def load_keywords():
     global keywords
-    global intensify_keywords
+    """加载关键字"""
+    try:
+        with open(file_name_keywords, 'r') as f:
+            lines = f.readlines()
+            keywords = [line.strip() for line in lines if line.strip()]
+            return keywords
+    except FileNotFoundError:
+        return []
 
-    if intensify:
-        """加载已成功处理的关键字"""
-        try:
-            with open(file_name_intensify_keywords, 'r') as f:
-                lines = f.readlines()
-                intensify_keywords = [line.strip() for line in lines]
-                return intensify_keywords
-        except FileNotFoundError:
-            return []
-    else:
-        """加载已成功处理的关键字"""
-        try:
-            with open(file_name_keywords, 'r') as f:
-                lines = f.readlines()
-                keywords = [line.strip() for line in lines]
-                return keywords
-        except FileNotFoundError:
-            return []
-        
-        
-def get_global_keywords(self):
+def get_global_keywords():
     return keywords
-
-def get_global_intensify_keywords(self):
-    return intensify_keywords

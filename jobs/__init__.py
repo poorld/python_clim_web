@@ -219,3 +219,116 @@ class IntervalsHoursScheduleJobThread(JobThread):
         while not self._stopped():
             self._schedule.run_pending()
             time.sleep(1)
+
+"""
+动态间隔调度器: 支持运行时调整间隔
+"""
+class DynamicSecondsScheduleJobThread(JobThread):
+    def __init__(self, handler: ThreadHandler, get_interval_func):
+        super().__init__(handler)
+        self._get_interval_func = get_interval_func  # 获取当前间隔的函数
+        self._current_interval = self._get_interval_func()
+
+    def run(self) -> None:
+        print(f"🚀 动态调度器启动，初始间隔: {self._current_interval}秒")
+        self._handler.startup()
+
+        while not self._stopped():
+            # 检查监控状态和解释器状态
+            try:
+                from common.status import get_global_monitor_status
+                if not get_global_monitor_status():
+                    print("🛑 监控已关闭，线程即将停止")
+                    break
+            except (ImportError, ModuleNotFoundError):
+                # 如果无法导入，可能是解释器正在关闭
+                print("🛑 无法导入监控状态模块，解释器可能正在关闭")
+                break
+            except Exception as e:
+                # 其他异常不应该导致线程退出，只记录错误
+                print(f"⚠️ 检查监控状态时出错: {e}，继续运行")
+                # 不break，继续运行
+
+            try:
+                self._handler.handle()
+            except RuntimeError as e:
+                if 'interpreter shutdown' in str(e):
+                    print("🛑 解释器正在关闭，停止监控线程")
+                    break
+                else:
+                    print(f"❌ 处理任务时出错: {e}")
+                    # 继续运行，不退出线程
+            except Exception as e:
+                print(f"❌ 监控任务执行异常: {e}")
+                # 继续运行，不退出线程
+
+            # 获取最新的间隔设置
+            try:
+                new_interval = self._get_interval_func()
+                if new_interval != self._current_interval:
+                    print(f"⚡ 监控间隔已调整: {self._current_interval}秒 → {new_interval}秒")
+                    self._current_interval = new_interval
+            except Exception as e:
+                # 如果无法获取间隔，使用当前间隔，记录错误但不退出
+                print(f"⚠️ 获取监控间隔失败: {e}，使用当前间隔 {self._current_interval}秒")
+
+            # 使用当前间隔等待，每秒检查一次停止信号
+            for _ in range(self._current_interval):
+                if self._stopped():
+                    print("🛑 收到停止信号，线程即将停止")
+                    break
+                time.sleep(1)
+
+        self._handler.shutdown()
+
+    def get_current_interval(self) -> int:
+        return self._current_interval
+
+# 全局监控线程管理
+_monitor_thread = None
+
+def get_monitor_thread():
+    """获取当前监控线程"""
+    return _monitor_thread
+
+def start_monitor_thread():
+    """启动监控线程"""
+    global _monitor_thread
+
+    if _monitor_thread is not None and _monitor_thread.is_alive():
+        print("⚠️ 监控线程已在运行中")
+        return
+
+    try:
+        from jobs.job_checkout import RefreshThread
+        from common.status import get_global_monitor_interval
+
+        # 创建新的监控线程
+        _monitor_thread = DynamicSecondsScheduleJobThread(RefreshThread(), get_global_monitor_interval)
+        _monitor_thread.daemon = True  # 设置为守护线程
+        _monitor_thread.start()
+
+        print("✅ 监控线程启动成功")
+    except Exception as e:
+        print(f"❌ 监控线程启动失败: {e}")
+
+def stop_monitor_thread():
+    """停止监控线程"""
+    global _monitor_thread
+
+    if _monitor_thread is None or not _monitor_thread.is_alive():
+        print("⚠️ 监控线程未运行")
+        return
+
+    try:
+        _monitor_thread.stop()  # 发送停止信号
+        _monitor_thread.join(timeout=5)  # 等待线程结束，最多5秒
+
+        if _monitor_thread.is_alive():
+            print("⚠️ 监控线程未能在5秒内停止")
+        else:
+            print("✅ 监控线程已停止")
+
+        _monitor_thread = None
+    except Exception as e:
+        print(f"❌ 停止监控线程失败: {e}")

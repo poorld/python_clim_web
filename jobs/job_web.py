@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from jobs import ThreadHandler
+from service.web import run_flask  # 移到类外部导入
 
 
 class WebThread(ThreadHandler):
@@ -15,6 +16,4 @@ class WebThread(ThreadHandler):
         pass
 
     def handle(self) -> None:
-        self.run_flask()
-        
-    from service.web import run_flask
+        run_flask()  # 直接调用函数

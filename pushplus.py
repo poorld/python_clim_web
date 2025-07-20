@@ -3,6 +3,8 @@
 
 import requests
 
+IS_DEBUG = True
+
 class PushPlus():
     def __init__(self) -> None:
         self._token = '251cb35f680d46d994ef95a4470438c3'
@@ -11,6 +13,8 @@ class PushPlus():
         # self._topic = '20240911'
         
     def sendMsg(self,title,content):
+        if IS_DEBUG:
+            return
         url = '{url}?token={token}&title={title}&content={content}&template=html&topic={topic}' \
             .format(url=self._url,
                     token=self._token,
