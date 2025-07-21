@@ -1,0 +1,10 @@
+{
+  "MONITOR_STATUS": true,
+  "AUTO_ORDER_STATUS": true,
+  "BATCH_ORDER_MODE": false,
+  "TEST_MODE": false,
+  "REFRESH_STATS": true,
+  "MONITOR_INTERVAL": 10,
+  "KEYWORDS": [
+  ]
+}

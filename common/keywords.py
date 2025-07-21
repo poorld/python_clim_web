@@ -1,37 +1,40 @@
-#!/usr/bin/env python
+"""#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-keywords = []
-file_name_keywords = 'keywords.txt'
+import json
+
+CONFIG_FILE = 'config.json'
+
+def _load_config():
+    try:
+        with open(CONFIG_FILE, 'r') as f:
+            return json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {}
+
+def _save_config(config):
+    with open(CONFIG_FILE, 'w') as f:
+        json.dump(config, f, indent=2)
 
 def save_keyword(keyword):
-    global keywords
+    config = _load_config()
+    keywords = config.get('KEYWORDS', [])
     if keyword not in keywords:
         keywords.append(keyword)
-        """保存关键字到文件中"""
-        with open(file_name_keywords, 'a') as f:
-            f.write(f"{keyword}\n")
+        config['KEYWORDS'] = keywords
+        _save_config(config)
 
 def remove_keyword(keyword):
-    global keywords
+    config = _load_config()
+    keywords = config.get('KEYWORDS', [])
     if keyword in keywords:
-        # Remove keyword
         keywords.remove(keyword)
-        print('keywords', keywords)
-        with open(file_name_keywords, 'w') as f:
-            for kw in keywords:
-                f.write(f"{kw}\n")
+        config['KEYWORDS'] = keywords
+        _save_config(config)
 
 def load_keywords():
-    global keywords
-    """加载关键字"""
-    try:
-        with open(file_name_keywords, 'r') as f:
-            lines = f.readlines()
-            keywords = [line.strip() for line in lines if line.strip()]
-            return keywords
-    except FileNotFoundError:
-        return []
+    return _load_config().get('KEYWORDS', [])
 
 def get_global_keywords():
-    return keywords
+    return load_keywords()
+"""

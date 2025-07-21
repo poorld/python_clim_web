@@ -1,45 +1,35 @@
-#!/usr/bin/env python
+"""#!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import json
 
-# 监控状态
-monitor_status = False
-# 自动下单开关
-auto_order_status = False
-# 监控间隔（秒）
-monitor_interval = 5
-# 建单模式：True=统一建单，False=单独建单
-batch_order_mode = False
-# 测试模式：True=测试模式（只弹一次付款），False=正常模式
-test_mode = False
+CONFIG_FILE = 'config.json'
+
 # 刷新次数统计
 daily_refresh_count = 0
 hourly_refresh_count = 0
 daily_refresh_date = None
 hourly_refresh_hour = None
 
-file_name_monitor_status = 'monitor_status.txt'
-file_name_auto_order_status = 'auto_order_status.txt'
-file_name_monitor_interval = 'monitor_interval.txt'
-file_name_batch_order_mode = 'batch_order_mode.txt'
-file_name_test_mode = 'test_mode.txt'
 file_name_refresh_stats = 'refresh_stats.txt'
 
-def load_monitor_status():
-    global monitor_status
+def _load_config():
     try:
-        with open(file_name_monitor_status, 'r') as f:
-            monitor_status = f.readline().strip() == 'True'
-            return monitor_status
-    except FileNotFoundError:
-        return False
+        with open(CONFIG_FILE, 'r') as f:
+            return json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {}
+
+def _save_config(config):
+    with open(CONFIG_FILE, 'w') as f:
+        json.dump(config, f, indent=2)
+
+def load_monitor_status():
+    return _load_config().get('MONITOR_STATUS', False)
 
 def set_monitor_status(status: bool):
-    global monitor_status
-    monitor_status = status
-    """保存监控状态到文件中"""
-    with open(file_name_monitor_status, 'w') as f:
-        f.write(f"{status}\n")
-
+    config = _load_config()
+    config['MONITOR_STATUS'] = status
+    _save_config(config)
     # 实际控制监控线程
     try:
         from jobs import get_monitor_thread, start_monitor_thread, stop_monitor_thread
@@ -59,25 +49,16 @@ def set_monitor_status(status: bool):
         print(f"⚠️ 监控线程控制失败: {e}")
 
 def get_global_monitor_status():
-    return monitor_status
+    return load_monitor_status()
 
 # --------------------------------------------
 def load_auto_order_status():
-    global auto_order_status
-    try:
-        with open(file_name_auto_order_status, 'r') as f:
-            auto_order_status = f.readline().strip() == 'True'
-            return auto_order_status
-    except FileNotFoundError:
-        return False
+    return _load_config().get('AUTO_ORDER_STATUS', False)
 
 def set_auto_order_status(status: bool):
-    global auto_order_status
-    auto_order_status = status
-    """保存自动下单状态到文件中"""
-    with open(file_name_auto_order_status, 'w') as f:
-        f.write(f"{status}\n")
-
+    config = _load_config()
+    config['AUTO_ORDER_STATUS'] = status
+    _save_config(config)
     # 实质性动作：自动下单需要监控支持
     if status:
         # 开启自动下单时，必须同时开启监控
@@ -89,33 +70,20 @@ def set_auto_order_status(status: bool):
         print("📢 自动下单已关闭：切换为通知模式，只发送库存通知")
 
 def get_global_auto_order_status():
-    return auto_order_status
+    return load_auto_order_status()
 
 # --------------------------------------------
 # 监控间隔管理
 def load_monitor_interval():
-    global monitor_interval
-    try:
-        with open(file_name_monitor_interval, 'r') as f:
-            interval = int(f.readline().strip())
-            # 限制间隔范围：1-300秒
-            if 1 <= interval <= 300:
-                monitor_interval = interval
-            else:
-                monitor_interval = 5  # 默认值
-            return monitor_interval
-    except (FileNotFoundError, ValueError):
-        return 5  # 默认5秒
+    return _load_config().get('MONITOR_INTERVAL', 10)
 
 def set_monitor_interval(interval: int):
-    global monitor_interval
     # 限制间隔范围：1-300秒
     if 1 <= interval <= 300:
-        old_interval = monitor_interval
-        monitor_interval = interval
-        """保存监控间隔到文件中"""
-        with open(file_name_monitor_interval, 'w') as f:
-            f.write(f"{interval}\n")
+        config = _load_config()
+        old_interval = config.get('MONITOR_INTERVAL', 10)
+        config['MONITOR_INTERVAL'] = interval
+        _save_config(config)
 
         # 实质性动作：动态调整监控频率
         mode_text = ""
@@ -141,27 +109,17 @@ def set_monitor_interval(interval: int):
     return False
 
 def get_global_monitor_interval():
-    return monitor_interval
+    return load_monitor_interval()
 
 # --------------------------------------------
 # 建单模式管理
 def load_batch_order_mode():
-    global batch_order_mode
-    try:
-        with open(file_name_batch_order_mode, 'r') as f:
-            mode = f.readline().strip().lower()
-            batch_order_mode = mode == 'true'
-            return batch_order_mode
-    except FileNotFoundError:
-        return False  # 默认单独建单
+    return _load_config().get('BATCH_ORDER_MODE', False)
 
 def set_batch_order_mode(mode: bool):
-    global batch_order_mode
-    batch_order_mode = mode
-    """保存建单模式到文件中"""
-    with open(file_name_batch_order_mode, 'w') as f:
-        f.write(f"{mode}\n")
-
+    config = _load_config()
+    config['BATCH_ORDER_MODE'] = mode
+    _save_config(config)
     # 实质性动作：清理购物车状态
     try:
         from service.product_checkout import clear_batch_cart, reset_batch_round
@@ -186,27 +144,17 @@ def set_batch_order_mode(mode: bool):
         print(f"⚠️ 建单模式切换时清理失败: {e}")
 
 def get_global_batch_order_mode():
-    return batch_order_mode
+    return load_batch_order_mode()
 
 # --------------------------------------------
 # 测试模式管理
 def load_test_mode():
-    global test_mode
-    try:
-        with open(file_name_test_mode, 'r') as f:
-            mode = f.readline().strip().lower()
-            test_mode = mode == 'true'
-            return test_mode
-    except FileNotFoundError:
-        return False  # 默认非测试模式
+    return _load_config().get('TEST_MODE', False)
 
 def set_test_mode(mode: bool):
-    global test_mode
-    test_mode = mode
-    """保存测试模式到文件中"""
-    with open(file_name_test_mode, 'w') as f:
-        f.write(f"{mode}\n")
-
+    config = _load_config()
+    config['TEST_MODE'] = mode
+    _save_config(config)
     # 实质性动作：测试模式管理
     if mode:
         print("🧪 测试模式已启用：")
@@ -223,7 +171,7 @@ def set_test_mode(mode: bool):
             pass
 
 def get_global_test_mode():
-    return test_mode
+    return load_test_mode()
 
 # --------------------------------------------
 # 刷新次数管理（每小时和每天）
@@ -359,3 +307,4 @@ def load_intensify_refresh_status():
 
 def set_intensify_refresh_status(status: bool):
     set_auto_order_status(status)
+"""
