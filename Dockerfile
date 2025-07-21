@@ -21,6 +21,9 @@ COPY --from=builder /usr/local/bin/ /usr/local/bin/
 # 复制应用代码
 COPY . .
 
+# 设置环境变量，告诉应用在生产模式下运行
+ENV ENV=production
+
 # 暴露 Gunicorn 将要监听的端口
 EXPOSE 5000
 
@@ -29,4 +32,5 @@ EXPOSE 5000
 # -b 0.0.0.0:5000: 监听所有网络接口的 5000 端口
 # service.web:run_flask: 指向 service/web.py 文件中的 run_flask 函数
 # ClawCloud 会自动设置 PORT 环境变量，我们在这里使用它
-CMD ["gunicorn", "--workers", "4", "--bind", "0.0.0.0:5000", "service.web:app"]
+#CMD ["gunicorn", "--workers", "4", "--bind", "0.0.0.0:5000", "service.web:app"]
+CMD gunicorn --workers 4 --bind "0.0.0.0:$PORT" service.web:app
