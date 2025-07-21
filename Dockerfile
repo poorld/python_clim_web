@@ -25,7 +25,7 @@ COPY . .
 ENV ENV=production
 
 # 暴露 Gunicorn 将要监听的端口
-EXPOSE 5000
+EXPOSE 80
 
 # 使用 Gunicorn 启动应用
 # -w 4: 启动 4 个 worker 进程 (可以根据您的服务器配置调整)

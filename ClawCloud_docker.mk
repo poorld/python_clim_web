@@ -178,3 +178,8 @@ CMD ["gunicorn", "--workers", "4", "--bind", "0.0.0.0:5000", "service.web:app"]
        * ClawCloud 会从 Docker Hub 拉取您的镜像，并启动容器。
 
   部署完成后，ClawCloud 会为您提供一个公开的访问域名，您就可以通过这个域名访问您的应用了。
+  
+  
+  Environment Variables 添加 PORT=5000
+  
+  wfzznhagltds.ap-southeast-1.clawcloudrun.com

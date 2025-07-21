@@ -10,6 +10,9 @@ from common.logger import get_logger
 
 logger = get_logger()
 
+RUN_DOCKER = True
+
+
 if __name__ == "__main__":
 
     load_keywords()
@@ -24,8 +27,9 @@ if __name__ == "__main__":
     logger.info(f"📊 初始监控间隔: {get_global_monitor_interval()}秒")
 
     # 启动Web服务
-    webThread = OnceJobThread(WebThread())
-    webThread.start()
+    if not RUN_DOCKER:
+        webThread = OnceJobThread(WebThread())
+        webThread.start()
 
     # 根据监控状态决定是否启动监控线程
     from common.status import get_global_monitor_status
@@ -45,5 +49,5 @@ if __name__ == "__main__":
 
     logger.info("🎛️ 监控间隔可在Web界面动态调整: http://localhost:5000")
 
-    # 阻塞主线程，等待Web服务线程结束，以保持容器运行
-    webThread.join()
+    # # 阻塞主线程，等待Web服务线程结束，以保持容器运行
+    # webThread.join()

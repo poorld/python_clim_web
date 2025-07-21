@@ -354,6 +354,18 @@ def home():
                          keywords=keywords,
                          error_message=error_message)
 
+
+@app.route('/health')
+def health_check():
+    """
+    一个专门给平台健康检查用的路径。
+    它不做任何事，只为了快速返回一个 200 OK 状态码。
+    """
+    return "OK", 200
+
+
+
+
 '''
 ----------------------------------------web--------------------------------
 '''
@@ -596,8 +608,6 @@ def api_get_refresh_stats():
             'hourly_count': 0
         })
 
-if __name__ == '__main__':
-    run_flask()
 
 # 手动检查订单状态
 @app.route('/api/check_order_status', methods=['POST'])
@@ -608,3 +618,8 @@ def api_check_order_status():
         return jsonify({'success': True, 'message': '订单状态检查完成'})
     except Exception as e:
         return jsonify({'success': False, 'message': f'检查失败: {str(e)}'})
+    
+
+if __name__ == '__main__':
+    # run_flask()
+    pass
