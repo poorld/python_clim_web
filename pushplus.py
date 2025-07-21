@@ -2,6 +2,9 @@
 # -*- coding: utf-8 -*-
 
 import requests
+from common.logger import get_logger
+
+logger = get_logger()
 
 IS_DEBUG = True
 
@@ -22,7 +25,4 @@ class PushPlus():
                     content=content,
                     topic=self._topic)
         response = requests.get(url)
-        print(response)
-   
-# push_plus = PushPlus()
-# push_plus.sendMsg('测试')
+        logger.debug(response)

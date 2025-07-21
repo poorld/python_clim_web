@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from common.logger import get_logger
+
+logger = get_logger()
 
 orders_history = []
 def save_orders_history(order):
@@ -10,9 +13,9 @@ def save_orders_history(order):
         orders_history.append(order)
         with open('orders.txt', 'a') as f:
             f.write(f"{order}\n")
-        print(f"📝 订单 {order} 已保存到历史记录")
+        logger.info(f"📝 订单 {order} 已保存到历史记录")
     else:
-        print(f"⚠️ 订单 {order} 已存在于历史记录中，跳过保存")
+        logger.warning(f"⚠️ 订单 {order} 已存在于历史记录中，跳过保存")
 
 def load_orders_history():
     global orders_history
@@ -34,11 +37,11 @@ def load_orders_history():
             # 如果发现重复，重写文件
             original_count = len([line.strip() for line in lines if line.strip()])
             if len(unique_orders) < original_count:
-                print(f"🧹 发现重复订单记录，清理中...")
+                logger.info(f"🧹 发现重复订单记录，清理中...")
                 with open('orders.txt', 'w') as f:
                     for order in unique_orders:
                         f.write(f"{order}\n")
-                print(f"✅ 订单记录已清理，从 {original_count} 条减少到 {len(unique_orders)} 条")
+                logger.info(f"✅ 订单记录已清理，从 {original_count} 条减少到 {len(unique_orders)} 条")
 
             return orders_history
     except FileNotFoundError:
@@ -53,9 +56,9 @@ def set_orders(_orders):
     # 去重：只有当订单不存在时才添加
     if _orders not in orders:
         orders.append(_orders)
-        print(f"📝 新订单已添加到列表: {_orders}")
+        logger.info(f"📝 新订单已添加到列表: {_orders}")
     else:
-        print(f"⚠️ 订单已存在，跳过添加: {_orders}")
+        logger.warning(f"⚠️ 订单已存在，跳过添加: {_orders}")
 
 def get_orders():
     global orders

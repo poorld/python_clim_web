@@ -4,8 +4,9 @@
 import requests
 import re
 from bs4 import BeautifulSoup
-# from http import cookiejar
+from common.logger import get_logger
 
+logger = get_logger()
 
 max_money = 20000
 
@@ -78,14 +79,12 @@ settleData = {
 def query_product(keyword):
     param_query_product['keyword'] = keyword
     resp = requests.post(url=url_query_product, headers=headers, params=param_query_product)
-    # print(resp.content)
-    print(f'status_code: {resp.status_code}')
+    logger.debug(f'status_code: {resp.status_code}')
     sku = None
     if resp.status_code == 200:
         soup = BeautifulSoup(resp.content, "html.parser", from_encoding="utf-8")
-        # print(soup)
         rows = soup.select('tbody tr')
-        print('查看供应商商品', len(rows))
+        logger.info(f'查看供应商商品: {len(rows)}')
 
         if len(rows) > 0:
             row_0 = rows[0]
@@ -109,35 +108,33 @@ def query_product(keyword):
                 stock = "无库存信息"
 
             # Print the extracted data
-            print(f"品牌/分类: {brand_category}")
-            print(f"图片: {image_url}")
-            print(f"名称: {name}")
-            print(f"重量: {weight}kg")
-            print(f"分销价(CNY)	: {distribution_price} CNY")
-            print(f"市场价: {market_price} CNY")
-            print(f"上新时间: {listing_time}")
-            print(f"库存: {stock}")
-            print("-" * 50)
+            logger.info(f"品牌/分类: {brand_category}")
+            logger.info(f"图片: {image_url}")
+            logger.info(f"名称: {name}")
+            logger.info(f"重量: {weight}kg")
+            logger.info(f"分销价(CNY): {distribution_price} CNY")
+            logger.info(f"市场价: {market_price} CNY")
+            logger.info(f"上新时间: {listing_time}")
+            logger.info(f"库存: {stock}")
+            logger.info("-" * 50)
 
             
             # 提取 button 的 title -> 真实编号
-            # buttons = stock_rows[13].find_all('button')
             buttons = row_0.find_all('button')
             button_titles = [button.get('title', None) for button in buttons]
-            print('button_titles', button_titles)
+            logger.debug(f'button_titles: {button_titles}')
             sku = button_titles[0]
             
         else:
-            print('无库存')
+            logger.info('无库存')
 
     return sku
 
 def selectBuyDefect(sku):
     resp = requests.get(url=f'{url_select_buy_pruduct}{sku}', headers=headers)
-    print(f'status_code: {resp.status_code}')
+    logger.debug(f'status_code: {resp.status_code}')
     if resp.status_code == 200:
         soup = BeautifulSoup(resp.content, "html.parser", from_encoding="utf-8")
-        # print(soup)
         return saveCart(soup)
     return None
 
@@ -147,21 +144,21 @@ def saveCart(soup: BeautifulSoup):
     price = soup.find('input', {'name': 'price'})
     product_code = soup.find('input', {'name': 'productCode'})
 
-    print(type_code)
-    print(price)
-    print(product_code)
+    logger.debug(f'type_code: {type_code}')
+    logger.debug(f'price: {price}')
+    logger.debug(f'product_code: {product_code}')
 
     type_code_value = type_code['value']
     price_value = price['value']
     product_code_value = product_code['value']
-    print(f"typeCode 的值: {type_code_value}")
-    print(f"price 的值: {price_value}")
-    print(f"productCode 的值: {product_code_value}")
+    logger.debug(f"typeCode 的值: {type_code_value}")
+    logger.debug(f"price 的值: {price_value}")
+    logger.debug(f"productCode 的值: {product_code_value}")
 
     # 库存
     stock = soup.find('input', {'id': f'stock{product_code_value}'})
     stock_value = stock['value']
-    print(f"stock_value 的值: {stock_value}")
+    logger.debug(f"stock_value 的值: {stock_value}")
 
     # 下单数 = 库存数
     count = stock_value
@@ -170,12 +167,12 @@ def saveCart(soup: BeautifulSoup):
 
     # 总价
     total_price = float(price_value) * float(stock_value)
-    print('总价', total_price)
+    logger.info(f'总价: {total_price}')
     if total_price > max_money:
         count = max_money / price_value
-        print(f'总价过大，下单数量:{count}')
+        logger.info(f'总价过大，下单数量:{count}')
 
-    print(f'下单数量:{count}')
+    logger.info(f'下单数量:{count}')
     param_save_cart['typeCode'] = type_code_value
     param_save_cart['price'] = price_value
     param_save_cart['productCode'] = product_code_value
@@ -184,19 +181,18 @@ def saveCart(soup: BeautifulSoup):
     resp = requests.post(url=url_save_cart, headers=headers, params=param_save_cart)
     status_code = resp.status_code
     content = resp.content
-    print('content', content)
+    logger.debug(f'content: {content}')
     
     if status_code == 200:
-        print('加入购物车成功')
+        logger.info('加入购物车成功')
         return product_code_value
     return None
 
 def check_cart():
     resp = requests.get(url_cart, headers=headers)
     soup = BeautifulSoup(resp.content, "html.parser", from_encoding="utf-8")
-    # print(soup)
     rows = soup.select('tbody tr')
-    print(len(rows))
+    logger.info(len(rows))
 
     if len(rows) > 0:
         row_0 = rows[0]
@@ -215,31 +211,28 @@ def check_cart():
         remarks = row_0.find_all('td')[7].get_text(strip=True)
         stock = row_0.find_all('td')[8].get_text(strip=True)
         # 打印提取的数据
-        print(f"隐藏数据: {hidden_data}")
-        print(f"复选框的值: {checkbox_value}")
-        print(f"图片链接: {img_src}")
-        print(f"产品代码: {product_code}")
-        print(f"描述: {description}")
-        print(f"项目名称: {item_name}")
-        print(f"产品链接: {product_link}")
-        print(f"价格: {price}")
-        print(f"备注: {remarks}")
-        print(f"库存: {stock}")
-        print("-" * 50)
+        logger.debug(f"隐藏数据: {hidden_data}")
+        logger.debug(f"复选框的值: {checkbox_value}")
+        logger.debug(f"图片链接: {img_src}")
+        logger.debug(f"产品代码: {product_code}")
+        logger.debug(f"描述: {description}")
+        logger.debug(f"项目名称: {item_name}")
+        logger.debug(f"产品链接: {product_link}")
+        logger.debug(f"价格: {price}")
+        logger.debug(f"备注: {remarks}")
+        logger.debug(f"库存: {stock}")
+        logger.info("-" * 50)
         
 
 def check_cart1(product_code_value):
     resp = requests.get(url_cart, headers=headers)
     soup = BeautifulSoup(resp.content, "html.parser", from_encoding="utf-8")
-    # print(soup)
     rows = soup.select('tbody tr')
-    print(len(rows))
+    logger.info(len(rows))
 
     if len(rows) > 0:
         for row in rows:
             # 获取隐藏输入字段
-            # hidden_inputs = row.find_all('input', type='hidden')
-            # hidden_data = {input_elem.get('name'): input_elem.get('value') for input_elem in hidden_inputs}
             rank_code_input = row.find('input', {'class': 'rankCode'})
             rank_code = rank_code_input['value']
 
@@ -255,17 +248,17 @@ def check_cart1(product_code_value):
             stock = row.find_all('td')[8].get_text(strip=True)
             
             # 打印提取的数据
-            print(f"隐藏数据: {rank_code}")
-            print(f"复选框的值: {checkbox_value}")
-            print(f"图片链接: {img_src}")
-            print(f"产品代码: {product_code}")
-            print(f"描述: {description}")
-            print(f"项目名称: {item_name}")
-            print(f"产品链接: {product_link}")
-            print(f"价格: {price}")
-            print(f"备注: {remarks}")
-            print(f"库存: {stock}")
-            print("-" * 50)
+            logger.debug(f"隐藏数据: {rank_code}")
+            logger.debug(f"复选框的值: {checkbox_value}")
+            logger.debug(f"图片链接: {img_src}")
+            logger.debug(f"产品代码: {product_code}")
+            logger.debug(f"描述: {description}")
+            logger.debug(f"项目名称: {item_name}")
+            logger.debug(f"产品链接: {product_link}")
+            logger.debug(f"价格: {price}")
+            logger.debug(f"备注: {remarks}")
+            logger.debug(f"库存: {stock}")
+            logger.info("-" * 50)
 
             if product_code == product_code_value:
                 checkout(checkbox_value)
@@ -273,7 +266,7 @@ def check_cart1(product_code_value):
 
 def checkout(checkId):
     pass
-    print('结算 checkId=', checkId)
+    logger.info(f'结算 checkId=: {checkId}')
     resp = requests.get(url=f'{url_settle}{checkId}', headers=headers)
     soup = BeautifulSoup(resp.content, "html.parser", from_encoding="utf-8")
 
@@ -305,12 +298,12 @@ def checkout(checkId):
     settleData['defectNo'] = defectNo['value']
     settleData['productcode'] = productcode['value']
     settleData['counts'] = counts['value']
-    print(settleData)
+    logger.debug(f'settleData: {settleData}')
     resp = requests.post(url=url_settle_save, headers=headers, params=settleData)
     status_code = resp.status_code
     content = resp.content
-    print('status_code', status_code)
-    print('content', content.decode('utf-8'))
+    logger.debug(f'status_code: {status_code}')
+    logger.debug(f'content: {content.decode("utf-8")}')
 
 if __name__ == "__main__":
     keys = ['C2712QBMI5', 'CH137SVM6A', ]

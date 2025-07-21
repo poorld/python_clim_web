@@ -19,6 +19,10 @@ from jobs import OnceJobThread
 from jobs.job_checkout import RefreshThread
 import threading
 import queue
+import logging
+from common.logger import get_logger
+
+logger = get_logger()
 
 # 获取项目根目录并设置模板路径
 project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -33,64 +37,45 @@ order_queue = queue.Queue()
 log_queue = queue.Queue(maxsize=1000)  # 限制队列大小防止内存溢出
 clients = []  # 存储SSE客户端连接
 
-# 日志捕获类
-class LogCapture:
-    def __init__(self, original_stdout):
-        self.original_stdout = original_stdout
+# Web UI 日志处理器
+class WebLogHandler(logging.Handler):
+    def __init__(self, log_queue):
+        super().__init__()
+        self.log_queue = log_queue
 
-    def write(self, message):
-        # 写入原始stdout（保持控制台输出）
-        self.original_stdout.write(message)
-        self.original_stdout.flush()
-
-        # 推送到Web界面（只推送非空消息）
-        if message.strip():
-            self.push_log_to_web(message.strip())
-
-    def flush(self):
-        self.original_stdout.flush()
-
-    def push_log_to_web(self, message):
-        """推送日志到Web界面"""
+    def emit(self, record):
         try:
-            timestamp = datetime.datetime.now().strftime("%H:%M:%S")
+            # 格式化日志消息
+            log_entry = self.format(record)
+            
+            # 准备要推送到前端的数据
             log_data = {
-                "timestamp": timestamp,
-                "message": message,
-                "level": self.detect_log_level(message)
+                "timestamp": datetime.datetime.fromtimestamp(record.created).strftime("%H:%M:%S"),
+                "message": log_entry,
+                "level": record.levelname.lower()
             }
-            log_queue.put(log_data, block=False)
+            
+            # 将日志数据放入队列
+            self.log_queue.put(log_data, block=False)
         except queue.Full:
-            # 队列满时，移除最老的日志
+            # 队列满时，可以考虑丢弃最旧的日志
             try:
-                log_queue.get_nowait()
-                log_queue.put(log_data, block=False)
+                self.log_queue.get_nowait()
+                self.log_queue.put(log_data, block=False)
             except queue.Empty:
                 pass
-        except Exception as e:
-            # 避免日志系统本身出错影响主程序
-            pass
+        except Exception:
+            # 忽略日志处理中的异常，防止程序崩溃
+            self.handleError(record)
 
-    def detect_log_level(self, message):
-        """检测日志级别"""
-        message_lower = message.lower()
-        if any(word in message_lower for word in ['error', '错误', 'failed', '失败']):
-            return 'error'
-        elif any(word in message_lower for word in ['warning', '警告', 'warn']):
-            return 'warning'
-        elif any(word in message_lower for word in ['success', '成功', 'complete', '完成']):
-            return 'success'
-        elif any(word in message_lower for word in ['info', '信息', 'start', '开始']):
-            return 'info'
-        else:
-            return 'default'
+# 创建并配置Web日志处理器
+web_log_handler = WebLogHandler(log_queue)
+web_log_handler.setLevel(logging.INFO)  # 设置推送到Web的最低日志级别
+formatter = logging.Formatter('%(message)s') # Web界面只显示纯消息
+web_log_handler.setFormatter(formatter)
 
-# 初始化日志捕获
-original_stdout = sys.stdout
-log_capture = LogCapture(original_stdout)
-sys.stdout = log_capture
-
-# index = 0
+# 将Web处理器添加到主logger
+logger.addHandler(web_log_handler)
 
 '''
 ----------------------------------------web--------------------------------
@@ -107,8 +92,8 @@ def get_keywords():
 def add_keyword():
     keywords = load_keywords()
     new_keyword = request.form.get('keyword', '').strip()
-    print('new_keyword', new_keyword)
-    print('keywords', keywords)
+    logger.debug(f'new_keyword: {new_keyword}')
+    logger.debug(f'keywords: {keywords}')
     if new_keyword and new_keyword not in keywords:
         save_keyword(new_keyword)  # 保存新添加的关键词
         return redirect(url_for('home'))  # 重定向到主页
@@ -169,7 +154,7 @@ def set_interval():
             else:
                 mode_text = "🛡️ 低频节能模式"
 
-            print(f"⚡ 监控间隔已更新为: {interval}秒 ({mode_text})")
+            logger.info(f"⚡ 监控间隔已更新为: {interval}秒 ({mode_text})")
             return redirect(url_for('home'))
         else:
             return redirect(url_for('home', error='间隔必须在1-300秒之间'))
@@ -182,7 +167,7 @@ def set_batch_mode():
     mode = request.form.get('batch_mode') == 'true'
     set_batch_order_mode(mode)
     mode_text = "统一建单" if mode else "单独建单"
-    print(f"🛒 建单模式已切换为: {mode_text}")
+    logger.info(f"🛒 建单模式已切换为: {mode_text}")
     return redirect(url_for('home'))
 
 # 测试下单（只弹一次付款）- 异步版本
@@ -191,18 +176,18 @@ def test_order():
     try:
         # 临时启用测试模式
         set_test_mode(True)
-        print("🧪 测试模式已启用：只弹一次付款窗口")
+        logger.info("🧪 测试模式已启用：只弹一次付款窗口")
 
         # 强制执行测试检测（跳过商品总数检查）
         from common.keywords import get_global_keywords
 
         keywords = get_global_keywords()
         if not keywords:
-            print("❌ 没有设置关键词，无法执行测试")
+            logger.error("❌ 没有设置关键词，无法执行测试")
             set_test_mode(False)
             return jsonify({'success': False, 'message': '没有设置关键词，无法执行测试'})
 
-        print(f"🧪 测试模式：开始检测 {len(keywords)} 个关键词")
+        logger.info(f"🧪 测试模式：开始检测 {len(keywords)} 个关键词")
 
         # 在后台线程中执行测试
         import threading
@@ -214,11 +199,9 @@ def test_order():
 
                 # 检测完成后关闭测试模式
                 set_test_mode(False)
-                print("🧪 测试模式已关闭")
+                logger.info("🧪 测试模式已关闭")
             except Exception as e:
-                print(f"❌ 测试执行失败: {e}")
-                import traceback
-                traceback.print_exc()
+                logger.error(f"❌ 测试执行失败: {e}", exc_info=True)
                 set_test_mode(False)
 
         # 启动后台线程
@@ -229,9 +212,7 @@ def test_order():
         return jsonify({'success': True, 'message': f'测试模式已启动，正在检测 {len(keywords)} 个关键词...'})
 
     except Exception as e:
-        print(f"❌ 测试下单失败: {e}")
-        import traceback
-        traceback.print_exc()
+        logger.error(f"❌ 测试下单失败: {e}", exc_info=True)
         set_test_mode(False)  # 确保测试模式被关闭
         return jsonify({'success': False, 'message': f'测试下单失败: {str(e)}'})
 
@@ -240,12 +221,8 @@ def test_order():
 # 获取所有订单
 @app.route('/orders', methods=['GET'])
 def orders():
-    # global index
-    # index = index + 1
-    # if index == 2:
-    #     set_orders(['FX2024423005', 'FX2024297042'])
     orders = get_orders()
-    print('orders', orders)
+    logger.debug(f'orders: {orders}')
     orders_history = get_global_orders_history()
     new_orders = []
     for order in orders:
@@ -253,45 +230,37 @@ def orders():
             new_orders.append(order)
             orders_history.append(order)
             save_orders_history(order)
-    print('new_orders', new_orders)
+    logger.debug(f'new_orders: {new_orders}')
 
-    # 注意：订单推送已在下单函数中直接处理，这里不需要重复推送
-    # 这个路由主要用于兼容旧的轮询方式和调试
     return jsonify({'orders': new_orders})
 
 # SSE订单推送端点
 @app.route('/stream')
 def stream():
     def event_stream():
-        # 发送连接确认
         yield "data: {\"type\": \"connected\"}\n\n"
 
         while True:
             try:
-                # 减少超时时间，提高响应速度
                 message = order_queue.get(timeout=1)
 
-                # 处理不同类型的消息
                 if isinstance(message, dict):
-                    # 订单移除消息
                     data = json.dumps(message)
-                    print(f"📤 SSE发送消息: {message}")
+                    logger.debug(f"📤 SSE发送消息: {message}")
                 else:
-                    # 新订单消息（兼容旧格式）
                     data = json.dumps({
                         "type": "new_order",
                         "order": message,
                         "timestamp": time.time()
                     })
-                    print(f"📤 SSE发送订单: {message}")
+                    logger.debug(f"📤 SSE发送订单: {message}")
 
                 yield f"data: {data}\n\n"
                 order_queue.task_done()
             except queue.Empty:
-                # 发送心跳包保持连接
                 yield "data: {\"type\": \"heartbeat\"}\n\n"
             except Exception as e:
-                print(f"❌ SSE错误: {e}")
+                logger.error(f"❌ SSE错误: {e}")
                 break
 
     return Response(event_stream(), mimetype="text/event-stream", headers={
@@ -305,15 +274,12 @@ def stream():
 def logs_stream():
     def log_event_stream():
         try:
-            # 发送连接确认
             yield "data: {\"type\": \"connected\"}\n\n"
-            print("📡 新的日志SSE客户端已连接")
+            logger.info("📡 新的日志SSE客户端已连接")
 
             while True:
                 try:
-                    # 等待新日志，超时时间30秒
                     log_data = log_queue.get(timeout=30)
-                    # 发送日志数据
                     data = json.dumps({
                         "type": "log",
                         "timestamp": log_data["timestamp"],
@@ -323,14 +289,13 @@ def logs_stream():
                     yield f"data: {data}\n\n"
                     log_queue.task_done()
                 except queue.Empty:
-                    # 发送心跳包保持连接
                     yield "data: {\"type\": \"heartbeat\"}\n\n"
                 except Exception as e:
-                    print(f"🔴 日志SSE内部错误: {e}")
+                    logger.error(f"🔴 日志SSE内部错误: {e}")
                     break
         except Exception as e:
-            print(f"🔴 日志SSE连接错误: {e}")
-            yield f"data: {{\"type\": \"error\", \"message\": \"连接错误: {str(e)}\"}}\n\n"
+            logger.error(f"🔴 日志SSE连接错误: {e}")
+            yield f"data: {json.dumps({'type': 'error', 'message': f'连接错误: {str(e)}'}, ensure_ascii=False)}\n\n"
 
     response = Response(log_event_stream(), mimetype="text/event-stream")
     response.headers['Cache-Control'] = 'no-cache'
@@ -338,24 +303,16 @@ def logs_stream():
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response
 
-# 日志系统状态检查端点
-@app.route('/log-status')
-def log_status():
-    return jsonify({
-        "log_capture_active": sys.stdout == log_capture,
-        "log_queue_size": log_queue.qsize(),
-        "log_queue_maxsize": log_queue.maxsize,
-        "status": "ok"
-    })
+
 
 # 推送新订单到所有客户端
 def push_order_to_clients(order):
     """将新订单推送到订单队列"""
     try:
         order_queue.put(order, block=False)
-        print(f"📤 订单 {order} 已推送到队列，队列大小: {order_queue.qsize()}")
+        logger.info(f"📤 订单 {order} 已推送到队列，队列大小: {order_queue.qsize()}")
     except queue.Full:
-        print("❌ 订单队列已满，跳过推送")
+        logger.warning("❌ 订单队列已满，跳过推送")
 
 def remove_paid_orders(paid_orders):
     """移除已付款的订单"""
@@ -364,9 +321,8 @@ def remove_paid_orders(paid_orders):
     for order in paid_orders:
         if order in orders:
             orders.remove(order)
-            print(f"🗑️ 已从订单列表移除: {order}")
+            logger.info(f"🗑️ 已从订单列表移除: {order}")
 
-            # 推送移除订单的消息到前端
             try:
                 removal_data = {
                     "type": "remove_order",
@@ -374,9 +330,9 @@ def remove_paid_orders(paid_orders):
                     "timestamp": time.time()
                 }
                 order_queue.put(removal_data, block=False)
-                print(f"📤 订单移除消息已推送: {order}")
+                logger.info(f"📤 订单移除消息已推送: {order}")
             except queue.Full:
-                print("❌ 订单队列已满，跳过移除消息推送")
+                logger.warning("❌ 订单队列已满，跳过移除消息推送")
 
 # 主页
 @app.route('/')
@@ -398,49 +354,38 @@ def home():
                          keywords=keywords,
                          error_message=error_message)
 
-
-
-
-# https://fenxiao.clim.cn/alipay/topay.do?code=FX2024762983
-
 '''
 ----------------------------------------web--------------------------------
 '''
 
-
-
 def run_flask():
-    print("🚀 Flask Web服务启动中...")
-    print("📡 实时日志推送系统已激活")
-    print("🌐 访问地址: http://localhost:5000")
-    print("🔧 日志捕获系统状态检查...")
+    logger.info("🚀 Flask Web服务启动中...")
+    logger.info("📡 实时日志推送系统已激活")
+    port = int(os.environ.get("PORT", 5000))
+    logger.info(f"🌐 访问地址: http://0.0.0.0:{port}")
+    logger.info("🔧 日志捕获系统状态检查...")
 
-    # 测试日志推送
     import threading
     def test_logs():
         import time
-        time.sleep(2)  # 等待Web服务启动
-        print("✅ 日志推送测试 - 这是一条测试日志")
-        print("🟢 成功：日志系统工作正常")
-        print("🔴 错误：这是一条错误测试日志")
-        print("🟡 警告：这是一条警告测试日志")
-        print("🔵 信息：这是一条信息测试日志")
+        time.sleep(2)
+        logger.info("✅ 日志推送测试 - 这是一条测试日志")
+        logger.info("🟢 成功：日志系统工作正常")
+        logger.error("🔴 错误：这是一条错误测试日志")
+        logger.warning("🟡 警告：这是一条警告测试日志")
 
-    # 启动测试线程
     test_thread = threading.Thread(target=test_logs)
     test_thread.daemon = True
     test_thread.start()
 
-    # 实际启动Flask服务
     try:
-        print("🚀 尝试启动Flask服务...")
-        app.run(host="0.0.0.0", port=5000, debug=True, use_reloader=False)
+        logger.info("🚀 尝试启动Flask服务...")
+        app.run(host="0.0.0.0", port=port, debug=True, use_reloader=False)
     except OSError as e:
         if "Address already in use" in str(e) or "WinError 10048" in str(e):
-            print("❌ 端口5000被占用，尝试使用端口5001...")
-            app.run(host="0.0.0.0", port=5001, debug=True, use_reloader=False)
+            logger.error(f"❌ 端口 {port} 被占用，请使用其他端口。")
         else:
-            print(f"❌ Flask启动失败: {e}")
+            logger.error(f"❌ Flask启动失败: {e}", exc_info=True)
             raise
 
 # ==================== 异步API路由 ====================
@@ -472,7 +417,6 @@ def api_toggle_auto_order():
 
         if enabled:
             set_auto_order_status(True)
-            # 自动下单需要监控支持
             if not load_monitor_status():
                 set_monitor_status(True)
                 message = '自动下单已开启，监控已同时启用'
@@ -623,7 +567,7 @@ def api_add_order_history():
 def api_close_test_mode():
     try:
         set_test_mode(False)
-        print("🧪 测试模式已强制关闭")
+        logger.info("🧪 测试模式已强制关闭")
         return jsonify({
             'success': True,
             'message': '测试模式已关闭',
@@ -653,16 +597,7 @@ def api_get_refresh_stats():
         })
 
 if __name__ == '__main__':
-    try:
-        print("🚀 尝试启动Flask服务...")
-        app.run(host="0.0.0.0", port=5000, debug=True, use_reloader=False)
-    except OSError as e:
-        if "Address already in use" in str(e) or "WinError 10048" in str(e):
-            print("❌ 端口5000被占用，尝试使用端口5001...")
-            app.run(host="0.0.0.0", port=5001, debug=True, use_reloader=False)
-        else:
-            print(f"❌ Flask启动失败: {e}")
-            raise
+    run_flask()
 
 # 手动检查订单状态
 @app.route('/api/check_order_status', methods=['POST'])

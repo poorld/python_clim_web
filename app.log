@@ -1,0 +1,159 @@
+2025-07-21 14:20:54 - INFO - logger:34 - File logger initialized successfully.
+2025-07-21 14:20:56 - INFO - main3:24 - 📊 初始监控间隔: 10秒
+2025-07-21 14:20:56 - INFO - web:386 - 🚀 Flask Web服务启动中...
+2025-07-21 14:20:56 - INFO - web:387 - 📡 实时日志推送系统已激活
+2025-07-21 14:20:56 - INFO - main3:38 - ⏸️ 监控状态为关闭，不启动监控线程
+2025-07-21 14:20:56 - INFO - web:389 - 🌐 访问地址: http://0.0.0.0:5000
+2025-07-21 14:20:56 - INFO - job_checkout:367 - 🔍 订单状态检查线程已启动
+2025-07-21 14:20:56 - INFO - main3:44 - 🔍 订单状态检查线程已启动
+2025-07-21 14:20:56 - INFO - web:390 - 🔧 日志捕获系统状态检查...
+2025-07-21 14:20:56 - INFO - main3:46 - 🎛️ 监控间隔可在Web界面动态调整: http://localhost:5000
+2025-07-21 14:20:56 - INFO - web:406 - 🚀 尝试启动Flask服务...
+2025-07-21 14:20:58 - INFO - web:396 - ✅ 日志推送测试 - 这是一条测试日志
+2025-07-21 14:20:58 - INFO - web:397 - 🟢 成功：日志系统工作正常
+2025-07-21 14:20:58 - ERROR - web:398 - 🔴 错误：这是一条错误测试日志
+2025-07-21 14:20:58 - WARNING - web:399 - 🟡 警告：这是一条警告测试日志
+2025-07-21 14:21:06 - INFO - web:294 - 📡 新的日志SSE客户端已连接
+2025-07-21 14:21:18 - INFO - keywords:28 - Added keyword: test
+2025-07-21 14:21:19 - INFO - web:294 - 📡 新的日志SSE客户端已连接
+2025-07-21 14:21:33 - INFO - status:99 - ⚡ 监控间隔已调整: 10秒 → 5秒 (🔥 高频抢购模式)
+2025-07-21 14:21:47 - INFO - status:99 - ⚡ 监控间隔已调整: 5秒 → 60秒 (🛡️ 低频节能模式)
+2025-07-21 14:26:29 - INFO - main3:24 - 📊 初始监控间隔: 60秒
+2025-07-21 14:26:29 - INFO - web:362 - 🚀 Flask Web服务启动中...
+2025-07-21 14:26:29 - INFO - web:363 - 📡 实时日志推送系统已激活
+2025-07-21 14:26:29 - INFO - web:365 - 🌐 访问地址: http://0.0.0.0:5000
+2025-07-21 14:26:29 - INFO - main3:38 - ⏸️ 监控状态为关闭，不启动监控线程
+2025-07-21 14:26:29 - INFO - web:366 - 🔧 日志捕获系统状态检查...
+2025-07-21 14:26:29 - INFO - job_checkout:367 - 🔍 订单状态检查线程已启动
+2025-07-21 14:26:29 - INFO - main3:44 - 🔍 订单状态检查线程已启动
+2025-07-21 14:26:29 - INFO - web:382 - 🚀 尝试启动Flask服务...
+2025-07-21 14:26:29 - INFO - main3:46 - 🎛️ 监控间隔可在Web界面动态调整: http://localhost:5000
+2025-07-21 14:26:31 - INFO - web:372 - ✅ 日志推送测试 - 这是一条测试日志
+2025-07-21 14:26:31 - INFO - web:373 - 🟢 成功：日志系统工作正常
+2025-07-21 14:26:31 - ERROR - web:374 - 🔴 错误：这是一条错误测试日志
+2025-07-21 14:26:31 - WARNING - web:375 - 🟡 警告：这是一条警告测试日志
+2025-07-21 14:26:32 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-21 14:26:41 - INFO - keywords:37 - Removed keyword: test
+2025-07-21 14:26:42 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-21 14:29:06 - INFO - status:40 - 🚀 启动监控线程...
+2025-07-21 14:29:06 - INFO - __init__:236 - 🚀 动态调度器启动，初始间隔: 60秒
+2025-07-21 14:29:06 - INFO - __init__:315 - ✅ 监控线程启动成功
+2025-07-21 14:29:06 - INFO - status:42 - ✅ 监控线程已启动
+2025-07-21 14:29:06 - INFO - product_checkout:945 - query_product_count
+2025-07-21 14:29:07 - DEBUG - product_checkout:950 - status_code: 200
+2025-07-21 14:29:07 - INFO - product_checkout:502 - do_login
+2025-07-21 14:29:07 - DEBUG - product_checkout:504 - 200
+2025-07-21 14:29:07 - DEBUG - product_checkout:506 - {'result': True}
+2025-07-21 14:29:07 - DEBUG - product_checkout:512 - JSESSIONID=5B4130B0A62F44935183B4EEC851EB7C;
+2025-07-21 14:29:07 - DEBUG - product_checkout:514 - loadcookie: JSESSIONID=5B4130B0A62F44935183B4EEC851EB7C;
+2025-07-21 14:29:07 - INFO - product_checkout:516 - --------------------------------------------------
+2025-07-21 14:29:07 - INFO - product_checkout:945 - query_product_count
+2025-07-21 14:29:08 - DEBUG - product_checkout:950 - status_code: 200
+2025-07-21 14:29:08 - INFO - product_checkout:961 - 商品总数: 1419
+2025-07-21 14:29:08 - INFO - status:260 - 📊 刷新统计 - 今日: 40次, 本小时: 1次
+2025-07-21 14:29:08 - INFO - product_checkout:1023 - 📈 商品总数变化: None -> 1419，需要查询商品
+2025-07-21 14:29:08 - DEBUG - job_checkout:334 - RefreshThread handle keywords: []
+2025-07-21 14:29:08 - INFO - job_checkout:387 - 📡 监控模式：检测库存变化，只发送通知
+2025-07-21 14:29:08 - ERROR - __init__:265 - ❌ 监控任务执行异常: max_workers must be greater than 0
+Traceback (most recent call last):
+  File "d:\hongda\github\python_clim_web\jobs\__init__.py", line 256, in run
+    self._handler.handle()
+  File "d:\hongda\github\python_clim_web\jobs\job_checkout.py", line 356, in handle
+    context.execute_checkout(keywords)
+  File "d:\hongda\github\python_clim_web\jobs\job_checkout.py", line 308, in execute_checkout
+    self._strategy.execute(keywords)
+  File "d:\hongda\github\python_clim_web\jobs\job_checkout.py", line 390, in execute
+    results = self._concurrent_check(keywords)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\hongda\github\python_clim_web\jobs\job_checkout.py", line 407, in _concurrent_check
+    with ThreadPoolExecutor(max_workers=min(len(keywords), 5)) as executor:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\concurrent\futures\thread.py", line 148, in __init__
+    raise ValueError("max_workers must be greater than 0")
+ValueError: max_workers must be greater than 0
+2025-07-21 14:30:02 - INFO - keywords:28 - Added keyword: test
+2025-07-21 14:30:04 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-21 14:30:08 - INFO - product_checkout:945 - query_product_count
+2025-07-21 14:30:09 - DEBUG - product_checkout:950 - status_code: 200
+2025-07-21 14:30:09 - INFO - product_checkout:961 - 商品总数: 1419
+2025-07-21 14:30:09 - INFO - status:260 - 📊 刷新统计 - 今日: 41次, 本小时: 2次
+2025-07-21 14:30:09 - INFO - product_checkout:1028 - 📊 商品总数未变化: 1419，跳过查询
+2025-07-21 14:30:09 - INFO - job_checkout:330 - 🔄 RefreshThread 商品总数未变化，跳过本次检查
+2025-07-21 14:30:09 - INFO - status:44 - 🛑 停止监控线程...
+2025-07-21 14:30:09 - INFO - status:40 - 🚀 启动监控线程...
+2025-07-21 14:30:09 - WARNING - __init__:303 - ⚠️ 监控线程已在运行中
+2025-07-21 14:30:09 - INFO - status:42 - ✅ 监控线程已启动
+2025-07-21 14:30:10 - INFO - __init__:281 - 🛑 收到停止信号，线程即将停止
+2025-07-21 14:30:10 - INFO - __init__:334 - ✅ 监控线程已停止
+2025-07-21 14:30:10 - INFO - status:46 - ✅ 监控线程已停止
+2025-07-21 14:30:22 - INFO - status:44 - 🛑 停止监控线程...
+2025-07-21 14:30:22 - WARNING - __init__:324 - ⚠️ 监控线程未运行
+2025-07-21 14:30:22 - INFO - status:46 - ✅ 监控线程已停止
+2025-07-21 14:30:38 - INFO - status:40 - 🚀 启动监控线程...
+2025-07-21 14:30:38 - INFO - __init__:236 - 🚀 动态调度器启动，初始间隔: 60秒
+2025-07-21 14:30:38 - INFO - __init__:315 - ✅ 监控线程启动成功
+2025-07-21 14:30:38 - INFO - status:42 - ✅ 监控线程已启动
+2025-07-21 14:30:38 - INFO - product_checkout:945 - query_product_count
+2025-07-21 14:30:39 - DEBUG - product_checkout:950 - status_code: 200
+2025-07-21 14:30:39 - INFO - product_checkout:961 - 商品总数: 1420
+2025-07-21 14:30:39 - INFO - status:260 - 📊 刷新统计 - 今日: 42次, 本小时: 3次
+2025-07-21 14:30:39 - INFO - product_checkout:1023 - 📈 商品总数变化: 1419 -> 1420，需要查询商品
+2025-07-21 14:30:39 - DEBUG - job_checkout:334 - RefreshThread handle keywords: ['test']
+2025-07-21 14:30:39 - INFO - job_checkout:387 - 📡 监控模式：检测库存变化，只发送通知
+2025-07-21 14:30:39 - INFO - product_checkout:520 - query_product: test
+2025-07-21 14:30:40 - DEBUG - product_checkout:529 - status_code: 200
+2025-07-21 14:30:40 - DEBUG - product_checkout:530 - url: https://fenxiao.clim.cn/shop/products.do?keyword=test&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-21 14:30:40 - INFO - product_checkout:538 - 商品列表: 0
+2025-07-21 14:30:40 - DEBUG - product_checkout:1059 - product: None
+2025-07-21 14:30:40 - DEBUG - product_checkout:1060 - auto_order_enabled: False
+2025-07-21 14:30:40 - DEBUG - job_checkout:430 - 📊 [MONITOR] 关键词 test 暂无库存变化
+2025-07-21 14:30:40 - INFO - job_checkout:394 - 📊 监控检测完成：0/1 个关键词有库存变化
+2025-07-21 14:30:40 - INFO - job_checkout:399 - 📊 暂无库存变化
+2025-07-21 14:30:56 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-21 14:31:40 - INFO - product_checkout:945 - query_product_count
+2025-07-21 14:31:41 - DEBUG - product_checkout:950 - status_code: 200
+2025-07-21 14:31:41 - INFO - product_checkout:961 - 商品总数: 1421
+2025-07-21 14:31:41 - INFO - status:260 - 📊 刷新统计 - 今日: 43次, 本小时: 4次
+2025-07-21 14:31:41 - INFO - product_checkout:1023 - 📈 商品总数变化: 1420 -> 1421，需要查询商品
+2025-07-21 14:31:41 - DEBUG - job_checkout:334 - RefreshThread handle keywords: ['test']
+2025-07-21 14:31:41 - INFO - job_checkout:387 - 📡 监控模式：检测库存变化，只发送通知
+2025-07-21 14:31:41 - INFO - product_checkout:1050 - 单独建单模式下关键字 test 已检测5轮，停止检测
+2025-07-21 14:31:41 - DEBUG - job_checkout:430 - 📊 [MONITOR] 关键词 test 暂无库存变化
+2025-07-21 14:31:41 - INFO - job_checkout:394 - 📊 监控检测完成：0/1 个关键词有库存变化
+2025-07-21 14:31:41 - INFO - job_checkout:399 - 📊 暂无库存变化
+2025-07-21 14:32:41 - INFO - product_checkout:945 - query_product_count
+2025-07-21 14:32:42 - DEBUG - product_checkout:950 - status_code: 200
+2025-07-21 14:32:42 - INFO - product_checkout:961 - 商品总数: 1421
+2025-07-21 14:32:42 - INFO - status:260 - 📊 刷新统计 - 今日: 44次, 本小时: 5次
+2025-07-21 14:32:42 - INFO - product_checkout:1028 - 📊 商品总数未变化: 1421，跳过查询
+2025-07-21 14:32:42 - INFO - job_checkout:330 - 🔄 RefreshThread 商品总数未变化，跳过本次检查
+2025-07-21 14:33:42 - INFO - product_checkout:945 - query_product_count
+2025-07-21 14:33:42 - DEBUG - product_checkout:950 - status_code: 200
+2025-07-21 14:33:43 - INFO - product_checkout:961 - 商品总数: 1421
+2025-07-21 14:33:43 - INFO - status:260 - 📊 刷新统计 - 今日: 45次, 本小时: 6次
+2025-07-21 14:33:43 - INFO - product_checkout:1028 - 📊 商品总数未变化: 1421，跳过查询
+2025-07-21 14:33:43 - INFO - job_checkout:330 - 🔄 RefreshThread 商品总数未变化，跳过本次检查
+2025-07-21 14:34:43 - INFO - product_checkout:945 - query_product_count
+2025-07-21 14:34:43 - DEBUG - product_checkout:950 - status_code: 200
+2025-07-21 14:34:43 - INFO - product_checkout:961 - 商品总数: 1421
+2025-07-21 14:34:43 - INFO - status:260 - 📊 刷新统计 - 今日: 46次, 本小时: 7次
+2025-07-21 14:34:43 - INFO - product_checkout:1028 - 📊 商品总数未变化: 1421，跳过查询
+2025-07-21 14:34:43 - INFO - job_checkout:330 - 🔄 RefreshThread 商品总数未变化，跳过本次检查
+2025-07-21 14:35:43 - INFO - product_checkout:945 - query_product_count
+2025-07-21 14:35:44 - DEBUG - product_checkout:950 - status_code: 200
+2025-07-21 14:35:45 - INFO - product_checkout:961 - 商品总数: 1421
+2025-07-21 14:35:45 - INFO - status:260 - 📊 刷新统计 - 今日: 47次, 本小时: 8次
+2025-07-21 14:35:45 - INFO - product_checkout:1028 - 📊 商品总数未变化: 1421，跳过查询
+2025-07-21 14:35:45 - INFO - job_checkout:330 - 🔄 RefreshThread 商品总数未变化，跳过本次检查
+2025-07-21 14:36:45 - INFO - product_checkout:945 - query_product_count
+2025-07-21 14:36:45 - DEBUG - product_checkout:950 - status_code: 200
+2025-07-21 14:36:45 - INFO - product_checkout:961 - 商品总数: 1421
+2025-07-21 14:36:45 - INFO - status:260 - 📊 刷新统计 - 今日: 48次, 本小时: 9次
+2025-07-21 14:36:45 - INFO - product_checkout:1028 - 📊 商品总数未变化: 1421，跳过查询
+2025-07-21 14:36:45 - INFO - job_checkout:330 - 🔄 RefreshThread 商品总数未变化，跳过本次检查
+2025-07-21 14:37:45 - INFO - product_checkout:945 - query_product_count
+2025-07-21 14:37:46 - DEBUG - product_checkout:950 - status_code: 200
+2025-07-21 14:37:46 - INFO - product_checkout:961 - 商品总数: 1421
+2025-07-21 14:37:46 - INFO - status:260 - 📊 刷新统计 - 今日: 49次, 本小时: 10次
+2025-07-21 14:37:46 - INFO - product_checkout:1028 - 📊 商品总数未变化: 1421，跳过查询
+2025-07-21 14:37:46 - INFO - job_checkout:330 - 🔄 RefreshThread 商品总数未变化，跳过本次检查

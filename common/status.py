@@ -1,7 +1,9 @@
-"""#!/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import json
+from common.logger import get_logger
 
+logger = get_logger()
 CONFIG_FILE = 'config.json'
 
 # 刷新次数统计
@@ -35,18 +37,18 @@ def set_monitor_status(status: bool):
         from jobs import get_monitor_thread, start_monitor_thread, stop_monitor_thread
 
         if status:
-            print("🚀 启动监控线程...")
+            logger.info("🚀 启动监控线程...")
             start_monitor_thread()
-            print("✅ 监控线程已启动")
+            logger.info("✅ 监控线程已启动")
         else:
-            print("🛑 停止监控线程...")
+            logger.info("🛑 停止监控线程...")
             stop_monitor_thread()
-            print("✅ 监控线程已停止")
+            logger.info("✅ 监控线程已停止")
     except ImportError:
         # 如果监控线程管理函数不存在，只打印状态
-        print(f"📊 监控状态已设置为: {'启用' if status else '关闭'}")
+        logger.info(f"📊 监控状态已设置为: {'启用' if status else '关闭'}")
     except Exception as e:
-        print(f"⚠️ 监控线程控制失败: {e}")
+        logger.error(f"⚠️ 监控线程控制失败: {e}")
 
 def get_global_monitor_status():
     return load_monitor_status()
@@ -63,11 +65,11 @@ def set_auto_order_status(status: bool):
     if status:
         # 开启自动下单时，必须同时开启监控
         if not get_global_monitor_status():
-            print("🔗 自动下单需要监控支持，同时启动监控...")
+            logger.info("🔗 自动下单需要监控支持，同时启动监控...")
             set_monitor_status(True)
-        print("⚡ 自动下单已启用：发现库存将自动下单")
+        logger.info("⚡ 自动下单已启用：发现库存将自动下单")
     else:
-        print("📢 自动下单已关闭：切换为通知模式，只发送库存通知")
+        logger.info("📢 自动下单已关闭：切换为通知模式，只发送库存通知")
 
 def get_global_auto_order_status():
     return load_auto_order_status()
@@ -94,14 +96,14 @@ def set_monitor_interval(interval: int):
         else:
             mode_text = "🛡️ 低频节能模式"
 
-        print(f"⚡ 监控间隔已调整: {old_interval}秒 → {interval}秒 ({mode_text})")
+        logger.info(f"⚡ 监控间隔已调整: {old_interval}秒 → {interval}秒 ({mode_text})")
 
         # 如果监控线程正在运行，间隔会自动调整（DynamicSecondsScheduleJobThread）
         try:
             from jobs import get_monitor_thread
             thread = get_monitor_thread()
             if thread and thread.is_alive():
-                print("🔄 监控线程将在下次循环时应用新间隔")
+                logger.info("🔄 监控线程将在下次循环时应用新间隔")
         except:
             pass
 
@@ -125,23 +127,23 @@ def set_batch_order_mode(mode: bool):
         from service.product_checkout import clear_batch_cart, reset_batch_round
 
         if mode:
-            print("🛒 切换为统一建单模式：")
-            print("   - 发现库存 → 加入购物车")
-            print("   - 等待所有关键词检测完成")
-            print("   - 批量提交订单")
+            logger.info("🛒 切换为统一建单模式：")
+            logger.info("   - 发现库存 → 加入购物车")
+            logger.info("   - 等待所有关键词检测完成")
+            logger.info("   - 批量提交订单")
             # 重置批量状态
             reset_batch_round()
         else:
-            print("⚡ 切换为单独建单模式：")
-            print("   - 发现库存 → 立即下单")
-            print("   - 不使用购物车")
+            logger.info("⚡ 切换为单独建单模式：")
+            logger.info("   - 发现库存 → 立即下单")
+            logger.info("   - 不使用购物车")
             # 清空现有购物车
             clear_batch_cart()
 
     except ImportError:
-        print(f"🛒 建单模式已设置为: {'统一建单' if mode else '单独建单'}")
+        logger.info(f"🛒 建单模式已设置为: {'统一建单' if mode else '单独建单'}")
     except Exception as e:
-        print(f"⚠️ 建单模式切换时清理失败: {e}")
+        logger.error(f"⚠️ 建单模式切换时清理失败: {e}")
 
 def get_global_batch_order_mode():
     return load_batch_order_mode()
@@ -157,12 +159,12 @@ def set_test_mode(mode: bool):
     _save_config(config)
     # 实质性动作：测试模式管理
     if mode:
-        print("🧪 测试模式已启用：")
-        print("   - 强制执行检测（忽略商品总数变化）")
-        print("   - 只弹一次付款窗口")
-        print("   - 测试完成后自动关闭")
+        logger.info("🧪 测试模式已启用：")
+        logger.info("   - 强制执行检测（忽略商品总数变化）")
+        logger.info("   - 只弹一次付款窗口")
+        logger.info("   - 测试完成后自动关闭")
     else:
-        print("🧪 测试模式已关闭：恢复正常监控模式")
+        logger.info("🧪 测试模式已关闭：恢复正常监控模式")
         # 清理测试状态
         try:
             from service.product_checkout import reset_batch_round
@@ -255,7 +257,7 @@ def increment_refresh_count():
 
     save_refresh_stats()
 
-    print(f"📊 刷新统计 - 今日: {daily_refresh_count}次, 本小时: {hourly_refresh_count}次")
+    logger.info(f"📊 刷新统计 - 今日: {daily_refresh_count}次, 本小时: {hourly_refresh_count}次")
     return daily_refresh_count, hourly_refresh_count
 
 def get_refresh_stats():
@@ -307,4 +309,3 @@ def load_intensify_refresh_status():
 
 def set_intensify_refresh_status(status: bool):
     set_auto_order_status(status)
-"""

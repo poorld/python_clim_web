@@ -1,11 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from jobs import OnceJobThread
+from jobs import OnceJobThread, JobThread
 from jobs.job_web import WebThread
 from common.keywords import load_keywords
 from common.status import load_monitor_status, load_auto_order_status, load_monitor_interval, get_global_monitor_interval, load_batch_order_mode, load_test_mode, load_refresh_stats
 from common.orders import load_orders_history
+from common.logger import get_logger
+
+logger = get_logger()
 
 if __name__ == "__main__":
 
@@ -18,7 +21,7 @@ if __name__ == "__main__":
     load_refresh_stats()  # 加载刷新统计配置
     load_orders_history()
 
-    print(f"📊 初始监控间隔: {get_global_monitor_interval()}秒")
+    logger.info(f"📊 初始监控间隔: {get_global_monitor_interval()}秒")
 
     # 启动Web服务
     webThread = OnceJobThread(WebThread())
@@ -29,15 +32,18 @@ if __name__ == "__main__":
     from jobs import start_monitor_thread
 
     if get_global_monitor_status():
-        print("🚀 监控状态为启用，自动启动监控线程")
+        logger.info("🚀 监控状态为启用，自动启动监控线程")
         start_monitor_thread()
     else:
-        print("⏸️ 监控状态为关闭，不启动监控线程")
+        logger.info("⏸️ 监控状态为关闭，不启动监控线程")
 
     # 启动订单状态检查线程
     from jobs.job_checkout import OrderStatusCheckThread
-    order_check_thread = OnceJobThread(OrderStatusCheckThread())
+    order_check_thread = JobThread(OrderStatusCheckThread())
     order_check_thread.start()
-    print("🔍 订单状态检查线程已启动")
+    logger.info("🔍 订单状态检查线程已启动")
 
-    print("🎛️ 监控间隔可在Web界面动态调整: http://localhost:5000")
+    logger.info("🎛️ 监控间隔可在Web界面动态调整: http://localhost:5000")
+
+    # 阻塞主线程，等待Web服务线程结束，以保持容器运行
+    webThread.join()

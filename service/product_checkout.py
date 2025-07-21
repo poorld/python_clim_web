@@ -13,7 +13,9 @@ import re
 from common.orders import set_orders
 from common.status import get_global_batch_order_mode, get_global_test_mode
 import json
+from common.logger import get_logger
 
+logger = get_logger()
 
 class ProductCheckoutConfig:
     """产品下单配置管理类"""
@@ -46,8 +48,6 @@ class ProductCheckoutConfig:
 
     # 商品相关URL
     URL_QUERY_PRODUCT = f'{BASE_URL}/shop/products.do'
-    # URL_QUERY_PRODUCT_COUNTS = f'{BASE_URL}/home/main.do'
-    # https://fenxiao.clim.cn/shop/products.do
     URL_QUERY_PRODUCT_COUNTS = f'{BASE_URL}/shop/products.do'
     URL_SELECT_BUY_PRODUCT = f'{BASE_URL}/shop/selectBuyProduct.do'
 
@@ -79,7 +79,7 @@ class ProductCheckoutConfig:
         'host': 'fenxiao.clim.cn',
         'origin': f'{BASE_URL}',
         'referer': f'{BASE_URL}/shop/products.do',
-        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/128.0.0.0 Safari/537.36'
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36'
     }
 
     # 查询商品参数配置
@@ -116,18 +116,18 @@ class ProductCheckoutState:
             self.processed_keywords_batch.clear()
             self.batch_round_count = 0
 
-            print(f"🔄 [STATE] 批量状态已重置:")
-            print(f"   清空购物车: {old_cart_count} → 0")
-            print(f"   清空关键词记录: {old_keywords_count} → 0")
-            print(f"   重置轮次计数: → 0")
+            logger.info(f"🔄 [STATE] 批量状态已重置:")
+            logger.info(f"   清空购物车: {old_cart_count} → 0")
+            logger.info(f"   清空关键词记录: {old_keywords_count} → 0")
+            logger.info(f"   重置轮次计数: → 0")
 
     def get_batch_cart_items(self):
         """获取批量购物车商品"""
         with self.batch_lock:
             items = self.batch_cart_items.copy()
-            print(f"🔍 [STATE] 获取购物车商品: {len(items)} 件")
+            logger.info(f"🔍 [STATE] 获取购物车商品: {len(items)} 件")
             for i, item in enumerate(items):
-                print(f"   商品{i+1}: {item.get('name', 'Unknown')} (关键词: {item.get('keyword', 'Unknown')})")
+                logger.info(f"   商品{i+1}: {item.get('name', 'Unknown')} (关键词: {item.get('keyword', 'Unknown')})")
             return items
 
     def add_batch_cart_item(self, item):
@@ -137,18 +137,18 @@ class ProductCheckoutState:
             self.batch_cart_items.append(item)
             new_count = len(self.batch_cart_items)
 
-            print(f"📦 [STATE] 商品已添加到购物车:")
-            print(f"   商品名称: {item.get('name', 'Unknown')}")
-            print(f"   关键词: {item.get('keyword', 'Unknown')}")
-            print(f"   购物车ID: {item.get('cart_id', 'Unknown')}")
-            print(f"   购物车数量: {old_count} → {new_count}")
+            logger.info(f"📦 [STATE] 商品已添加到购物车:")
+            logger.info(f"   商品名称: {item.get('name', 'Unknown')}")
+            logger.info(f"   关键词: {item.get('keyword', 'Unknown')}")
+            logger.info(f"   购物车ID: {item.get('cart_id', 'Unknown')}")
+            logger.info(f"   购物车数量: {old_count} → {new_count}")
 
     def clear_batch_cart(self):
         """清空批量购物车"""
         with self.batch_lock:
             old_count = len(self.batch_cart_items)
             self.batch_cart_items.clear()
-            print(f"🧹 [STATE] 批量购物车已清空: {old_count} → 0")
+            logger.info(f"🧹 [STATE] 批量购物车已清空: {old_count} → 0")
 
 
 # 全局实例
@@ -157,9 +157,9 @@ state = ProductCheckoutState()
 
 def add_to_batch_cart(product_info, cart_result):
     """添加商品到批量购物车"""
-    print(f"🔄 [FUNC] add_to_batch_cart 被调用:")
-    print(f"   product_info: {product_info}")
-    print(f"   cart_result: {cart_result}")
+    logger.info(f"🔄 [FUNC] add_to_batch_cart 被调用:")
+    logger.debug(f"   product_info: {product_info}")
+    logger.debug(f"   cart_result: {cart_result}")
 
     item = {
         'keyword': product_info['keyword'],
@@ -170,38 +170,38 @@ def add_to_batch_cart(product_info, cart_result):
         'name': product_info['name']
     }
 
-    print(f"📦 [FUNC] 准备添加商品到购物车: {item}")
+    logger.info(f"📦 [FUNC] 准备添加商品到购物车: {item}")
 
     # 调用状态管理器添加商品
     state.add_batch_cart_item(item)
 
     # 验证添加结果
     current_items = state.get_batch_cart_items()
-    print(f"✅ [FUNC] 添加完成，当前购物车总数: {len(current_items)}")
+    logger.info(f"✅ [FUNC] 添加完成，当前购物车总数: {len(current_items)}")
 
     # 添加调试信息
     test_mode = get_global_test_mode()
     if test_mode:
-        print(f"📦 商品已加入测试购物车: {product_info['name']} (购物车ID: {cart_result['cart_id']})")
+        logger.info(f"📦 商品已加入测试购物车: {product_info['name']} (购物车ID: {cart_result['cart_id']})")
     else:
-        print(f"📦 商品已加入批量购物车: {product_info['name']} (购物车ID: {cart_result['cart_id']})")
+        logger.info(f"📦 商品已加入批量购物车: {product_info['name']} (购物车ID: {cart_result['cart_id']})")
 
 def get_batch_cart_items():
     """获取批量购物车商品"""
-    print(f"🔍 [FUNC] get_batch_cart_items 被调用")
+    logger.info(f"🔍 [FUNC] get_batch_cart_items 被调用")
     items = state.get_batch_cart_items()
-    print(f"🔍 [FUNC] 返回 {len(items)} 件商品")
+    logger.info(f"🔍 [FUNC] 返回 {len(items)} 件商品")
     return items
 
 def clear_batch_cart():
     """清空批量购物车"""
     state.clear_batch_cart()
-    print("🧹 批量购物车已清空")
+    logger.info("🧹 批量购物车已清空")
 
 def reset_batch_round():
     """重置批量检测轮次"""
     state.reset_batch_state()
-    print("🔄 批量检测轮次已重置")
+    logger.info("🔄 批量检测轮次已重置")
 
 def split_cart_into_orders(cart_items):
     """
@@ -269,9 +269,9 @@ def split_cart_into_orders(cart_items):
             'product_count': len(current_products)
         })
 
-    print(f"🛒 购物车商品已分组为 {len(orders)} 个订单")
+    logger.info(f"🛒 购物车商品已分组为 {len(orders)} 个订单")
     for i, order in enumerate(orders, 1):
-        print(f"   订单{i}: {order['product_count']}种商品, {order['total_count']}件, ¥{order['total_amount']:.2f}")
+        logger.info(f"   订单{i}: {order['product_count']}种商品, {order['total_count']}件, ¥{order['total_amount']:.2f}")
 
     return orders
 
@@ -279,93 +279,91 @@ def execute_batch_checkout():
     """执行批量下单"""
     cart_items = get_batch_cart_items()
     if not cart_items:
-        print("📦 批量购物车为空，无需下单")
+        logger.info("📦 批量购物车为空，无需下单")
         return
 
-    print(f"🛒 开始批量下单，共 {len(cart_items)} 件商品")
+    logger.info(f"🛒 开始批量下单，共 {len(cart_items)} 件商品")
 
     # 检查是否为测试模式
     test_mode = get_global_test_mode()
 
     if test_mode:
         # 测试模式：所有商品合并成一个订单
-        print("🧪 测试模式：将所有商品合并成一个订单")
+        logger.info("🧪 测试模式：将所有商品合并成一个订单")
         orders = [{
             'items': cart_items,
             'total_count': sum(int(item['count']) for item in cart_items),
             'total_amount': sum(float(item['price']) * int(item['count']) for item in cart_items),
             'product_count': len(cart_items)
         }]
-        print(f"🛒 测试订单: {orders[0]['product_count']}种商品, {orders[0]['total_count']}件, ¥{orders[0]['total_amount']:.2f}")
+        logger.info(f"🛒 测试订单: {orders[0]['product_count']}种商品, {orders[0]['total_count']}件, ¥{orders[0]['total_amount']:.2f}")
     else:
         # 正常模式：按规则分组订单
         orders = split_cart_into_orders(cart_items)
 
     if not orders:
-        print("❌ 订单分组失败")
+        logger.error("❌ 订单分组失败")
         return
 
     # 执行每个订单
     for i, order in enumerate(orders, 1):
         try:
-            print(f"🚀 正在处理第 {i}/{len(orders)} 个订单...")
+            logger.info(f"🚀 正在处理第 {i}/{len(orders)} 个订单...")
 
             # 构建多商品URL
             cart_ids = [item['cart_id'] for item in order['items']]
             checked_params = "&".join([f"checked={cart_id}" for cart_id in cart_ids])
             settle_url = f"https://fenxiao.clim.cn/shop/settle.do?{checked_params}"
 
-            print(f"📋 订单详情: {order['product_count']}种商品, {order['total_count']}件, ¥{order['total_amount']:.2f}")
-            print(f"🔗 结算链接: {settle_url}")
+            logger.info(f"📋 订单详情: {order['product_count']}种商品, {order['total_count']}件, ¥{order['total_amount']:.2f}")
+            logger.info(f"🔗 结算链接: {settle_url}")
 
             # 执行下单
             checkout_result = submit_batch_order(settle_url, order)
 
             if checkout_result:
-                print(f"✅ 第 {i} 个订单下单成功")
+                logger.info(f"✅ 第 {i} 个订单下单成功")
 
                 # 立即获取最新订单并推送（这样可以立即弹窗）
                 try:
-                    print("🔍 开始立即推送流程...")
+                    logger.info("🔍 开始立即推送流程...")
                     from service.web import push_order_to_clients
                     from common.orders import get_orders
 
                     # 获取最新订单
                     latest_orders = get_orders()
-                    print(f"🔍 获取到的订单列表: {latest_orders}")
+                    logger.info(f"🔍 获取到的订单列表: {latest_orders}")
 
                     if latest_orders:
                         # 推送最新的订单号（真实订单号）
                         for order_code in latest_orders[-1:]:  # 只推送最新的订单
-                            print(f"🚀 立即推送真实订单号: {order_code}")
+                            logger.info(f"🚀 立即推送真实订单号: {order_code}")
                             push_order_to_clients(order_code)
                     else:
-                        print("⚠️ 获取到的订单列表为空，无法立即推送")
+                        logger.warning("⚠️ 获取到的订单列表为空，无法立即推送")
 
                 except Exception as e:
-                    print(f"❌ 推送订单失败: {e}")
-                    import traceback
-                    traceback.print_exc()
+                    logger.error(f"❌ 推送订单失败: {e}", exc_info=True)
 
             else:
-                print(f"❌ 第 {i} 个订单下单失败")
+                logger.error(f"❌ 第 {i} 个订单下单失败")
 
         except Exception as e:
-            print(f"❌ 处理第 {i} 个订单时出错: {e}")
+            logger.error(f"❌ 处理第 {i} 个订单时出错: {e}", exc_info=True)
 
     # 清空批量购物车
     clear_batch_cart()
-    print("🎉 批量下单处理完成")
+    logger.info("🎉 批量下单处理完成")
 
 def submit_batch_order(settle_url, order):
     """提交批量订单"""
     try:
-        print(f"💳 正在提交批量订单: {settle_url}")
+        logger.info(f"💳 正在提交批量订单: {settle_url}")
 
         # 1. 访问结算页面获取表单数据
         resp = requests.get(url=settle_url, headers=headers)
         if resp.status_code != 200:
-            print(f"❌ 访问结算页面失败: {resp.status_code}")
+            logger.error(f"❌ 访问结算页面失败: {resp.status_code}")
             return False
 
         soup = BeautifulSoup(resp.content, "html.parser", from_encoding="utf-8")
@@ -400,7 +398,7 @@ def submit_batch_order(settle_url, order):
             if soup.find('input', {'name': 'exchangeRate'}):
                 settle_data['exchangeRate'] = soup.find('input', {'name': 'exchangeRate'})['value']
         except Exception as e:
-            print(f"⚠️ 获取页面数据时出错: {e}，使用默认值")
+            logger.warning(f"⚠️ 获取页面数据时出错: {e}，使用默认值")
 
         # 4. 构建多商品数据（按照表单格式）
         cart_codes = []
@@ -426,25 +424,25 @@ def submit_batch_order(settle_url, order):
         for key, value in settle_data.items():
             form_data.append((key, value))
 
-        print(f"📋 订单数据: {dict(form_data)}")
+        logger.debug(f"📋 订单数据: {dict(form_data)}")
 
         # 5. 提交订单
         resp = requests.post(url=config.URL_SETTLE_SAVE, headers=headers, data=form_data)
 
-        print(f"📤 提交状态码: {resp.status_code}")
+        logger.debug(f"📤 提交状态码: {resp.status_code}")
 
         if resp.status_code == 200:
             try:
                 result = resp.json()
-                print(f"📋 提交结果: {result}")
+                logger.debug(f"📋 提交结果: {result}")
 
                 if result.get('resultCode') == 0:
                     order_code = result.get('data', {}).get('code', 'Unknown')
                     total_amount = result.get('data', {}).get('paid', 0)
 
-                    print(f"✅ 批量订单提交成功!")
-                    print(f"📦 订单号: {order_code}")
-                    print(f"💰 订单金额: ¥{total_amount}")
+                    logger.info(f"✅ 批量订单提交成功!")
+                    logger.info(f"📦 订单号: {order_code}")
+                    logger.info(f"💰 订单金额: ¥{total_amount}")
 
                     # 发送通知
                     try:
@@ -453,29 +451,29 @@ def submit_batch_order(settle_url, order):
                         msg = f'批量下单成功!\n订单号: {order_code}\n商品: {", ".join(product_names)}\n金额: ¥{total_amount}'
                         wxpush.sendMsg("批量下单", msg)
                     except Exception as e:
-                        print(f"⚠️ 发送通知失败: {e}")
+                        logger.warning(f"⚠️ 发送通知失败: {e}")
 
                     # 刷新订单列表
                     try:
                         refresh_orders()
                     except Exception as e:
-                        print(f"⚠️ 刷新订单列表失败: {e}")
+                        logger.warning(f"⚠️ 刷新订单列表失败: {e}")
 
                     return True
                 else:
                     error_msg = result.get('errorMsg', '未知错误')
-                    print(f"❌ 订单提交失败: {error_msg}")
+                    logger.error(f"❌ 订单提交失败: {error_msg}")
                     return False
 
             except json.JSONDecodeError:
-                print(f"❌ 响应解析失败: {resp.text}")
+                logger.error(f"❌ 响应解析失败: {resp.text}")
                 return False
         else:
-            print(f"❌ 请求失败: {resp.status_code}")
+            logger.error(f"❌ 请求失败: {resp.status_code}")
             return False
 
     except Exception as e:
-        print(f"❌ 提交批量订单时出错: {e}")
+        logger.error(f"❌ 提交批量订单时出错: {e}", exc_info=True)
         return False
 
 # 注意：所有URL和配置已移至 ProductCheckoutConfig 类
@@ -491,37 +489,35 @@ def getOrder():
     links = soup.find_all('a', href=True)
     for link in links:
         href = link['href']
-        # 使用正则表达式提取订单号
-        # 确保 href 属性包含 showOrder 调用
         if 'showOrder' in href:
             match = re.search(r"showOrder\('(\w+)'\)", href)
             if match:
                 order_number = match.group(1)
-                print(f"提取的订单号: {order_number}")
+                logger.info(f"提取的订单号: {order_number}")
 
 
 
 # 登录
 def do_login():
-    print('do_login')
+    logger.info('do_login')
     response = requests.post(url=config.URL_LOGIN, data=config.LOGIN_USER)
-    print(response.status_code)
+    logger.debug(response.status_code)
     data = response.json()
-    print(data)
+    logger.debug(data)
     if data['result'] is True:
         cookies = requests.utils.dict_from_cookiejar(response.cookies)
         cookiesValue = ''
         for key in cookies.keys():
             cookiesValue += key + '=' + cookies.get(key) + ';'
-        print(cookiesValue)
+        logger.debug(cookiesValue)
         save_cookie(cookiesValue)
-        print('loadcookie', load_cookie())
+        logger.debug(f'loadcookie: {load_cookie()}')
         headers['cookie'] = cookiesValue
-        print('-' * 50)
+        logger.info('-' * 50)
 
 # 查询商品信息
 def query_product(keyword):
-    print('query_product', keyword)
+    logger.info(f'query_product: {keyword}')
 
     sku = None
     product = None
@@ -530,19 +526,16 @@ def query_product(keyword):
     query_params['keyword'] = keyword
     headers['cookie'] = load_cookie()
     resp = requests.post(url=config.URL_QUERY_PRODUCT, headers=headers, params=query_params)
-    print(f'status_code: {resp.status_code}')
-    print(f'url: {resp.url}')
+    logger.debug(f'status_code: {resp.status_code}')
+    logger.debug(f'url: {resp.url}')
     if 'login.do' in resp.url:
         do_login()
         return query_product(keyword)
     else:
-        # print(f'content: {resp.content}')
-        
-
         if resp.status_code == 200:
             soup = BeautifulSoup(resp.content, "html.parser", from_encoding="utf-8")
             rows = soup.select('tbody tr')
-            print('商品列表:', len(rows))
+            logger.info(f'商品列表: {len(rows)}')
 
             if rows:
                 row_0 = rows[0]
@@ -550,7 +543,7 @@ def query_product(keyword):
 
                 buttons = row_0.find_all('button')
                 button_titles = [button.get('title') for button in buttons]
-                print('商品编号:', button_titles)
+                logger.info(f'商品编号: {button_titles}')
                 
                 sku = button_titles[0] if button_titles else None
 
@@ -576,12 +569,11 @@ def query_product(keyword):
 
 # 选择商品并保存到购物车
 def selectBuyDefect(sku):
-    print('selectBuyDefect')
+    logger.info('selectBuyDefect')
     sku = urllib.parse.quote(sku)
-    print('sku', sku)
+    logger.debug(f'sku: {sku}')
     resp = requests.get(url=f'{config.URL_SELECT_BUY_PRODUCT}?skc={sku}', headers=headers)
-    print(f'status_code: {resp.status_code}')
-    # print('content:', resp.content.decode('utf-8'))
+    logger.debug(f'status_code: {resp.status_code}')
     
     if resp.status_code == 200:
         soup = BeautifulSoup(resp.content, "html.parser", from_encoding="utf-8")
@@ -590,13 +582,12 @@ def selectBuyDefect(sku):
 
 # 保存到购物车
 def saveCart(soup: BeautifulSoup):
-    print('saveCart')
+    logger.info('saveCart')
     type_code = soup.find('input', {'name': 'typeCode'})['value']
     price = soup.find('input', {'name': 'price'})['value']
     product_code = soup.find('input', {'name': 'productCode'})['value']
     
     stock = soup.find('input', {'id': f'stock{product_code}'})['value']
-    # count = min(float(stock), max_money / float(price))
     count = int(stock)
     param_save_cart = {'typeCode': 0, 'price': 0, 'productCode': 0, 'count': 0}
     param_save_cart.update({
@@ -606,22 +597,20 @@ def saveCart(soup: BeautifulSoup):
         'count': count
     })
 
-    print('param_save_cart', param_save_cart)
+    logger.debug(f'param_save_cart: {param_save_cart}')
 
     resp = requests.post(url=config.URL_SAVE_CART, headers=headers, params=param_save_cart)
-    print(f'status_code: {resp.status_code}')
-    print('content:', resp.content.decode('utf-8'))
+    logger.debug(f'status_code: {resp.status_code}')
+    logger.debug(f'content: {resp.content.decode("utf-8")}')
     if resp.status_code == 200:
-        print('加入购物车成功')
+        logger.info('加入购物车成功')
 
-        # 获取购物车ID（需要查询购物车获取最新的cart_id）
         try:
             cart_resp = requests.get(config.URL_CART, headers=headers)
             if cart_resp.status_code == 200:
                 cart_soup = BeautifulSoup(cart_resp.content, "html.parser", from_encoding="utf-8")
                 rows = cart_soup.select('tbody tr')
 
-                # 查找刚添加的商品
                 for row in rows:
                     row_product_code = row.find_all('td')[2].get_text(strip=True)
                     if row_product_code == product_code:
@@ -629,18 +618,17 @@ def saveCart(soup: BeautifulSoup):
                         return {
                             'cart_id': cart_id,
                             'product_code': product_code,
-                            'productCode': product_code,  # 兼容旧的键名
+                            'productCode': product_code,
                             'count': count,
                             'price': price
                         }
         except Exception as e:
-            print(f"获取购物车ID失败: {e}")
+            logger.error(f"获取购物车ID失败: {e}", exc_info=True)
 
-        # 如果获取cart_id失败，返回基本信息
         return {
             'cart_id': None,
             'product_code': product_code,
-            'productCode': product_code,  # 兼容旧的键名
+            'productCode': product_code,
             'count': count,
             'price': price
         }
@@ -659,7 +647,6 @@ def check_cart(product_code_value, count, payType='2'):
     rows = soup.select('tbody tr')
 
     for row in rows:
-        # rank_code = row.find('input', {'class': 'rankCode'})['value']  # 暂时不需要使用
         product_code = row.find_all('td')[2].get_text(strip=True)
         if product_code == product_code_value:
             checkId = row.find('input', {'type': 'checkbox'})['value']
@@ -674,7 +661,7 @@ def checkout(checkId, count, payType='2'):
     :param count: 数量
     :param payType: 支付类型 ('1'=支付宝, '2'=微信支付)
     """
-    print(f'结算商品: {checkId}, 支付类型: {payType}')
+    logger.info(f'结算商品: {checkId}, 支付类型: {payType}')
     resp = requests.get(url=f'{config.URL_SETTLE}?checked={checkId}', headers=headers)
     soup = BeautifulSoup(resp.content, "html.parser", from_encoding="utf-8")
 
@@ -682,16 +669,15 @@ def checkout(checkId, count, payType='2'):
     row_0 = rows[0]
     row_0_td = row_0.find_all('td')
     name = row_0_td[4].get_text(strip=True)
-    print('name', name)
+    logger.info(f'name: {name}')
 
     settleData = {
         'rankCode': 0, 'tagCode': 0, 'shippingMethod': 1, 'thirdcode': '',
-        'payType': payType,  # 添加支付类型参数
+        'payType': payType,
         'receiver': '李小峰', 'recvphone': '18529551929', 'provincecode': 19, 'citycode': 202, 'countycode': 1754,
         'recvaddr': '化龙镇山门大道700号', 'zip': '', 'idno': '', 'exchangeRate': 1,
         'cartCodes': checkId, 'defectNo': '', 'productcode': '0', 'counts': count, 'description': ''
     }
-    # 获取结算数据
     try:
         settleData.update({
             'rankCode': soup.find('input', {'name': 'rankCode'})['value'],
@@ -702,13 +688,11 @@ def checkout(checkId, count, payType='2'):
             'productcode': soup.find('input', {'name': 'productcode'})['value'],
         })
 
-        # 保持原有的cartCodes和counts
         settleData['cartCodes'] = checkId
         settleData['counts'] = count
 
     except Exception as e:
-        print(f"获取页面数据时出错: {e}，使用默认值")
-        # 使用默认值
+        logger.warning(f"获取页面数据时出错: {e}，使用默认值")
         settleData.update({
             'rankCode': '68',
             'tagCode': '30',
@@ -718,68 +702,56 @@ def checkout(checkId, count, payType='2'):
             'productcode': '',
         })
 
-    # table = soup.find('table', {'class': 'table table-striped'})
-    # table_html = str(table)
-    # print('table_html', table_html)
-
-    # {'rankCode': '68', 'tagCode': '30', 'shippingMethod': '1', 'thirdcode': None, 'receiver': '李不帅', 'recvphone': '18529551929', 'provincecode': 19, 'citycode': 202, 'countycode': 1754, 'recvaddr': '化龙镇山门大道700号', 'exchangeRate': '1', 'paid': '4821.0', 'rmbAmount': '4821.00', 'cartCodes': '70708', 'itemPrice': '1607.0', 'itemRmbAmount': '1607.00', 'defectNo': '', 'productcode': '101877501', 'counts': 3}
-    print('settleData', settleData)
+    logger.debug(f'settleData: {settleData}')
 
     wxpush = PushPlus()
 
-    # 提交订单（使用data而不是params，与批量下单保持一致）
     resp = requests.post(url=config.URL_SETTLE_SAVE, headers=headers, data=settleData)
-    print(f'📤 提交状态码: {resp.status_code}')
+    logger.debug(f'📤 提交状态码: {resp.status_code}')
 
     if resp.status_code == 200:
         try:
             result = resp.json()
-            print(f"📋 提交结果: {result}")
+            logger.debug(f"📋 提交结果: {result}")
 
             if result.get('resultCode') == 0:
                 order_code = result.get('data', {}).get('code', 'Unknown')
                 total_amount = result.get('data', {}).get('paid', 0)
 
-                print(f"✅ 单独下单成功!")
-                print(f"📦 订单号: {order_code}")
-                print(f"💰 订单金额: ¥{total_amount}")
-                print(f"💳 支付类型: {'支付宝' if payType == '1' else '微信支付'}")
+                logger.info(f"✅ 单独下单成功!")
+                logger.info(f"📦 订单号: {order_code}")
+                logger.info(f"💰 订单金额: ¥{total_amount}")
+                logger.info(f"💳 支付类型: {'支付宝' if payType == '1' else '微信支付'}")
 
-                # 发送通知
                 try:
                     wxpush.sendMsg(name, f'下单成功!\n订单号: {order_code}\n商品: {name}\n数量: {count}\n金额: ¥{total_amount}\n支付: {"支付宝" if payType == "1" else "微信支付"}')
                 except Exception as e:
-                    print(f"⚠️ 发送通知失败: {e}")
+                    logger.warning(f"⚠️ 发送通知失败: {e}")
 
-                # 直接推送当前订单号到Web界面（不刷新整个订单列表，避免重复）
                 try:
                     from service.web import push_order_to_clients
                     from common.orders import set_orders
 
-                    # 将订单号添加到订单列表
                     set_orders(order_code)
 
-                    # 立即推送订单号
-                    print(f"🚀 直接推送订单号: {order_code}")
+                    logger.info(f"🚀 直接推送订单号: {order_code}")
                     push_order_to_clients(order_code)
                 except Exception as e:
-                    print(f"❌ 直接推送订单失败: {e}")
-                    import traceback
-                    traceback.print_exc()
+                    logger.error(f"❌ 直接推送订单失败: {e}", exc_info=True)
 
                 return True
             else:
                 error_msg = result.get('errorMsg', '未知错误')
-                print(f"❌ 订单提交失败: {error_msg}")
+                logger.error(f"❌ 订单提交失败: {error_msg}")
                 wxpush.sendMsg(name, f'下单失败! {error_msg}')
                 return False
 
         except json.JSONDecodeError:
-            print(f"❌ 响应解析失败: {resp.text}")
+            logger.error(f"❌ 响应解析失败: {resp.text}")
             wxpush.sendMsg(name, f'下单失败! 响应解析失败')
             return False
     else:
-        print(f"❌ 请求失败: {resp.status_code}")
+        logger.error(f"❌ 请求失败: {resp.status_code}")
         wxpush.sendMsg(name, f'下单失败! HTTP {resp.status_code}')
         return False
 
@@ -821,50 +793,40 @@ def load_cookie():
         return ''
 
 def process_keyword(keyword):
-    # 先检查是否需要查询商品
     if not should_query_products(keyword):
         return False
 
-    # 获取自动下单状态
     from common.status import get_global_auto_order_status
     auto_order_enabled = get_global_auto_order_status()
 
-    # 处理流程
     product = query_product(keyword)
-    print('product', product)
+    logger.debug(f'product: {product}')
     if product:
         param_save_cart = selectBuyDefect(product['sku'])
 
         if param_save_cart:
-            # 获取商品代码（兼容不同的键名）
             product_code_value = param_save_cart.get('productCode') or param_save_cart.get('product_code')
             count = param_save_cart.get('count', 1)
 
             if not product_code_value:
-                print(f"❌ 关键词 {keyword} 获取商品代码失败，param_save_cart: {param_save_cart}")
+                logger.error(f"❌ 关键词 {keyword} 获取商品代码失败，param_save_cart: {param_save_cart}")
                 return False
 
-            print(f"📦 关键词 {keyword} 获取到商品代码: {product_code_value}, 数量: {count}")
+            logger.info(f"📦 关键词 {keyword} 获取到商品代码: {product_code_value}, 数量: {count}")
 
             if auto_order_enabled:
-                # 自动下单模式（默认使用微信支付）
                 checkout_result = check_cart(product_code_value, count, config.PAY_TYPE_WECHAT)
                 if checkout_result:
-                    print(f"关键字 {keyword} 自动下单成功")
+                    logger.info(f"关键字 {keyword} 自动下单成功")
                     save_keyword_status(keyword)
 
-                    # 注意：订单推送已在 checkout 函数中处理，这里不需要重复推送
                     return True
             else:
-                # 通知模式
                 wxpush = PushPlus()
-                msg = f'库存更新 {product["name"]},\
-                            <br />数量 {count}\
-                            <br />金额 {product["distribution_price"]}\
-                            <br /><img src="{product["image_url"]}" width="200px" height="200px" />'
+                msg = f'库存更新 {product["name"]},\n            <br />数量 {count}\n            <br />金额 {product["distribution_price"]}\n            <br /><img src="{product["image_url"]}" width="200px" height="200px" />'
                 wxpush.sendMsg(keyword, msg)
-                print('msg', msg)
-                print(f"关键字 {keyword} 通知发送成功")
+                logger.debug(f'msg: {msg}')
+                logger.info(f"关键字 {keyword} 通知发送成功")
                 save_keyword_status(keyword)
                 return True
 
@@ -874,14 +836,13 @@ def process_keyword(keyword):
     
 def refresh_orders():
     """刷新订单列表，只获取待付款的订单"""
-    print('getOrder')
+    logger.info('getOrder')
     resp = requests.get(url=config.URL_ORDERLIST, headers=headers)
     soup = BeautifulSoup(resp.content, "html.parser", from_encoding="utf-8")
 
-    # 查找订单表格
     tbody = soup.find('tbody')
     if not tbody:
-        print("未找到订单表格")
+        logger.warning("未找到订单表格")
         return []
 
     orders = []
@@ -891,28 +852,25 @@ def refresh_orders():
         try:
             tds = row.find_all('td')
             if len(tds) >= 6:
-                # 提取订单号
                 order_link = tds[0].find('a')
                 if order_link and 'showOrder' in order_link.get('href', ''):
                     match = re.search(r"showOrder\('(\w+)'\)", order_link['href'])
                     if match:
                         order_number = match.group(1)
 
-                        # 提取订单状态
                         order_status = tds[5].get_text(strip=True)
 
-                        # 只处理待付款的订单
                         if order_status == '待付款':
-                            print(f"发现待付款订单: {order_number}")
+                            logger.info(f"发现待付款订单: {order_number}")
                             orders.append(order_number)
                             set_orders(order_number)
                         else:
-                            print(f"订单 {order_number} 状态为 '{order_status}'，跳过")
+                            logger.debug(f"订单 {order_number} 状态为 '{order_status}'，跳过")
         except Exception as e:
-            print(f"解析订单行时出错: {e}")
+            logger.error(f"解析订单行时出错: {e}", exc_info=True)
             continue
 
-    print(f"共找到 {len(orders)} 个待付款订单")
+    logger.info(f"共找到 {len(orders)} 个待付款订单")
     return orders
 
 def check_order_payment_status():
@@ -924,10 +882,9 @@ def check_order_payment_status():
     if not current_orders:
         return
 
-    print(f"🔍 检查 {len(current_orders)} 个订单的付款状态...")
+    logger.info(f"🔍 检查 {len(current_orders)} 个订单的付款状态...")
 
     try:
-        # 获取待付款订单状态（statuscode=10是待付款订单）
         resp = requests.get(url=config.URL_ORDERLIST, headers=headers)
         soup = BeautifulSoup(resp.content, "html.parser", from_encoding="utf-8")
 
@@ -935,7 +892,6 @@ def check_order_payment_status():
         if not tbody:
             return
 
-        # 提取订单总数信息
         try:
             message_div = soup.find('div', class_='message')
             if message_div:
@@ -943,11 +899,10 @@ def check_order_payment_status():
                 total_match = re.search(r'共.*?(\d+).*?条记录', total_text)
                 if total_match:
                     total_count = int(total_match.group(1))
-                    print(f"📊 当前待付款订单总数: {total_count}")
+                    logger.info(f"📊 当前待付款订单总数: {total_count}")
         except Exception as e:
-            print(f"⚠️ 提取订单总数失败: {e}")
+            logger.warning(f"⚠️ 提取订单总数失败: {e}")
 
-        # 获取当前待付款订单列表
         pending_orders = set()
         rows = tbody.find_all('tr')
 
@@ -955,48 +910,44 @@ def check_order_payment_status():
             try:
                 tds = row.find_all('td')
                 if len(tds) >= 1:
-                    # 提取订单号
                     order_link = tds[0].find('a')
                     if order_link and 'showOrder' in order_link.get('href', ''):
                         match = re.search(r"showOrder\('(\w+)'\)", order_link['href'])
                         if match:
                             order_number = match.group(1)
                             pending_orders.add(order_number)
-                            print(f"📋 发现待付款订单: {order_number}")
+                            logger.info(f"📋 发现待付款订单: {order_number}")
             except Exception as e:
                 continue
 
-        print(f"📊 服务器端待付款订单: {list(pending_orders)}")
-        print(f"📊 本地订单列表: {current_orders}")
+        logger.info(f"📊 服务器端待付款订单: {list(pending_orders)}")
+        logger.info(f"📊 本地订单列表: {current_orders}")
 
-        # 检查哪些订单不在待付款列表中（说明已付款）
         paid_orders = []
         for order in current_orders:
             if order not in pending_orders:
                 paid_orders.append(order)
-                print(f"✅ 订单 {order} 已付款（不在待付款列表中）")
+                logger.info(f"✅ 订单 {order} 已付款（不在待付款列表中）")
             else:
-                print(f"📋 订单 {order} 仍为待付款状态")
+                logger.info(f"📋 订单 {order} 仍为待付款状态")
 
-        # 移除已付款的订单
         if paid_orders:
             remove_paid_orders(paid_orders)
-            print(f"🗑️ 已移除 {len(paid_orders)} 个已付款订单")
+            logger.info(f"🗑️ 已移除 {len(paid_orders)} 个已付款订单")
         else:
-            print("📋 所有订单仍为待付款状态")
+            logger.info("📋 所有订单仍为待付款状态")
 
     except Exception as e:
-        print(f"❌ 检查订单状态失败: {e}")
+        logger.error(f"❌ 检查订单状态失败: {e}", exc_info=True)
 
-# 添加查询商品总数的函数
 def query_product_count():
     """查询商品总数"""
-    print('query_product_count')
+    logger.info('query_product_count')
     
     try:
         headers['cookie'] = load_cookie()
         resp = requests.get(url=config.URL_QUERY_PRODUCT_COUNTS, headers=headers, timeout=10)
-        print(f'status_code: {resp.status_code}')
+        logger.debug(f'status_code: {resp.status_code}')
         
         if 'login.do' in resp.url:
             do_login()
@@ -1005,20 +956,19 @@ def query_product_count():
         if resp.status_code == 200:
             soup = BeautifulSoup(resp.content, "html.parser", from_encoding="utf-8")
             message_div = soup.find('div', class_='message')
-            # 查找包含总数的div
             if message_div:
                 total_records = message_div.find('i', class_='blue').text
-                print(f'商品总数: {total_records}')
+                logger.info(f'商品总数: {total_records}')
                 return int(total_records)
         
-            print("⚠️ 未找到商品总数信息")
+            logger.warning("⚠️ 未找到商品总数信息")
             return None
         
     except requests.exceptions.RequestException as e:
-        print(f"❌ 网络请求失败: {e}")
+        logger.error(f"❌ 网络请求失败: {e}")
         return None
     except Exception as e:
-        print(f"❌ 查询商品总数时出错: {e}")
+        logger.error(f"❌ 查询商品总数时出错: {e}", exc_info=True)
         return None
 
 def should_query_products(keyword):
@@ -1026,18 +976,16 @@ def should_query_products(keyword):
     current_count = query_product_count()
 
     if current_count is None:
-        return True  # 查询失败，保险起见还是查询
-
-    # 获取上次的总数
-    last_count = state.last_product_count.get(keyword, 0)
-
-    # 如果总数发生变化，需要查询
-    if current_count != last_count:
-        state.last_product_count[keyword] = current_count
-        print(f'商品总数变化: {last_count} -> {current_count}，需要查询商品')
         return True
 
-    print(f'商品总数未变化: {current_count}，跳过查询')
+    last_count = state.last_product_count.get(keyword, 0)
+
+    if current_count != last_count:
+        state.last_product_count[keyword] = current_count
+        logger.info(f'商品总数变化: {last_count} -> {current_count}，需要查询商品')
+        return True
+
+    logger.info(f'商品总数未变化: {current_count}，跳过查询')
     return False
 
 def save_count_cache(keyword, count):
@@ -1063,127 +1011,107 @@ def should_check_products():
     current_time = datetime.now()
 
     if current_count is None:
-        return True  # 查询失败，保险起见还是查询
+        return True
 
-    # 记录刷新次数（每次调用都算一次刷新）
     try:
         from common.status import increment_refresh_count
         increment_refresh_count()
     except Exception as e:
-        print(f"⚠️ 记录刷新次数失败: {e}")
+        logger.warning(f"⚠️ 记录刷新次数失败: {e}")
 
-    # 如果总数发生变化，需要查询
     if state._last_total_count != current_count:
-        print(f'📈 商品总数变化: {state._last_total_count} -> {current_count}，需要查询商品')
+        logger.info(f'📈 商品总数变化: {state._last_total_count} -> {current_count}，需要查询商品')
         state._last_total_count = current_count
         state._last_check_time = current_time
         return True
 
-    print(f'📊 商品总数未变化: {current_count}，跳过查询')
+    logger.info(f'📊 商品总数未变化: {current_count}，跳过查询')
     return False
 
 def process_keyword_direct(keyword):
     """直接处理关键词，支持单独建单和统一建单模式"""
 
-    # 获取建单模式
     batch_mode = get_global_batch_order_mode()
 
     if batch_mode:
-        # 统一建单模式：支持多轮检测
         with state.batch_lock:
-            # 检查是否应该继续检测这个关键词
             if keyword in state.processed_keywords_batch:
                 keyword_info = state.processed_keywords_batch[keyword]
-                # 如果已经检测了5轮，跳过
                 if keyword_info['count'] >= config.MAX_DETECTION_ROUNDS:
-                    print(f"批量模式下关键字 {keyword} 已检测{config.MAX_DETECTION_ROUNDS}轮，停止检测")
+                    logger.info(f"批量模式下关键字 {keyword} 已检测{config.MAX_DETECTION_ROUNDS}轮，停止检测")
                     return False
             else:
-                # 初始化关键词记录
                 state.processed_keywords_batch[keyword] = {'count': 0, 'last_stock': 0}
     else:
-        # 单独建单模式：支持多轮检测
         with state.batch_lock:
-            # 检查是否应该继续检测这个关键词
             if keyword in state.processed_keywords_batch:
                 keyword_info = state.processed_keywords_batch[keyword]
-                # 如果已经检测了5轮，跳过
                 if keyword_info['count'] >= config.MAX_DETECTION_ROUNDS:
-                    print(f"单独建单模式下关键字 {keyword} 已检测{config.MAX_DETECTION_ROUNDS}轮，停止检测")
+                    logger.info(f"单独建单模式下关键字 {keyword} 已检测{config.MAX_DETECTION_ROUNDS}轮，停止检测")
                     return False
             else:
-                # 初始化关键词记录
                 state.processed_keywords_batch[keyword] = {'count': 0, 'last_stock': 0}
     
-    # 获取自动下单状态
     from common.status import get_global_auto_order_status
     auto_order_enabled = get_global_auto_order_status()
 
-    # 处理流程
     product = query_product(keyword)
-    print('product', product)
-    print('auto_order_enabled', auto_order_enabled)
+    logger.debug(f'product: {product}')
+    logger.debug(f'auto_order_enabled: {auto_order_enabled}')
     if product:
-        # 检查是否需要处理（自动下单模式或测试模式）
         test_mode = get_global_test_mode()
-        print(f"🔍 [PROCESS] 模式检查: auto_order_enabled={auto_order_enabled}, test_mode={test_mode}, batch_mode={batch_mode}")
+        logger.info(f"🔍 [PROCESS] 模式检查: auto_order_enabled={auto_order_enabled}, test_mode={test_mode}, batch_mode={batch_mode}")
 
         if auto_order_enabled or test_mode:
-            # 只有在自动下单或测试模式下才调用 selectBuyDefect
             param_save_cart = selectBuyDefect(product['sku'])
 
             if param_save_cart:
-                # 获取商品代码（兼容不同的键名）
                 product_code_value = param_save_cart.get('productCode') or param_save_cart.get('product_code')
                 count = param_save_cart.get('count', 1)
 
                 if not product_code_value:
-                    print(f"❌ 关键词 {keyword} 获取商品代码失败，param_save_cart: {param_save_cart}")
+                    logger.error(f"❌ 关键词 {keyword} 获取商品代码失败，param_save_cart: {param_save_cart}")
                     return False
 
-                print(f"📦 关键词 {keyword} 获取到商品代码: {product_code_value}, 数量: {count}")
-                # 判断处理模式：测试模式遵循当前建单模式设置
+                logger.info(f"📦 关键词 {keyword} 获取到商品代码: {product_code_value}, 数量: {count}")
                 if test_mode:
-                    # 测试模式：根据当前建单模式设置决定行为
                     if batch_mode:
-                        print(f"🧪 [TEST] 测试统一建单模式：关键词 {keyword} 加入购物车")
+                        logger.info(f"🧪 [TEST] 测试统一建单模式：关键词 {keyword} 加入购物车")
                         mode_name = "测试统一建单"
                         use_cart = True
                     else:
-                        print(f"🧪 [TEST] 测试单独建单模式：关键词 {keyword} 立即下单")
+                        logger.info(f"🧪 [TEST] 测试单独建单模式：关键词 {keyword} 立即下单")
                         mode_name = "测试单独建单"
                         use_cart = False
                 elif batch_mode:
-                    print(f"🛒 [BATCH] 统一建单模式：关键词 {keyword} 加入购物车")
+                    logger.info(f"🛒 [BATCH] 统一建单模式：关键词 {keyword} 加入购物车")
                     mode_name = "统一建单"
                     use_cart = True
                 else:
-                    print(f"⚡ [SINGLE] 单独建单模式：关键词 {keyword} 立即下单")
+                    logger.info(f"⚡ [SINGLE] 单独建单模式：关键词 {keyword} 立即下单")
                     mode_name = "单独建单"
                     use_cart = False
 
                 if use_cart:
-                    # 购物车模式：加入购物车等待批量处理
                     cart_result = selectBuyDefect(product['sku'])
-                    print(f"🔄 [PROCESS] selectBuyDefect 结果: {cart_result}")
+                    logger.debug(f"🔄 [PROCESS] selectBuyDefect 结果: {cart_result}")
 
                     if cart_result:
                         product_info = {
                             'keyword': keyword,
                             'product_code': product_code_value,
                             'price': product['distribution_price'],
-                            'distribution_price': product['distribution_price'],  # 添加这个字段
+                            'distribution_price': product['distribution_price'],
                             'name': product['name'],
-                            'image_url': product.get('image_url', ''),  # 添加图片字段
+                            'image_url': product.get('image_url', ''),
                             'market_price': product.get('market_price', ''),
                             'brand_category': product.get('brand_category', '')
                         }
-                        print(f"🔄 [PROCESS] 准备调用 add_to_batch_cart")
+                        logger.info(f"🔄 [PROCESS] 准备调用 add_to_batch_cart")
                         add_to_batch_cart(product_info, cart_result)
 
-                        print(f"✅ [PROCESS] {mode_name}：关键字 {keyword} 商品已加入购物车")
+                        logger.info(f"✅ [PROCESS] {mode_name}：关键字 {keyword} 商品已加入购物车")
 
-                        # 发送带图片的HTML日志到Web界面
                         image_url = product_info.get('image_url', '')
                         if image_url:
                             html_msg = f'''📦 商品详情: {product_info['name']}
@@ -1191,11 +1119,10 @@ def process_keyword_direct(keyword):
                                             📦 库存: {count}
                                             🛒 购物车ID: {cart_result['cart_id']}
                                             <br><img src="{image_url}" style="max-width:200px;max-height:200px;border-radius:8px;" />'''
-                            print(html_msg)  # 这会通过日志SSE推送到Web界面
+                            logger.info(html_msg)
                     else:
-                        print(f"❌ [PROCESS] 关键词 {keyword} selectBuyDefect 失败")
+                        logger.error(f"❌ [PROCESS] 关键词 {keyword} selectBuyDefect 失败")
 
-                        # 更新检测记录
                         if batch_mode or test_mode:
                             with state.batch_lock:
                                 if keyword in state.processed_keywords_batch:
@@ -1204,44 +1131,36 @@ def process_keyword_direct(keyword):
 
                         return True
                 else:
-                    # 立即下单模式：立即下单（默认使用微信支付）
                     checkout_result = check_cart(product_code_value, count, config.PAY_TYPE_WECHAT)
                     if checkout_result:
-                        print(f"✅ [PROCESS] {mode_name}：关键字 {keyword} 自动下单成功")
+                        logger.info(f"✅ [PROCESS] {mode_name}：关键字 {keyword} 自动下单成功")
 
-                        # 更新单独建单模式检测记录
                         batch_mode = get_global_batch_order_mode()
-                        if not batch_mode:  # 单独建单模式
+                        if not batch_mode:
                             with state.batch_lock:
                                 if keyword in state.processed_keywords_batch:
                                     state.processed_keywords_batch[keyword]['count'] += 1
                                     state.processed_keywords_batch[keyword]['last_stock'] = count
 
-                        # 注意：订单推送已在 checkout 函数中处理，这里不需要重复推送
                         return True
         else:
-            # 通知模式：只发送通知，不加购物车，不下单
-            print(f"📢 [PROCESS] 关键词 {keyword} 进入通知模式（只发送库存通知）")
+            logger.info(f"📢 [PROCESS] 关键词 {keyword} 进入通知模式（只发送库存通知）")
             wxpush = PushPlus()
-            msg = f'库存更新 {product["name"]},\
-                        <br />金额 {product["distribution_price"]}\
-                        <br /><img src="{product["image_url"]}" width="200px" height="200px" />'
+            msg = f'库存更新 {product["name"]},\n            <br />金额 {product["distribution_price"]}\n            <br /><img src="{product["image_url"]}" width="200px" height="200px" />'
             wxpush.sendMsg(keyword, msg)
-            print('msg', msg)
-            print(f"关键字 {keyword} 通知发送成功")
+            logger.debug(f'msg: {msg}')
+            logger.info(f"关键字 {keyword} 通知发送成功")
             save_keyword_status(keyword)
             return True
 
-    # 如果没有找到有货商品，也要更新检测记录（批量模式和单独建单模式都需要）
     batch_mode = get_global_batch_order_mode()
     test_mode = get_global_test_mode()
 
-    if batch_mode or (not batch_mode and not test_mode):  # 批量模式或单独建单模式
+    if batch_mode or (not batch_mode and not test_mode):
         with state.batch_lock:
             if keyword in state.processed_keywords_batch:
                 state.processed_keywords_batch[keyword]['count'] += 1
-                # 如果连续检测没有库存变化，标记为无需继续检测
                 if state.processed_keywords_batch[keyword]['last_stock'] == 0:
-                    state.processed_keywords_batch[keyword]['count'] = config.MAX_DETECTION_ROUNDS  # 直接标记为完成
+                    state.processed_keywords_batch[keyword]['count'] = config.MAX_DETECTION_ROUNDS
 
     return False

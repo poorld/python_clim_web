@@ -1,8 +1,10 @@
-"""#!/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 import json
+from common.logger import get_logger
 
+logger = get_logger()
 CONFIG_FILE = 'config.json'
 
 def _load_config():
@@ -23,6 +25,7 @@ def save_keyword(keyword):
         keywords.append(keyword)
         config['KEYWORDS'] = keywords
         _save_config(config)
+        logger.info(f"Added keyword: {keyword}")
 
 def remove_keyword(keyword):
     config = _load_config()
@@ -31,10 +34,10 @@ def remove_keyword(keyword):
         keywords.remove(keyword)
         config['KEYWORDS'] = keywords
         _save_config(config)
+        logger.info(f"Removed keyword: {keyword}")
 
 def load_keywords():
     return _load_config().get('KEYWORDS', [])
 
 def get_global_keywords():
     return load_keywords()
-"""
