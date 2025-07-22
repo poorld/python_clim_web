@@ -1135,6 +1135,7 @@ def process_keyword_direct(keyword):
                     if checkout_result:
                         logger.info(f"✅ [PROCESS] {mode_name}：关键字 {keyword} 自动下单成功")
 
+                        # 正确逻辑：自动下单模式下，每次成功都+1，以实现5轮连续下单
                         batch_mode = get_global_batch_order_mode()
                         if not batch_mode:
                             with state.batch_lock:
@@ -1151,6 +1152,13 @@ def process_keyword_direct(keyword):
             logger.debug(f'msg: {msg}')
             logger.info(f"关键字 {keyword} 通知发送成功")
             save_keyword_status(keyword)
+
+            # 正确逻辑：监控模式下通知一次后，立即将计数器设置为最大值，防止重复通知
+            with state.batch_lock:
+                if keyword in state.processed_keywords_batch:
+                    logger.info(f"🛑 关键字 {keyword} 监控模式通知完成，停止后续检测。")
+                    state.processed_keywords_batch[keyword]['count'] = config.MAX_DETECTION_ROUNDS
+            
             return True
 
     batch_mode = get_global_batch_order_mode()
