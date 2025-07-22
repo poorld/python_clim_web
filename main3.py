@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import os
 from jobs import OnceJobThread, JobThread
 from jobs.job_web import WebThread
 from common.keywords import load_keywords
@@ -9,8 +10,6 @@ from common.orders import load_orders_history
 from common.logger import get_logger
 
 logger = get_logger()
-
-RUN_DOCKER = True
 
 
 if __name__ == "__main__":
@@ -27,7 +26,7 @@ if __name__ == "__main__":
     logger.info(f"📊 初始监控间隔: {get_global_monitor_interval()}秒")
 
     # 启动Web服务
-    if not RUN_DOCKER:
+    if os.getenv("ENV") != "production":
         webThread = OnceJobThread(WebThread())
         webThread.start()
 
