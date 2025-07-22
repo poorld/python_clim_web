@@ -7,14 +7,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
     <style>
-        /* body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            min-height: 100vh;
-            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
-            position: relative;
-            overflow-x: hidden;
-        } */
-
         body {
             background: url('/static/images/08.jpg') no-repeat center center fixed;
             background-size: cover;
@@ -24,7 +16,6 @@
             overflow-x: hidden;
         }
         
-
         body::before {
             content: '';
             position: fixed;
@@ -293,44 +284,71 @@
 
 
         <div class="main-container p-4">
-            <!-- 页面标题和状态 -->
-            <div class="text-center mb-4">
-                
-                <div class="row justify-content-center">
-                    <div class="col-auto">
-                        <div class="status-badge {{ 'status-on' if monitor_status else 'status-off' }}">
-                            <i class="bi bi-{{ 'play-circle' if monitor_status else 'pause-circle' }}"></i>
-                            监控状态: {{ '运行中' if monitor_status else '已停止' }}
+            <!-- 状态卡片 -->
+            <div class="row g-3 mb-4">
+                <div class="col-md-4 col-6">
+                    <div class="card text-center h-100 shadow-sm">
+                        <div class="card-body">
+                            <h6 class="card-subtitle mb-2 text-muted">监控状态</h6>
+                            <p class="card-text fs-5 {{ 'text-success' if monitor_status else 'text-danger' }}">
+                                <i class="bi bi-{{ 'play-circle-fill' if monitor_status else 'pause-circle-fill' }}"></i>
+                                {{ '运行中' if monitor_status else '已停止' }}
+                            </p>
                         </div>
                     </div>
-                    <div class="col-auto">
-                        <div class="status-badge {{ 'status-on' if auto_order_status else 'status-off' }}">
-                            <i class="bi bi-{{ 'cart-check' if auto_order_status else 'cart-x' }}"></i>
-                            自动下单: {{ '已开启' if auto_order_status else '已关闭' }}
+                </div>
+                <div class="col-md-4 col-6">
+                    <div class="card text-center h-100 shadow-sm">
+                        <div class="card-body">
+                            <h6 class="card-subtitle mb-2 text-muted">自动下单</h6>
+                            <p class="card-text fs-5 {{ 'text-success' if auto_order_status else 'text-danger' }}">
+                                <i class="bi bi-{{ 'cart-check-fill' if auto_order_status else 'cart-x-fill' }}"></i>
+                                {{ '已开启' if auto_order_status else '已关闭' }}
+                            </p>
                         </div>
                     </div>
-                    <div class="col-auto">
-                        <div class="status-badge status-on" id="intervalBadge">
-                            <i class="bi bi-stopwatch"></i>
-                            检查间隔: <span id="currentInterval">{{ monitor_interval }}</span>秒
+                </div>
+                <div class="col-md-4 col-12">
+                    <div class="card text-center h-100 shadow-sm">
+                        <div class="card-body">
+                            <h6 class="card-subtitle mb-2 text-muted">建单模式</h6>
+                            <p class="card-text fs-5 text-info">
+                                <i class="bi bi-{{ 'collection-fill' if batch_order_mode else 'lightning-fill' }}"></i>
+                                {{ '统一建单' if batch_order_mode else '单独建单' }}
+                            </p>
                         </div>
                     </div>
-                    <div class="col-auto">
-                        <div class="status-badge {{ 'status-info' if batch_order_mode else 'status-success' }}">
-                            <i class="bi bi-{{ 'collection' if batch_order_mode else 'lightning' }}"></i>
-                            建单模式: {{ '统一建单' if batch_order_mode else '单独建单' }}
+                </div>
+                <div class="col-md-4 col-4">
+                    <div class="card text-center h-100 shadow-sm">
+                        <div class="card-body">
+                            <h6 class="card-subtitle mb-2 text-muted">检查间隔</h6>
+                            <p class="card-text fs-5 text-primary" id="currentInterval">
+                                <i class="bi bi-stopwatch-fill"></i>
+                                {{ monitor_interval }}s
+                            </p>
                         </div>
                     </div>
-                    <div class="col-auto">
-                        <div class="status-badge status-info">
-                            <i class="bi bi-clock-history"></i>
-                            本小时: <span id="hourlyRefreshCount">{{ hourly_refresh_count }}</span>次
+                </div>
+                <div class="col-md-4 col-4">
+                    <div class="card text-center h-100 shadow-sm">
+                        <div class="card-body">
+                            <h6 class="card-subtitle mb-2 text-muted">本小时刷新</h6>
+                            <p class="card-text fs-5 text-primary" id="hourlyRefreshCount">
+                                <i class="bi bi-clock-history"></i>
+                                {{ hourly_refresh_count }}
+                            </p>
                         </div>
                     </div>
-                    <div class="col-auto">
-                        <div class="status-badge status-info">
-                            <i class="bi bi-calendar-day"></i>
-                            今日刷新: <span id="dailyRefreshCount">{{ daily_refresh_count }}</span>次
+                </div>
+                <div class="col-md-4 col-4">
+                    <div class="card text-center h-100 shadow-sm">
+                        <div class="card-body">
+                            <h6 class="card-subtitle mb-2 text-muted">今日刷新</h6>
+                            <p class="card-text fs-5 text-primary" id="dailyRefreshCount">
+                                <i class="bi bi-calendar-day"></i>
+                                {{ daily_refresh_count }}
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -1145,7 +1163,7 @@
 
         // 实时更新页面上的间隔显示
         function updatePageInterval(newInterval) {
-            document.getElementById('currentInterval').textContent = newInterval;
+            document.getElementById('currentInterval').innerHTML = `<i class="bi bi-stopwatch-fill"></i> ${newInterval}s`;
             document.getElementById('currentIntervalDisplay').textContent = newInterval + '秒';
             currentInterval = newInterval;
         }
@@ -1378,10 +1396,10 @@
                     const hourlyElement = document.getElementById('hourlyRefreshCount');
 
                     if (dailyElement) {
-                        dailyElement.textContent = data.daily_count;
+                        dailyElement.innerHTML = `<i class="bi bi-calendar-day"></i> ${data.daily_count}`;
                     }
                     if (hourlyElement) {
-                        hourlyElement.textContent = data.hourly_count;
+                        hourlyElement.innerHTML = `<i class="bi bi-clock-history"></i> ${data.hourly_count}`;
                     }
                 }
             })
@@ -1628,7 +1646,7 @@
                     let modeText = '';
                     if (newInterval <= 5) modeText = '🔥 高频抢购模式';
                     else if (newInterval <= 30) modeText = '⚡ 正常监控模式';
-                    else modeText = '🛡️ 低频节能模式';
+                    else modeText = '🛡️ 低频模式 - 节省资源';
 
                     showToast(`监控间隔已调整为 ${newInterval} 秒 (${modeText})`, 'success');
                 } else {
@@ -1646,5 +1664,3 @@
     </script>
 </body>
 </html>
-
-
