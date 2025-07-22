@@ -290,7 +290,7 @@
                     <div class="card text-center h-100 shadow-sm">
                         <div class="card-body">
                             <h6 class="card-subtitle mb-2 text-muted">监控状态</h6>
-                            <p class="card-text fs-5 {{ 'text-success' if monitor_status else 'text-danger' }}">
+                            <p class="card-text fs-5 {{ 'text-success' if monitor_status else 'text-danger' }}" id="monitorStatusText">
                                 <i class="bi bi-{{ 'play-circle-fill' if monitor_status else 'pause-circle-fill' }}"></i>
                                 {{ '运行中' if monitor_status else '已停止' }}
                             </p>
@@ -301,7 +301,7 @@
                     <div class="card text-center h-100 shadow-sm">
                         <div class="card-body">
                             <h6 class="card-subtitle mb-2 text-muted">自动下单</h6>
-                            <p class="card-text fs-5 {{ 'text-success' if auto_order_status else 'text-danger' }}">
+                            <p class="card-text fs-5 {{ 'text-success' if auto_order_status else 'text-danger' }}" id="autoOrderStatusText">
                                 <i class="bi bi-{{ 'cart-check-fill' if auto_order_status else 'cart-x-fill' }}"></i>
                                 {{ '已开启' if auto_order_status else '已关闭' }}
                             </p>
@@ -312,7 +312,7 @@
                     <div class="card text-center h-100 shadow-sm">
                         <div class="card-body">
                             <h6 class="card-subtitle mb-2 text-muted">建单模式</h6>
-                            <p class="card-text fs-5 text-info">
+                            <p class="card-text fs-5 text-info" id="batchModeStatusText">
                                 <i class="bi bi-{{ 'collection-fill' if batch_order_mode else 'lightning-fill' }}"></i>
                                 {{ '统一建单' if batch_order_mode else '单独建单' }}
                             </p>
@@ -750,22 +750,18 @@
                 if (result.success) {
                     // 更新UI
                     const label = document.getElementById('monitorLabel');
-                    const badge = document.querySelector('.status-badge.status-monitor');
+                    const statusText = document.getElementById('monitorStatusText');
 
                     if (enabled) {
                         label.textContent = '启用';
                         label.className = 'badge bg-success';
-                        if (badge) {
-                            badge.className = 'status-badge status-on';
-                            badge.innerHTML = '<i class="bi bi-eye"></i> 监控状态: 启用';
-                        }
+                        statusText.className = 'card-text fs-5 text-success';
+                        statusText.innerHTML = '<i class="bi bi-play-circle-fill"></i> 运行中';
                     } else {
                         label.textContent = '关闭';
                         label.className = 'badge bg-secondary';
-                        if (badge) {
-                            badge.className = 'status-badge status-off';
-                            badge.innerHTML = '<i class="bi bi-eye-slash"></i> 监控状态: 关闭';
-                        }
+                        statusText.className = 'card-text fs-5 text-danger';
+                        statusText.innerHTML = '<i class="bi bi-pause-circle-fill"></i> 已停止';
                     }
 
                     showToast(result.message, 'success');
@@ -797,38 +793,32 @@
                 if (result.success) {
                     // 更新自动下单UI
                     const label = document.getElementById('autoOrderLabel');
-                    const badge = document.querySelector('.status-badge.status-auto');
+                    const statusText = document.getElementById('autoOrderStatusText');
 
                     if (enabled) {
                         label.textContent = '开启';
                         label.className = 'badge bg-warning';
-                        if (badge) {
-                            badge.className = 'status-badge status-on';
-                            badge.innerHTML = '<i class="bi bi-cart-check"></i> 自动下单: 开启';
-                        }
+                        statusText.className = 'card-text fs-5 text-success';
+                        statusText.innerHTML = '<i class="bi bi-cart-check-fill"></i> 已开启';
                     } else {
                         label.textContent = '关闭';
                         label.className = 'badge bg-secondary';
-                        if (badge) {
-                            badge.className = 'status-badge status-off';
-                            badge.innerHTML = '<i class="bi bi-cart-x"></i> 自动下单: 关闭';
-                        }
+                        statusText.className = 'card-text fs-5 text-danger';
+                        statusText.innerHTML = '<i class="bi bi-cart-x-fill"></i> 已关闭';
                     }
 
                     // 如果监控状态也改变了，更新监控UI
                     if (result.monitor_enabled !== undefined) {
                         const monitorSwitch = document.getElementById('monitorSwitch');
                         const monitorLabel = document.getElementById('monitorLabel');
-                        const monitorBadge = document.querySelector('.status-badge.status-monitor');
+                        const monitorStatusText = document.getElementById('monitorStatusText');
 
                         monitorSwitch.checked = result.monitor_enabled;
                         if (result.monitor_enabled) {
                             monitorLabel.textContent = '启用';
                             monitorLabel.className = 'badge bg-success';
-                            if (monitorBadge) {
-                                monitorBadge.className = 'status-badge status-on';
-                                monitorBadge.innerHTML = '<i class="bi bi-eye"></i> 监控状态: 启用';
-                            }
+                            monitorStatusText.className = 'card-text fs-5 text-success';
+                            monitorStatusText.innerHTML = '<i class="bi bi-play-circle-fill"></i> 运行中';
                         }
                     }
 
@@ -861,26 +851,22 @@
                 if (result.success) {
                     // 更新UI
                     const label = document.getElementById('batchModeLabel');
-                    const badge = document.querySelector('.status-badge.status-mode');
+                    const statusText = document.getElementById('batchModeStatusText');
                     const testDescription = document.getElementById('testModeDescription');
 
                     if (enabled) {
                         label.textContent = '统一建单';
                         label.className = 'badge bg-info';
-                        if (badge) {
-                            badge.className = 'status-badge status-info';
-                            badge.innerHTML = '<i class="bi bi-collection"></i> 建单模式: 统一建单';
-                        }
+                        statusText.className = 'card-text fs-5 text-info';
+                        statusText.innerHTML = '<i class="bi bi-collection-fill"></i> 统一建单';
                         if (testDescription) {
                             testDescription.textContent = '测试统一建单：检测所有款号，有货商品合并成一个订单，只弹一次付款窗口';
                         }
                     } else {
                         label.textContent = '单独建单';
                         label.className = 'badge bg-success';
-                        if (badge) {
-                            badge.className = 'status-badge status-success';
-                            badge.innerHTML = '<i class="bi bi-lightning"></i> 建单模式: 单独建单';
-                        }
+                        statusText.className = 'card-text fs-5 text-info';
+                        statusText.innerHTML = '<i class="bi bi-lightning-fill"></i> 单独建单';
                         if (testDescription) {
                             testDescription.textContent = '测试单独建单：检测所有款号，每个有货商品立即下单（多次付款）';
                         }
