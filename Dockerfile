@@ -28,9 +28,9 @@ ENV ENV=production
 EXPOSE 80
 
 # 使用 Gunicorn 启动应用
-# -w 4: 启动 4 个 worker 进程 (可以根据您的服务器配置调整)
-# -b 0.0.0.0:5000: 监听所有网络接口的 5000 端口
-# service.web:run_flask: 指向 service/web.py 文件中的 run_flask 函数
-# ClawCloud 会自动设置 PORT 环境变量，我们在这里使用它
-#CMD ["gunicorn", "--workers", "4", "--bind", "0.0.0.0:5000", "service.web:app"]
+# --workers 4: 启动 4 个 worker 进程
+# --threads 4: 每个 worker 启动 4 个线程
+# --worker-class gevent: 使用 gevent 作为 worker 类
+# --bind "0.0.0.0:$PORT": 监听所有网络接口的 PORT 环境变量指定的端口
+# service.web:app: 指向 service/web.py 文件中的 app 对象
 CMD gunicorn --workers 4 --threads 4 --worker-class gevent --bind "0.0.0.0:$PORT" service.web:app
