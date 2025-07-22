@@ -1,5 +1,5 @@
 {
-  "MONITOR_STATUS": true,
+  "MONITOR_STATUS": false,
   "AUTO_ORDER_STATUS": false,
   "BATCH_ORDER_MODE": false,
   "TEST_MODE": false,

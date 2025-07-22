@@ -48,5 +48,6 @@ if __name__ == "__main__":
 
     logger.info("🎛️ 监控间隔可在Web界面动态调整: http://localhost:5000")
 
-    # # 阻塞主线程，等待Web服务线程结束，以保持容器运行
-    # webThread.join()
+    if os.getenv("ENV") != "production":
+        # 阻塞主线程，等待Web服务线程结束，以保持容器运行
+        webThread.join()

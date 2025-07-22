@@ -33,4 +33,4 @@ EXPOSE 80
 # --worker-class gevent: 使用 gevent 作为 worker 类
 # --bind "0.0.0.0:$PORT": 监听所有网络接口的 PORT 环境变量指定的端口
 # service.web:app: 指向 service/web.py 文件中的 app 对象
-CMD gunicorn --workers 4 --threads 4 --worker-class gevent --bind "0.0.0.0:$PORT" service.web:app
+CMD gunicorn --workers 1 --threads 4 --worker-class gevent --bind "0.0.0.0:$PORT" service.web:app
