@@ -11,6 +11,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 # 步骤 2: 创建最终的生产镜像
 FROM python:3.11-slim
 
+# 设置时区（解决时间问题）
+ENV TZ=Asia/Shanghai
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 # 设置工作目录
 WORKDIR /app
 
