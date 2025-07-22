@@ -1,6 +1,0 @@
-{
-  "daily_date": "2025-07-21",
-  "daily_count": 49,
-  "hourly_hour": "2025-07-21-14",
-  "hourly_count": 10
-}
