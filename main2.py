@@ -258,11 +258,26 @@ def query_product(keyword):
             logger.info(f'商品列表: {len(rows)}')
 
             if rows:
+                # 记录所有商品信息
+                logger.info(f"📋 找到 {len(rows)} 个商品")
+                for i, row in enumerate(rows):
+                    try:
+                        buttons = row.find_all('button')
+                        button_titles = [button.get('title') for button in buttons if button.get('title')]
+                        unique_titles = list(set(button_titles))
+                        name_element = row.find('a')
+                        name = name_element.get_text(strip=True) if name_element else '未知商品'
+                        logger.info(f"  商品{i+1}: {name} - SKU候选: {unique_titles}")
+                    except Exception as e:
+                        logger.warning(f"解析第{i}行商品信息时出错: {e}")
+
+                # 处理第一个商品
                 row_0 = rows[0]
                 buttons = row_0.find_all('button')
-                button_titles = [button.get('title') for button in buttons]
-                logger.info(f'商品编号: {button_titles}')
-                sku = button_titles[0] if button_titles else None
+                button_titles = [button.get('title') for button in buttons if button.get('title')]
+                unique_button_titles = list(set(button_titles))
+                logger.info(f'第一个商品的按钮标题（去重后）: {unique_button_titles}')
+                sku = unique_button_titles[0] if unique_button_titles else None
 
     return sku
 

@@ -534,26 +534,77 @@ def query_product(keyword):
     else:
         if resp.status_code == 200:
             soup = BeautifulSoup(resp.content, "html.parser", from_encoding="utf-8")
+
+            # 从页面统计信息获取真正的商品总数
+            message_div = soup.find('div', class_='message')
+            total_count = 0
+            if message_div:
+                blue_element = message_div.find('i', class_='blue')
+                if blue_element:
+                    try:
+                        total_count = int(blue_element.get_text(strip=True))
+                    except ValueError:
+                        total_count = 0
+
             rows = soup.select('tbody tr')
-            logger.info(f'商品列表: {len(rows)}')
+            logger.info(f'商品列表: 共{total_count}条记录')
 
             if rows:
+                # 只显示有效商品，不显示无效行信息
+                valid_products = []
+                for row in rows:
+                    try:
+                        # 检查是否有SKU input（真正的商品行必须有这个）
+                        sku_input = row.find('input', {'name': 'skc'})
+                        name_element = row.find('a')
+
+                        if sku_input and name_element:
+                            # 这是有效的商品行
+                            name = name_element.get_text(strip=True)
+                            sku_value = sku_input['value']
+
+                            # 获取图片URL
+                            image_element = row.find('img')
+                            image_url = image_element['src'] if image_element else ''
+
+                            valid_products.append((name, sku_value, image_url))
+
+                            # 显示商品信息和图片
+                            if image_url:
+                                logger.info(f"  商品{len(valid_products)}: {name} (SKU: {sku_value}) <br><img src='{image_url}' style='max-width:100px;max-height:100px;' />")
+                            else:
+                                logger.info(f"  商品{len(valid_products)}: {name} (SKU: {sku_value})")
+                    except Exception:
+                        # 静默处理错误，不显示
+                        pass
+
+                if len(valid_products) != len(rows):
+                    logger.info(f"📦 找到 {len(valid_products)} 个有效商品")
+
+                # 处理第一个商品
                 row_0 = rows[0]
                 row_0_td = row_0.find_all('td')
 
-                buttons = row_0.find_all('button')
-                button_titles = [button.get('title') for button in buttons]
-                logger.info(f'商品编号: {button_titles}')
-                
-                sku = button_titles[0] if button_titles else None
+                # 从hidden input获取SKU（更准确）
+                sku_input = row_0.find('input', {'name': 'skc'})
+                sku = sku_input['value'] if sku_input else None
 
-                brand_category = row_0_td[1].get_text(strip=True)
-                image_url = row_0.find('img')['src']
-                name = row_0.find('a').get_text(strip=True)
-                weight = row_0_td[4].get_text(strip=True)
-                distribution_price = row_0_td[5].get_text(strip=True)
-                market_price = row_0_td[6].get_text(strip=True)
-                listing_time = row_0_td[7].get_text(strip=True)
+                if not sku:
+                    # 备用方案：从按钮获取
+                    buttons = row_0.find_all('button')
+                    button_titles = [button.get('title') for button in buttons if button.get('title')]
+                    sku = button_titles[0] if button_titles else None
+
+                logger.info(f'提取的SKU: {sku}')
+
+                brand_category = row_0_td[1].get_text(strip=True) if len(row_0_td) > 1 else ''
+                image_element = row_0.find('img')
+                image_url = image_element['src'] if image_element else ''
+                name_element = row_0.find('a')
+                name = name_element.get_text(strip=True) if name_element else '未知商品'
+                distribution_price = row_0_td[5].get_text(strip=True) if len(row_0_td) > 5 else ''
+                market_price = row_0_td[6].get_text(strip=True) if len(row_0_td) > 6 else ''
+                listing_time = row_0_td[7].get_text(strip=True) if len(row_0_td) > 7 else ''
 
                 product = {
                     'keyword': keyword,
@@ -1031,144 +1082,229 @@ def should_check_products():
 def process_keyword_direct(keyword):
     """直接处理关键词，支持单独建单和统一建单模式"""
 
-    batch_mode = get_global_batch_order_mode()
+    # 检查是否已达到最大检测轮数
+    if _should_skip_keyword(keyword):
+        return False
 
-    if batch_mode:
-        with state.batch_lock:
-            if keyword in state.processed_keywords_batch:
-                keyword_info = state.processed_keywords_batch[keyword]
-                if keyword_info['count'] >= config.MAX_DETECTION_ROUNDS:
-                    logger.info(f"批量模式下关键字 {keyword} 已检测{config.MAX_DETECTION_ROUNDS}轮，停止检测")
-                    return False
-            else:
-                state.processed_keywords_batch[keyword] = {'count': 0, 'last_stock': 0}
-    else:
-        with state.batch_lock:
-            if keyword in state.processed_keywords_batch:
-                keyword_info = state.processed_keywords_batch[keyword]
-                if keyword_info['count'] >= config.MAX_DETECTION_ROUNDS:
-                    logger.info(f"单独建单模式下关键字 {keyword} 已检测{config.MAX_DETECTION_ROUNDS}轮，停止检测")
-                    return False
-            else:
-                state.processed_keywords_batch[keyword] = {'count': 0, 'last_stock': 0}
-    
-    from common.status import get_global_auto_order_status
-    auto_order_enabled = get_global_auto_order_status()
+    # 初始化关键词状态
+    _initialize_keyword_state(keyword)
 
+    # 查询商品
     product = query_product(keyword)
     logger.debug(f'product: {product}')
-    logger.debug(f'auto_order_enabled: {auto_order_enabled}')
-    if product:
-        test_mode = get_global_test_mode()
-        logger.info(f"🔍 [PROCESS] 模式检查: auto_order_enabled={auto_order_enabled}, test_mode={test_mode}, batch_mode={batch_mode}")
 
-        if auto_order_enabled or test_mode:
-            param_save_cart = selectBuyDefect(product['sku'])
+    if not product:
+        _handle_no_product_found(keyword)
+        return False
 
-            if param_save_cart:
-                product_code_value = param_save_cart.get('productCode') or param_save_cart.get('product_code')
-                count = param_save_cart.get('count', 1)
-
-                if not product_code_value:
-                    logger.error(f"❌ 关键词 {keyword} 获取商品代码失败，param_save_cart: {param_save_cart}")
-                    return False
-
-                logger.info(f"📦 关键词 {keyword} 获取到商品代码: {product_code_value}, 数量: {count}")
-                if test_mode:
-                    if batch_mode:
-                        logger.info(f"🧪 [TEST] 测试统一建单模式：关键词 {keyword} 加入购物车")
-                        mode_name = "测试统一建单"
-                        use_cart = True
-                    else:
-                        logger.info(f"🧪 [TEST] 测试单独建单模式：关键词 {keyword} 立即下单")
-                        mode_name = "测试单独建单"
-                        use_cart = False
-                elif batch_mode:
-                    logger.info(f"🛒 [BATCH] 统一建单模式：关键词 {keyword} 加入购物车")
-                    mode_name = "统一建单"
-                    use_cart = True
-                else:
-                    logger.info(f"⚡ [SINGLE] 单独建单模式：关键词 {keyword} 立即下单")
-                    mode_name = "单独建单"
-                    use_cart = False
-
-                if use_cart:
-                    cart_result = selectBuyDefect(product['sku'])
-                    logger.debug(f"🔄 [PROCESS] selectBuyDefect 结果: {cart_result}")
-
-                    if cart_result:
-                        product_info = {
-                            'keyword': keyword,
-                            'product_code': product_code_value,
-                            'price': product['distribution_price'],
-                            'distribution_price': product['distribution_price'],
-                            'name': product['name'],
-                            'image_url': product.get('image_url', ''),
-                            'market_price': product.get('market_price', ''),
-                            'brand_category': product.get('brand_category', '')
-                        }
-                        logger.info(f"🔄 [PROCESS] 准备调用 add_to_batch_cart")
-                        add_to_batch_cart(product_info, cart_result)
-
-                        logger.info(f"✅ [PROCESS] {mode_name}：关键字 {keyword} 商品已加入购物车")
-
-                        image_url = product_info.get('image_url', '')
-                        if image_url:
-                            html_msg = f'''📦 商品详情: {product_info['name']}
-                                            💰 价格: ¥{product_info.get('price', '未知')}
-                                            📦 库存: {count}
-                                            🛒 购物车ID: {cart_result['cart_id']}
-                                            <br><img src="{image_url}" style="max-width:200px;max-height:200px;border-radius:8px;" />'''
-                            logger.info(html_msg)
-                    else:
-                        logger.error(f"❌ [PROCESS] 关键词 {keyword} selectBuyDefect 失败")
-
-                        if batch_mode or test_mode:
-                            with state.batch_lock:
-                                if keyword in state.processed_keywords_batch:
-                                    state.processed_keywords_batch[keyword]['count'] += 1
-                                    state.processed_keywords_batch[keyword]['last_stock'] = count
-
-                        return True
-                else:
-                    checkout_result = check_cart(product_code_value, count, config.PAY_TYPE_WECHAT)
-                    if checkout_result:
-                        logger.info(f"✅ [PROCESS] {mode_name}：关键字 {keyword} 自动下单成功")
-
-                        # 正确逻辑：自动下单模式下，每次成功都+1，以实现5轮连续下单
-                        batch_mode = get_global_batch_order_mode()
-                        if not batch_mode:
-                            with state.batch_lock:
-                                if keyword in state.processed_keywords_batch:
-                                    state.processed_keywords_batch[keyword]['count'] += 1
-                                    state.processed_keywords_batch[keyword]['last_stock'] = count
-
-                        return True
-        else:
-            logger.info(f"📢 [PROCESS] 关键词 {keyword} 进入通知模式（只发送库存通知）")
-            wxpush = PushPlus()
-            msg = f'库存更新 {product["name"]},\n            <br />金额 {product["distribution_price"]}\n            <br /><img src="{product["image_url"]}" width="200px" height="200px" />'
-            wxpush.sendMsg(keyword, msg)
-            logger.debug(f'msg: {msg}')
-            logger.info(f"关键字 {keyword} 通知发送成功")
-            save_keyword_status(keyword)
-
-            # 正确逻辑：监控模式下通知一次后，立即将计数器设置为最大值，防止重复通知
-            with state.batch_lock:
-                if keyword in state.processed_keywords_batch:
-                    logger.info(f"🛑 关键字 {keyword} 监控模式通知完成，停止后续检测。")
-                    state.processed_keywords_batch[keyword]['count'] = config.MAX_DETECTION_ROUNDS
-            
-            return True
-
-    batch_mode = get_global_batch_order_mode()
+    # 获取系统状态
+    from common.status import get_global_auto_order_status
+    auto_order_enabled = get_global_auto_order_status()
     test_mode = get_global_test_mode()
+    batch_mode = get_global_batch_order_mode()
 
+    logger.info(f"🔍 [PROCESS] 模式检查: auto_order_enabled={auto_order_enabled}, test_mode={test_mode}, batch_mode={batch_mode}")
+
+    if auto_order_enabled or test_mode:
+        return _handle_order_mode(keyword, product, test_mode, batch_mode)
+    else:
+        return _handle_notification_mode(keyword, product)
+
+
+def _should_skip_keyword(keyword):
+    """检查关键词是否应该跳过处理"""
+    from common.status import get_global_auto_order_status
+    auto_order_enabled = get_global_auto_order_status()
+    test_mode = get_global_test_mode()
+    batch_mode = get_global_batch_order_mode()
+
+    # 纯监控模式（只开监控，不开自动下单和测试）不应该有轮数限制
+    if not auto_order_enabled and not test_mode:
+        logger.debug(f"📡 [MONITOR] 关键词 {keyword} 处于纯监控模式，无轮数限制")
+        return False
+
+    # 其他模式才应用轮数限制
+    mode_name = "批量模式" if batch_mode else "单独建单模式"
+    if test_mode:
+        mode_name = "测试模式"
+
+    with state.batch_lock:
+        if keyword in state.processed_keywords_batch:
+            keyword_info = state.processed_keywords_batch[keyword]
+            if keyword_info['count'] >= config.MAX_DETECTION_ROUNDS:
+                logger.info(f"{mode_name}下关键字 {keyword} 已检测{config.MAX_DETECTION_ROUNDS}轮，停止检测")
+                return True
+    return False
+
+
+def _initialize_keyword_state(keyword):
+    """初始化关键词状态"""
+    with state.batch_lock:
+        if keyword not in state.processed_keywords_batch:
+            state.processed_keywords_batch[keyword] = {'count': 0, 'last_stock': 0}
+
+
+def _handle_no_product_found(keyword):
+    """处理未找到商品的情况"""
+    from common.status import get_global_auto_order_status
+    auto_order_enabled = get_global_auto_order_status()
+    test_mode = get_global_test_mode()
+    batch_mode = get_global_batch_order_mode()
+
+    # 纯监控模式不增加计数，允许持续检测
+    if not auto_order_enabled and not test_mode:
+        logger.debug(f"📡 [MONITOR] 关键词 {keyword} 纯监控模式，暂无库存，继续监控")
+        return
+
+    # 其他模式才增加计数
     if batch_mode or (not batch_mode and not test_mode):
         with state.batch_lock:
             if keyword in state.processed_keywords_batch:
                 state.processed_keywords_batch[keyword]['count'] += 1
+                # 如果库存为0，直接设置为最大轮数
                 if state.processed_keywords_batch[keyword]['last_stock'] == 0:
                     state.processed_keywords_batch[keyword]['count'] = config.MAX_DETECTION_ROUNDS
 
-    return False
+
+def _handle_order_mode(keyword, product, test_mode, batch_mode):
+    """处理下单模式（自动下单或测试模式）"""
+    param_save_cart = selectBuyDefect(product['sku'])
+
+    if not param_save_cart:
+        logger.error(f"❌ [PROCESS] 关键词 {keyword} selectBuyDefect 失败")
+        _update_keyword_count_on_failure(keyword, batch_mode, test_mode)
+        return True
+
+    product_code_value = param_save_cart.get('productCode') or param_save_cart.get('product_code')
+    count = param_save_cart.get('count', 1)
+
+    if not product_code_value:
+        logger.error(f"❌ 关键词 {keyword} 获取商品代码失败，param_save_cart: {param_save_cart}")
+        return False
+
+    logger.info(f"📦 关键词 {keyword} 获取到商品代码: {product_code_value}, 数量: {count}")
+
+    # 确定处理模式
+    use_cart, mode_name = _determine_processing_mode(test_mode, batch_mode, keyword)
+
+    if use_cart:
+        return _handle_cart_mode(keyword, product, product_code_value, count, mode_name)
+    else:
+        return _handle_direct_order_mode(keyword, product_code_value, count, mode_name, batch_mode)
+
+
+def _determine_processing_mode(test_mode, batch_mode, keyword):
+    """确定处理模式和名称"""
+    if test_mode:
+        if batch_mode:
+            logger.info(f"🧪 [TEST] 测试统一建单模式：关键词 {keyword} 加入购物车")
+            return True, "测试统一建单"
+        else:
+            logger.info(f"🧪 [TEST] 测试单独建单模式：关键词 {keyword} 立即下单")
+            return False, "测试单独建单"
+    elif batch_mode:
+        logger.info(f"🛒 [BATCH] 统一建单模式：关键词 {keyword} 加入购物车")
+        return True, "统一建单"
+    else:
+        logger.info(f"⚡ [SINGLE] 单独建单模式：关键词 {keyword} 立即下单")
+        return False, "单独建单"
+
+
+def _handle_cart_mode(keyword, product, product_code_value, count, mode_name):
+    """处理购物车模式"""
+    cart_result = selectBuyDefect(product['sku'])
+    logger.debug(f"🔄 [PROCESS] selectBuyDefect 结果: {cart_result}")
+
+    if not cart_result:
+        logger.error(f"❌ [PROCESS] 关键词 {keyword} selectBuyDefect 失败")
+        batch_mode = get_global_batch_order_mode()
+        test_mode = get_global_test_mode()
+        _update_keyword_count_on_failure(keyword, batch_mode, test_mode, count)
+        return True
+
+    # 构建商品信息
+    product_info = _build_product_info(keyword, product_code_value, product)
+
+    logger.info(f"🔄 [PROCESS] 准备调用 add_to_batch_cart")
+    add_to_batch_cart(product_info, cart_result)
+
+    logger.info(f"✅ [PROCESS] {mode_name}：关键字 {keyword} 商品已加入购物车")
+
+    # 记录商品详情
+    _log_product_details(product_info, count, cart_result)
+
+    return True
+
+
+def _handle_direct_order_mode(keyword, product_code_value, count, mode_name, batch_mode):
+    """处理直接下单模式"""
+    checkout_result = check_cart(product_code_value, count, config.PAY_TYPE_WECHAT)
+
+    if not checkout_result:
+        return False
+
+    logger.info(f"✅ [PROCESS] {mode_name}：关键字 {keyword} 自动下单成功")
+
+    # 单独建单模式下更新计数
+    if not batch_mode:
+        with state.batch_lock:
+            if keyword in state.processed_keywords_batch:
+                state.processed_keywords_batch[keyword]['count'] += 1
+                state.processed_keywords_batch[keyword]['last_stock'] = count
+
+    return True
+
+
+def _handle_notification_mode(keyword, product):
+    """处理通知模式（只发送库存通知）"""
+    logger.info(f"📢 [PROCESS] 关键词 {keyword} 进入通知模式（只发送库存通知）")
+
+    wxpush = PushPlus()
+    msg = f'库存更新 {product["name"]},\n            <br />金额 {product["distribution_price"]}\n            <br /><img src="{product["image_url"]}" width="200px" height="200px" />'
+    wxpush.sendMsg(keyword, msg)
+    logger.debug(f'msg: {msg}')
+    logger.info(f"关键字 {keyword} 通知发送成功")
+    save_keyword_status(keyword)
+
+    # 通知模式下，通知一次后停止后续检测
+    with state.batch_lock:
+        if keyword in state.processed_keywords_batch:
+            logger.info(f"🛑 关键字 {keyword} 监控模式通知完成，停止后续检测。")
+            state.processed_keywords_batch[keyword]['count'] = config.MAX_DETECTION_ROUNDS
+
+    return True
+
+
+def _update_keyword_count_on_failure(keyword, batch_mode, test_mode, count=0):
+    """失败时更新关键词计数"""
+    if batch_mode or test_mode:
+        with state.batch_lock:
+            if keyword in state.processed_keywords_batch:
+                state.processed_keywords_batch[keyword]['count'] += 1
+                state.processed_keywords_batch[keyword]['last_stock'] = count
+
+
+def _build_product_info(keyword, product_code_value, product):
+    """构建商品信息字典"""
+    return {
+        'keyword': keyword,
+        'product_code': product_code_value,
+        'price': product['distribution_price'],
+        'distribution_price': product['distribution_price'],
+        'name': product['name'],
+        'image_url': product.get('image_url', ''),
+        'market_price': product.get('market_price', ''),
+        'brand_category': product.get('brand_category', '')
+    }
+
+
+def _log_product_details(product_info, count, cart_result):
+    """记录商品详情日志"""
+    image_url = product_info.get('image_url', '')
+    if image_url:
+        html_msg = f'''📦 商品详情: {product_info['name']}
+                        💰 价格: ¥{product_info.get('price', '未知')}
+                        📦 库存: {count}
+                        🛒 购物车ID: {cart_result['cart_id']}
+                        <br><img src="{image_url}" style="max-width:200px;max-height:200px;border-radius:8px;" />'''
+        logger.info(html_msg)
