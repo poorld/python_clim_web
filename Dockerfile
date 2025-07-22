@@ -33,4 +33,4 @@ EXPOSE 80
 # service.web:run_flask: 指向 service/web.py 文件中的 run_flask 函数
 # ClawCloud 会自动设置 PORT 环境变量，我们在这里使用它
 #CMD ["gunicorn", "--workers", "4", "--bind", "0.0.0.0:5000", "service.web:app"]
-CMD gunicorn --workers 4 --bind "0.0.0.0:$PORT" service.web:app
+CMD gunicorn --workers 4 --threads 4 --worker-class gevent --bind "0.0.0.0:$PORT" service.web:app

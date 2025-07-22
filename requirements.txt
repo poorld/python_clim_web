@@ -1,6 +1,7 @@
 Flask==2.3.3
 requests
 gunicorn==23.0.0
+gevent
 beautifulsoup4==4.12.2
 Werkzeug==2.3.7
 Jinja2==3.1.2
