@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from jobs import ThreadHandler, OnceJobThread
-from common.keywords import get_global_keywords
-from common.status import get_global_monitor_status, get_global_batch_order_mode, get_global_test_mode
-from service.product_checkout import should_check_products, process_keyword_direct, execute_batch_checkout, reset_batch_round, config
+from . import ThreadHandler, OnceJobThread
+from ..common.keywords import get_global_keywords
+from ..common.status import get_global_monitor_status, get_global_batch_order_mode, get_global_test_mode
+from ..service.product_checkout import should_check_products, process_keyword_direct, execute_batch_checkout, reset_batch_round, config
 import threading
 import time
 from abc import ABC, abstractmethod
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from common.logger import get_logger
+from ..common.logger import get_logger
 
 logger = get_logger()
 
@@ -27,7 +27,7 @@ class TestModeStrategy(CheckoutStrategy):
     """测试模式策略：根据建单模式设置决定测试行为"""
 
     def execute(self, keywords):
-        from common.status import get_global_batch_order_mode
+        from ..common.status import get_global_batch_order_mode
         batch_mode = get_global_batch_order_mode()
 
         if batch_mode:
@@ -41,7 +41,7 @@ class TestModeStrategy(CheckoutStrategy):
         """测试统一建单模式"""
         try:
             # 测试模式：只重置检测轮次，不清空购物车
-            from service.product_checkout import state
+            from ..service.product_checkout import state
             with state.batch_lock:
                 old_cart_count = len(state.batch_cart_items)
                 old_keywords_count = len(state.processed_keywords_batch)
@@ -74,8 +74,8 @@ class TestModeStrategy(CheckoutStrategy):
     def _test_single_mode(self, keywords):
         """测试单独建单模式：每个商品立即下单，不使用购物车"""
         try:
-            from service.product_checkout import reset_batch_round, query_product, selectBuyDefect, check_cart, config
-            from common.status import set_test_mode
+            from ..service.product_checkout import reset_batch_round, query_product, selectBuyDefect, check_cart, config
+            from ..common.status import set_test_mode
 
             # 重置状态
             reset_batch_round()
@@ -131,7 +131,7 @@ class TestModeStrategy(CheckoutStrategy):
             logger.error(f"❌ 测试单独建单模式执行出错: {e}", exc_info=True)
             # 确保恢复测试模式
             try:
-                from common.status import set_test_mode
+                from ..common.status import set_test_mode
                 set_test_mode(True)
             except:
                 pass
@@ -171,7 +171,7 @@ class TestModeStrategy(CheckoutStrategy):
 
     def _execute_checkout(self, mode_name):
         """执行下单"""
-        from service.product_checkout import get_batch_cart_items
+        from ..service.product_checkout import get_batch_cart_items
         cart_items = get_batch_cart_items()
 
         # 添加调试信息
@@ -237,7 +237,7 @@ class BatchModeStrategy(CheckoutStrategy):
 
     def _mark_all_keywords_completed(self, keywords):
         """将所有关键词标记为已完成，避免显示误导性日志"""
-        from service.product_checkout import state, config
+        from ..service.product_checkout import state, config
         with state.batch_lock:
             for keyword in keywords:
                 if keyword in state.processed_keywords_batch:
@@ -273,7 +273,7 @@ class BatchModeStrategy(CheckoutStrategy):
 
     def _execute_checkout(self, mode_name):
         """执行下单"""
-        from service.product_checkout import get_batch_cart_items
+        from ..service.product_checkout import get_batch_cart_items
         cart_items = get_batch_cart_items()
         if cart_items:
             logger.info(f"🚀 {mode_name}发现 {len(cart_items)} 件商品，执行批量下单...")
@@ -359,7 +359,7 @@ class RefreshThread(ThreadHandler):
         context = CheckoutContext()
 
         # 根据模式选择策略
-        from common.status import get_global_auto_order_status
+        from ..common.status import get_global_auto_order_status
         test_mode = get_global_test_mode()
         batch_mode = get_global_batch_order_mode()
         auto_order_enabled = get_global_auto_order_status()
@@ -393,7 +393,7 @@ class OrderStatusCheckThread(ThreadHandler):
 
     def handle(self) -> None:
         try:
-            from service.product_checkout import check_order_payment_status
+            from ..service.product_checkout import check_order_payment_status
             check_order_payment_status()
         except Exception as e:
             logger.error(f"❌ 订单状态检查出错: {e}", exc_info=True)

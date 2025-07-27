@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import json
-from common.logger import get_logger
+import os
+from .logger import get_logger
 
 logger = get_logger()
 CONFIG_FILE = 'config.json'
@@ -12,7 +13,9 @@ hourly_refresh_count = 0
 daily_refresh_date = None
 hourly_refresh_hour = None
 
-file_name_refresh_stats = 'refresh_stats.txt'
+# 确保 data 目录存在
+os.makedirs('data', exist_ok=True)
+file_name_refresh_stats = 'data/refresh_stats.txt'
 
 def _load_config():
     try:
@@ -34,7 +37,7 @@ def set_monitor_status(status: bool):
     _save_config(config)
     # 实际控制监控线程
     try:
-        from jobs import get_monitor_thread, start_monitor_thread, stop_monitor_thread
+        from ..jobs import get_monitor_thread, start_monitor_thread, stop_monitor_thread
 
         if status:
             logger.info("🚀 启动监控线程...")
@@ -100,7 +103,7 @@ def set_monitor_interval(interval: int):
 
         # 如果监控线程正在运行，间隔会自动调整（DynamicSecondsScheduleJobThread）
         try:
-            from jobs import get_monitor_thread
+            from ..jobs import get_monitor_thread
             thread = get_monitor_thread()
             if thread and thread.is_alive():
                 logger.info("🔄 监控线程将在下次循环时应用新间隔")
@@ -124,7 +127,7 @@ def set_batch_order_mode(mode: bool):
     _save_config(config)
     # 实质性动作：清理购物车状态
     try:
-        from service.product_checkout import clear_batch_cart, reset_batch_round
+        from ..service.product_checkout import clear_batch_cart, reset_batch_round
 
         if mode:
             logger.info("🛒 切换为统一建单模式：")
@@ -167,7 +170,7 @@ def set_test_mode(mode: bool):
         logger.info("🧪 测试模式已关闭：恢复正常监控模式")
         # 清理测试状态
         try:
-            from service.product_checkout import reset_batch_round
+            from ..service.product_checkout import reset_batch_round
             reset_batch_round()
         except:
             pass

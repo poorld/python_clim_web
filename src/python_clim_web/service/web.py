@@ -7,26 +7,26 @@ import time
 import sys
 import datetime
 from flask import Flask, request, jsonify, render_template, redirect, url_for, Response
-from common.keywords import load_keywords, save_keyword, remove_keyword
-from common.status import load_monitor_status, set_monitor_status
-from common.status import load_auto_order_status, set_auto_order_status
-from common.status import load_monitor_interval, set_monitor_interval, get_global_monitor_interval
-from common.status import load_batch_order_mode, set_batch_order_mode, get_global_batch_order_mode
-from common.status import load_test_mode, set_test_mode, get_global_test_mode
-from common.status import get_refresh_stats
-from common.orders import save_orders_history, get_global_orders_history, get_orders, set_orders
-from jobs import OnceJobThread
-from jobs.job_checkout import RefreshThread
+from ..common.keywords import load_keywords, save_keyword, remove_keyword
+from ..common.status import load_monitor_status, set_monitor_status
+from ..common.status import load_auto_order_status, set_auto_order_status
+from ..common.status import load_monitor_interval, set_monitor_interval, get_global_monitor_interval
+from ..common.status import load_batch_order_mode, set_batch_order_mode, get_global_batch_order_mode
+from ..common.status import load_test_mode, set_test_mode, get_global_test_mode
+from ..common.status import get_refresh_stats
+from ..common.orders import save_orders_history, get_global_orders_history, get_orders, set_orders
+from ..jobs import OnceJobThread
+from ..jobs.job_checkout import RefreshThread
 import threading
 import queue
 import logging
-from common.logger import get_logger
+from ..common.logger import get_logger
 
 logger = get_logger()
 
-# 获取项目根目录并设置模板路径
-project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-template_dir = os.path.join(project_root, 'templates')
+# 获取模板目录路径
+current_dir = os.path.dirname(os.path.abspath(__file__))
+template_dir = os.path.join(current_dir, '..', 'templates')
 static_dir = os.path.join(template_dir, 'static')
 
 app = Flask(__name__, template_folder=template_dir, static_folder=static_dir)
@@ -179,7 +179,7 @@ def test_order():
         logger.info("🧪 测试模式已启用：只弹一次付款窗口")
 
         # 强制执行测试检测（跳过商品总数检查）
-        from common.keywords import get_global_keywords
+        from ..common.keywords import get_global_keywords
 
         keywords = get_global_keywords()
         if not keywords:
@@ -193,7 +193,7 @@ def test_order():
         import threading
         def run_test():
             try:
-                from jobs.job_checkout import TestModeStrategy
+                from ..jobs.job_checkout import TestModeStrategy
                 strategy = TestModeStrategy()
                 strategy.execute(keywords)
 
@@ -316,7 +316,7 @@ def push_order_to_clients(order):
 
 def remove_paid_orders(paid_orders):
     """移除已付款的订单"""
-    from common.orders import orders
+    from ..common.orders import orders
 
     for order in paid_orders:
         if order in orders:
@@ -558,7 +558,7 @@ def api_add_order_history():
         if not order:
             return jsonify({'success': False, 'message': '订单号不能为空'})
 
-        from common.orders import get_global_orders_history, save_orders_history
+        from ..common.orders import get_global_orders_history, save_orders_history
 
         orders_history = get_global_orders_history()
         if order in orders_history:
@@ -613,7 +613,7 @@ def api_get_refresh_stats():
 @app.route('/api/check_order_status', methods=['POST'])
 def api_check_order_status():
     try:
-        from service.product_checkout import check_order_payment_status
+        from ..service.product_checkout import check_order_payment_status
         check_order_payment_status()
         return jsonify({'success': True, 'message': '订单状态检查完成'})
     except Exception as e:

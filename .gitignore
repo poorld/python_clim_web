@@ -74,6 +74,18 @@ cookie.txt
 processed_keywords.txt
 config.json
 
+# 日志目录
+logs/*.log
+logs/*.log.*
+
+# 数据目录
+data/*.txt
+data/*.json
+
+# 运行时目录
+runtime/*.txt
+runtime/*.json
+
 # 临时文件
 *.tmp
 *.temp

@@ -2,18 +2,18 @@
 # -*- coding: utf-8 -*-
 
 import os
-from jobs import OnceJobThread, JobThread
-from jobs.job_web import WebThread
-from common.keywords import load_keywords
-from common.status import load_monitor_status, load_auto_order_status, load_monitor_interval, get_global_monitor_interval, load_batch_order_mode, load_test_mode, load_refresh_stats
-from common.orders import load_orders_history
-from common.logger import get_logger
+from .jobs import OnceJobThread, JobThread
+from .jobs.job_web import WebThread
+from .common.keywords import load_keywords
+from .common.status import load_monitor_status, load_auto_order_status, load_monitor_interval, get_global_monitor_interval, load_batch_order_mode, load_test_mode, load_refresh_stats
+from .common.orders import load_orders_history
+from .common.logger import get_logger
 
 logger = get_logger()
 
 
-if __name__ == "__main__":
-
+def main():
+    """主函数"""
     load_keywords()
     load_monitor_status()
     load_auto_order_status()
@@ -31,8 +31,8 @@ if __name__ == "__main__":
         webThread.start()
 
     # 根据监控状态决定是否启动监控线程
-    from common.status import get_global_monitor_status
-    from jobs import start_monitor_thread
+    from .common.status import get_global_monitor_status
+    from .jobs import start_monitor_thread
 
     if get_global_monitor_status():
         logger.info("🚀 监控状态为启用，自动启动监控线程")
@@ -41,7 +41,7 @@ if __name__ == "__main__":
         logger.info("⏸️ 监控状态为关闭，不启动监控线程")
 
     # 启动订单状态检查线程
-    from jobs.job_checkout import OrderStatusCheckThread
+    from .jobs.job_checkout import OrderStatusCheckThread
     order_check_thread = JobThread(OrderStatusCheckThread())
     order_check_thread.start()
     logger.info("🔍 订单状态检查线程已启动")
@@ -51,3 +51,7 @@ if __name__ == "__main__":
     if os.getenv("ENV") != "production":
         # 阻塞主线程，等待Web服务线程结束，以保持容器运行
         webThread.join()
+
+
+if __name__ == "__main__":
+    main()

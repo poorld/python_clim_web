@@ -1,5 +1,6 @@
 import logging
 import sys
+import os
 from logging.handlers import TimedRotatingFileHandler
 
 # 1. 创建一个日志记录器（logger）
@@ -20,8 +21,13 @@ console_handler.setFormatter(log_format)
 # 4. 创建一个处理器，用于将日志写入文件（按天轮换）
 # TimedRotatingFileHandler 会在指定的时间间隔创建新的日志文件
 # when='midnight' 表示每天午夜轮换，backupCount=7 表示保留最近7天的日志
+
+# 确保 logs 目录存在
+log_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'logs')
+os.makedirs(log_dir, exist_ok=True)
+
 file_handler = TimedRotatingFileHandler(
-    'app.log', when='midnight', interval=1, backupCount=7, encoding='utf-8'
+    os.path.join(log_dir, 'app.log'), when='midnight', interval=1, backupCount=7, encoding='utf-8'
 )
 file_handler.setLevel(logging.DEBUG)  # 文件中记录所有DEBUG及以上级别的日志
 file_handler.setFormatter(log_format)

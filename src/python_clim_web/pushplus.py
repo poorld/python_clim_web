@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import requests
-from common.logger import get_logger
+from .common.logger import get_logger
 
 logger = get_logger()
 

@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from jobs import ThreadHandler
-from service.web import run_flask  # 移到类外部导入
+from . import ThreadHandler
+from ..service.web import run_flask  # 移到类外部导入
 
 
 class WebThread(ThreadHandler):

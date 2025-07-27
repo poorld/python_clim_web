@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from common.logger import get_logger
+import os
+from .logger import get_logger
+
+# 确保 data 目录存在
+os.makedirs('data', exist_ok=True)
 
 logger = get_logger()
 
@@ -11,7 +15,7 @@ def save_orders_history(order):
     # 同时更新内存和文件，避免重复
     if order not in orders_history:
         orders_history.append(order)
-        with open('orders.txt', 'a') as f:
+        with open('data/orders.txt', 'a') as f:
             f.write(f"{order}\n")
         logger.info(f"📝 订单 {order} 已保存到历史记录")
     else:
@@ -21,7 +25,7 @@ def load_orders_history():
     global orders_history
     """加载已成功处理的关键字"""
     try:
-        with open('orders.txt', 'r') as f:
+        with open('data/orders.txt', 'r') as f:
             lines = f.readlines()
             # 去重处理
             unique_orders = []
@@ -38,7 +42,7 @@ def load_orders_history():
             original_count = len([line.strip() for line in lines if line.strip()])
             if len(unique_orders) < original_count:
                 logger.info(f"🧹 发现重复订单记录，清理中...")
-                with open('orders.txt', 'w') as f:
+                with open('data/orders.txt', 'w') as f:
                     for order in unique_orders:
                         f.write(f"{order}\n")
                 logger.info(f"✅ 订单记录已清理，从 {original_count} 条减少到 {len(unique_orders)} 条")

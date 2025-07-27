@@ -8,12 +8,13 @@ from datetime import datetime, timedelta
 import urllib.parse
 import threading
 import concurrent.futures
-from pushplus import PushPlus
+import os
+from ..pushplus import PushPlus
 import re
-from common.orders import set_orders
-from common.status import get_global_batch_order_mode, get_global_test_mode
+from ..common.orders import set_orders
+from ..common.status import get_global_batch_order_mode, get_global_test_mode
 import json
-from common.logger import get_logger
+from ..common.logger import get_logger
 
 logger = get_logger()
 
@@ -327,8 +328,8 @@ def execute_batch_checkout():
                 # 立即获取最新订单并推送（这样可以立即弹窗）
                 try:
                     logger.info("🔍 开始立即推送流程...")
-                    from service.web import push_order_to_clients
-                    from common.orders import get_orders
+                    from .web import push_order_to_clients
+                    from ..common.orders import get_orders
 
                     # 获取最新订单
                     latest_orders = get_orders()
@@ -780,8 +781,8 @@ def checkout(checkId, count, payType='2'):
                     logger.warning(f"⚠️ 发送通知失败: {e}")
 
                 try:
-                    from service.web import push_order_to_clients
-                    from common.orders import set_orders
+                    from .web import push_order_to_clients
+                    from ..common.orders import set_orders
 
                     set_orders(order_code)
 
@@ -818,13 +819,15 @@ def is_within_time_range(start_hour=7, end_hour=12):
     
 def save_keyword_status(keyword):
     """保存成功处理的关键字到文件中"""
-    with open('processed_keywords.txt', 'a') as f:
+    # 确保 data 目录存在
+    os.makedirs('data', exist_ok=True)
+    with open('data/processed_keywords.txt', 'a') as f:
         f.write(f"{keyword},{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
 
 def load_processed_keywords():
     """加载已成功处理的关键字"""
     try:
-        with open('processed_keywords.txt', 'r') as f:
+        with open('data/processed_keywords.txt', 'r') as f:
             lines = f.readlines()
             return {line.split(',')[0]: datetime.strptime(line.split(',')[1].strip(), '%Y-%m-%d %H:%M:%S') for line in lines}
     except FileNotFoundError:
@@ -847,7 +850,7 @@ def process_keyword(keyword):
     if not should_query_products(keyword):
         return False
 
-    from common.status import get_global_auto_order_status
+    from ..common.status import get_global_auto_order_status
     auto_order_enabled = get_global_auto_order_status()
 
     product = query_product(keyword)
@@ -926,8 +929,8 @@ def refresh_orders():
 
 def check_order_payment_status():
     """检查订单付款状态，移除已付款的订单"""
-    from common.orders import get_orders
-    from service.web import remove_paid_orders
+    from ..common.orders import get_orders
+    from .web import remove_paid_orders
 
     current_orders = get_orders()
     if not current_orders:
@@ -1065,7 +1068,7 @@ def should_check_products():
         return True
 
     try:
-        from common.status import increment_refresh_count
+        from ..common.status import increment_refresh_count
         increment_refresh_count()
     except Exception as e:
         logger.warning(f"⚠️ 记录刷新次数失败: {e}")
@@ -1098,7 +1101,7 @@ def process_keyword_direct(keyword):
         return False
 
     # 获取系统状态
-    from common.status import get_global_auto_order_status
+    from ..common.status import get_global_auto_order_status
     auto_order_enabled = get_global_auto_order_status()
     test_mode = get_global_test_mode()
     batch_mode = get_global_batch_order_mode()
@@ -1113,7 +1116,7 @@ def process_keyword_direct(keyword):
 
 def _should_skip_keyword(keyword):
     """检查关键词是否应该跳过处理"""
-    from common.status import get_global_auto_order_status
+    from ..common.status import get_global_auto_order_status
     auto_order_enabled = get_global_auto_order_status()
     test_mode = get_global_test_mode()
     batch_mode = get_global_batch_order_mode()
@@ -1154,7 +1157,7 @@ def _initialize_keyword_state(keyword):
 
 def _handle_no_product_found(keyword):
     """处理未找到商品的情况"""
-    from common.status import get_global_auto_order_status
+    from ..common.status import get_global_auto_order_status
     auto_order_enabled = get_global_auto_order_status()
     test_mode = get_global_test_mode()
     batch_mode = get_global_batch_order_mode()

@@ -5,7 +5,7 @@ import threading
 from abc import ABC, abstractmethod
 import schedule
 import time
-from common.logger import get_logger
+from ..common.logger import get_logger
 
 logger = get_logger()
 
@@ -239,7 +239,7 @@ class DynamicSecondsScheduleJobThread(JobThread):
         while not self._stopped():
             # 检查监控状态和解释器状态
             try:
-                from common.status import get_global_monitor_status
+                from ..common.status import get_global_monitor_status
                 if not get_global_monitor_status():
                     logger.info("🛑 监控已关闭，线程即将停止")
                     break
@@ -304,8 +304,8 @@ def start_monitor_thread():
         return
 
     try:
-        from jobs.job_checkout import RefreshThread
-        from common.status import get_global_monitor_interval
+        from .job_checkout import RefreshThread
+        from ..common.status import get_global_monitor_interval
 
         # 创建新的监控线程
         _monitor_thread = DynamicSecondsScheduleJobThread(RefreshThread(), get_global_monitor_interval)
