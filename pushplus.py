@@ -6,7 +6,7 @@ from common.logger import get_logger
 
 logger = get_logger()
 
-IS_DEBUG = True
+IS_DEBUG = False
 
 class PushPlus():
     def __init__(self) -> None:

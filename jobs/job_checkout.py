@@ -199,6 +199,7 @@ class BatchModeStrategy(CheckoutStrategy):
 
             max_rounds = config.MAX_DETECTION_ROUNDS
             round_interval = config.ROUND_INTERVAL
+            first_round_no_stock = False
 
             for round_num in range(1, max_rounds + 1):
                 logger.info(f"🔄 第 {round_num}/{max_rounds} 轮检测开始...")
@@ -210,6 +211,14 @@ class BatchModeStrategy(CheckoutStrategy):
                 success_count = sum(1 for result in results.values() if result)
                 logger.info(f"📊 第 {round_num} 轮检测完成：{success_count}/{len(keywords)} 个关键词有货")
 
+                # 第1轮检测完成后，如果没有货，标记并跳过后续轮次
+                if round_num == 1 and success_count == 0:
+                    first_round_no_stock = True
+                    logger.info("📦 第1轮检测完成，没有货，跳过后续4轮检测")
+                    # 设置所有关键词为已完成状态，避免后续显示误导性日志
+                    self._mark_all_keywords_completed(keywords)
+                    break
+
                 # 执行批量下单
                 self._execute_checkout(f"第 {round_num} 轮")
 
@@ -218,10 +227,23 @@ class BatchModeStrategy(CheckoutStrategy):
                     logger.info(f"⏰ 等待 {round_interval} 秒后进行下一轮检测...")
                     time.sleep(round_interval)
 
-            logger.info("🎉 多轮检测完成")
+            if first_round_no_stock:
+                logger.info("🎉 批量检测完成（第1轮无货，已跳过后续检测）")
+            else:
+                logger.info("🎉 多轮检测完成")
 
         except Exception as e:
             logger.error(f"❌ 多轮检测过程中出错: {e}", exc_info=True)
+
+    def _mark_all_keywords_completed(self, keywords):
+        """将所有关键词标记为已完成，避免显示误导性日志"""
+        from service.product_checkout import state, config
+        with state.batch_lock:
+            for keyword in keywords:
+                if keyword in state.processed_keywords_batch:
+                    # 设置为最大轮数，但不显示"已检测5轮"的日志
+                    state.processed_keywords_batch[keyword]['count'] = config.MAX_DETECTION_ROUNDS
+                    state.processed_keywords_batch[keyword]['first_round_no_stock'] = True
 
     def _concurrent_check(self, keywords):
         """并发检测关键词"""

@@ -547,7 +547,7 @@ def query_product(keyword):
                         total_count = 0
 
             rows = soup.select('tbody tr')
-            logger.info(f'商品列表: 共{total_count}条记录')
+            logger.info(f'商品列表 [{keyword}]: 共{total_count}条记录')
 
             if rows:
                 # 只显示有效商品，不显示无效行信息
@@ -1132,7 +1132,11 @@ def _should_skip_keyword(keyword):
         if keyword in state.processed_keywords_batch:
             keyword_info = state.processed_keywords_batch[keyword]
             if keyword_info['count'] >= config.MAX_DETECTION_ROUNDS:
-                logger.info(f"{mode_name}下关键字 {keyword} 已检测{config.MAX_DETECTION_ROUNDS}轮，停止检测")
+                # 检查是否是第1轮无货导致的跳过，如果是则不显示误导性日志
+                if keyword_info.get('first_round_no_stock', False):
+                    logger.debug(f"📦 关键字 {keyword} 第1轮无货已跳过后续检测")
+                else:
+                    logger.info(f"{mode_name}下关键字 {keyword} 已检测{config.MAX_DETECTION_ROUNDS}轮，停止检测")
                 return True
     return False
 
@@ -1141,7 +1145,11 @@ def _initialize_keyword_state(keyword):
     """初始化关键词状态"""
     with state.batch_lock:
         if keyword not in state.processed_keywords_batch:
-            state.processed_keywords_batch[keyword] = {'count': 0, 'last_stock': 0}
+            state.processed_keywords_batch[keyword] = {
+                'count': 0,
+                'last_stock': 0,
+                'first_round_no_stock': False
+            }
 
 
 def _handle_no_product_found(keyword):

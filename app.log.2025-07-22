@@ -1,0 +1,1270 @@
+2025-07-22 23:12:19 - INFO - main3:26 - 📊 初始监控间隔: 60秒
+2025-07-22 23:12:19 - INFO - web:374 - 🚀 Flask Web服务启动中...
+2025-07-22 23:12:19 - INFO - web:375 - 📡 实时日志推送系统已激活
+2025-07-22 23:12:19 - INFO - web:377 - 🌐 访问地址: http://0.0.0.0:5000
+2025-07-22 23:12:19 - INFO - main3:38 - 🚀 监控状态为启用，自动启动监控线程
+2025-07-22 23:12:19 - INFO - web:378 - 🔧 日志捕获系统状态检查...
+2025-07-22 23:12:19 - INFO - web:394 - 🚀 尝试启动Flask服务...
+2025-07-22 23:12:19 - INFO - __init__:236 - 🚀 动态调度器启动，初始间隔: 60秒
+2025-07-22 23:12:19 - INFO - __init__:315 - ✅ 监控线程启动成功
+2025-07-22 23:12:19 - INFO - job_checkout:367 - 🔍 订单状态检查线程已启动
+2025-07-22 23:12:19 - INFO - main3:47 - 🔍 订单状态检查线程已启动
+2025-07-22 23:12:19 - INFO - main3:49 - 🎛️ 监控间隔可在Web界面动态调整: http://localhost:5000
+2025-07-22 23:12:19 - INFO - product_checkout:965 - query_product_count
+2025-07-22 23:12:20 - DEBUG - product_checkout:970 - status_code: 200
+2025-07-22 23:12:20 - INFO - product_checkout:981 - 商品总数: 1445
+2025-07-22 23:12:20 - INFO - status:260 - 📊 刷新统计 - 今日: 9次, 本小时: 8次
+2025-07-22 23:12:20 - INFO - product_checkout:1043 - 📈 商品总数变化: None -> 1445，需要查询商品
+2025-07-22 23:12:20 - DEBUG - job_checkout:334 - RefreshThread handle keywords: ['C4148QBBK']
+2025-07-22 23:12:20 - INFO - job_checkout:387 - 📡 监控模式：检测库存变化，只发送通知
+2025-07-22 23:12:20 - INFO - product_checkout:520 - query_product: C4148QBBK
+2025-07-22 23:12:21 - INFO - web:384 - ✅ 日志推送测试 - 这是一条测试日志
+2025-07-22 23:12:21 - INFO - web:385 - 🟢 成功：日志系统工作正常
+2025-07-22 23:12:21 - ERROR - web:386 - 🔴 错误：这是一条错误测试日志
+2025-07-22 23:12:21 - WARNING - web:387 - 🟡 警告：这是一条警告测试日志
+2025-07-22 23:12:21 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-22 23:12:22 - DEBUG - product_checkout:529 - status_code: 200
+2025-07-22 23:12:22 - DEBUG - product_checkout:530 - url: https://fenxiao.clim.cn/shop/products.do?keyword=C4148QBBK&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-22 23:12:22 - INFO - product_checkout:538 - 商品列表: 3
+2025-07-22 23:12:22 - INFO - product_checkout:549 -   商品1: COACH 奥莱款小号男士皮质单肩斜挎包 (SKU: 10104620-C4148QBBK)
+2025-07-22 23:12:22 - INFO - product_checkout:549 -   商品2: 未知商品 (SKU: 未知SKU)
+2025-07-22 23:12:22 - INFO - product_checkout:549 -   商品3: 未知商品 (SKU: 未知SKU)
+2025-07-22 23:12:22 - INFO - product_checkout:567 - 提取的SKU: 10104620-C4148QBBK
+2025-07-22 23:12:22 - DEBUG - product_checkout:1063 - product: {'keyword': 'C4148QBBK', 'sku': '10104620-C4148QBBK', 'brand_category': 'Coach男士单肩包', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100', 'name': 'COACH 奥莱款小号男士皮质单肩斜挎包', 'distribution_price': '1026', 'market_price': '4950.0', 'listing_time': '2021-04-29 15:45:00'}
+2025-07-22 23:12:22 - INFO - product_checkout:1075 - 🔍 [PROCESS] 模式检查: auto_order_enabled=False, test_mode=False, batch_mode=False
+2025-07-22 23:12:22 - INFO - product_checkout:1210 - 📢 [PROCESS] 关键词 C4148QBBK 进入通知模式（只发送库存通知）
+2025-07-22 23:12:22 - DEBUG - product_checkout:1215 - msg: 库存更新 COACH 奥莱款小号男士皮质单肩斜挎包,
+            <br />金额 1026
+            <br /><img src="https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100" width="200px" height="200px" />
+2025-07-22 23:12:22 - INFO - product_checkout:1216 - 关键字 C4148QBBK 通知发送成功
+2025-07-22 23:12:22 - INFO - product_checkout:1222 - 🛑 关键字 C4148QBBK 监控模式通知完成，停止后续检测。
+2025-07-22 23:12:22 - INFO - job_checkout:428 - 📢 [MONITOR] 关键词 C4148QBBK 检测到库存变化
+2025-07-22 23:12:22 - INFO - job_checkout:394 - 📊 监控检测完成：1/1 个关键词有库存变化
+2025-07-22 23:12:22 - INFO - job_checkout:397 - 📢 已发送库存通知，监控任务完成
+2025-07-22 23:12:22 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-22 23:13:22 - INFO - product_checkout:965 - query_product_count
+2025-07-22 23:13:23 - DEBUG - product_checkout:970 - status_code: 200
+2025-07-22 23:13:23 - INFO - product_checkout:981 - 商品总数: 1445
+2025-07-22 23:13:23 - INFO - status:260 - 📊 刷新统计 - 今日: 10次, 本小时: 9次
+2025-07-22 23:13:23 - INFO - product_checkout:1048 - 📊 商品总数未变化: 1445，跳过查询
+2025-07-22 23:13:23 - INFO - job_checkout:330 - 🔄 RefreshThread 商品总数未变化，跳过本次检查
+2025-07-22 23:14:23 - INFO - product_checkout:965 - query_product_count
+2025-07-22 23:14:24 - DEBUG - product_checkout:970 - status_code: 200
+2025-07-22 23:14:24 - INFO - product_checkout:981 - 商品总数: 1445
+2025-07-22 23:14:24 - INFO - status:260 - 📊 刷新统计 - 今日: 11次, 本小时: 10次
+2025-07-22 23:14:24 - INFO - product_checkout:1048 - 📊 商品总数未变化: 1445，跳过查询
+2025-07-22 23:14:24 - INFO - job_checkout:330 - 🔄 RefreshThread 商品总数未变化，跳过本次检查
+2025-07-22 23:15:24 - INFO - product_checkout:965 - query_product_count
+2025-07-22 23:15:25 - DEBUG - product_checkout:970 - status_code: 200
+2025-07-22 23:15:25 - INFO - product_checkout:981 - 商品总数: 1445
+2025-07-22 23:15:25 - INFO - status:260 - 📊 刷新统计 - 今日: 12次, 本小时: 11次
+2025-07-22 23:15:25 - INFO - product_checkout:1048 - 📊 商品总数未变化: 1445，跳过查询
+2025-07-22 23:15:25 - INFO - job_checkout:330 - 🔄 RefreshThread 商品总数未变化，跳过本次检查
+2025-07-22 23:16:25 - INFO - product_checkout:965 - query_product_count
+2025-07-22 23:16:27 - DEBUG - product_checkout:970 - status_code: 200
+2025-07-22 23:16:27 - INFO - product_checkout:981 - 商品总数: 1445
+2025-07-22 23:16:27 - INFO - status:260 - 📊 刷新统计 - 今日: 13次, 本小时: 12次
+2025-07-22 23:16:27 - INFO - product_checkout:1048 - 📊 商品总数未变化: 1445，跳过查询
+2025-07-22 23:16:27 - INFO - job_checkout:330 - 🔄 RefreshThread 商品总数未变化，跳过本次检查
+2025-07-22 23:17:27 - INFO - product_checkout:965 - query_product_count
+2025-07-22 23:17:28 - DEBUG - product_checkout:970 - status_code: 200
+2025-07-22 23:17:28 - INFO - product_checkout:981 - 商品总数: 1445
+2025-07-22 23:17:28 - INFO - status:260 - 📊 刷新统计 - 今日: 14次, 本小时: 13次
+2025-07-22 23:17:28 - INFO - product_checkout:1048 - 📊 商品总数未变化: 1445，跳过查询
+2025-07-22 23:17:28 - INFO - job_checkout:330 - 🔄 RefreshThread 商品总数未变化，跳过本次检查
+2025-07-22 23:18:28 - INFO - product_checkout:965 - query_product_count
+2025-07-22 23:18:29 - DEBUG - product_checkout:970 - status_code: 200
+2025-07-22 23:18:29 - INFO - product_checkout:981 - 商品总数: 1445
+2025-07-22 23:18:29 - INFO - status:260 - 📊 刷新统计 - 今日: 15次, 本小时: 14次
+2025-07-22 23:18:29 - INFO - product_checkout:1048 - 📊 商品总数未变化: 1445，跳过查询
+2025-07-22 23:18:29 - INFO - job_checkout:330 - 🔄 RefreshThread 商品总数未变化，跳过本次检查
+2025-07-22 23:19:29 - INFO - product_checkout:965 - query_product_count
+2025-07-22 23:19:31 - DEBUG - product_checkout:970 - status_code: 200
+2025-07-22 23:19:31 - INFO - product_checkout:981 - 商品总数: 1445
+2025-07-22 23:19:31 - INFO - status:260 - 📊 刷新统计 - 今日: 16次, 本小时: 15次
+2025-07-22 23:19:31 - INFO - product_checkout:1048 - 📊 商品总数未变化: 1445，跳过查询
+2025-07-22 23:19:31 - INFO - job_checkout:330 - 🔄 RefreshThread 商品总数未变化，跳过本次检查
+2025-07-22 23:20:29 - INFO - main3:26 - 📊 初始监控间隔: 60秒
+2025-07-22 23:20:29 - INFO - web:374 - 🚀 Flask Web服务启动中...
+2025-07-22 23:20:29 - INFO - web:375 - 📡 实时日志推送系统已激活
+2025-07-22 23:20:29 - INFO - web:377 - 🌐 访问地址: http://0.0.0.0:5000
+2025-07-22 23:20:29 - INFO - main3:38 - 🚀 监控状态为启用，自动启动监控线程
+2025-07-22 23:20:29 - INFO - web:378 - 🔧 日志捕获系统状态检查...
+2025-07-22 23:20:29 - INFO - web:394 - 🚀 尝试启动Flask服务...
+2025-07-22 23:20:29 - INFO - __init__:236 - 🚀 动态调度器启动，初始间隔: 60秒
+2025-07-22 23:20:29 - INFO - __init__:315 - ✅ 监控线程启动成功
+2025-07-22 23:20:29 - INFO - job_checkout:367 - 🔍 订单状态检查线程已启动
+2025-07-22 23:20:29 - INFO - main3:47 - 🔍 订单状态检查线程已启动
+2025-07-22 23:20:29 - INFO - main3:49 - 🎛️ 监控间隔可在Web界面动态调整: http://localhost:5000
+2025-07-22 23:20:29 - INFO - product_checkout:984 - query_product_count
+2025-07-22 23:20:31 - INFO - web:384 - ✅ 日志推送测试 - 这是一条测试日志
+2025-07-22 23:20:31 - INFO - web:385 - 🟢 成功：日志系统工作正常
+2025-07-22 23:20:31 - ERROR - web:386 - 🔴 错误：这是一条错误测试日志
+2025-07-22 23:20:31 - WARNING - web:387 - 🟡 警告：这是一条警告测试日志
+2025-07-22 23:20:31 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-22 23:20:32 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-22 23:20:34 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-22 23:20:38 - DEBUG - product_checkout:989 - status_code: 200
+2025-07-22 23:20:38 - INFO - product_checkout:1000 - 商品总数: 1445
+2025-07-22 23:20:38 - INFO - status:260 - 📊 刷新统计 - 今日: 17次, 本小时: 16次
+2025-07-22 23:20:38 - INFO - product_checkout:1062 - 📈 商品总数变化: None -> 1445，需要查询商品
+2025-07-22 23:20:38 - DEBUG - job_checkout:334 - RefreshThread handle keywords: ['C4148QBBK']
+2025-07-22 23:20:38 - INFO - job_checkout:387 - 📡 监控模式：检测库存变化，只发送通知
+2025-07-22 23:20:38 - INFO - product_checkout:520 - query_product: C4148QBBK
+2025-07-22 23:20:38 - INFO - status:44 - 🛑 停止监控线程...
+2025-07-22 23:20:39 - INFO - status:40 - 🚀 启动监控线程...
+2025-07-22 23:20:39 - WARNING - __init__:303 - ⚠️ 监控线程已在运行中
+2025-07-22 23:20:39 - INFO - status:42 - ✅ 监控线程已启动
+2025-07-22 23:20:41 - DEBUG - product_checkout:529 - status_code: 200
+2025-07-22 23:20:41 - DEBUG - product_checkout:530 - url: https://fenxiao.clim.cn/shop/products.do?keyword=C4148QBBK&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-22 23:20:41 - INFO - product_checkout:538 - 商品列表: 3
+2025-07-22 23:20:41 - INFO - product_checkout:562 -   商品1: COACH 奥莱款小号男士皮质单肩斜挎包 (SKU: 10104620-C4148QBBK) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-22 23:20:41 - INFO - product_checkout:570 - 📦 找到 1 个有效商品
+2025-07-22 23:20:41 - INFO - product_checkout:586 - 提取的SKU: 10104620-C4148QBBK
+2025-07-22 23:20:41 - DEBUG - product_checkout:1082 - product: {'keyword': 'C4148QBBK', 'sku': '10104620-C4148QBBK', 'brand_category': 'Coach男士单肩包', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100', 'name': 'COACH 奥莱款小号男士皮质单肩斜挎包', 'distribution_price': '1026', 'market_price': '4950.0', 'listing_time': '2021-04-29 15:45:00'}
+2025-07-22 23:20:41 - INFO - product_checkout:1094 - 🔍 [PROCESS] 模式检查: auto_order_enabled=False, test_mode=False, batch_mode=False
+2025-07-22 23:20:41 - INFO - product_checkout:1229 - 📢 [PROCESS] 关键词 C4148QBBK 进入通知模式（只发送库存通知）
+2025-07-22 23:20:41 - DEBUG - product_checkout:1234 - msg: 库存更新 COACH 奥莱款小号男士皮质单肩斜挎包,
+            <br />金额 1026
+            <br /><img src="https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100" width="200px" height="200px" />
+2025-07-22 23:20:41 - INFO - product_checkout:1235 - 关键字 C4148QBBK 通知发送成功
+2025-07-22 23:20:41 - INFO - product_checkout:1241 - 🛑 关键字 C4148QBBK 监控模式通知完成，停止后续检测。
+2025-07-22 23:20:41 - INFO - job_checkout:428 - 📢 [MONITOR] 关键词 C4148QBBK 检测到库存变化
+2025-07-22 23:20:41 - INFO - job_checkout:394 - 📊 监控检测完成：1/1 个关键词有库存变化
+2025-07-22 23:20:41 - INFO - job_checkout:397 - 📢 已发送库存通知，监控任务完成
+2025-07-22 23:20:41 - INFO - __init__:281 - 🛑 收到停止信号，线程即将停止
+2025-07-22 23:20:41 - INFO - __init__:334 - ✅ 监控线程已停止
+2025-07-22 23:20:41 - INFO - status:46 - ✅ 监控线程已停止
+2025-07-22 23:23:01 - INFO - main3:26 - 📊 初始监控间隔: 60秒
+2025-07-22 23:23:01 - INFO - web:374 - 🚀 Flask Web服务启动中...
+2025-07-22 23:23:01 - INFO - web:375 - 📡 实时日志推送系统已激活
+2025-07-22 23:23:01 - INFO - web:377 - 🌐 访问地址: http://0.0.0.0:5000
+2025-07-22 23:23:01 - INFO - web:378 - 🔧 日志捕获系统状态检查...
+2025-07-22 23:23:01 - INFO - main3:38 - 🚀 监控状态为启用，自动启动监控线程
+2025-07-22 23:23:01 - INFO - web:394 - 🚀 尝试启动Flask服务...
+2025-07-22 23:23:01 - INFO - __init__:236 - 🚀 动态调度器启动，初始间隔: 60秒
+2025-07-22 23:23:01 - INFO - __init__:315 - ✅ 监控线程启动成功
+2025-07-22 23:23:01 - INFO - job_checkout:367 - 🔍 订单状态检查线程已启动
+2025-07-22 23:23:01 - INFO - main3:47 - 🔍 订单状态检查线程已启动
+2025-07-22 23:23:01 - INFO - main3:49 - 🎛️ 监控间隔可在Web界面动态调整: http://localhost:5000
+2025-07-22 23:23:01 - INFO - product_checkout:996 - query_product_count
+2025-07-22 23:23:03 - DEBUG - product_checkout:1001 - status_code: 200
+2025-07-22 23:23:03 - INFO - product_checkout:1012 - 商品总数: 1445
+2025-07-22 23:23:03 - INFO - status:260 - 📊 刷新统计 - 今日: 18次, 本小时: 17次
+2025-07-22 23:23:03 - INFO - product_checkout:1074 - 📈 商品总数变化: None -> 1445，需要查询商品
+2025-07-22 23:23:03 - DEBUG - job_checkout:334 - RefreshThread handle keywords: ['C4148QBBK']
+2025-07-22 23:23:03 - INFO - job_checkout:387 - 📡 监控模式：检测库存变化，只发送通知
+2025-07-22 23:23:03 - INFO - product_checkout:520 - query_product: C4148QBBK
+2025-07-22 23:23:03 - DEBUG - product_checkout:529 - status_code: 200
+2025-07-22 23:23:03 - DEBUG - product_checkout:530 - url: https://fenxiao.clim.cn/shop/products.do?keyword=C4148QBBK&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-22 23:23:03 - INFO - product_checkout:550 - 商品列表: 共1条记录
+2025-07-22 23:23:03 - INFO - product_checkout:574 -   商品1: COACH 奥莱款小号男士皮质单肩斜挎包 (SKU: 10104620-C4148QBBK) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-22 23:23:03 - INFO - product_checkout:582 - 📦 找到 1 个有效商品
+2025-07-22 23:23:03 - INFO - product_checkout:598 - 提取的SKU: 10104620-C4148QBBK
+2025-07-22 23:23:03 - DEBUG - product_checkout:1094 - product: {'keyword': 'C4148QBBK', 'sku': '10104620-C4148QBBK', 'brand_category': 'Coach男士单肩包', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100', 'name': 'COACH 奥莱款小号男士皮质单肩斜挎包', 'distribution_price': '1026', 'market_price': '4950.0', 'listing_time': '2021-04-29 15:45:00'}
+2025-07-22 23:23:03 - INFO - product_checkout:1106 - 🔍 [PROCESS] 模式检查: auto_order_enabled=False, test_mode=False, batch_mode=False
+2025-07-22 23:23:03 - INFO - product_checkout:1241 - 📢 [PROCESS] 关键词 C4148QBBK 进入通知模式（只发送库存通知）
+2025-07-22 23:23:03 - DEBUG - product_checkout:1246 - msg: 库存更新 COACH 奥莱款小号男士皮质单肩斜挎包,
+            <br />金额 1026
+            <br /><img src="https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100" width="200px" height="200px" />
+2025-07-22 23:23:03 - INFO - product_checkout:1247 - 关键字 C4148QBBK 通知发送成功
+2025-07-22 23:23:03 - INFO - product_checkout:1253 - 🛑 关键字 C4148QBBK 监控模式通知完成，停止后续检测。
+2025-07-22 23:23:03 - INFO - job_checkout:428 - 📢 [MONITOR] 关键词 C4148QBBK 检测到库存变化
+2025-07-22 23:23:03 - INFO - job_checkout:394 - 📊 监控检测完成：1/1 个关键词有库存变化
+2025-07-22 23:23:03 - INFO - job_checkout:397 - 📢 已发送库存通知，监控任务完成
+2025-07-22 23:23:03 - INFO - web:384 - ✅ 日志推送测试 - 这是一条测试日志
+2025-07-22 23:23:03 - INFO - web:385 - 🟢 成功：日志系统工作正常
+2025-07-22 23:23:03 - ERROR - web:386 - 🔴 错误：这是一条错误测试日志
+2025-07-22 23:23:03 - WARNING - web:387 - 🟡 警告：这是一条警告测试日志
+2025-07-22 23:23:04 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-22 23:23:09 - INFO - status:44 - 🛑 停止监控线程...
+2025-07-22 23:23:09 - INFO - __init__:281 - 🛑 收到停止信号，线程即将停止
+2025-07-22 23:23:09 - INFO - __init__:334 - ✅ 监控线程已停止
+2025-07-22 23:23:09 - INFO - status:46 - ✅ 监控线程已停止
+2025-07-22 23:23:13 - INFO - status:40 - 🚀 启动监控线程...
+2025-07-22 23:23:13 - INFO - __init__:236 - 🚀 动态调度器启动，初始间隔: 60秒
+2025-07-22 23:23:13 - INFO - __init__:315 - ✅ 监控线程启动成功
+2025-07-22 23:23:13 - INFO - status:42 - ✅ 监控线程已启动
+2025-07-22 23:23:13 - INFO - product_checkout:996 - query_product_count
+2025-07-22 23:23:14 - DEBUG - product_checkout:1001 - status_code: 200
+2025-07-22 23:23:14 - INFO - product_checkout:1012 - 商品总数: 1445
+2025-07-22 23:23:14 - INFO - status:260 - 📊 刷新统计 - 今日: 19次, 本小时: 18次
+2025-07-22 23:23:14 - INFO - product_checkout:1079 - 📊 商品总数未变化: 1445，跳过查询
+2025-07-22 23:23:14 - INFO - job_checkout:330 - 🔄 RefreshThread 商品总数未变化，跳过本次检查
+2025-07-22 23:23:24 - INFO - status:44 - 🛑 停止监控线程...
+2025-07-22 23:23:24 - INFO - __init__:281 - 🛑 收到停止信号，线程即将停止
+2025-07-22 23:23:24 - INFO - __init__:334 - ✅ 监控线程已停止
+2025-07-22 23:23:24 - INFO - status:46 - ✅ 监控线程已停止
+2025-07-22 23:23:24 - INFO - status:40 - 🚀 启动监控线程...
+2025-07-22 23:23:24 - INFO - __init__:236 - 🚀 动态调度器启动，初始间隔: 60秒
+2025-07-22 23:23:24 - INFO - __init__:315 - ✅ 监控线程启动成功
+2025-07-22 23:23:24 - INFO - status:42 - ✅ 监控线程已启动
+2025-07-22 23:23:24 - INFO - product_checkout:996 - query_product_count
+2025-07-22 23:23:25 - DEBUG - product_checkout:1001 - status_code: 200
+2025-07-22 23:23:25 - INFO - product_checkout:1012 - 商品总数: 1445
+2025-07-22 23:23:25 - INFO - status:260 - 📊 刷新统计 - 今日: 20次, 本小时: 19次
+2025-07-22 23:23:25 - INFO - product_checkout:1079 - 📊 商品总数未变化: 1445，跳过查询
+2025-07-22 23:23:25 - INFO - job_checkout:330 - 🔄 RefreshThread 商品总数未变化，跳过本次检查
+2025-07-22 23:24:25 - INFO - product_checkout:996 - query_product_count
+2025-07-22 23:24:27 - DEBUG - product_checkout:1001 - status_code: 200
+2025-07-22 23:24:27 - INFO - product_checkout:1012 - 商品总数: 1444
+2025-07-22 23:24:27 - INFO - status:260 - 📊 刷新统计 - 今日: 21次, 本小时: 20次
+2025-07-22 23:24:27 - INFO - product_checkout:1074 - 📈 商品总数变化: 1445 -> 1444，需要查询商品
+2025-07-22 23:24:27 - DEBUG - job_checkout:334 - RefreshThread handle keywords: ['C4148QBBK']
+2025-07-22 23:24:27 - INFO - job_checkout:387 - 📡 监控模式：检测库存变化，只发送通知
+2025-07-22 23:24:27 - INFO - product_checkout:1123 - 单独建单模式下关键字 C4148QBBK 已检测5轮，停止检测
+2025-07-22 23:24:27 - DEBUG - job_checkout:430 - 📊 [MONITOR] 关键词 C4148QBBK 暂无库存变化
+2025-07-22 23:24:27 - INFO - job_checkout:394 - 📊 监控检测完成：0/1 个关键词有库存变化
+2025-07-22 23:24:27 - INFO - job_checkout:399 - 📊 暂无库存变化
+2025-07-22 23:25:27 - INFO - product_checkout:996 - query_product_count
+2025-07-22 23:25:28 - DEBUG - product_checkout:1001 - status_code: 200
+2025-07-22 23:25:28 - INFO - product_checkout:1012 - 商品总数: 1443
+2025-07-22 23:25:28 - INFO - status:260 - 📊 刷新统计 - 今日: 22次, 本小时: 21次
+2025-07-22 23:25:28 - INFO - product_checkout:1074 - 📈 商品总数变化: 1444 -> 1443，需要查询商品
+2025-07-22 23:25:28 - DEBUG - job_checkout:334 - RefreshThread handle keywords: ['C4148QBBK']
+2025-07-22 23:25:28 - INFO - job_checkout:387 - 📡 监控模式：检测库存变化，只发送通知
+2025-07-22 23:25:28 - INFO - product_checkout:1123 - 单独建单模式下关键字 C4148QBBK 已检测5轮，停止检测
+2025-07-22 23:25:28 - DEBUG - job_checkout:430 - 📊 [MONITOR] 关键词 C4148QBBK 暂无库存变化
+2025-07-22 23:25:28 - INFO - job_checkout:394 - 📊 监控检测完成：0/1 个关键词有库存变化
+2025-07-22 23:25:28 - INFO - job_checkout:399 - 📊 暂无库存变化
+2025-07-22 23:26:28 - INFO - product_checkout:996 - query_product_count
+2025-07-22 23:26:36 - DEBUG - product_checkout:1001 - status_code: 200
+2025-07-22 23:26:36 - INFO - product_checkout:1012 - 商品总数: 1443
+2025-07-22 23:26:36 - INFO - status:260 - 📊 刷新统计 - 今日: 23次, 本小时: 22次
+2025-07-22 23:26:36 - INFO - product_checkout:1079 - 📊 商品总数未变化: 1443，跳过查询
+2025-07-22 23:26:36 - INFO - job_checkout:330 - 🔄 RefreshThread 商品总数未变化，跳过本次检查
+2025-07-22 23:27:36 - INFO - product_checkout:996 - query_product_count
+2025-07-22 23:27:38 - DEBUG - product_checkout:1001 - status_code: 200
+2025-07-22 23:27:38 - INFO - product_checkout:1012 - 商品总数: 1443
+2025-07-22 23:27:38 - INFO - status:260 - 📊 刷新统计 - 今日: 24次, 本小时: 23次
+2025-07-22 23:27:38 - INFO - product_checkout:1079 - 📊 商品总数未变化: 1443，跳过查询
+2025-07-22 23:27:38 - INFO - job_checkout:330 - 🔄 RefreshThread 商品总数未变化，跳过本次检查
+2025-07-22 23:28:38 - INFO - product_checkout:996 - query_product_count
+2025-07-22 23:28:41 - DEBUG - product_checkout:1001 - status_code: 200
+2025-07-22 23:28:41 - INFO - product_checkout:1012 - 商品总数: 1443
+2025-07-22 23:28:41 - INFO - status:260 - 📊 刷新统计 - 今日: 25次, 本小时: 24次
+2025-07-22 23:28:41 - INFO - product_checkout:1079 - 📊 商品总数未变化: 1443，跳过查询
+2025-07-22 23:28:41 - INFO - job_checkout:330 - 🔄 RefreshThread 商品总数未变化，跳过本次检查
+2025-07-22 23:29:43 - INFO - main3:26 - 📊 初始监控间隔: 60秒
+2025-07-22 23:29:43 - INFO - web:374 - 🚀 Flask Web服务启动中...
+2025-07-22 23:29:43 - INFO - web:375 - 📡 实时日志推送系统已激活
+2025-07-22 23:29:43 - INFO - web:377 - 🌐 访问地址: http://0.0.0.0:5000
+2025-07-22 23:29:43 - INFO - main3:38 - 🚀 监控状态为启用，自动启动监控线程
+2025-07-22 23:29:43 - INFO - web:378 - 🔧 日志捕获系统状态检查...
+2025-07-22 23:29:43 - INFO - web:394 - 🚀 尝试启动Flask服务...
+2025-07-22 23:29:43 - INFO - __init__:236 - 🚀 动态调度器启动，初始间隔: 60秒
+2025-07-22 23:29:43 - INFO - __init__:315 - ✅ 监控线程启动成功
+2025-07-22 23:29:43 - INFO - job_checkout:367 - 🔍 订单状态检查线程已启动
+2025-07-22 23:29:43 - INFO - main3:47 - 🔍 订单状态检查线程已启动
+2025-07-22 23:29:43 - INFO - main3:49 - 🎛️ 监控间隔可在Web界面动态调整: http://localhost:5000
+2025-07-22 23:29:43 - INFO - product_checkout:996 - query_product_count
+2025-07-22 23:29:43 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-22 23:29:44 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-22 23:29:45 - INFO - web:384 - ✅ 日志推送测试 - 这是一条测试日志
+2025-07-22 23:29:45 - INFO - web:385 - 🟢 成功：日志系统工作正常
+2025-07-22 23:29:45 - ERROR - web:386 - 🔴 错误：这是一条错误测试日志
+2025-07-22 23:29:45 - WARNING - web:387 - 🟡 警告：这是一条警告测试日志
+2025-07-22 23:29:46 - DEBUG - product_checkout:1001 - status_code: 200
+2025-07-22 23:29:46 - INFO - product_checkout:1012 - 商品总数: 1443
+2025-07-22 23:29:46 - INFO - status:260 - 📊 刷新统计 - 今日: 26次, 本小时: 25次
+2025-07-22 23:29:46 - INFO - product_checkout:1074 - 📈 商品总数变化: None -> 1443，需要查询商品
+2025-07-22 23:29:46 - DEBUG - job_checkout:334 - RefreshThread handle keywords: ['C4148QBBK']
+2025-07-22 23:29:46 - INFO - job_checkout:387 - 📡 监控模式：检测库存变化，只发送通知
+2025-07-22 23:29:46 - DEBUG - product_checkout:1123 - 📡 [MONITOR] 关键词 C4148QBBK 处于纯监控模式，无轮数限制
+2025-07-22 23:29:46 - INFO - product_checkout:520 - query_product: C4148QBBK
+2025-07-22 23:29:48 - DEBUG - product_checkout:529 - status_code: 200
+2025-07-22 23:29:48 - DEBUG - product_checkout:530 - url: https://fenxiao.clim.cn/shop/products.do?keyword=C4148QBBK&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-22 23:29:48 - INFO - product_checkout:550 - 商品列表: 共1条记录
+2025-07-22 23:29:48 - INFO - product_checkout:574 -   商品1: COACH 奥莱款小号男士皮质单肩斜挎包 (SKU: 10104620-C4148QBBK) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-22 23:29:48 - INFO - product_checkout:582 - 📦 找到 1 个有效商品
+2025-07-22 23:29:48 - INFO - product_checkout:598 - 提取的SKU: 10104620-C4148QBBK
+2025-07-22 23:29:48 - DEBUG - product_checkout:1094 - product: {'keyword': 'C4148QBBK', 'sku': '10104620-C4148QBBK', 'brand_category': 'Coach男士单肩包', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100', 'name': 'COACH 奥莱款小号男士皮质单肩斜挎包', 'distribution_price': '1026', 'market_price': '4950.0', 'listing_time': '2021-04-29 15:45:00'}
+2025-07-22 23:29:48 - INFO - product_checkout:1106 - 🔍 [PROCESS] 模式检查: auto_order_enabled=False, test_mode=False, batch_mode=False
+2025-07-22 23:29:48 - INFO - product_checkout:1260 - 📢 [PROCESS] 关键词 C4148QBBK 进入通知模式（只发送库存通知）
+2025-07-22 23:29:48 - DEBUG - product_checkout:1265 - msg: 库存更新 COACH 奥莱款小号男士皮质单肩斜挎包,
+            <br />金额 1026
+            <br /><img src="https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100" width="200px" height="200px" />
+2025-07-22 23:29:48 - INFO - product_checkout:1266 - 关键字 C4148QBBK 通知发送成功
+2025-07-22 23:29:48 - INFO - product_checkout:1272 - 🛑 关键字 C4148QBBK 监控模式通知完成，停止后续检测。
+2025-07-22 23:29:48 - INFO - job_checkout:428 - 📢 [MONITOR] 关键词 C4148QBBK 检测到库存变化
+2025-07-22 23:29:48 - INFO - job_checkout:394 - 📊 监控检测完成：1/1 个关键词有库存变化
+2025-07-22 23:29:48 - INFO - job_checkout:397 - 📢 已发送库存通知，监控任务完成
+2025-07-22 23:30:08 - INFO - status:70 - ⚡ 自动下单已启用：发现库存将自动下单
+2025-07-22 23:30:12 - INFO - status:44 - 🛑 停止监控线程...
+2025-07-22 23:30:12 - INFO - __init__:281 - 🛑 收到停止信号，线程即将停止
+2025-07-22 23:30:12 - INFO - __init__:334 - ✅ 监控线程已停止
+2025-07-22 23:30:12 - INFO - status:46 - ✅ 监控线程已停止
+2025-07-22 23:30:12 - INFO - status:40 - 🚀 启动监控线程...
+2025-07-22 23:30:12 - INFO - __init__:236 - 🚀 动态调度器启动，初始间隔: 60秒
+2025-07-22 23:30:12 - INFO - __init__:315 - ✅ 监控线程启动成功
+2025-07-22 23:30:12 - INFO - status:42 - ✅ 监控线程已启动
+2025-07-22 23:30:12 - INFO - product_checkout:996 - query_product_count
+2025-07-22 23:30:13 - DEBUG - product_checkout:1001 - status_code: 200
+2025-07-22 23:30:13 - INFO - product_checkout:1012 - 商品总数: 1443
+2025-07-22 23:30:13 - INFO - status:260 - 📊 刷新统计 - 今日: 27次, 本小时: 26次
+2025-07-22 23:30:13 - INFO - product_checkout:1079 - 📊 商品总数未变化: 1443，跳过查询
+2025-07-22 23:30:13 - INFO - job_checkout:330 - 🔄 RefreshThread 商品总数未变化，跳过本次检查
+2025-07-22 23:30:27 - INFO - status:72 - 📢 自动下单已关闭：切换为通知模式，只发送库存通知
+2025-07-22 23:30:28 - INFO - status:44 - 🛑 停止监控线程...
+2025-07-22 23:30:28 - INFO - __init__:281 - 🛑 收到停止信号，线程即将停止
+2025-07-22 23:30:28 - INFO - __init__:334 - ✅ 监控线程已停止
+2025-07-22 23:30:28 - INFO - status:46 - ✅ 监控线程已停止
+2025-07-22 23:30:35 - INFO - main3:26 - 📊 初始监控间隔: 60秒
+2025-07-22 23:30:35 - INFO - web:374 - 🚀 Flask Web服务启动中...
+2025-07-22 23:30:35 - INFO - web:375 - 📡 实时日志推送系统已激活
+2025-07-22 23:30:35 - INFO - web:377 - 🌐 访问地址: http://0.0.0.0:5000
+2025-07-22 23:30:35 - INFO - main3:41 - ⏸️ 监控状态为关闭，不启动监控线程
+2025-07-22 23:30:35 - INFO - web:378 - 🔧 日志捕获系统状态检查...
+2025-07-22 23:30:35 - INFO - job_checkout:367 - 🔍 订单状态检查线程已启动
+2025-07-22 23:30:35 - INFO - main3:47 - 🔍 订单状态检查线程已启动
+2025-07-22 23:30:35 - INFO - web:394 - 🚀 尝试启动Flask服务...
+2025-07-22 23:30:35 - INFO - main3:49 - 🎛️ 监控间隔可在Web界面动态调整: http://localhost:5000
+2025-07-22 23:30:36 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-22 23:30:36 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-22 23:30:37 - INFO - web:384 - ✅ 日志推送测试 - 这是一条测试日志
+2025-07-22 23:30:37 - INFO - web:385 - 🟢 成功：日志系统工作正常
+2025-07-22 23:30:37 - ERROR - web:386 - 🔴 错误：这是一条错误测试日志
+2025-07-22 23:30:37 - WARNING - web:387 - 🟡 警告：这是一条警告测试日志
+2025-07-22 23:30:41 - INFO - status:68 - 🔗 自动下单需要监控支持，同时启动监控...
+2025-07-22 23:30:41 - INFO - status:40 - 🚀 启动监控线程...
+2025-07-22 23:30:41 - INFO - __init__:236 - 🚀 动态调度器启动，初始间隔: 60秒
+2025-07-22 23:30:41 - INFO - __init__:315 - ✅ 监控线程启动成功
+2025-07-22 23:30:41 - INFO - status:42 - ✅ 监控线程已启动
+2025-07-22 23:30:41 - INFO - status:70 - ⚡ 自动下单已启用：发现库存将自动下单
+2025-07-22 23:30:41 - INFO - product_checkout:996 - query_product_count
+2025-07-22 23:30:42 - DEBUG - product_checkout:1001 - status_code: 200
+2025-07-22 23:30:42 - INFO - product_checkout:1012 - 商品总数: 1443
+2025-07-22 23:30:42 - INFO - status:260 - 📊 刷新统计 - 今日: 28次, 本小时: 27次
+2025-07-22 23:30:42 - INFO - product_checkout:1074 - 📈 商品总数变化: None -> 1443，需要查询商品
+2025-07-22 23:30:42 - DEBUG - job_checkout:334 - RefreshThread handle keywords: ['C4148QBBK']
+2025-07-22 23:30:42 - INFO - job_checkout:265 - ⚡ 单独建单模式：开始多轮检测...
+2025-07-22 23:30:42 - INFO - product_checkout:119 - 🔄 [STATE] 批量状态已重置:
+2025-07-22 23:30:42 - INFO - product_checkout:120 -    清空购物车: 0 → 0
+2025-07-22 23:30:42 - INFO - product_checkout:121 -    清空关键词记录: 0 → 0
+2025-07-22 23:30:42 - INFO - product_checkout:122 -    重置轮次计数: → 0
+2025-07-22 23:30:42 - INFO - product_checkout:204 - 🔄 批量检测轮次已重置
+2025-07-22 23:30:42 - INFO - job_checkout:274 - 🔄 第 1/5 轮检测开始...
+2025-07-22 23:30:42 - INFO - product_checkout:520 - query_product: C4148QBBK
+2025-07-22 23:30:43 - DEBUG - product_checkout:529 - status_code: 200
+2025-07-22 23:30:43 - DEBUG - product_checkout:530 - url: https://fenxiao.clim.cn/shop/products.do?keyword=C4148QBBK&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-22 23:30:43 - INFO - product_checkout:550 - 商品列表: 共1条记录
+2025-07-22 23:30:43 - INFO - product_checkout:574 -   商品1: COACH 奥莱款小号男士皮质单肩斜挎包 (SKU: 10104620-C4148QBBK) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-22 23:30:43 - INFO - product_checkout:582 - 📦 找到 1 个有效商品
+2025-07-22 23:30:43 - INFO - product_checkout:598 - 提取的SKU: 10104620-C4148QBBK
+2025-07-22 23:30:43 - DEBUG - product_checkout:1094 - product: {'keyword': 'C4148QBBK', 'sku': '10104620-C4148QBBK', 'brand_category': 'Coach男士单肩包', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100', 'name': 'COACH 奥莱款小号男士皮质单肩斜挎包', 'distribution_price': '1026', 'market_price': '4950.0', 'listing_time': '2021-04-29 15:45:00'}
+2025-07-22 23:30:43 - INFO - product_checkout:1106 - 🔍 [PROCESS] 模式检查: auto_order_enabled=True, test_mode=False, batch_mode=False
+2025-07-22 23:30:43 - INFO - product_checkout:623 - selectBuyDefect
+2025-07-22 23:30:43 - DEBUG - product_checkout:625 - sku: 10104620-C4148QBBK
+2025-07-22 23:30:44 - DEBUG - product_checkout:627 - status_code: 200
+2025-07-22 23:30:44 - INFO - product_checkout:636 - saveCart
+2025-07-22 23:30:44 - DEBUG - product_checkout:651 - param_save_cart: {'typeCode': '68', 'price': '1026.0', 'productCode': '101460701', 'count': 1}
+2025-07-22 23:30:44 - DEBUG - product_checkout:654 - status_code: 200
+2025-07-22 23:30:44 - DEBUG - product_checkout:655 - content: true
+2025-07-22 23:30:44 - INFO - product_checkout:657 - 加入购物车成功
+2025-07-22 23:30:45 - INFO - product_checkout:1185 - 📦 关键词 C4148QBBK 获取到商品代码: 101460701, 数量: 1
+2025-07-22 23:30:45 - INFO - product_checkout:1209 - ⚡ [SINGLE] 单独建单模式：关键词 C4148QBBK 立即下单
+2025-07-22 23:30:46 - INFO - product_checkout:715 - 结算商品: 115128, 支付类型: 2
+2025-07-22 23:30:46 - INFO - product_checkout:723 - name: COACH 奥莱款小号男士皮质单肩斜挎包
+2025-07-22 23:30:46 - DEBUG - product_checkout:756 - settleData: {'rankCode': '68', 'tagCode': '30', 'shippingMethod': '1', 'thirdcode': '', 'payType': '2', 'receiver': '李小峰', 'recvphone': '18529551929', 'provincecode': 19, 'citycode': 202, 'countycode': 1754, 'recvaddr': '化龙镇山门大道700号', 'zip': '', 'idno': '', 'exchangeRate': '1', 'cartCodes': '115128', 'defectNo': '', 'productcode': '101460701', 'counts': 1, 'description': ''}
+2025-07-22 23:30:47 - DEBUG - product_checkout:761 - 📤 提交状态码: 200
+2025-07-22 23:30:47 - DEBUG - product_checkout:766 - 📋 提交结果: {'data': {'childOrderCode': False, 'citycode': 202, 'cityname': '广州市', 'code': 'FX2507223217801', 'countycode': 1754, 'countyname': '番禺区', 'createtime': '2025-07-22 23:30:48', 'currency': 'CNY', 'defectNo': '', 'defectPriceCode': 0, 'description': '', 'disWarehouseCode': 2, 'distributorcode': 10025, 'distributorsettlecode': 1, 'exchangeRate': 1, 'existReturnOrder': False, 'goodsamount': 0, 'idno': '', 'issubunitorder': False, 'orderOriginType': 1, 'paid': 1026, 'payType': '2', 'platformcode': 14, 'price': 0, 'productcode': '101460701', 'provincecode': 19, 'provincename': '广东省', 'rankCode': 68, 'receiver': '李小峰', 'recvaddr': '化龙镇山门大道700号', 'recvphone': '18529551929', 'rmbAmount': 1026.0, 'settlecode': 1, 'shippingMethod': 1, 'statuscode': 5, 'tagCode': 30, 'thirdcode': '', 'thirdprice': 0, 'ywjCode': 0, 'zip': ''}, 'errorMsg': '成功', 'resultCode': 0}
+2025-07-22 23:30:47 - INFO - product_checkout:772 - ✅ 单独下单成功!
+2025-07-22 23:30:47 - INFO - product_checkout:773 - 📦 订单号: FX2507223217801
+2025-07-22 23:30:47 - INFO - product_checkout:774 - 💰 订单金额: ¥1026
+2025-07-22 23:30:47 - INFO - product_checkout:775 - 💳 支付类型: 微信支付
+2025-07-22 23:30:47 - INFO - orders:59 - 📝 新订单已添加到列表: FX2507223217801
+2025-07-22 23:30:47 - INFO - product_checkout:788 - 🚀 直接推送订单号: FX2507223217801
+2025-07-22 23:30:47 - DEBUG - web:256 - 📤 SSE发送订单: FX2507223217801
+2025-07-22 23:30:47 - INFO - web:313 - 📤 订单 FX2507223217801 已推送到队列，队列大小: 1
+2025-07-22 23:30:47 - INFO - product_checkout:1246 - ✅ [PROCESS] 单独建单：关键字 C4148QBBK 自动下单成功
+2025-07-22 23:30:47 - INFO - job_checkout:282 - 📊 第 1 轮检测完成：1/1 个关键词有货并下单
+2025-07-22 23:30:47 - INFO - job_checkout:286 - ⏰ 等待 4 秒后进行下一轮检测...
+2025-07-22 23:30:47 - INFO - orders:16 - 📝 订单 FX2507223217801 已保存到历史记录
+2025-07-22 23:30:50 - INFO - product_checkout:936 - 🔍 检查 1 个订单的付款状态...
+2025-07-22 23:30:50 - INFO - status:72 - 📢 自动下单已关闭：切换为通知模式，只发送库存通知
+2025-07-22 23:30:51 - INFO - job_checkout:274 - 🔄 第 2/5 轮检测开始...
+2025-07-22 23:30:51 - DEBUG - product_checkout:1123 - 📡 [MONITOR] 关键词 C4148QBBK 处于纯监控模式，无轮数限制
+2025-07-22 23:30:51 - INFO - product_checkout:520 - query_product: C4148QBBK
+2025-07-22 23:30:51 - INFO - product_checkout:953 - 📊 当前待付款订单总数: 1
+2025-07-22 23:30:51 - INFO - product_checkout:970 - 📋 发现待付款订单: FX2507223217801
+2025-07-22 23:30:51 - INFO - product_checkout:974 - 📊 服务器端待付款订单: ['FX2507223217801']
+2025-07-22 23:30:51 - INFO - product_checkout:975 - 📊 本地订单列表: ['FX2507223217801']
+2025-07-22 23:30:51 - INFO - product_checkout:983 - 📋 订单 FX2507223217801 仍为待付款状态
+2025-07-22 23:30:51 - INFO - product_checkout:989 - 📋 所有订单仍为待付款状态
+2025-07-22 23:30:51 - INFO - status:44 - 🛑 停止监控线程...
+2025-07-22 23:30:52 - DEBUG - product_checkout:529 - status_code: 200
+2025-07-22 23:30:52 - DEBUG - product_checkout:530 - url: https://fenxiao.clim.cn/shop/products.do?keyword=C4148QBBK&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-22 23:30:52 - INFO - product_checkout:550 - 商品列表: 共1条记录
+2025-07-22 23:30:52 - INFO - product_checkout:574 -   商品1: COACH 奥莱款小号男士皮质单肩斜挎包 (SKU: 10104620-C4148QBBK) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-22 23:30:52 - INFO - product_checkout:582 - 📦 找到 1 个有效商品
+2025-07-22 23:30:52 - INFO - product_checkout:598 - 提取的SKU: 10104620-C4148QBBK
+2025-07-22 23:30:52 - DEBUG - product_checkout:1094 - product: {'keyword': 'C4148QBBK', 'sku': '10104620-C4148QBBK', 'brand_category': 'Coach男士单肩包', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100', 'name': 'COACH 奥莱款小号男士皮质单肩斜挎包', 'distribution_price': '1026', 'market_price': '4950.0', 'listing_time': '2021-04-29 15:45:00'}
+2025-07-22 23:30:52 - INFO - product_checkout:1106 - 🔍 [PROCESS] 模式检查: auto_order_enabled=False, test_mode=False, batch_mode=False
+2025-07-22 23:30:52 - INFO - product_checkout:1260 - 📢 [PROCESS] 关键词 C4148QBBK 进入通知模式（只发送库存通知）
+2025-07-22 23:30:52 - DEBUG - product_checkout:1265 - msg: 库存更新 COACH 奥莱款小号男士皮质单肩斜挎包,
+            <br />金额 1026
+            <br /><img src="https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100" width="200px" height="200px" />
+2025-07-22 23:30:52 - INFO - product_checkout:1266 - 关键字 C4148QBBK 通知发送成功
+2025-07-22 23:30:52 - INFO - product_checkout:1272 - 🛑 关键字 C4148QBBK 监控模式通知完成，停止后续检测。
+2025-07-22 23:30:52 - INFO - job_checkout:282 - 📊 第 2 轮检测完成：1/1 个关键词有货并下单
+2025-07-22 23:30:52 - INFO - job_checkout:286 - ⏰ 等待 4 秒后进行下一轮检测...
+2025-07-22 23:30:56 - INFO - job_checkout:274 - 🔄 第 3/5 轮检测开始...
+2025-07-22 23:30:56 - DEBUG - product_checkout:1123 - 📡 [MONITOR] 关键词 C4148QBBK 处于纯监控模式，无轮数限制
+2025-07-22 23:30:56 - INFO - product_checkout:520 - query_product: C4148QBBK
+2025-07-22 23:30:56 - INFO - product_checkout:936 - 🔍 检查 1 个订单的付款状态...
+2025-07-22 23:30:56 - WARNING - __init__:332 - ⚠️ 监控线程未能在5秒内停止
+2025-07-22 23:30:56 - INFO - status:46 - ✅ 监控线程已停止
+2025-07-22 23:30:57 - DEBUG - product_checkout:529 - status_code: 200
+2025-07-22 23:30:57 - DEBUG - product_checkout:530 - url: https://fenxiao.clim.cn/shop/products.do?keyword=C4148QBBK&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-22 23:30:57 - INFO - product_checkout:550 - 商品列表: 共1条记录
+2025-07-22 23:30:57 - INFO - product_checkout:574 -   商品1: COACH 奥莱款小号男士皮质单肩斜挎包 (SKU: 10104620-C4148QBBK) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-22 23:30:57 - INFO - product_checkout:582 - 📦 找到 1 个有效商品
+2025-07-22 23:30:57 - INFO - product_checkout:598 - 提取的SKU: 10104620-C4148QBBK
+2025-07-22 23:30:57 - DEBUG - product_checkout:1094 - product: {'keyword': 'C4148QBBK', 'sku': '10104620-C4148QBBK', 'brand_category': 'Coach男士单肩包', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100', 'name': 'COACH 奥莱款小号男士皮质单肩斜挎包', 'distribution_price': '1026', 'market_price': '4950.0', 'listing_time': '2021-04-29 15:45:00'}
+2025-07-22 23:30:57 - INFO - product_checkout:1106 - 🔍 [PROCESS] 模式检查: auto_order_enabled=False, test_mode=False, batch_mode=False
+2025-07-22 23:30:57 - INFO - product_checkout:1260 - 📢 [PROCESS] 关键词 C4148QBBK 进入通知模式（只发送库存通知）
+2025-07-22 23:30:57 - DEBUG - product_checkout:1265 - msg: 库存更新 COACH 奥莱款小号男士皮质单肩斜挎包,
+            <br />金额 1026
+            <br /><img src="https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100" width="200px" height="200px" />
+2025-07-22 23:30:57 - INFO - product_checkout:1266 - 关键字 C4148QBBK 通知发送成功
+2025-07-22 23:30:57 - INFO - product_checkout:1272 - 🛑 关键字 C4148QBBK 监控模式通知完成，停止后续检测。
+2025-07-22 23:30:57 - INFO - job_checkout:282 - 📊 第 3 轮检测完成：1/1 个关键词有货并下单
+2025-07-22 23:30:57 - INFO - job_checkout:286 - ⏰ 等待 4 秒后进行下一轮检测...
+2025-07-22 23:30:57 - INFO - product_checkout:953 - 📊 当前待付款订单总数: 1
+2025-07-22 23:30:57 - INFO - product_checkout:970 - 📋 发现待付款订单: FX2507223217801
+2025-07-22 23:30:57 - INFO - product_checkout:974 - 📊 服务器端待付款订单: ['FX2507223217801']
+2025-07-22 23:30:57 - INFO - product_checkout:975 - 📊 本地订单列表: ['FX2507223217801']
+2025-07-22 23:30:57 - INFO - product_checkout:983 - 📋 订单 FX2507223217801 仍为待付款状态
+2025-07-22 23:30:57 - INFO - product_checkout:989 - 📋 所有订单仍为待付款状态
+2025-07-22 23:31:01 - INFO - job_checkout:274 - 🔄 第 4/5 轮检测开始...
+2025-07-22 23:31:01 - DEBUG - product_checkout:1123 - 📡 [MONITOR] 关键词 C4148QBBK 处于纯监控模式，无轮数限制
+2025-07-22 23:31:01 - INFO - product_checkout:520 - query_product: C4148QBBK
+2025-07-22 23:31:02 - DEBUG - product_checkout:529 - status_code: 200
+2025-07-22 23:31:02 - DEBUG - product_checkout:530 - url: https://fenxiao.clim.cn/shop/products.do?keyword=C4148QBBK&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-22 23:31:02 - INFO - product_checkout:550 - 商品列表: 共1条记录
+2025-07-22 23:31:02 - INFO - product_checkout:574 -   商品1: COACH 奥莱款小号男士皮质单肩斜挎包 (SKU: 10104620-C4148QBBK) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-22 23:31:02 - INFO - product_checkout:582 - 📦 找到 1 个有效商品
+2025-07-22 23:31:02 - INFO - product_checkout:598 - 提取的SKU: 10104620-C4148QBBK
+2025-07-22 23:31:02 - DEBUG - product_checkout:1094 - product: {'keyword': 'C4148QBBK', 'sku': '10104620-C4148QBBK', 'brand_category': 'Coach男士单肩包', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100', 'name': 'COACH 奥莱款小号男士皮质单肩斜挎包', 'distribution_price': '1026', 'market_price': '4950.0', 'listing_time': '2021-04-29 15:45:00'}
+2025-07-22 23:31:02 - INFO - product_checkout:1106 - 🔍 [PROCESS] 模式检查: auto_order_enabled=False, test_mode=False, batch_mode=False
+2025-07-22 23:31:02 - INFO - product_checkout:1260 - 📢 [PROCESS] 关键词 C4148QBBK 进入通知模式（只发送库存通知）
+2025-07-22 23:31:02 - DEBUG - product_checkout:1265 - msg: 库存更新 COACH 奥莱款小号男士皮质单肩斜挎包,
+            <br />金额 1026
+            <br /><img src="https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100" width="200px" height="200px" />
+2025-07-22 23:31:02 - INFO - product_checkout:1266 - 关键字 C4148QBBK 通知发送成功
+2025-07-22 23:31:02 - INFO - product_checkout:1272 - 🛑 关键字 C4148QBBK 监控模式通知完成，停止后续检测。
+2025-07-22 23:31:02 - INFO - job_checkout:282 - 📊 第 4 轮检测完成：1/1 个关键词有货并下单
+2025-07-22 23:31:02 - INFO - job_checkout:286 - ⏰ 等待 4 秒后进行下一轮检测...
+2025-07-22 23:31:02 - INFO - product_checkout:936 - 🔍 检查 1 个订单的付款状态...
+2025-07-22 23:31:03 - INFO - product_checkout:953 - 📊 当前待付款订单总数: 1
+2025-07-22 23:31:03 - INFO - product_checkout:970 - 📋 发现待付款订单: FX2507223217801
+2025-07-22 23:31:03 - INFO - product_checkout:974 - 📊 服务器端待付款订单: ['FX2507223217801']
+2025-07-22 23:31:03 - INFO - product_checkout:975 - 📊 本地订单列表: ['FX2507223217801']
+2025-07-22 23:31:03 - INFO - product_checkout:983 - 📋 订单 FX2507223217801 仍为待付款状态
+2025-07-22 23:31:03 - INFO - product_checkout:989 - 📋 所有订单仍为待付款状态
+2025-07-22 23:31:06 - INFO - job_checkout:274 - 🔄 第 5/5 轮检测开始...
+2025-07-22 23:31:06 - DEBUG - product_checkout:1123 - 📡 [MONITOR] 关键词 C4148QBBK 处于纯监控模式，无轮数限制
+2025-07-22 23:31:06 - INFO - product_checkout:520 - query_product: C4148QBBK
+2025-07-22 23:31:07 - DEBUG - product_checkout:529 - status_code: 200
+2025-07-22 23:31:07 - DEBUG - product_checkout:530 - url: https://fenxiao.clim.cn/shop/products.do?keyword=C4148QBBK&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-22 23:31:07 - INFO - product_checkout:550 - 商品列表: 共1条记录
+2025-07-22 23:31:07 - INFO - product_checkout:574 -   商品1: COACH 奥莱款小号男士皮质单肩斜挎包 (SKU: 10104620-C4148QBBK) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-22 23:31:07 - INFO - product_checkout:582 - 📦 找到 1 个有效商品
+2025-07-22 23:31:07 - INFO - product_checkout:598 - 提取的SKU: 10104620-C4148QBBK
+2025-07-22 23:31:07 - DEBUG - product_checkout:1094 - product: {'keyword': 'C4148QBBK', 'sku': '10104620-C4148QBBK', 'brand_category': 'Coach男士单肩包', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100', 'name': 'COACH 奥莱款小号男士皮质单肩斜挎包', 'distribution_price': '1026', 'market_price': '4950.0', 'listing_time': '2021-04-29 15:45:00'}
+2025-07-22 23:31:07 - INFO - product_checkout:1106 - 🔍 [PROCESS] 模式检查: auto_order_enabled=False, test_mode=False, batch_mode=False
+2025-07-22 23:31:07 - INFO - product_checkout:1260 - 📢 [PROCESS] 关键词 C4148QBBK 进入通知模式（只发送库存通知）
+2025-07-22 23:31:07 - DEBUG - product_checkout:1265 - msg: 库存更新 COACH 奥莱款小号男士皮质单肩斜挎包,
+            <br />金额 1026
+            <br /><img src="https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100" width="200px" height="200px" />
+2025-07-22 23:31:07 - INFO - product_checkout:1266 - 关键字 C4148QBBK 通知发送成功
+2025-07-22 23:31:07 - INFO - product_checkout:1272 - 🛑 关键字 C4148QBBK 监控模式通知完成，停止后续检测。
+2025-07-22 23:31:07 - INFO - job_checkout:282 - 📊 第 5 轮检测完成：1/1 个关键词有货并下单
+2025-07-22 23:31:07 - INFO - job_checkout:289 - 🎉 单独建单多轮检测完成
+2025-07-22 23:31:07 - INFO - __init__:281 - 🛑 收到停止信号，线程即将停止
+2025-07-22 23:31:08 - INFO - product_checkout:936 - 🔍 检查 1 个订单的付款状态...
+2025-07-22 23:31:09 - INFO - product_checkout:953 - 📊 当前待付款订单总数: 0
+2025-07-22 23:31:09 - INFO - product_checkout:974 - 📊 服务器端待付款订单: []
+2025-07-22 23:31:09 - INFO - product_checkout:975 - 📊 本地订单列表: ['FX2507223217801']
+2025-07-22 23:31:09 - INFO - product_checkout:981 - ✅ 订单 FX2507223217801 已付款（不在待付款列表中）
+2025-07-22 23:31:09 - INFO - web:324 - 🗑️ 已从订单列表移除: FX2507223217801
+2025-07-22 23:31:09 - DEBUG - web:249 - 📤 SSE发送消息: {'type': 'remove_order', 'order': 'FX2507223217801', 'timestamp': 1753198269.2451284}
+2025-07-22 23:31:09 - INFO - web:333 - 📤 订单移除消息已推送: FX2507223217801
+2025-07-22 23:31:09 - INFO - product_checkout:987 - 🗑️ 已移除 1 个已付款订单
+2025-07-22 23:33:01 - INFO - keywords:28 - Added keyword: L47450600-8
+2025-07-22 23:33:02 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-22 23:33:11 - INFO - main3:26 - 📊 初始监控间隔: 60秒
+2025-07-22 23:33:11 - INFO - web:374 - 🚀 Flask Web服务启动中...
+2025-07-22 23:33:11 - INFO - web:375 - 📡 实时日志推送系统已激活
+2025-07-22 23:33:11 - INFO - web:377 - 🌐 访问地址: http://0.0.0.0:5000
+2025-07-22 23:33:11 - INFO - main3:41 - ⏸️ 监控状态为关闭，不启动监控线程
+2025-07-22 23:33:11 - INFO - web:378 - 🔧 日志捕获系统状态检查...
+2025-07-22 23:33:11 - INFO - job_checkout:367 - 🔍 订单状态检查线程已启动
+2025-07-22 23:33:11 - INFO - main3:47 - 🔍 订单状态检查线程已启动
+2025-07-22 23:33:11 - INFO - web:394 - 🚀 尝试启动Flask服务...
+2025-07-22 23:33:11 - INFO - main3:49 - 🎛️ 监控间隔可在Web界面动态调整: http://localhost:5000
+2025-07-22 23:33:11 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-22 23:33:12 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-22 23:33:13 - INFO - web:384 - ✅ 日志推送测试 - 这是一条测试日志
+2025-07-22 23:33:13 - INFO - web:385 - 🟢 成功：日志系统工作正常
+2025-07-22 23:33:13 - ERROR - web:386 - 🔴 错误：这是一条错误测试日志
+2025-07-22 23:33:13 - WARNING - web:387 - 🟡 警告：这是一条警告测试日志
+2025-07-22 23:33:14 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-22 23:33:21 - INFO - status:68 - 🔗 自动下单需要监控支持，同时启动监控...
+2025-07-22 23:33:21 - INFO - status:40 - 🚀 启动监控线程...
+2025-07-22 23:33:21 - INFO - __init__:236 - 🚀 动态调度器启动，初始间隔: 60秒
+2025-07-22 23:33:21 - INFO - __init__:315 - ✅ 监控线程启动成功
+2025-07-22 23:33:21 - INFO - status:42 - ✅ 监控线程已启动
+2025-07-22 23:33:21 - INFO - status:70 - ⚡ 自动下单已启用：发现库存将自动下单
+2025-07-22 23:33:21 - INFO - product_checkout:996 - query_product_count
+2025-07-22 23:33:22 - DEBUG - product_checkout:1001 - status_code: 200
+2025-07-22 23:33:22 - INFO - product_checkout:1012 - 商品总数: 1443
+2025-07-22 23:33:22 - INFO - status:260 - 📊 刷新统计 - 今日: 29次, 本小时: 28次
+2025-07-22 23:33:22 - INFO - product_checkout:1074 - 📈 商品总数变化: None -> 1443，需要查询商品
+2025-07-22 23:33:22 - DEBUG - job_checkout:334 - RefreshThread handle keywords: ['C4148QBBK', 'L47450600-8']
+2025-07-22 23:33:22 - INFO - job_checkout:265 - ⚡ 单独建单模式：开始多轮检测...
+2025-07-22 23:33:22 - INFO - product_checkout:119 - 🔄 [STATE] 批量状态已重置:
+2025-07-22 23:33:22 - INFO - product_checkout:120 -    清空购物车: 0 → 0
+2025-07-22 23:33:22 - INFO - product_checkout:121 -    清空关键词记录: 0 → 0
+2025-07-22 23:33:22 - INFO - product_checkout:122 -    重置轮次计数: → 0
+2025-07-22 23:33:22 - INFO - product_checkout:204 - 🔄 批量检测轮次已重置
+2025-07-22 23:33:22 - INFO - job_checkout:274 - 🔄 第 1/5 轮检测开始...
+2025-07-22 23:33:22 - INFO - product_checkout:520 - query_product: C4148QBBK
+2025-07-22 23:33:23 - DEBUG - product_checkout:529 - status_code: 200
+2025-07-22 23:33:23 - DEBUG - product_checkout:530 - url: https://fenxiao.clim.cn/shop/products.do?keyword=C4148QBBK&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-22 23:33:23 - INFO - product_checkout:550 - 商品列表: 共1条记录
+2025-07-22 23:33:23 - INFO - product_checkout:574 -   商品1: COACH 奥莱款小号男士皮质单肩斜挎包 (SKU: 10104620-C4148QBBK) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-22 23:33:23 - INFO - product_checkout:582 - 📦 找到 1 个有效商品
+2025-07-22 23:33:23 - INFO - product_checkout:598 - 提取的SKU: 10104620-C4148QBBK
+2025-07-22 23:33:23 - DEBUG - product_checkout:1094 - product: {'keyword': 'C4148QBBK', 'sku': '10104620-C4148QBBK', 'brand_category': 'Coach男士单肩包', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100', 'name': 'COACH 奥莱款小号男士皮质单肩斜挎包', 'distribution_price': '1026', 'market_price': '4950.0', 'listing_time': '2021-04-29 15:45:00'}
+2025-07-22 23:33:23 - INFO - product_checkout:1106 - 🔍 [PROCESS] 模式检查: auto_order_enabled=True, test_mode=False, batch_mode=False
+2025-07-22 23:33:23 - INFO - product_checkout:623 - selectBuyDefect
+2025-07-22 23:33:23 - DEBUG - product_checkout:625 - sku: 10104620-C4148QBBK
+2025-07-22 23:33:24 - DEBUG - product_checkout:627 - status_code: 200
+2025-07-22 23:33:24 - INFO - product_checkout:636 - saveCart
+2025-07-22 23:33:24 - DEBUG - product_checkout:651 - param_save_cart: {'typeCode': '68', 'price': '1026.0', 'productCode': '101460701', 'count': 1}
+2025-07-22 23:33:24 - DEBUG - product_checkout:654 - status_code: 200
+2025-07-22 23:33:24 - DEBUG - product_checkout:655 - content: true
+2025-07-22 23:33:24 - INFO - product_checkout:657 - 加入购物车成功
+2025-07-22 23:33:25 - INFO - product_checkout:1185 - 📦 关键词 C4148QBBK 获取到商品代码: 101460701, 数量: 1
+2025-07-22 23:33:25 - INFO - product_checkout:1209 - ⚡ [SINGLE] 单独建单模式：关键词 C4148QBBK 立即下单
+2025-07-22 23:33:26 - INFO - product_checkout:715 - 结算商品: 115129, 支付类型: 2
+2025-07-22 23:33:26 - INFO - product_checkout:723 - name: COACH 奥莱款小号男士皮质单肩斜挎包
+2025-07-22 23:33:26 - DEBUG - product_checkout:756 - settleData: {'rankCode': '68', 'tagCode': '30', 'shippingMethod': '1', 'thirdcode': '', 'payType': '2', 'receiver': '李小峰', 'recvphone': '18529551929', 'provincecode': 19, 'citycode': 202, 'countycode': 1754, 'recvaddr': '化龙镇山门大道700号', 'zip': '', 'idno': '', 'exchangeRate': '1', 'cartCodes': '115129', 'defectNo': '', 'productcode': '101460701', 'counts': 1, 'description': ''}
+2025-07-22 23:33:27 - DEBUG - product_checkout:761 - 📤 提交状态码: 200
+2025-07-22 23:33:27 - DEBUG - product_checkout:766 - 📋 提交结果: {'data': {'childOrderCode': False, 'citycode': 202, 'cityname': '广州市', 'code': 'FX2507223236880', 'countycode': 1754, 'countyname': '番禺区', 'createtime': '2025-07-22 23:33:28', 'currency': 'CNY', 'defectNo': '', 'defectPriceCode': 0, 'description': '', 'disWarehouseCode': 2, 'distributorcode': 10025, 'distributorsettlecode': 1, 'exchangeRate': 1, 'existReturnOrder': False, 'goodsamount': 0, 'idno': '', 'issubunitorder': False, 'orderOriginType': 1, 'paid': 1026, 'payType': '2', 'platformcode': 14, 'price': 0, 'productcode': '101460701', 'provincecode': 19, 'provincename': '广东省', 'rankCode': 68, 'receiver': '李小峰', 'recvaddr': '化龙镇山门大道700号', 'recvphone': '18529551929', 'rmbAmount': 1026.0, 'settlecode': 1, 'shippingMethod': 1, 'statuscode': 5, 'tagCode': 30, 'thirdcode': '', 'thirdprice': 0, 'ywjCode': 0, 'zip': ''}, 'errorMsg': '成功', 'resultCode': 0}
+2025-07-22 23:33:27 - INFO - product_checkout:772 - ✅ 单独下单成功!
+2025-07-22 23:33:27 - INFO - product_checkout:773 - 📦 订单号: FX2507223236880
+2025-07-22 23:33:27 - INFO - product_checkout:774 - 💰 订单金额: ¥1026
+2025-07-22 23:33:27 - INFO - product_checkout:775 - 💳 支付类型: 微信支付
+2025-07-22 23:33:27 - INFO - orders:59 - 📝 新订单已添加到列表: FX2507223236880
+2025-07-22 23:33:27 - INFO - product_checkout:788 - 🚀 直接推送订单号: FX2507223236880
+2025-07-22 23:33:27 - DEBUG - web:256 - 📤 SSE发送订单: FX2507223236880
+2025-07-22 23:33:27 - INFO - web:313 - 📤 订单 FX2507223236880 已推送到队列，队列大小: 1
+2025-07-22 23:33:27 - INFO - product_checkout:1246 - ✅ [PROCESS] 单独建单：关键字 C4148QBBK 自动下单成功
+2025-07-22 23:33:27 - INFO - product_checkout:520 - query_product: L47450600-8
+2025-07-22 23:33:27 - INFO - orders:16 - 📝 订单 FX2507223236880 已保存到历史记录
+2025-07-22 23:33:28 - DEBUG - product_checkout:529 - status_code: 200
+2025-07-22 23:33:28 - DEBUG - product_checkout:530 - url: https://fenxiao.clim.cn/shop/products.do?keyword=L47450600-8&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-22 23:33:28 - INFO - product_checkout:550 - 商品列表: 共1条记录
+2025-07-22 23:33:28 - INFO - product_checkout:574 -   商品1: SALOMON男士运动鞋L47450600 (SKU: 62300004-L47450600) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/e8c374efe47f43eca2ea4937646525dd.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-22 23:33:28 - INFO - product_checkout:582 - 📦 找到 1 个有效商品
+2025-07-22 23:33:28 - INFO - product_checkout:598 - 提取的SKU: 62300004-L47450600
+2025-07-22 23:33:28 - DEBUG - product_checkout:1094 - product: {'keyword': 'L47450600-8', 'sku': '62300004-L47450600', 'brand_category': 'Salomon男士运动鞋', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/e8c374efe47f43eca2ea4937646525dd.jpg?imageMogr2/thumbnail/100x100', 'name': 'SALOMON男士运动鞋L47450600', 'distribution_price': '1276', 'market_price': '0.0', 'listing_time': '2025-07-17 14:40:58'}
+2025-07-22 23:33:28 - INFO - product_checkout:1106 - 🔍 [PROCESS] 模式检查: auto_order_enabled=True, test_mode=False, batch_mode=False
+2025-07-22 23:33:28 - INFO - product_checkout:623 - selectBuyDefect
+2025-07-22 23:33:28 - DEBUG - product_checkout:625 - sku: 62300004-L47450600
+2025-07-22 23:33:29 - DEBUG - product_checkout:627 - status_code: 200
+2025-07-22 23:33:29 - INFO - product_checkout:636 - saveCart
+2025-07-22 23:33:29 - DEBUG - product_checkout:651 - param_save_cart: {'typeCode': '68', 'price': '1276.0', 'productCode': '6230000410', 'count': 2}
+2025-07-22 23:33:30 - DEBUG - product_checkout:654 - status_code: 200
+2025-07-22 23:33:30 - DEBUG - product_checkout:655 - content: true
+2025-07-22 23:33:30 - INFO - product_checkout:657 - 加入购物车成功
+2025-07-22 23:33:30 - INFO - product_checkout:1185 - 📦 关键词 L47450600-8 获取到商品代码: 6230000410, 数量: 2
+2025-07-22 23:33:30 - INFO - product_checkout:1209 - ⚡ [SINGLE] 单独建单模式：关键词 L47450600-8 立即下单
+2025-07-22 23:33:31 - INFO - product_checkout:715 - 结算商品: 115130, 支付类型: 2
+2025-07-22 23:33:31 - INFO - product_checkout:936 - 🔍 检查 1 个订单的付款状态...
+2025-07-22 23:33:32 - INFO - product_checkout:723 - name: SALOMON男士运动鞋L47450600
+2025-07-22 23:33:32 - DEBUG - product_checkout:756 - settleData: {'rankCode': '68', 'tagCode': '30', 'shippingMethod': '1', 'thirdcode': '', 'payType': '2', 'receiver': '李小峰', 'recvphone': '18529551929', 'provincecode': 19, 'citycode': 202, 'countycode': 1754, 'recvaddr': '化龙镇山门大道700号', 'zip': '', 'idno': '', 'exchangeRate': '1', 'cartCodes': '115130', 'defectNo': '', 'productcode': '6230000410', 'counts': 2, 'description': ''}
+2025-07-22 23:33:32 - INFO - product_checkout:953 - 📊 当前待付款订单总数: 1
+2025-07-22 23:33:32 - INFO - product_checkout:970 - 📋 发现待付款订单: FX2507223236880
+2025-07-22 23:33:32 - INFO - product_checkout:974 - 📊 服务器端待付款订单: ['FX2507223236880']
+2025-07-22 23:33:32 - INFO - product_checkout:975 - 📊 本地订单列表: ['FX2507223236880']
+2025-07-22 23:33:32 - INFO - product_checkout:983 - 📋 订单 FX2507223236880 仍为待付款状态
+2025-07-22 23:33:32 - INFO - product_checkout:989 - 📋 所有订单仍为待付款状态
+2025-07-22 23:33:33 - DEBUG - product_checkout:761 - 📤 提交状态码: 200
+2025-07-22 23:33:33 - DEBUG - product_checkout:766 - 📋 提交结果: {'data': {'childOrderCode': False, 'citycode': 202, 'cityname': '广州市', 'code': 'FX2507223276881', 'countycode': 1754, 'countyname': '番禺区', 'createtime': '2025-07-22 23:33:33', 'currency': 'CNY', 'defectNo': '', 'defectPriceCode': 0, 'description': '', 'disWarehouseCode': 2, 'distributorcode': 10025, 'distributorsettlecode': 1, 'exchangeRate': 1, 'existReturnOrder': False, 'goodsamount': 0, 'idno': '', 'issubunitorder': False, 'orderOriginType': 1, 'paid': 2552, 'payType': '2', 'platformcode': 14, 'price': 0, 'productcode': '6230000410', 'provincecode': 19, 'provincename': '广东省', 'rankCode': 68, 'receiver': '李小峰', 'recvaddr': '化龙镇山门大道700号', 'recvphone': '18529551929', 'rmbAmount': 2552.0, 'settlecode': 1, 'shippingMethod': 1, 'statuscode': 5, 'tagCode': 30, 'thirdcode': '', 'thirdprice': 0, 'ywjCode': 0, 'zip': ''}, 'errorMsg': '成功', 'resultCode': 0}
+2025-07-22 23:33:33 - INFO - product_checkout:772 - ✅ 单独下单成功!
+2025-07-22 23:33:33 - INFO - product_checkout:773 - 📦 订单号: FX2507223276881
+2025-07-22 23:33:33 - INFO - product_checkout:774 - 💰 订单金额: ¥2552
+2025-07-22 23:33:33 - INFO - product_checkout:775 - 💳 支付类型: 微信支付
+2025-07-22 23:33:33 - INFO - orders:59 - 📝 新订单已添加到列表: FX2507223276881
+2025-07-22 23:33:33 - INFO - product_checkout:788 - 🚀 直接推送订单号: FX2507223276881
+2025-07-22 23:33:33 - DEBUG - web:256 - 📤 SSE发送订单: FX2507223276881
+2025-07-22 23:33:33 - INFO - web:313 - 📤 订单 FX2507223276881 已推送到队列，队列大小: 1
+2025-07-22 23:33:33 - INFO - product_checkout:1246 - ✅ [PROCESS] 单独建单：关键字 L47450600-8 自动下单成功
+2025-07-22 23:33:33 - INFO - job_checkout:282 - 📊 第 1 轮检测完成：2/2 个关键词有货并下单
+2025-07-22 23:33:33 - INFO - job_checkout:286 - ⏰ 等待 4 秒后进行下一轮检测...
+2025-07-22 23:33:33 - INFO - orders:16 - 📝 订单 FX2507223276881 已保存到历史记录
+2025-07-22 23:33:37 - INFO - job_checkout:274 - 🔄 第 2/5 轮检测开始...
+2025-07-22 23:33:37 - INFO - product_checkout:520 - query_product: C4148QBBK
+2025-07-22 23:33:37 - INFO - product_checkout:936 - 🔍 检查 2 个订单的付款状态...
+2025-07-22 23:33:37 - DEBUG - product_checkout:529 - status_code: 200
+2025-07-22 23:33:37 - DEBUG - product_checkout:530 - url: https://fenxiao.clim.cn/shop/products.do?keyword=C4148QBBK&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-22 23:33:37 - INFO - product_checkout:550 - 商品列表: 共1条记录
+2025-07-22 23:33:37 - INFO - product_checkout:574 -   商品1: COACH 奥莱款小号男士皮质单肩斜挎包 (SKU: 10104620-C4148QBBK) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-22 23:33:37 - INFO - product_checkout:582 - 📦 找到 1 个有效商品
+2025-07-22 23:33:37 - INFO - product_checkout:598 - 提取的SKU: 10104620-C4148QBBK
+2025-07-22 23:33:37 - DEBUG - product_checkout:1094 - product: {'keyword': 'C4148QBBK', 'sku': '10104620-C4148QBBK', 'brand_category': 'Coach男士单肩包', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100', 'name': 'COACH 奥莱款小号男士皮质单肩斜挎包', 'distribution_price': '1026', 'market_price': '4950.0', 'listing_time': '2021-04-29 15:45:00'}
+2025-07-22 23:33:37 - INFO - product_checkout:1106 - 🔍 [PROCESS] 模式检查: auto_order_enabled=True, test_mode=False, batch_mode=False
+2025-07-22 23:33:37 - INFO - product_checkout:623 - selectBuyDefect
+2025-07-22 23:33:37 - DEBUG - product_checkout:625 - sku: 10104620-C4148QBBK
+2025-07-22 23:33:38 - INFO - product_checkout:953 - 📊 当前待付款订单总数: 2
+2025-07-22 23:33:38 - INFO - product_checkout:970 - 📋 发现待付款订单: FX2507223276881
+2025-07-22 23:33:38 - INFO - product_checkout:970 - 📋 发现待付款订单: FX2507223236880
+2025-07-22 23:33:38 - INFO - product_checkout:974 - 📊 服务器端待付款订单: ['FX2507223276881', 'FX2507223236880']
+2025-07-22 23:33:38 - INFO - product_checkout:975 - 📊 本地订单列表: ['FX2507223236880', 'FX2507223276881']
+2025-07-22 23:33:38 - INFO - product_checkout:983 - 📋 订单 FX2507223236880 仍为待付款状态
+2025-07-22 23:33:38 - INFO - product_checkout:983 - 📋 订单 FX2507223276881 仍为待付款状态
+2025-07-22 23:33:38 - INFO - product_checkout:989 - 📋 所有订单仍为待付款状态
+2025-07-22 23:33:39 - DEBUG - product_checkout:627 - status_code: 200
+2025-07-22 23:33:39 - INFO - product_checkout:636 - saveCart
+2025-07-22 23:33:39 - DEBUG - product_checkout:651 - param_save_cart: {'typeCode': '68', 'price': '1026.0', 'productCode': '101460701', 'count': 1}
+2025-07-22 23:33:39 - DEBUG - product_checkout:654 - status_code: 200
+2025-07-22 23:33:39 - DEBUG - product_checkout:655 - content: true
+2025-07-22 23:33:39 - INFO - product_checkout:657 - 加入购物车成功
+2025-07-22 23:33:40 - INFO - product_checkout:1185 - 📦 关键词 C4148QBBK 获取到商品代码: 101460701, 数量: 1
+2025-07-22 23:33:40 - INFO - product_checkout:1209 - ⚡ [SINGLE] 单独建单模式：关键词 C4148QBBK 立即下单
+2025-07-22 23:33:41 - INFO - product_checkout:715 - 结算商品: 115131, 支付类型: 2
+2025-07-22 23:33:41 - INFO - product_checkout:723 - name: COACH 奥莱款小号男士皮质单肩斜挎包
+2025-07-22 23:33:41 - DEBUG - product_checkout:756 - settleData: {'rankCode': '68', 'tagCode': '30', 'shippingMethod': '1', 'thirdcode': '', 'payType': '2', 'receiver': '李小峰', 'recvphone': '18529551929', 'provincecode': 19, 'citycode': 202, 'countycode': 1754, 'recvaddr': '化龙镇山门大道700号', 'zip': '', 'idno': '', 'exchangeRate': '1', 'cartCodes': '115131', 'defectNo': '', 'productcode': '101460701', 'counts': 1, 'description': ''}
+2025-07-22 23:33:42 - DEBUG - product_checkout:761 - 📤 提交状态码: 200
+2025-07-22 23:33:42 - DEBUG - product_checkout:766 - 📋 提交结果: {'data': {'childOrderCode': False, 'citycode': 202, 'cityname': '广州市', 'code': 'FX2507223212882', 'countycode': 1754, 'countyname': '番禺区', 'createtime': '2025-07-22 23:33:43', 'currency': 'CNY', 'defectNo': '', 'defectPriceCode': 0, 'description': '', 'disWarehouseCode': 2, 'distributorcode': 10025, 'distributorsettlecode': 1, 'exchangeRate': 1, 'existReturnOrder': False, 'goodsamount': 0, 'idno': '', 'issubunitorder': False, 'orderOriginType': 1, 'paid': 1026, 'payType': '2', 'platformcode': 14, 'price': 0, 'productcode': '101460701', 'provincecode': 19, 'provincename': '广东省', 'rankCode': 68, 'receiver': '李小峰', 'recvaddr': '化龙镇山门大道700号', 'recvphone': '18529551929', 'rmbAmount': 1026.0, 'settlecode': 1, 'shippingMethod': 1, 'statuscode': 5, 'tagCode': 30, 'thirdcode': '', 'thirdprice': 0, 'ywjCode': 0, 'zip': ''}, 'errorMsg': '成功', 'resultCode': 0}
+2025-07-22 23:33:42 - INFO - product_checkout:772 - ✅ 单独下单成功!
+2025-07-22 23:33:42 - INFO - product_checkout:773 - 📦 订单号: FX2507223212882
+2025-07-22 23:33:42 - INFO - product_checkout:774 - 💰 订单金额: ¥1026
+2025-07-22 23:33:42 - INFO - product_checkout:775 - 💳 支付类型: 微信支付
+2025-07-22 23:33:42 - INFO - orders:59 - 📝 新订单已添加到列表: FX2507223212882
+2025-07-22 23:33:42 - INFO - product_checkout:788 - 🚀 直接推送订单号: FX2507223212882
+2025-07-22 23:33:42 - DEBUG - web:256 - 📤 SSE发送订单: FX2507223212882
+2025-07-22 23:33:42 - INFO - web:313 - 📤 订单 FX2507223212882 已推送到队列，队列大小: 1
+2025-07-22 23:33:42 - INFO - product_checkout:1246 - ✅ [PROCESS] 单独建单：关键字 C4148QBBK 自动下单成功
+2025-07-22 23:33:42 - INFO - product_checkout:520 - query_product: L47450600-8
+2025-07-22 23:33:42 - INFO - orders:16 - 📝 订单 FX2507223212882 已保存到历史记录
+2025-07-22 23:33:43 - INFO - product_checkout:936 - 🔍 检查 3 个订单的付款状态...
+2025-07-22 23:33:43 - DEBUG - product_checkout:529 - status_code: 200
+2025-07-22 23:33:43 - DEBUG - product_checkout:530 - url: https://fenxiao.clim.cn/shop/products.do?keyword=L47450600-8&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-22 23:33:43 - INFO - product_checkout:550 - 商品列表: 共1条记录
+2025-07-22 23:33:43 - INFO - product_checkout:574 -   商品1: SALOMON男士运动鞋L47450600 (SKU: 62300004-L47450600) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/e8c374efe47f43eca2ea4937646525dd.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-22 23:33:43 - INFO - product_checkout:582 - 📦 找到 1 个有效商品
+2025-07-22 23:33:43 - INFO - product_checkout:598 - 提取的SKU: 62300004-L47450600
+2025-07-22 23:33:43 - DEBUG - product_checkout:1094 - product: {'keyword': 'L47450600-8', 'sku': '62300004-L47450600', 'brand_category': 'Salomon男士运动鞋', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/e8c374efe47f43eca2ea4937646525dd.jpg?imageMogr2/thumbnail/100x100', 'name': 'SALOMON男士运动鞋L47450600', 'distribution_price': '1276', 'market_price': '0.0', 'listing_time': '2025-07-17 14:40:58'}
+2025-07-22 23:33:43 - INFO - product_checkout:1106 - 🔍 [PROCESS] 模式检查: auto_order_enabled=True, test_mode=False, batch_mode=False
+2025-07-22 23:33:43 - INFO - product_checkout:623 - selectBuyDefect
+2025-07-22 23:33:43 - DEBUG - product_checkout:625 - sku: 62300004-L47450600
+2025-07-22 23:33:43 - INFO - product_checkout:953 - 📊 当前待付款订单总数: 3
+2025-07-22 23:33:43 - INFO - product_checkout:970 - 📋 发现待付款订单: FX2507223212882
+2025-07-22 23:33:43 - INFO - product_checkout:970 - 📋 发现待付款订单: FX2507223276881
+2025-07-22 23:33:43 - INFO - product_checkout:970 - 📋 发现待付款订单: FX2507223236880
+2025-07-22 23:33:43 - INFO - product_checkout:974 - 📊 服务器端待付款订单: ['FX2507223276881', 'FX2507223212882', 'FX2507223236880']
+2025-07-22 23:33:43 - INFO - product_checkout:975 - 📊 本地订单列表: ['FX2507223236880', 'FX2507223276881', 'FX2507223212882']
+2025-07-22 23:33:43 - INFO - product_checkout:983 - 📋 订单 FX2507223236880 仍为待付款状态
+2025-07-22 23:33:43 - INFO - product_checkout:983 - 📋 订单 FX2507223276881 仍为待付款状态
+2025-07-22 23:33:43 - INFO - product_checkout:983 - 📋 订单 FX2507223212882 仍为待付款状态
+2025-07-22 23:33:43 - INFO - product_checkout:989 - 📋 所有订单仍为待付款状态
+2025-07-22 23:33:44 - DEBUG - product_checkout:627 - status_code: 200
+2025-07-22 23:33:44 - INFO - product_checkout:636 - saveCart
+2025-07-22 23:33:44 - DEBUG - product_checkout:651 - param_save_cart: {'typeCode': '68', 'price': '1276.0', 'productCode': '6230000410', 'count': 2}
+2025-07-22 23:33:44 - DEBUG - product_checkout:654 - status_code: 200
+2025-07-22 23:33:44 - DEBUG - product_checkout:655 - content: true
+2025-07-22 23:33:44 - INFO - product_checkout:657 - 加入购物车成功
+2025-07-22 23:33:45 - INFO - product_checkout:1185 - 📦 关键词 L47450600-8 获取到商品代码: 6230000410, 数量: 2
+2025-07-22 23:33:45 - INFO - product_checkout:1209 - ⚡ [SINGLE] 单独建单模式：关键词 L47450600-8 立即下单
+2025-07-22 23:33:46 - INFO - status:44 - 🛑 停止监控线程...
+2025-07-22 23:33:46 - INFO - product_checkout:715 - 结算商品: 115132, 支付类型: 2
+2025-07-22 23:33:46 - INFO - status:72 - 📢 自动下单已关闭：切换为通知模式，只发送库存通知
+2025-07-22 23:33:46 - INFO - product_checkout:723 - name: SALOMON男士运动鞋L47450600
+2025-07-22 23:33:46 - DEBUG - product_checkout:756 - settleData: {'rankCode': '68', 'tagCode': '30', 'shippingMethod': '1', 'thirdcode': '', 'payType': '2', 'receiver': '李小峰', 'recvphone': '18529551929', 'provincecode': 19, 'citycode': 202, 'countycode': 1754, 'recvaddr': '化龙镇山门大道700号', 'zip': '', 'idno': '', 'exchangeRate': '1', 'cartCodes': '115132', 'defectNo': '', 'productcode': '6230000410', 'counts': 2, 'description': ''}
+2025-07-22 23:33:47 - DEBUG - product_checkout:761 - 📤 提交状态码: 200
+2025-07-22 23:33:47 - DEBUG - product_checkout:766 - 📋 提交结果: {'data': {'childOrderCode': False, 'citycode': 202, 'cityname': '广州市', 'code': 'FX2507223261883', 'countycode': 1754, 'countyname': '番禺区', 'createtime': '2025-07-22 23:33:48', 'currency': 'CNY', 'defectNo': '', 'defectPriceCode': 0, 'description': '', 'disWarehouseCode': 2, 'distributorcode': 10025, 'distributorsettlecode': 1, 'exchangeRate': 1, 'existReturnOrder': False, 'goodsamount': 0, 'idno': '', 'issubunitorder': False, 'orderOriginType': 1, 'paid': 2552, 'payType': '2', 'platformcode': 14, 'price': 0, 'productcode': '6230000410', 'provincecode': 19, 'provincename': '广东省', 'rankCode': 68, 'receiver': '李小峰', 'recvaddr': '化龙镇山门大道700号', 'recvphone': '18529551929', 'rmbAmount': 2552.0, 'settlecode': 1, 'shippingMethod': 1, 'statuscode': 5, 'tagCode': 30, 'thirdcode': '', 'thirdprice': 0, 'ywjCode': 0, 'zip': ''}, 'errorMsg': '成功', 'resultCode': 0}
+2025-07-22 23:33:47 - INFO - product_checkout:772 - ✅ 单独下单成功!
+2025-07-22 23:33:47 - INFO - product_checkout:773 - 📦 订单号: FX2507223261883
+2025-07-22 23:33:47 - INFO - product_checkout:774 - 💰 订单金额: ¥2552
+2025-07-22 23:33:47 - INFO - product_checkout:775 - 💳 支付类型: 微信支付
+2025-07-22 23:33:47 - INFO - orders:59 - 📝 新订单已添加到列表: FX2507223261883
+2025-07-22 23:33:47 - INFO - product_checkout:788 - 🚀 直接推送订单号: FX2507223261883
+2025-07-22 23:33:47 - DEBUG - web:256 - 📤 SSE发送订单: FX2507223261883
+2025-07-22 23:33:47 - INFO - web:313 - 📤 订单 FX2507223261883 已推送到队列，队列大小: 1
+2025-07-22 23:33:47 - INFO - product_checkout:1246 - ✅ [PROCESS] 单独建单：关键字 L47450600-8 自动下单成功
+2025-07-22 23:33:47 - INFO - job_checkout:282 - 📊 第 2 轮检测完成：2/2 个关键词有货并下单
+2025-07-22 23:33:47 - INFO - job_checkout:286 - ⏰ 等待 4 秒后进行下一轮检测...
+2025-07-22 23:33:47 - INFO - orders:16 - 📝 订单 FX2507223261883 已保存到历史记录
+2025-07-22 23:33:48 - INFO - product_checkout:936 - 🔍 检查 4 个订单的付款状态...
+2025-07-22 23:33:49 - INFO - product_checkout:953 - 📊 当前待付款订单总数: 4
+2025-07-22 23:33:49 - INFO - product_checkout:970 - 📋 发现待付款订单: FX2507223261883
+2025-07-22 23:33:49 - INFO - product_checkout:970 - 📋 发现待付款订单: FX2507223212882
+2025-07-22 23:33:49 - INFO - product_checkout:970 - 📋 发现待付款订单: FX2507223276881
+2025-07-22 23:33:49 - INFO - product_checkout:970 - 📋 发现待付款订单: FX2507223236880
+2025-07-22 23:33:49 - INFO - product_checkout:974 - 📊 服务器端待付款订单: ['FX2507223276881', 'FX2507223212882', 'FX2507223261883', 'FX2507223236880']
+2025-07-22 23:33:49 - INFO - product_checkout:975 - 📊 本地订单列表: ['FX2507223236880', 'FX2507223276881', 'FX2507223212882', 'FX2507223261883']
+2025-07-22 23:33:49 - INFO - product_checkout:983 - 📋 订单 FX2507223236880 仍为待付款状态
+2025-07-22 23:33:49 - INFO - product_checkout:983 - 📋 订单 FX2507223276881 仍为待付款状态
+2025-07-22 23:33:49 - INFO - product_checkout:983 - 📋 订单 FX2507223212882 仍为待付款状态
+2025-07-22 23:33:49 - INFO - product_checkout:983 - 📋 订单 FX2507223261883 仍为待付款状态
+2025-07-22 23:33:49 - INFO - product_checkout:989 - 📋 所有订单仍为待付款状态
+2025-07-22 23:33:51 - WARNING - __init__:332 - ⚠️ 监控线程未能在5秒内停止
+2025-07-22 23:33:51 - INFO - status:46 - ✅ 监控线程已停止
+2025-07-22 23:33:51 - INFO - job_checkout:274 - 🔄 第 3/5 轮检测开始...
+2025-07-22 23:33:51 - DEBUG - product_checkout:1123 - 📡 [MONITOR] 关键词 C4148QBBK 处于纯监控模式，无轮数限制
+2025-07-22 23:33:51 - INFO - product_checkout:520 - query_product: C4148QBBK
+2025-07-22 23:33:52 - DEBUG - product_checkout:529 - status_code: 200
+2025-07-22 23:33:52 - DEBUG - product_checkout:530 - url: https://fenxiao.clim.cn/shop/products.do?keyword=C4148QBBK&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-22 23:33:52 - INFO - product_checkout:550 - 商品列表: 共1条记录
+2025-07-22 23:33:52 - INFO - product_checkout:574 -   商品1: COACH 奥莱款小号男士皮质单肩斜挎包 (SKU: 10104620-C4148QBBK) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-22 23:33:52 - INFO - product_checkout:582 - 📦 找到 1 个有效商品
+2025-07-22 23:33:52 - INFO - product_checkout:598 - 提取的SKU: 10104620-C4148QBBK
+2025-07-22 23:33:52 - DEBUG - product_checkout:1094 - product: {'keyword': 'C4148QBBK', 'sku': '10104620-C4148QBBK', 'brand_category': 'Coach男士单肩包', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100', 'name': 'COACH 奥莱款小号男士皮质单肩斜挎包', 'distribution_price': '1026', 'market_price': '4950.0', 'listing_time': '2021-04-29 15:45:00'}
+2025-07-22 23:33:52 - INFO - product_checkout:1106 - 🔍 [PROCESS] 模式检查: auto_order_enabled=False, test_mode=False, batch_mode=False
+2025-07-22 23:33:52 - INFO - product_checkout:1260 - 📢 [PROCESS] 关键词 C4148QBBK 进入通知模式（只发送库存通知）
+2025-07-22 23:33:52 - DEBUG - product_checkout:1265 - msg: 库存更新 COACH 奥莱款小号男士皮质单肩斜挎包,
+            <br />金额 1026
+            <br /><img src="https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100" width="200px" height="200px" />
+2025-07-22 23:33:52 - INFO - product_checkout:1266 - 关键字 C4148QBBK 通知发送成功
+2025-07-22 23:33:52 - INFO - product_checkout:1272 - 🛑 关键字 C4148QBBK 监控模式通知完成，停止后续检测。
+2025-07-22 23:33:52 - DEBUG - product_checkout:1123 - 📡 [MONITOR] 关键词 L47450600-8 处于纯监控模式，无轮数限制
+2025-07-22 23:33:52 - INFO - product_checkout:520 - query_product: L47450600-8
+2025-07-22 23:33:53 - DEBUG - product_checkout:529 - status_code: 200
+2025-07-22 23:33:53 - DEBUG - product_checkout:530 - url: https://fenxiao.clim.cn/shop/products.do?keyword=L47450600-8&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-22 23:33:53 - INFO - product_checkout:550 - 商品列表: 共1条记录
+2025-07-22 23:33:53 - INFO - product_checkout:574 -   商品1: SALOMON男士运动鞋L47450600 (SKU: 62300004-L47450600) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/e8c374efe47f43eca2ea4937646525dd.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-22 23:33:53 - INFO - product_checkout:582 - 📦 找到 1 个有效商品
+2025-07-22 23:33:53 - INFO - product_checkout:598 - 提取的SKU: 62300004-L47450600
+2025-07-22 23:33:53 - DEBUG - product_checkout:1094 - product: {'keyword': 'L47450600-8', 'sku': '62300004-L47450600', 'brand_category': 'Salomon男士运动鞋', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/e8c374efe47f43eca2ea4937646525dd.jpg?imageMogr2/thumbnail/100x100', 'name': 'SALOMON男士运动鞋L47450600', 'distribution_price': '1276', 'market_price': '0.0', 'listing_time': '2025-07-17 14:40:58'}
+2025-07-22 23:33:53 - INFO - product_checkout:1106 - 🔍 [PROCESS] 模式检查: auto_order_enabled=False, test_mode=False, batch_mode=False
+2025-07-22 23:33:53 - INFO - product_checkout:1260 - 📢 [PROCESS] 关键词 L47450600-8 进入通知模式（只发送库存通知）
+2025-07-22 23:33:53 - DEBUG - product_checkout:1265 - msg: 库存更新 SALOMON男士运动鞋L47450600,
+            <br />金额 1276
+            <br /><img src="https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/e8c374efe47f43eca2ea4937646525dd.jpg?imageMogr2/thumbnail/100x100" width="200px" height="200px" />
+2025-07-22 23:33:53 - INFO - product_checkout:1266 - 关键字 L47450600-8 通知发送成功
+2025-07-22 23:33:53 - INFO - product_checkout:1272 - 🛑 关键字 L47450600-8 监控模式通知完成，停止后续检测。
+2025-07-22 23:33:53 - INFO - job_checkout:282 - 📊 第 3 轮检测完成：2/2 个关键词有货并下单
+2025-07-22 23:33:53 - INFO - job_checkout:286 - ⏰ 等待 4 秒后进行下一轮检测...
+2025-07-22 23:33:54 - INFO - product_checkout:936 - 🔍 检查 4 个订单的付款状态...
+2025-07-22 23:33:55 - INFO - product_checkout:953 - 📊 当前待付款订单总数: 4
+2025-07-22 23:33:55 - INFO - product_checkout:970 - 📋 发现待付款订单: FX2507223261883
+2025-07-22 23:33:55 - INFO - product_checkout:970 - 📋 发现待付款订单: FX2507223212882
+2025-07-22 23:33:55 - INFO - product_checkout:970 - 📋 发现待付款订单: FX2507223276881
+2025-07-22 23:33:55 - INFO - product_checkout:970 - 📋 发现待付款订单: FX2507223236880
+2025-07-22 23:33:55 - INFO - product_checkout:974 - 📊 服务器端待付款订单: ['FX2507223276881', 'FX2507223212882', 'FX2507223261883', 'FX2507223236880']
+2025-07-22 23:33:55 - INFO - product_checkout:975 - 📊 本地订单列表: ['FX2507223236880', 'FX2507223276881', 'FX2507223212882', 'FX2507223261883']
+2025-07-22 23:33:55 - INFO - product_checkout:983 - 📋 订单 FX2507223236880 仍为待付款状态
+2025-07-22 23:33:55 - INFO - product_checkout:983 - 📋 订单 FX2507223276881 仍为待付款状态
+2025-07-22 23:33:55 - INFO - product_checkout:983 - 📋 订单 FX2507223212882 仍为待付款状态
+2025-07-22 23:33:55 - INFO - product_checkout:983 - 📋 订单 FX2507223261883 仍为待付款状态
+2025-07-22 23:33:55 - INFO - product_checkout:989 - 📋 所有订单仍为待付款状态
+2025-07-22 23:33:57 - INFO - job_checkout:274 - 🔄 第 4/5 轮检测开始...
+2025-07-22 23:33:57 - DEBUG - product_checkout:1123 - 📡 [MONITOR] 关键词 C4148QBBK 处于纯监控模式，无轮数限制
+2025-07-22 23:33:57 - INFO - product_checkout:520 - query_product: C4148QBBK
+2025-07-22 23:33:57 - DEBUG - product_checkout:529 - status_code: 200
+2025-07-22 23:33:57 - DEBUG - product_checkout:530 - url: https://fenxiao.clim.cn/shop/products.do?keyword=C4148QBBK&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-22 23:33:57 - INFO - product_checkout:550 - 商品列表: 共1条记录
+2025-07-22 23:33:57 - INFO - product_checkout:574 -   商品1: COACH 奥莱款小号男士皮质单肩斜挎包 (SKU: 10104620-C4148QBBK) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-22 23:33:57 - INFO - product_checkout:582 - 📦 找到 1 个有效商品
+2025-07-22 23:33:57 - INFO - product_checkout:598 - 提取的SKU: 10104620-C4148QBBK
+2025-07-22 23:33:57 - DEBUG - product_checkout:1094 - product: {'keyword': 'C4148QBBK', 'sku': '10104620-C4148QBBK', 'brand_category': 'Coach男士单肩包', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100', 'name': 'COACH 奥莱款小号男士皮质单肩斜挎包', 'distribution_price': '1026', 'market_price': '4950.0', 'listing_time': '2021-04-29 15:45:00'}
+2025-07-22 23:33:57 - INFO - product_checkout:1106 - 🔍 [PROCESS] 模式检查: auto_order_enabled=False, test_mode=False, batch_mode=False
+2025-07-22 23:33:57 - INFO - product_checkout:1260 - 📢 [PROCESS] 关键词 C4148QBBK 进入通知模式（只发送库存通知）
+2025-07-22 23:33:57 - DEBUG - product_checkout:1265 - msg: 库存更新 COACH 奥莱款小号男士皮质单肩斜挎包,
+            <br />金额 1026
+            <br /><img src="https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100" width="200px" height="200px" />
+2025-07-22 23:33:57 - INFO - product_checkout:1266 - 关键字 C4148QBBK 通知发送成功
+2025-07-22 23:33:57 - INFO - product_checkout:1272 - 🛑 关键字 C4148QBBK 监控模式通知完成，停止后续检测。
+2025-07-22 23:33:57 - DEBUG - product_checkout:1123 - 📡 [MONITOR] 关键词 L47450600-8 处于纯监控模式，无轮数限制
+2025-07-22 23:33:57 - INFO - product_checkout:520 - query_product: L47450600-8
+2025-07-22 23:33:59 - DEBUG - product_checkout:529 - status_code: 200
+2025-07-22 23:33:59 - DEBUG - product_checkout:530 - url: https://fenxiao.clim.cn/shop/products.do?keyword=L47450600-8&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-22 23:33:59 - INFO - product_checkout:550 - 商品列表: 共1条记录
+2025-07-22 23:33:59 - INFO - product_checkout:574 -   商品1: SALOMON男士运动鞋L47450600 (SKU: 62300004-L47450600) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/e8c374efe47f43eca2ea4937646525dd.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-22 23:33:59 - INFO - product_checkout:582 - 📦 找到 1 个有效商品
+2025-07-22 23:33:59 - INFO - product_checkout:598 - 提取的SKU: 62300004-L47450600
+2025-07-22 23:33:59 - DEBUG - product_checkout:1094 - product: {'keyword': 'L47450600-8', 'sku': '62300004-L47450600', 'brand_category': 'Salomon男士运动鞋', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/e8c374efe47f43eca2ea4937646525dd.jpg?imageMogr2/thumbnail/100x100', 'name': 'SALOMON男士运动鞋L47450600', 'distribution_price': '1276', 'market_price': '0.0', 'listing_time': '2025-07-17 14:40:58'}
+2025-07-22 23:33:59 - INFO - product_checkout:1106 - 🔍 [PROCESS] 模式检查: auto_order_enabled=False, test_mode=False, batch_mode=False
+2025-07-22 23:33:59 - INFO - product_checkout:1260 - 📢 [PROCESS] 关键词 L47450600-8 进入通知模式（只发送库存通知）
+2025-07-22 23:33:59 - DEBUG - product_checkout:1265 - msg: 库存更新 SALOMON男士运动鞋L47450600,
+            <br />金额 1276
+            <br /><img src="https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/e8c374efe47f43eca2ea4937646525dd.jpg?imageMogr2/thumbnail/100x100" width="200px" height="200px" />
+2025-07-22 23:33:59 - INFO - product_checkout:1266 - 关键字 L47450600-8 通知发送成功
+2025-07-22 23:33:59 - INFO - product_checkout:1272 - 🛑 关键字 L47450600-8 监控模式通知完成，停止后续检测。
+2025-07-22 23:33:59 - INFO - job_checkout:282 - 📊 第 4 轮检测完成：2/2 个关键词有货并下单
+2025-07-22 23:33:59 - INFO - job_checkout:286 - ⏰ 等待 4 秒后进行下一轮检测...
+2025-07-22 23:34:00 - INFO - product_checkout:936 - 🔍 检查 4 个订单的付款状态...
+2025-07-22 23:34:01 - INFO - product_checkout:953 - 📊 当前待付款订单总数: 4
+2025-07-22 23:34:01 - INFO - product_checkout:970 - 📋 发现待付款订单: FX2507223261883
+2025-07-22 23:34:01 - INFO - product_checkout:970 - 📋 发现待付款订单: FX2507223212882
+2025-07-22 23:34:01 - INFO - product_checkout:970 - 📋 发现待付款订单: FX2507223276881
+2025-07-22 23:34:01 - INFO - product_checkout:970 - 📋 发现待付款订单: FX2507223236880
+2025-07-22 23:34:01 - INFO - product_checkout:974 - 📊 服务器端待付款订单: ['FX2507223276881', 'FX2507223212882', 'FX2507223261883', 'FX2507223236880']
+2025-07-22 23:34:01 - INFO - product_checkout:975 - 📊 本地订单列表: ['FX2507223236880', 'FX2507223276881', 'FX2507223212882', 'FX2507223261883']
+2025-07-22 23:34:01 - INFO - product_checkout:983 - 📋 订单 FX2507223236880 仍为待付款状态
+2025-07-22 23:34:01 - INFO - product_checkout:983 - 📋 订单 FX2507223276881 仍为待付款状态
+2025-07-22 23:34:01 - INFO - product_checkout:983 - 📋 订单 FX2507223212882 仍为待付款状态
+2025-07-22 23:34:01 - INFO - product_checkout:983 - 📋 订单 FX2507223261883 仍为待付款状态
+2025-07-22 23:34:01 - INFO - product_checkout:989 - 📋 所有订单仍为待付款状态
+2025-07-22 23:34:03 - INFO - job_checkout:274 - 🔄 第 5/5 轮检测开始...
+2025-07-22 23:34:03 - DEBUG - product_checkout:1123 - 📡 [MONITOR] 关键词 C4148QBBK 处于纯监控模式，无轮数限制
+2025-07-22 23:34:03 - INFO - product_checkout:520 - query_product: C4148QBBK
+2025-07-22 23:34:03 - DEBUG - product_checkout:529 - status_code: 200
+2025-07-22 23:34:03 - DEBUG - product_checkout:530 - url: https://fenxiao.clim.cn/shop/products.do?keyword=C4148QBBK&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-22 23:34:03 - INFO - product_checkout:550 - 商品列表: 共1条记录
+2025-07-22 23:34:03 - INFO - product_checkout:574 -   商品1: COACH 奥莱款小号男士皮质单肩斜挎包 (SKU: 10104620-C4148QBBK) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-22 23:34:03 - INFO - product_checkout:582 - 📦 找到 1 个有效商品
+2025-07-22 23:34:03 - INFO - product_checkout:598 - 提取的SKU: 10104620-C4148QBBK
+2025-07-22 23:34:03 - DEBUG - product_checkout:1094 - product: {'keyword': 'C4148QBBK', 'sku': '10104620-C4148QBBK', 'brand_category': 'Coach男士单肩包', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100', 'name': 'COACH 奥莱款小号男士皮质单肩斜挎包', 'distribution_price': '1026', 'market_price': '4950.0', 'listing_time': '2021-04-29 15:45:00'}
+2025-07-22 23:34:03 - INFO - product_checkout:1106 - 🔍 [PROCESS] 模式检查: auto_order_enabled=False, test_mode=False, batch_mode=False
+2025-07-22 23:34:03 - INFO - product_checkout:1260 - 📢 [PROCESS] 关键词 C4148QBBK 进入通知模式（只发送库存通知）
+2025-07-22 23:34:03 - DEBUG - product_checkout:1265 - msg: 库存更新 COACH 奥莱款小号男士皮质单肩斜挎包,
+            <br />金额 1026
+            <br /><img src="https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100" width="200px" height="200px" />
+2025-07-22 23:34:03 - INFO - product_checkout:1266 - 关键字 C4148QBBK 通知发送成功
+2025-07-22 23:34:03 - INFO - product_checkout:1272 - 🛑 关键字 C4148QBBK 监控模式通知完成，停止后续检测。
+2025-07-22 23:34:03 - DEBUG - product_checkout:1123 - 📡 [MONITOR] 关键词 L47450600-8 处于纯监控模式，无轮数限制
+2025-07-22 23:34:03 - INFO - product_checkout:520 - query_product: L47450600-8
+2025-07-22 23:34:04 - DEBUG - product_checkout:529 - status_code: 200
+2025-07-22 23:34:04 - DEBUG - product_checkout:530 - url: https://fenxiao.clim.cn/shop/products.do?keyword=L47450600-8&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-22 23:34:04 - INFO - product_checkout:550 - 商品列表: 共1条记录
+2025-07-22 23:34:04 - INFO - product_checkout:574 -   商品1: SALOMON男士运动鞋L47450600 (SKU: 62300004-L47450600) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/e8c374efe47f43eca2ea4937646525dd.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-22 23:34:04 - INFO - product_checkout:582 - 📦 找到 1 个有效商品
+2025-07-22 23:34:04 - INFO - product_checkout:598 - 提取的SKU: 62300004-L47450600
+2025-07-22 23:34:04 - DEBUG - product_checkout:1094 - product: {'keyword': 'L47450600-8', 'sku': '62300004-L47450600', 'brand_category': 'Salomon男士运动鞋', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/e8c374efe47f43eca2ea4937646525dd.jpg?imageMogr2/thumbnail/100x100', 'name': 'SALOMON男士运动鞋L47450600', 'distribution_price': '1276', 'market_price': '0.0', 'listing_time': '2025-07-17 14:40:58'}
+2025-07-22 23:34:04 - INFO - product_checkout:1106 - 🔍 [PROCESS] 模式检查: auto_order_enabled=False, test_mode=False, batch_mode=False
+2025-07-22 23:34:04 - INFO - product_checkout:1260 - 📢 [PROCESS] 关键词 L47450600-8 进入通知模式（只发送库存通知）
+2025-07-22 23:34:04 - DEBUG - product_checkout:1265 - msg: 库存更新 SALOMON男士运动鞋L47450600,
+            <br />金额 1276
+            <br /><img src="https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/e8c374efe47f43eca2ea4937646525dd.jpg?imageMogr2/thumbnail/100x100" width="200px" height="200px" />
+2025-07-22 23:34:04 - INFO - product_checkout:1266 - 关键字 L47450600-8 通知发送成功
+2025-07-22 23:34:04 - INFO - product_checkout:1272 - 🛑 关键字 L47450600-8 监控模式通知完成，停止后续检测。
+2025-07-22 23:34:04 - INFO - job_checkout:282 - 📊 第 5 轮检测完成：2/2 个关键词有货并下单
+2025-07-22 23:34:04 - INFO - job_checkout:289 - 🎉 单独建单多轮检测完成
+2025-07-22 23:34:04 - INFO - __init__:281 - 🛑 收到停止信号，线程即将停止
+2025-07-22 23:34:06 - INFO - product_checkout:936 - 🔍 检查 4 个订单的付款状态...
+2025-07-22 23:34:07 - INFO - product_checkout:953 - 📊 当前待付款订单总数: 4
+2025-07-22 23:34:07 - INFO - product_checkout:970 - 📋 发现待付款订单: FX2507223261883
+2025-07-22 23:34:07 - INFO - product_checkout:970 - 📋 发现待付款订单: FX2507223212882
+2025-07-22 23:34:07 - INFO - product_checkout:970 - 📋 发现待付款订单: FX2507223276881
+2025-07-22 23:34:07 - INFO - product_checkout:970 - 📋 发现待付款订单: FX2507223236880
+2025-07-22 23:34:07 - INFO - product_checkout:974 - 📊 服务器端待付款订单: ['FX2507223276881', 'FX2507223212882', 'FX2507223261883', 'FX2507223236880']
+2025-07-22 23:34:07 - INFO - product_checkout:975 - 📊 本地订单列表: ['FX2507223236880', 'FX2507223276881', 'FX2507223212882', 'FX2507223261883']
+2025-07-22 23:34:07 - INFO - product_checkout:983 - 📋 订单 FX2507223236880 仍为待付款状态
+2025-07-22 23:34:07 - INFO - product_checkout:983 - 📋 订单 FX2507223276881 仍为待付款状态
+2025-07-22 23:34:07 - INFO - product_checkout:983 - 📋 订单 FX2507223212882 仍为待付款状态
+2025-07-22 23:34:07 - INFO - product_checkout:983 - 📋 订单 FX2507223261883 仍为待付款状态
+2025-07-22 23:34:07 - INFO - product_checkout:989 - 📋 所有订单仍为待付款状态
+2025-07-22 23:34:12 - INFO - product_checkout:936 - 🔍 检查 4 个订单的付款状态...
+2025-07-22 23:34:12 - INFO - product_checkout:953 - 📊 当前待付款订单总数: 2
+2025-07-22 23:34:12 - INFO - product_checkout:970 - 📋 发现待付款订单: FX2507223261883
+2025-07-22 23:34:12 - INFO - product_checkout:970 - 📋 发现待付款订单: FX2507223212882
+2025-07-22 23:34:12 - INFO - product_checkout:974 - 📊 服务器端待付款订单: ['FX2507223212882', 'FX2507223261883']
+2025-07-22 23:34:12 - INFO - product_checkout:975 - 📊 本地订单列表: ['FX2507223236880', 'FX2507223276881', 'FX2507223212882', 'FX2507223261883']
+2025-07-22 23:34:12 - INFO - product_checkout:981 - ✅ 订单 FX2507223236880 已付款（不在待付款列表中）
+2025-07-22 23:34:12 - INFO - product_checkout:981 - ✅ 订单 FX2507223276881 已付款（不在待付款列表中）
+2025-07-22 23:34:12 - INFO - product_checkout:983 - 📋 订单 FX2507223212882 仍为待付款状态
+2025-07-22 23:34:12 - INFO - product_checkout:983 - 📋 订单 FX2507223261883 仍为待付款状态
+2025-07-22 23:34:12 - INFO - web:324 - 🗑️ 已从订单列表移除: FX2507223236880
+2025-07-22 23:34:12 - DEBUG - web:249 - 📤 SSE发送消息: {'type': 'remove_order', 'order': 'FX2507223236880', 'timestamp': 1753198452.9926188}
+2025-07-22 23:34:12 - INFO - web:333 - 📤 订单移除消息已推送: FX2507223236880
+2025-07-22 23:34:12 - INFO - web:324 - 🗑️ 已从订单列表移除: FX2507223276881
+2025-07-22 23:34:12 - DEBUG - web:249 - 📤 SSE发送消息: {'type': 'remove_order', 'order': 'FX2507223276881', 'timestamp': 1753198452.9934669}
+2025-07-22 23:34:12 - INFO - web:333 - 📤 订单移除消息已推送: FX2507223276881
+2025-07-22 23:34:12 - INFO - product_checkout:987 - 🗑️ 已移除 2 个已付款订单
+2025-07-22 23:34:17 - INFO - product_checkout:936 - 🔍 检查 2 个订单的付款状态...
+2025-07-22 23:34:18 - INFO - product_checkout:953 - 📊 当前待付款订单总数: 0
+2025-07-22 23:34:18 - INFO - product_checkout:974 - 📊 服务器端待付款订单: []
+2025-07-22 23:34:18 - INFO - product_checkout:975 - 📊 本地订单列表: ['FX2507223212882', 'FX2507223261883']
+2025-07-22 23:34:18 - INFO - product_checkout:981 - ✅ 订单 FX2507223212882 已付款（不在待付款列表中）
+2025-07-22 23:34:18 - INFO - product_checkout:981 - ✅ 订单 FX2507223261883 已付款（不在待付款列表中）
+2025-07-22 23:34:18 - INFO - web:324 - 🗑️ 已从订单列表移除: FX2507223212882
+2025-07-22 23:34:18 - DEBUG - web:249 - 📤 SSE发送消息: {'type': 'remove_order', 'order': 'FX2507223212882', 'timestamp': 1753198458.7050948}
+2025-07-22 23:34:18 - INFO - web:333 - 📤 订单移除消息已推送: FX2507223212882
+2025-07-22 23:34:18 - INFO - web:324 - 🗑️ 已从订单列表移除: FX2507223261883
+2025-07-22 23:34:18 - DEBUG - web:249 - 📤 SSE发送消息: {'type': 'remove_order', 'order': 'FX2507223261883', 'timestamp': 1753198458.7056775}
+2025-07-22 23:34:18 - INFO - web:333 - 📤 订单移除消息已推送: FX2507223261883
+2025-07-22 23:34:18 - INFO - product_checkout:987 - 🗑️ 已移除 2 个已付款订单
+2025-07-22 23:37:04 - INFO - main3:26 - 📊 初始监控间隔: 60秒
+2025-07-22 23:37:04 - INFO - web:374 - 🚀 Flask Web服务启动中...
+2025-07-22 23:37:04 - INFO - web:375 - 📡 实时日志推送系统已激活
+2025-07-22 23:37:04 - INFO - web:377 - 🌐 访问地址: http://0.0.0.0:5000
+2025-07-22 23:37:04 - INFO - main3:41 - ⏸️ 监控状态为关闭，不启动监控线程
+2025-07-22 23:37:04 - INFO - web:378 - 🔧 日志捕获系统状态检查...
+2025-07-22 23:37:04 - INFO - job_checkout:367 - 🔍 订单状态检查线程已启动
+2025-07-22 23:37:04 - INFO - main3:47 - 🔍 订单状态检查线程已启动
+2025-07-22 23:37:04 - INFO - web:394 - 🚀 尝试启动Flask服务...
+2025-07-22 23:37:04 - INFO - main3:49 - 🎛️ 监控间隔可在Web界面动态调整: http://localhost:5000
+2025-07-22 23:37:06 - INFO - web:384 - ✅ 日志推送测试 - 这是一条测试日志
+2025-07-22 23:37:06 - INFO - web:385 - 🟢 成功：日志系统工作正常
+2025-07-22 23:37:06 - ERROR - web:386 - 🔴 错误：这是一条错误测试日志
+2025-07-22 23:37:06 - WARNING - web:387 - 🟡 警告：这是一条警告测试日志
+2025-07-22 23:37:07 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-22 23:42:23 - INFO - status:130 - 🛒 切换为统一建单模式：
+2025-07-22 23:42:23 - INFO - status:131 -    - 发现库存 → 加入购物车
+2025-07-22 23:42:23 - INFO - status:132 -    - 等待所有关键词检测完成
+2025-07-22 23:42:23 - INFO - status:133 -    - 批量提交订单
+2025-07-22 23:42:23 - INFO - product_checkout:119 - 🔄 [STATE] 批量状态已重置:
+2025-07-22 23:42:23 - INFO - product_checkout:120 -    清空购物车: 0 → 0
+2025-07-22 23:42:23 - INFO - product_checkout:121 -    清空关键词记录: 0 → 0
+2025-07-22 23:42:23 - INFO - product_checkout:122 -    重置轮次计数: → 0
+2025-07-22 23:42:23 - INFO - product_checkout:204 - 🔄 批量检测轮次已重置
+2025-07-22 23:44:25 - INFO - status:162 - 🧪 测试模式已启用：
+2025-07-22 23:44:25 - INFO - status:163 -    - 强制执行检测（忽略商品总数变化）
+2025-07-22 23:44:25 - INFO - status:164 -    - 只弹一次付款窗口
+2025-07-22 23:44:25 - INFO - status:165 -    - 测试完成后自动关闭
+2025-07-22 23:44:25 - INFO - web:179 - 🧪 测试模式已启用：只弹一次付款窗口
+2025-07-22 23:44:25 - INFO - web:190 - 🧪 测试模式：开始检测 2 个关键词
+2025-07-22 23:44:25 - INFO - job_checkout:34 - 🧪 测试统一建单模式：检测所有款号，合并成一个订单，只弹一次付款
+2025-07-22 23:44:25 - INFO - job_checkout:53 - 🔄 [TEST-BATCH] 测试统一建单模式状态重置:
+2025-07-22 23:44:25 - INFO - job_checkout:54 -    保留购物车: 0 件商品
+2025-07-22 23:44:25 - INFO - job_checkout:55 -    清空关键词记录: 0 → 0
+2025-07-22 23:44:25 - INFO - job_checkout:56 -    重置轮次计数: → 0
+2025-07-22 23:44:25 - INFO - job_checkout:57 - 🔄 测试统一建单检测开始...
+2025-07-22 23:44:25 - INFO - job_checkout:141 - 🔄 [CONCURRENT] 开始并发检测 2 个关键词
+2025-07-22 23:44:25 - INFO - job_checkout:147 - 🔄 [WORKER] 开始处理关键词: C4148QBBK
+2025-07-22 23:44:25 - INFO - job_checkout:161 - 🚀 [CONCURRENT] 启动线程处理关键词: C4148QBBK
+2025-07-22 23:44:25 - INFO - job_checkout:147 - 🔄 [WORKER] 开始处理关键词: L47450600-8
+2025-07-22 23:44:25 - INFO - job_checkout:161 - 🚀 [CONCURRENT] 启动线程处理关键词: L47450600-8
+2025-07-22 23:44:25 - INFO - job_checkout:164 - ⏳ [CONCURRENT] 等待所有线程完成...
+2025-07-22 23:44:25 - INFO - product_checkout:520 - query_product: C4148QBBK
+2025-07-22 23:44:25 - INFO - product_checkout:520 - query_product: L47450600-8
+2025-07-22 23:44:26 - DEBUG - product_checkout:529 - status_code: 200
+2025-07-22 23:44:26 - DEBUG - product_checkout:530 - url: https://fenxiao.clim.cn/shop/products.do?keyword=C4148QBBK&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-22 23:44:26 - INFO - product_checkout:550 - 商品列表: 共1条记录
+2025-07-22 23:44:26 - DEBUG - product_checkout:529 - status_code: 200
+2025-07-22 23:44:26 - INFO - product_checkout:574 -   商品1: COACH 奥莱款小号男士皮质单肩斜挎包 (SKU: 10104620-C4148QBBK) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-22 23:44:26 - DEBUG - product_checkout:530 - url: https://fenxiao.clim.cn/shop/products.do?keyword=L47450600-8&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-22 23:44:26 - INFO - product_checkout:582 - 📦 找到 1 个有效商品
+2025-07-22 23:44:26 - INFO - product_checkout:550 - 商品列表: 共1条记录
+2025-07-22 23:44:26 - INFO - product_checkout:598 - 提取的SKU: 10104620-C4148QBBK
+2025-07-22 23:44:26 - INFO - product_checkout:574 -   商品1: SALOMON男士运动鞋L47450600 (SKU: 62300004-L47450600) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/e8c374efe47f43eca2ea4937646525dd.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-22 23:44:26 - DEBUG - product_checkout:1094 - product: {'keyword': 'C4148QBBK', 'sku': '10104620-C4148QBBK', 'brand_category': 'Coach男士单肩包', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100', 'name': 'COACH 奥莱款小号男士皮质单肩斜挎包', 'distribution_price': '1026', 'market_price': '4950.0', 'listing_time': '2021-04-29 15:45:00'}
+2025-07-22 23:44:26 - INFO - product_checkout:582 - 📦 找到 1 个有效商品
+2025-07-22 23:44:26 - INFO - product_checkout:598 - 提取的SKU: 62300004-L47450600
+2025-07-22 23:44:26 - DEBUG - product_checkout:1094 - product: {'keyword': 'L47450600-8', 'sku': '62300004-L47450600', 'brand_category': 'Salomon男士运动鞋', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/e8c374efe47f43eca2ea4937646525dd.jpg?imageMogr2/thumbnail/100x100', 'name': 'SALOMON男士运动鞋L47450600', 'distribution_price': '1276', 'market_price': '0.0', 'listing_time': '2025-07-17 14:40:58'}
+2025-07-22 23:44:26 - INFO - product_checkout:1106 - 🔍 [PROCESS] 模式检查: auto_order_enabled=False, test_mode=True, batch_mode=True
+2025-07-22 23:44:26 - INFO - product_checkout:1106 - 🔍 [PROCESS] 模式检查: auto_order_enabled=False, test_mode=True, batch_mode=True
+2025-07-22 23:44:26 - INFO - product_checkout:623 - selectBuyDefect
+2025-07-22 23:44:26 - DEBUG - product_checkout:625 - sku: 10104620-C4148QBBK
+2025-07-22 23:44:26 - INFO - product_checkout:623 - selectBuyDefect
+2025-07-22 23:44:26 - DEBUG - product_checkout:625 - sku: 62300004-L47450600
+2025-07-22 23:44:27 - DEBUG - product_checkout:627 - status_code: 200
+2025-07-22 23:44:27 - INFO - product_checkout:636 - saveCart
+2025-07-22 23:44:27 - DEBUG - product_checkout:651 - param_save_cart: {'typeCode': '68', 'price': '1276.0', 'productCode': '6230000410', 'count': 2}
+2025-07-22 23:44:27 - DEBUG - product_checkout:627 - status_code: 200
+2025-07-22 23:44:27 - INFO - product_checkout:636 - saveCart
+2025-07-22 23:44:27 - DEBUG - product_checkout:651 - param_save_cart: {'typeCode': '68', 'price': '1026.0', 'productCode': '101460701', 'count': 1}
+2025-07-22 23:44:28 - DEBUG - product_checkout:654 - status_code: 200
+2025-07-22 23:44:28 - DEBUG - product_checkout:655 - content: true
+2025-07-22 23:44:28 - INFO - product_checkout:657 - 加入购物车成功
+2025-07-22 23:44:28 - DEBUG - product_checkout:654 - status_code: 200
+2025-07-22 23:44:28 - DEBUG - product_checkout:655 - content: true
+2025-07-22 23:44:28 - INFO - product_checkout:657 - 加入购物车成功
+2025-07-22 23:44:30 - INFO - product_checkout:1185 - 📦 关键词 L47450600-8 获取到商品代码: 6230000410, 数量: 2
+2025-07-22 23:44:30 - INFO - product_checkout:1185 - 📦 关键词 C4148QBBK 获取到商品代码: 101460701, 数量: 1
+2025-07-22 23:44:30 - INFO - product_checkout:1200 - 🧪 [TEST] 测试统一建单模式：关键词 L47450600-8 加入购物车
+2025-07-22 23:44:30 - INFO - product_checkout:1200 - 🧪 [TEST] 测试统一建单模式：关键词 C4148QBBK 加入购物车
+2025-07-22 23:44:30 - INFO - product_checkout:623 - selectBuyDefect
+2025-07-22 23:44:30 - DEBUG - product_checkout:625 - sku: 62300004-L47450600
+2025-07-22 23:44:30 - INFO - product_checkout:623 - selectBuyDefect
+2025-07-22 23:44:30 - DEBUG - product_checkout:625 - sku: 10104620-C4148QBBK
+2025-07-22 23:44:31 - DEBUG - product_checkout:627 - status_code: 200
+2025-07-22 23:44:31 - INFO - product_checkout:636 - saveCart
+2025-07-22 23:44:31 - DEBUG - product_checkout:651 - param_save_cart: {'typeCode': '68', 'price': '1276.0', 'productCode': '6230000410', 'count': 2}
+2025-07-22 23:44:31 - DEBUG - product_checkout:627 - status_code: 200
+2025-07-22 23:44:31 - INFO - product_checkout:636 - saveCart
+2025-07-22 23:44:31 - DEBUG - product_checkout:651 - param_save_cart: {'typeCode': '68', 'price': '1026.0', 'productCode': '101460701', 'count': 1}
+2025-07-22 23:44:32 - DEBUG - product_checkout:654 - status_code: 200
+2025-07-22 23:44:32 - DEBUG - product_checkout:655 - content: true
+2025-07-22 23:44:32 - INFO - product_checkout:657 - 加入购物车成功
+2025-07-22 23:44:32 - DEBUG - product_checkout:654 - status_code: 200
+2025-07-22 23:44:32 - DEBUG - product_checkout:655 - content: true
+2025-07-22 23:44:32 - INFO - product_checkout:657 - 加入购物车成功
+2025-07-22 23:44:33 - DEBUG - product_checkout:1216 - 🔄 [PROCESS] selectBuyDefect 结果: {'cart_id': '115134', 'product_code': '101460701', 'productCode': '101460701', 'count': 1, 'price': '1026.0'}
+2025-07-22 23:44:33 - INFO - product_checkout:1228 - 🔄 [PROCESS] 准备调用 add_to_batch_cart
+2025-07-22 23:44:33 - INFO - product_checkout:160 - 🔄 [FUNC] add_to_batch_cart 被调用:
+2025-07-22 23:44:33 - DEBUG - product_checkout:161 -    product_info: {'keyword': 'C4148QBBK', 'product_code': '101460701', 'price': '1026', 'distribution_price': '1026', 'name': 'COACH 奥莱款小号男士皮质单肩斜挎包', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100', 'market_price': '4950.0', 'brand_category': 'Coach男士单肩包'}
+2025-07-22 23:44:33 - DEBUG - product_checkout:162 -    cart_result: {'cart_id': '115134', 'product_code': '101460701', 'productCode': '101460701', 'count': 1, 'price': '1026.0'}
+2025-07-22 23:44:33 - INFO - product_checkout:173 - 📦 [FUNC] 准备添加商品到购物车: {'keyword': 'C4148QBBK', 'product_code': '101460701', 'cart_id': '115134', 'count': 1, 'price': '1026', 'name': 'COACH 奥莱款小号男士皮质单肩斜挎包'}
+2025-07-22 23:44:33 - INFO - product_checkout:140 - 📦 [STATE] 商品已添加到购物车:
+2025-07-22 23:44:33 - INFO - product_checkout:141 -    商品名称: COACH 奥莱款小号男士皮质单肩斜挎包
+2025-07-22 23:44:33 - INFO - product_checkout:142 -    关键词: C4148QBBK
+2025-07-22 23:44:33 - INFO - product_checkout:143 -    购物车ID: 115134
+2025-07-22 23:44:33 - INFO - product_checkout:144 -    购物车数量: 0 → 1
+2025-07-22 23:44:33 - INFO - product_checkout:128 - 🔍 [STATE] 获取购物车商品: 1 件
+2025-07-22 23:44:33 - INFO - product_checkout:130 -    商品1: COACH 奥莱款小号男士皮质单肩斜挎包 (关键词: C4148QBBK)
+2025-07-22 23:44:33 - INFO - product_checkout:180 - ✅ [FUNC] 添加完成，当前购物车总数: 1
+2025-07-22 23:44:33 - INFO - product_checkout:185 - 📦 商品已加入测试购物车: COACH 奥莱款小号男士皮质单肩斜挎包 (购物车ID: 115134)
+2025-07-22 23:44:33 - INFO - product_checkout:1231 - ✅ [PROCESS] 测试统一建单：关键字 C4148QBBK 商品已加入购物车
+2025-07-22 23:44:33 - INFO - product_checkout:1310 - 📦 商品详情: COACH 奥莱款小号男士皮质单肩斜挎包
+                        💰 价格: ¥1026
+                        📦 库存: 1
+                        🛒 购物车ID: 115134
+                        <br><img src="https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100" style="max-width:200px;max-height:200px;border-radius:8px;" />
+2025-07-22 23:44:33 - INFO - job_checkout:150 - ✅ [WORKER] 关键词 C4148QBBK 处理完成，结果: True
+2025-07-22 23:44:33 - INFO - job_checkout:167 - ✅ [CONCURRENT] 线程 1/2 完成
+2025-07-22 23:44:33 - DEBUG - product_checkout:1216 - 🔄 [PROCESS] selectBuyDefect 结果: {'cart_id': '115133', 'product_code': '6230000410', 'productCode': '6230000410', 'count': 2, 'price': '1276.0'}
+2025-07-22 23:44:33 - INFO - product_checkout:1228 - 🔄 [PROCESS] 准备调用 add_to_batch_cart
+2025-07-22 23:44:33 - INFO - product_checkout:160 - 🔄 [FUNC] add_to_batch_cart 被调用:
+2025-07-22 23:44:33 - DEBUG - product_checkout:161 -    product_info: {'keyword': 'L47450600-8', 'product_code': '6230000410', 'price': '1276', 'distribution_price': '1276', 'name': 'SALOMON男士运动鞋L47450600', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/e8c374efe47f43eca2ea4937646525dd.jpg?imageMogr2/thumbnail/100x100', 'market_price': '0.0', 'brand_category': 'Salomon男士运动鞋'}
+2025-07-22 23:44:33 - DEBUG - product_checkout:162 -    cart_result: {'cart_id': '115133', 'product_code': '6230000410', 'productCode': '6230000410', 'count': 2, 'price': '1276.0'}
+2025-07-22 23:44:33 - INFO - product_checkout:173 - 📦 [FUNC] 准备添加商品到购物车: {'keyword': 'L47450600-8', 'product_code': '6230000410', 'cart_id': '115133', 'count': 2, 'price': '1276', 'name': 'SALOMON男士运动鞋L47450600'}
+2025-07-22 23:44:33 - INFO - product_checkout:140 - 📦 [STATE] 商品已添加到购物车:
+2025-07-22 23:44:33 - INFO - product_checkout:141 -    商品名称: SALOMON男士运动鞋L47450600
+2025-07-22 23:44:33 - INFO - product_checkout:142 -    关键词: L47450600-8
+2025-07-22 23:44:33 - INFO - product_checkout:143 -    购物车ID: 115133
+2025-07-22 23:44:33 - INFO - product_checkout:144 -    购物车数量: 1 → 2
+2025-07-22 23:44:33 - INFO - product_checkout:128 - 🔍 [STATE] 获取购物车商品: 2 件
+2025-07-22 23:44:33 - INFO - product_checkout:130 -    商品1: COACH 奥莱款小号男士皮质单肩斜挎包 (关键词: C4148QBBK)
+2025-07-22 23:44:33 - INFO - product_checkout:130 -    商品2: SALOMON男士运动鞋L47450600 (关键词: L47450600-8)
+2025-07-22 23:44:33 - INFO - product_checkout:180 - ✅ [FUNC] 添加完成，当前购物车总数: 2
+2025-07-22 23:44:33 - INFO - product_checkout:185 - 📦 商品已加入测试购物车: SALOMON男士运动鞋L47450600 (购物车ID: 115133)
+2025-07-22 23:44:33 - INFO - product_checkout:1231 - ✅ [PROCESS] 测试统一建单：关键字 L47450600-8 商品已加入购物车
+2025-07-22 23:44:33 - INFO - product_checkout:1310 - 📦 商品详情: SALOMON男士运动鞋L47450600
+                        💰 价格: ¥1276
+                        📦 库存: 2
+                        🛒 购物车ID: 115133
+                        <br><img src="https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/e8c374efe47f43eca2ea4937646525dd.jpg?imageMogr2/thumbnail/100x100" style="max-width:200px;max-height:200px;border-radius:8px;" />
+2025-07-22 23:44:33 - INFO - job_checkout:150 - ✅ [WORKER] 关键词 L47450600-8 处理完成，结果: True
+2025-07-22 23:44:33 - INFO - job_checkout:167 - ✅ [CONCURRENT] 线程 2/2 完成
+2025-07-22 23:44:33 - INFO - job_checkout:169 - 🎉 [CONCURRENT] 所有线程完成，结果: {'C4148QBBK': True, 'L47450600-8': True}
+2025-07-22 23:44:33 - INFO - job_checkout:64 - 📊 测试统一建单检测完成：2/2 个关键词有货
+2025-07-22 23:44:33 - INFO - product_checkout:191 - 🔍 [FUNC] get_batch_cart_items 被调用
+2025-07-22 23:44:33 - INFO - product_checkout:128 - 🔍 [STATE] 获取购物车商品: 2 件
+2025-07-22 23:44:33 - INFO - product_checkout:130 -    商品1: COACH 奥莱款小号男士皮质单肩斜挎包 (关键词: C4148QBBK)
+2025-07-22 23:44:33 - INFO - product_checkout:130 -    商品2: SALOMON男士运动鞋L47450600 (关键词: L47450600-8)
+2025-07-22 23:44:33 - INFO - product_checkout:193 - 🔍 [FUNC] 返回 2 件商品
+2025-07-22 23:44:33 - INFO - job_checkout:178 - 🔍 测试统一建单模式检查购物车状态:
+2025-07-22 23:44:33 - INFO - job_checkout:179 -    购物车商品数量: 2
+2025-07-22 23:44:33 - INFO - job_checkout:182 -    商品1: COACH 奥莱款小号男士皮质单肩斜挎包 (ID: 115134)
+2025-07-22 23:44:33 - INFO - job_checkout:182 -    商品2: SALOMON男士运动鞋L47450600 (ID: 115133)
+2025-07-22 23:44:33 - INFO - job_checkout:185 - 🚀 测试统一建单发现 2 件商品，执行测试统一建单下单...
+2025-07-22 23:44:33 - INFO - product_checkout:191 - 🔍 [FUNC] get_batch_cart_items 被调用
+2025-07-22 23:44:33 - INFO - product_checkout:128 - 🔍 [STATE] 获取购物车商品: 2 件
+2025-07-22 23:44:33 - INFO - product_checkout:130 -    商品1: COACH 奥莱款小号男士皮质单肩斜挎包 (关键词: C4148QBBK)
+2025-07-22 23:44:33 - INFO - product_checkout:130 -    商品2: SALOMON男士运动鞋L47450600 (关键词: L47450600-8)
+2025-07-22 23:44:33 - INFO - product_checkout:193 - 🔍 [FUNC] 返回 2 件商品
+2025-07-22 23:44:33 - INFO - product_checkout:285 - 🛒 开始批量下单，共 2 件商品
+2025-07-22 23:44:33 - INFO - product_checkout:292 - 🧪 测试模式：将所有商品合并成一个订单
+2025-07-22 23:44:33 - INFO - product_checkout:299 - 🛒 测试订单: 2种商品, 3件, ¥3578.00
+2025-07-22 23:44:33 - INFO - product_checkout:311 - 🚀 正在处理第 1/1 个订单...
+2025-07-22 23:44:33 - INFO - product_checkout:318 - 📋 订单详情: 2种商品, 3件, ¥3578.00
+2025-07-22 23:44:33 - INFO - product_checkout:319 - 🔗 结算链接: https://fenxiao.clim.cn/shop/settle.do?checked=115134&checked=115133
+2025-07-22 23:44:33 - INFO - product_checkout:361 - 💳 正在提交批量订单: https://fenxiao.clim.cn/shop/settle.do?checked=115134&checked=115133
+2025-07-22 23:44:34 - DEBUG - product_checkout:427 - 📋 订单数据: {'cartCodes': '115133', 'defectNo': '', 'productcode': '6230000410', 'counts': '2', 'rankCode': '68', 'tagCode': '30', 'shippingMethod': '1', 'thirdcode': '', 'payType': '2', 'receiver': '李小峰', 'recvphone': '18529551929', 'provincecode': '19', 'citycode': '202', 'countycode': '1754', 'recvaddr': '化龙镇山门大道700号', 'zip': '', 'idno': '', 'exchangeRate': '1', 'description': ''}
+2025-07-22 23:44:34 - DEBUG - product_checkout:432 - 📤 提交状态码: 200
+2025-07-22 23:44:34 - DEBUG - product_checkout:437 - 📋 提交结果: {'data': {'childOrderCode': False, 'citycode': 202, 'cityname': '广州市', 'code': 'FX2507223381196', 'countycode': 1754, 'countyname': '番禺区', 'createtime': '2025-07-22 23:44:34', 'currency': 'CNY', 'defectNo': ',', 'defectPriceCode': 0, 'description': '', 'disWarehouseCode': 2, 'distributorcode': 10025, 'distributorsettlecode': 1, 'exchangeRate': 1, 'existReturnOrder': False, 'goodsamount': 0, 'idno': '', 'issubunitorder': False, 'orderOriginType': 1, 'paid': 3578, 'payType': '2', 'platformcode': 14, 'price': 0, 'productcode': '101460701,6230000410', 'provincecode': 19, 'provincename': '广东省', 'rankCode': 68, 'receiver': '李小峰', 'recvaddr': '化龙镇山门大道700号', 'recvphone': '18529551929', 'rmbAmount': 3578.0, 'settlecode': 1, 'shippingMethod': 1, 'statuscode': 5, 'tagCode': 30, 'thirdcode': '', 'thirdprice': 0, 'ywjCode': 0, 'zip': ''}, 'errorMsg': '成功', 'resultCode': 0}
+2025-07-22 23:44:34 - INFO - product_checkout:443 - ✅ 批量订单提交成功!
+2025-07-22 23:44:34 - INFO - product_checkout:444 - 📦 订单号: FX2507223381196
+2025-07-22 23:44:34 - INFO - product_checkout:445 - 💰 订单金额: ¥3578
+2025-07-22 23:44:34 - INFO - product_checkout:890 - getOrder
+2025-07-22 23:44:35 - INFO - product_checkout:915 - 发现待付款订单: FX2507223381196
+2025-07-22 23:44:35 - INFO - orders:59 - 📝 新订单已添加到列表: FX2507223381196
+2025-07-22 23:44:35 - INFO - product_checkout:924 - 共找到 1 个待付款订单
+2025-07-22 23:44:35 - INFO - product_checkout:325 - ✅ 第 1 个订单下单成功
+2025-07-22 23:44:35 - INFO - product_checkout:329 - 🔍 开始立即推送流程...
+2025-07-22 23:44:35 - INFO - product_checkout:335 - 🔍 获取到的订单列表: ['FX2507223381196']
+2025-07-22 23:44:35 - INFO - product_checkout:340 - 🚀 立即推送真实订单号: FX2507223381196
+2025-07-22 23:44:35 - DEBUG - web:256 - 📤 SSE发送订单: FX2507223381196
+2025-07-22 23:44:35 - INFO - web:313 - 📤 订单 FX2507223381196 已推送到队列，队列大小: 1
+2025-07-22 23:44:35 - INFO - product_checkout:151 - 🧹 [STATE] 批量购物车已清空: 2 → 0
+2025-07-22 23:44:35 - INFO - product_checkout:199 - 🧹 批量购物车已清空
+2025-07-22 23:44:35 - INFO - product_checkout:356 - 🎉 批量下单处理完成
+2025-07-22 23:44:35 - INFO - job_checkout:69 - 🎉 测试统一建单模式完成
+2025-07-22 23:44:35 - INFO - status:167 - 🧪 测试模式已关闭：恢复正常监控模式
+2025-07-22 23:44:35 - INFO - product_checkout:119 - 🔄 [STATE] 批量状态已重置:
+2025-07-22 23:44:35 - INFO - product_checkout:120 -    清空购物车: 0 → 0
+2025-07-22 23:44:35 - INFO - product_checkout:121 -    清空关键词记录: 2 → 0
+2025-07-22 23:44:35 - INFO - product_checkout:122 -    重置轮次计数: → 0
+2025-07-22 23:44:35 - INFO - product_checkout:204 - 🔄 批量检测轮次已重置
+2025-07-22 23:44:35 - INFO - web:202 - 🧪 测试模式已关闭
+2025-07-22 23:44:35 - INFO - orders:16 - 📝 订单 FX2507223381196 已保存到历史记录
+2025-07-22 23:44:40 - INFO - product_checkout:936 - 🔍 检查 1 个订单的付款状态...
+2025-07-22 23:44:40 - INFO - product_checkout:953 - 📊 当前待付款订单总数: 1
+2025-07-22 23:44:40 - INFO - product_checkout:970 - 📋 发现待付款订单: FX2507223381196
+2025-07-22 23:44:40 - INFO - product_checkout:974 - 📊 服务器端待付款订单: ['FX2507223381196']
+2025-07-22 23:44:40 - INFO - product_checkout:975 - 📊 本地订单列表: ['FX2507223381196']
+2025-07-22 23:44:40 - INFO - product_checkout:983 - 📋 订单 FX2507223381196 仍为待付款状态
+2025-07-22 23:44:40 - INFO - product_checkout:989 - 📋 所有订单仍为待付款状态
+2025-07-22 23:44:45 - INFO - product_checkout:936 - 🔍 检查 1 个订单的付款状态...
+2025-07-22 23:44:46 - INFO - product_checkout:953 - 📊 当前待付款订单总数: 1
+2025-07-22 23:44:46 - INFO - product_checkout:970 - 📋 发现待付款订单: FX2507223381196
+2025-07-22 23:44:46 - INFO - product_checkout:974 - 📊 服务器端待付款订单: ['FX2507223381196']
+2025-07-22 23:44:46 - INFO - product_checkout:975 - 📊 本地订单列表: ['FX2507223381196']
+2025-07-22 23:44:46 - INFO - product_checkout:983 - 📋 订单 FX2507223381196 仍为待付款状态
+2025-07-22 23:44:46 - INFO - product_checkout:989 - 📋 所有订单仍为待付款状态
+2025-07-22 23:44:51 - INFO - product_checkout:936 - 🔍 检查 1 个订单的付款状态...
+2025-07-22 23:44:52 - INFO - product_checkout:953 - 📊 当前待付款订单总数: 1
+2025-07-22 23:44:52 - INFO - product_checkout:970 - 📋 发现待付款订单: FX2507223381196
+2025-07-22 23:44:52 - INFO - product_checkout:974 - 📊 服务器端待付款订单: ['FX2507223381196']
+2025-07-22 23:44:52 - INFO - product_checkout:975 - 📊 本地订单列表: ['FX2507223381196']
+2025-07-22 23:44:52 - INFO - product_checkout:983 - 📋 订单 FX2507223381196 仍为待付款状态
+2025-07-22 23:44:52 - INFO - product_checkout:989 - 📋 所有订单仍为待付款状态
+2025-07-22 23:44:57 - INFO - product_checkout:936 - 🔍 检查 1 个订单的付款状态...
+2025-07-22 23:44:58 - INFO - product_checkout:953 - 📊 当前待付款订单总数: 1
+2025-07-22 23:44:58 - INFO - product_checkout:970 - 📋 发现待付款订单: FX2507223381196
+2025-07-22 23:44:58 - INFO - product_checkout:974 - 📊 服务器端待付款订单: ['FX2507223381196']
+2025-07-22 23:44:58 - INFO - product_checkout:975 - 📊 本地订单列表: ['FX2507223381196']
+2025-07-22 23:44:58 - INFO - product_checkout:983 - 📋 订单 FX2507223381196 仍为待付款状态
+2025-07-22 23:44:58 - INFO - product_checkout:989 - 📋 所有订单仍为待付款状态
+2025-07-22 23:45:03 - INFO - product_checkout:936 - 🔍 检查 1 个订单的付款状态...
+2025-07-22 23:45:03 - INFO - product_checkout:953 - 📊 当前待付款订单总数: 0
+2025-07-22 23:45:03 - INFO - product_checkout:974 - 📊 服务器端待付款订单: []
+2025-07-22 23:45:03 - INFO - product_checkout:975 - 📊 本地订单列表: ['FX2507223381196']
+2025-07-22 23:45:03 - INFO - product_checkout:981 - ✅ 订单 FX2507223381196 已付款（不在待付款列表中）
+2025-07-22 23:45:03 - INFO - web:324 - 🗑️ 已从订单列表移除: FX2507223381196
+2025-07-22 23:45:03 - DEBUG - web:249 - 📤 SSE发送消息: {'type': 'remove_order', 'order': 'FX2507223381196', 'timestamp': 1753199103.8712006}
+2025-07-22 23:45:03 - INFO - web:333 - 📤 订单移除消息已推送: FX2507223381196
+2025-07-22 23:45:03 - INFO - product_checkout:987 - 🗑️ 已移除 1 个已付款订单
+2025-07-22 23:46:02 - INFO - status:137 - ⚡ 切换为单独建单模式：
+2025-07-22 23:46:02 - INFO - status:138 -    - 发现库存 → 立即下单
+2025-07-22 23:46:02 - INFO - status:139 -    - 不使用购物车
+2025-07-22 23:46:02 - INFO - product_checkout:151 - 🧹 [STATE] 批量购物车已清空: 0 → 0
+2025-07-22 23:46:02 - INFO - product_checkout:199 - 🧹 批量购物车已清空
+2025-07-22 23:46:05 - INFO - status:162 - 🧪 测试模式已启用：
+2025-07-22 23:46:05 - INFO - status:163 -    - 强制执行检测（忽略商品总数变化）
+2025-07-22 23:46:05 - INFO - status:164 -    - 只弹一次付款窗口
+2025-07-22 23:46:05 - INFO - status:165 -    - 测试完成后自动关闭
+2025-07-22 23:46:05 - INFO - web:179 - 🧪 测试模式已启用：只弹一次付款窗口
+2025-07-22 23:46:05 - INFO - web:190 - 🧪 测试模式：开始检测 2 个关键词
+2025-07-22 23:46:05 - INFO - job_checkout:37 - 🧪 测试单独建单模式：检测所有款号，每个有货商品立即下单
+2025-07-22 23:46:05 - INFO - product_checkout:119 - 🔄 [STATE] 批量状态已重置:
+2025-07-22 23:46:05 - INFO - product_checkout:120 -    清空购物车: 0 → 0
+2025-07-22 23:46:05 - INFO - product_checkout:121 -    清空关键词记录: 0 → 0
+2025-07-22 23:46:05 - INFO - product_checkout:122 -    重置轮次计数: → 0
+2025-07-22 23:46:05 - INFO - product_checkout:204 - 🔄 批量检测轮次已重置
+2025-07-22 23:46:05 - INFO - job_checkout:82 - 🔄 [TEST-SINGLE] 测试单独建单模式状态重置完成
+2025-07-22 23:46:05 - INFO - job_checkout:83 - 🔄 测试单独建单检测开始...
+2025-07-22 23:46:05 - INFO - status:167 - 🧪 测试模式已关闭：恢复正常监控模式
+2025-07-22 23:46:05 - INFO - product_checkout:119 - 🔄 [STATE] 批量状态已重置:
+2025-07-22 23:46:05 - INFO - product_checkout:120 -    清空购物车: 0 → 0
+2025-07-22 23:46:05 - INFO - product_checkout:121 -    清空关键词记录: 0 → 0
+2025-07-22 23:46:05 - INFO - product_checkout:122 -    重置轮次计数: → 0
+2025-07-22 23:46:05 - INFO - product_checkout:204 - 🔄 批量检测轮次已重置
+2025-07-22 23:46:05 - INFO - job_checkout:91 - 🔍 [1/2] 测试关键词: C4148QBBK
+2025-07-22 23:46:05 - INFO - product_checkout:520 - query_product: C4148QBBK
+2025-07-22 23:46:06 - DEBUG - product_checkout:529 - status_code: 200
+2025-07-22 23:46:06 - DEBUG - product_checkout:530 - url: https://fenxiao.clim.cn/shop/products.do?keyword=C4148QBBK&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-22 23:46:06 - INFO - product_checkout:550 - 商品列表: 共1条记录
+2025-07-22 23:46:06 - INFO - product_checkout:574 -   商品1: COACH 奥莱款小号男士皮质单肩斜挎包 (SKU: 10104620-C4148QBBK) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/77d58f27d8c34c3fa57db2f809cf8480.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-22 23:46:06 - INFO - product_checkout:582 - 📦 找到 1 个有效商品
+2025-07-22 23:46:06 - INFO - product_checkout:598 - 提取的SKU: 10104620-C4148QBBK
+2025-07-22 23:46:06 - INFO - job_checkout:97 - 📦 关键词 C4148QBBK 有库存，准备立即下单
+2025-07-22 23:46:06 - INFO - product_checkout:623 - selectBuyDefect
+2025-07-22 23:46:06 - DEBUG - product_checkout:625 - sku: 10104620-C4148QBBK
+2025-07-22 23:46:07 - DEBUG - product_checkout:627 - status_code: 200
+2025-07-22 23:46:07 - INFO - product_checkout:636 - saveCart
+2025-07-22 23:46:07 - DEBUG - product_checkout:651 - param_save_cart: {'typeCode': '68', 'price': '1026.0', 'productCode': '101460701', 'count': 1}
+2025-07-22 23:46:07 - DEBUG - product_checkout:654 - status_code: 200
+2025-07-22 23:46:07 - DEBUG - product_checkout:655 - content: true
+2025-07-22 23:46:07 - INFO - product_checkout:657 - 加入购物车成功
+2025-07-22 23:46:09 - INFO - product_checkout:715 - 结算商品: 115135, 支付类型: 2
+2025-07-22 23:46:10 - INFO - product_checkout:723 - name: COACH 奥莱款小号男士皮质单肩斜挎包
+2025-07-22 23:46:10 - DEBUG - product_checkout:756 - settleData: {'rankCode': '68', 'tagCode': '30', 'shippingMethod': '1', 'thirdcode': '', 'payType': '2', 'receiver': '李小峰', 'recvphone': '18529551929', 'provincecode': 19, 'citycode': 202, 'countycode': 1754, 'recvaddr': '化龙镇山门大道700号', 'zip': '', 'idno': '', 'exchangeRate': '1', 'cartCodes': '115135', 'defectNo': '', 'productcode': '101460701', 'counts': 1, 'description': ''}
+2025-07-22 23:46:10 - DEBUG - product_checkout:761 - 📤 提交状态码: 200
+2025-07-22 23:46:10 - DEBUG - product_checkout:766 - 📋 提交结果: {'data': {'childOrderCode': False, 'citycode': 202, 'cityname': '广州市', 'code': 'FX2507223354228', 'countycode': 1754, 'countyname': '番禺区', 'createtime': '2025-07-22 23:46:10', 'currency': 'CNY', 'defectNo': '', 'defectPriceCode': 0, 'description': '', 'disWarehouseCode': 2, 'distributorcode': 10025, 'distributorsettlecode': 1, 'exchangeRate': 1, 'existReturnOrder': False, 'goodsamount': 0, 'idno': '', 'issubunitorder': False, 'orderOriginType': 1, 'paid': 1026, 'payType': '2', 'platformcode': 14, 'price': 0, 'productcode': '101460701', 'provincecode': 19, 'provincename': '广东省', 'rankCode': 68, 'receiver': '李小峰', 'recvaddr': '化龙镇山门大道700号', 'recvphone': '18529551929', 'rmbAmount': 1026.0, 'settlecode': 1, 'shippingMethod': 1, 'statuscode': 5, 'tagCode': 30, 'thirdcode': '', 'thirdprice': 0, 'ywjCode': 0, 'zip': ''}, 'errorMsg': '成功', 'resultCode': 0}
+2025-07-22 23:46:10 - INFO - product_checkout:772 - ✅ 单独下单成功!
+2025-07-22 23:46:10 - INFO - product_checkout:773 - 📦 订单号: FX2507223354228
+2025-07-22 23:46:10 - INFO - product_checkout:774 - 💰 订单金额: ¥1026
+2025-07-22 23:46:10 - INFO - product_checkout:775 - 💳 支付类型: 微信支付
+2025-07-22 23:46:10 - INFO - orders:59 - 📝 新订单已添加到列表: FX2507223354228
+2025-07-22 23:46:10 - INFO - product_checkout:788 - 🚀 直接推送订单号: FX2507223354228
+2025-07-22 23:46:10 - DEBUG - web:256 - 📤 SSE发送订单: FX2507223354228
+2025-07-22 23:46:10 - INFO - web:313 - 📤 订单 FX2507223354228 已推送到队列，队列大小: 1
+2025-07-22 23:46:10 - INFO - job_checkout:110 - ✅ 关键词 C4148QBBK 测试成功，已立即下单（第1个订单）
+2025-07-22 23:46:10 - INFO - job_checkout:91 - 🔍 [2/2] 测试关键词: L47450600-8
+2025-07-22 23:46:10 - INFO - product_checkout:520 - query_product: L47450600-8
+2025-07-22 23:46:10 - INFO - orders:16 - 📝 订单 FX2507223354228 已保存到历史记录
+2025-07-22 23:46:11 - DEBUG - product_checkout:529 - status_code: 200
+2025-07-22 23:46:11 - DEBUG - product_checkout:530 - url: https://fenxiao.clim.cn/shop/products.do?keyword=L47450600-8&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-22 23:46:11 - INFO - product_checkout:550 - 商品列表: 共1条记录
+2025-07-22 23:46:11 - INFO - product_checkout:574 -   商品1: SALOMON男士运动鞋L47450600 (SKU: 62300004-L47450600) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/e8c374efe47f43eca2ea4937646525dd.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-22 23:46:11 - INFO - product_checkout:582 - 📦 找到 1 个有效商品
+2025-07-22 23:46:11 - INFO - product_checkout:598 - 提取的SKU: 62300004-L47450600
+2025-07-22 23:46:11 - INFO - job_checkout:97 - 📦 关键词 L47450600-8 有库存，准备立即下单
+2025-07-22 23:46:11 - INFO - product_checkout:623 - selectBuyDefect
+2025-07-22 23:46:11 - DEBUG - product_checkout:625 - sku: 62300004-L47450600
+2025-07-22 23:46:12 - DEBUG - product_checkout:627 - status_code: 200
+2025-07-22 23:46:12 - INFO - product_checkout:636 - saveCart
+2025-07-22 23:46:12 - DEBUG - product_checkout:651 - param_save_cart: {'typeCode': '68', 'price': '1276.0', 'productCode': '6230000410', 'count': 2}
+2025-07-22 23:46:13 - DEBUG - product_checkout:654 - status_code: 200
+2025-07-22 23:46:13 - DEBUG - product_checkout:655 - content: true
+2025-07-22 23:46:13 - INFO - product_checkout:657 - 加入购物车成功
+2025-07-22 23:46:13 - INFO - product_checkout:936 - 🔍 检查 1 个订单的付款状态...
+2025-07-22 23:46:14 - INFO - product_checkout:715 - 结算商品: 115136, 支付类型: 2
+2025-07-22 23:46:14 - INFO - product_checkout:953 - 📊 当前待付款订单总数: 1
+2025-07-22 23:46:14 - INFO - product_checkout:970 - 📋 发现待付款订单: FX2507223354228
+2025-07-22 23:46:14 - INFO - product_checkout:974 - 📊 服务器端待付款订单: ['FX2507223354228']
+2025-07-22 23:46:14 - INFO - product_checkout:975 - 📊 本地订单列表: ['FX2507223354228']
+2025-07-22 23:46:14 - INFO - product_checkout:983 - 📋 订单 FX2507223354228 仍为待付款状态
+2025-07-22 23:46:14 - INFO - product_checkout:989 - 📋 所有订单仍为待付款状态
+2025-07-22 23:46:15 - INFO - product_checkout:723 - name: SALOMON男士运动鞋L47450600
+2025-07-22 23:46:15 - DEBUG - product_checkout:756 - settleData: {'rankCode': '68', 'tagCode': '30', 'shippingMethod': '1', 'thirdcode': '', 'payType': '2', 'receiver': '李小峰', 'recvphone': '18529551929', 'provincecode': 19, 'citycode': 202, 'countycode': 1754, 'recvaddr': '化龙镇山门大道700号', 'zip': '', 'idno': '', 'exchangeRate': '1', 'cartCodes': '115136', 'defectNo': '', 'productcode': '6230000410', 'counts': 2, 'description': ''}
+2025-07-22 23:46:15 - DEBUG - product_checkout:761 - 📤 提交状态码: 200
+2025-07-22 23:46:15 - DEBUG - product_checkout:766 - 📋 提交结果: {'data': {'childOrderCode': False, 'citycode': 202, 'cityname': '广州市', 'code': 'FX2507223386243', 'countycode': 1754, 'countyname': '番禺区', 'createtime': '2025-07-22 23:46:15', 'currency': 'CNY', 'defectNo': '', 'defectPriceCode': 0, 'description': '', 'disWarehouseCode': 2, 'distributorcode': 10025, 'distributorsettlecode': 1, 'exchangeRate': 1, 'existReturnOrder': False, 'goodsamount': 0, 'idno': '', 'issubunitorder': False, 'orderOriginType': 1, 'paid': 2552, 'payType': '2', 'platformcode': 14, 'price': 0, 'productcode': '6230000410', 'provincecode': 19, 'provincename': '广东省', 'rankCode': 68, 'receiver': '李小峰', 'recvaddr': '化龙镇山门大道700号', 'recvphone': '18529551929', 'rmbAmount': 2552.0, 'settlecode': 1, 'shippingMethod': 1, 'statuscode': 5, 'tagCode': 30, 'thirdcode': '', 'thirdprice': 0, 'ywjCode': 0, 'zip': ''}, 'errorMsg': '成功', 'resultCode': 0}
+2025-07-22 23:46:15 - INFO - product_checkout:772 - ✅ 单独下单成功!
+2025-07-22 23:46:15 - INFO - product_checkout:773 - 📦 订单号: FX2507223386243
+2025-07-22 23:46:15 - INFO - product_checkout:774 - 💰 订单金额: ¥2552
+2025-07-22 23:46:15 - INFO - product_checkout:775 - 💳 支付类型: 微信支付
+2025-07-22 23:46:15 - INFO - orders:59 - 📝 新订单已添加到列表: FX2507223386243
+2025-07-22 23:46:15 - INFO - product_checkout:788 - 🚀 直接推送订单号: FX2507223386243
+2025-07-22 23:46:15 - DEBUG - web:256 - 📤 SSE发送订单: FX2507223386243
+2025-07-22 23:46:15 - INFO - web:313 - 📤 订单 FX2507223386243 已推送到队列，队列大小: 1
+2025-07-22 23:46:15 - INFO - job_checkout:110 - ✅ 关键词 L47450600-8 测试成功，已立即下单（第2个订单）
+2025-07-22 23:46:15 - INFO - status:162 - 🧪 测试模式已启用：
+2025-07-22 23:46:15 - INFO - status:163 -    - 强制执行检测（忽略商品总数变化）
+2025-07-22 23:46:15 - INFO - status:164 -    - 只弹一次付款窗口
+2025-07-22 23:46:15 - INFO - status:165 -    - 测试完成后自动关闭
+2025-07-22 23:46:15 - INFO - job_checkout:127 - 📊 测试单独建单检测完成：2/2 个关键词有货并已下单
+2025-07-22 23:46:15 - INFO - job_checkout:128 - 🎉 测试单独建单模式完成
+2025-07-22 23:46:15 - INFO - status:167 - 🧪 测试模式已关闭：恢复正常监控模式
+2025-07-22 23:46:15 - INFO - product_checkout:119 - 🔄 [STATE] 批量状态已重置:
+2025-07-22 23:46:15 - INFO - product_checkout:120 -    清空购物车: 0 → 0
+2025-07-22 23:46:15 - INFO - product_checkout:121 -    清空关键词记录: 0 → 0
+2025-07-22 23:46:15 - INFO - product_checkout:122 -    重置轮次计数: → 0
+2025-07-22 23:46:15 - INFO - product_checkout:204 - 🔄 批量检测轮次已重置
+2025-07-22 23:46:15 - INFO - web:202 - 🧪 测试模式已关闭
+2025-07-22 23:46:15 - INFO - orders:16 - 📝 订单 FX2507223386243 已保存到历史记录
+2025-07-22 23:46:19 - INFO - product_checkout:936 - 🔍 检查 2 个订单的付款状态...
+2025-07-22 23:46:20 - INFO - product_checkout:953 - 📊 当前待付款订单总数: 2
+2025-07-22 23:46:20 - INFO - product_checkout:970 - 📋 发现待付款订单: FX2507223386243
+2025-07-22 23:46:20 - INFO - product_checkout:970 - 📋 发现待付款订单: FX2507223354228
+2025-07-22 23:46:20 - INFO - product_checkout:974 - 📊 服务器端待付款订单: ['FX2507223354228', 'FX2507223386243']
+2025-07-22 23:46:20 - INFO - product_checkout:975 - 📊 本地订单列表: ['FX2507223354228', 'FX2507223386243']
+2025-07-22 23:46:20 - INFO - product_checkout:983 - 📋 订单 FX2507223354228 仍为待付款状态
+2025-07-22 23:46:20 - INFO - product_checkout:983 - 📋 订单 FX2507223386243 仍为待付款状态
+2025-07-22 23:46:20 - INFO - product_checkout:989 - 📋 所有订单仍为待付款状态
+2025-07-22 23:46:25 - INFO - product_checkout:936 - 🔍 检查 2 个订单的付款状态...
+2025-07-22 23:46:26 - INFO - product_checkout:953 - 📊 当前待付款订单总数: 2
+2025-07-22 23:46:26 - INFO - product_checkout:970 - 📋 发现待付款订单: FX2507223386243
+2025-07-22 23:46:26 - INFO - product_checkout:970 - 📋 发现待付款订单: FX2507223354228
+2025-07-22 23:46:26 - INFO - product_checkout:974 - 📊 服务器端待付款订单: ['FX2507223354228', 'FX2507223386243']
+2025-07-22 23:46:26 - INFO - product_checkout:975 - 📊 本地订单列表: ['FX2507223354228', 'FX2507223386243']
+2025-07-22 23:46:26 - INFO - product_checkout:983 - 📋 订单 FX2507223354228 仍为待付款状态
+2025-07-22 23:46:26 - INFO - product_checkout:983 - 📋 订单 FX2507223386243 仍为待付款状态
+2025-07-22 23:46:26 - INFO - product_checkout:989 - 📋 所有订单仍为待付款状态
+2025-07-22 23:46:31 - INFO - product_checkout:936 - 🔍 检查 2 个订单的付款状态...
+2025-07-22 23:46:32 - INFO - product_checkout:953 - 📊 当前待付款订单总数: 1
+2025-07-22 23:46:32 - INFO - product_checkout:970 - 📋 发现待付款订单: FX2507223354228
+2025-07-22 23:46:32 - INFO - product_checkout:974 - 📊 服务器端待付款订单: ['FX2507223354228']
+2025-07-22 23:46:32 - INFO - product_checkout:975 - 📊 本地订单列表: ['FX2507223354228', 'FX2507223386243']
+2025-07-22 23:46:32 - INFO - product_checkout:983 - 📋 订单 FX2507223354228 仍为待付款状态
+2025-07-22 23:46:32 - INFO - product_checkout:981 - ✅ 订单 FX2507223386243 已付款（不在待付款列表中）
+2025-07-22 23:46:32 - INFO - web:324 - 🗑️ 已从订单列表移除: FX2507223386243
+2025-07-22 23:46:32 - DEBUG - web:249 - 📤 SSE发送消息: {'type': 'remove_order', 'order': 'FX2507223386243', 'timestamp': 1753199192.2793014}
+2025-07-22 23:46:32 - INFO - web:333 - 📤 订单移除消息已推送: FX2507223386243
+2025-07-22 23:46:32 - INFO - product_checkout:987 - 🗑️ 已移除 1 个已付款订单
+2025-07-22 23:46:37 - INFO - product_checkout:936 - 🔍 检查 1 个订单的付款状态...
+2025-07-22 23:46:37 - INFO - product_checkout:953 - 📊 当前待付款订单总数: 0
+2025-07-22 23:46:37 - INFO - product_checkout:974 - 📊 服务器端待付款订单: []
+2025-07-22 23:46:37 - INFO - product_checkout:975 - 📊 本地订单列表: ['FX2507223354228']
+2025-07-22 23:46:37 - INFO - product_checkout:981 - ✅ 订单 FX2507223354228 已付款（不在待付款列表中）
+2025-07-22 23:46:37 - INFO - web:324 - 🗑️ 已从订单列表移除: FX2507223354228
+2025-07-22 23:46:37 - DEBUG - web:249 - 📤 SSE发送消息: {'type': 'remove_order', 'order': 'FX2507223354228', 'timestamp': 1753199197.929623}
+2025-07-22 23:46:37 - INFO - web:333 - 📤 订单移除消息已推送: FX2507223354228
+2025-07-22 23:46:37 - INFO - product_checkout:987 - 🗑️ 已移除 1 个已付款订单
