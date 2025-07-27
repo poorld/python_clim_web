@@ -5,7 +5,8 @@ import os
 from .jobs import OnceJobThread, JobThread
 from .jobs.job_web import WebThread
 from .common.keywords import load_keywords
-from .common.status import load_monitor_status, load_auto_order_status, load_monitor_interval, get_global_monitor_interval, load_batch_order_mode, load_test_mode, load_refresh_stats
+from .common.status import load_monitor_status, load_auto_order_status, load_monitor_interval, get_global_monitor_interval, load_batch_order_mode, get_global_batch_order_mode, load_test_mode, load_refresh_stats
+from .common.status import load_group_enabled, load_group_size, get_global_group_enabled, get_global_group_size
 from .common.orders import load_orders_history
 from .common.logger import get_logger
 
@@ -20,10 +21,17 @@ def main():
     load_monitor_interval()  # 加载监控间隔配置
     load_batch_order_mode()  # 加载建单模式配置
     load_test_mode()  # 加载测试模式配置
+    load_group_enabled()  # 加载分组开关配置
+    load_group_size()  # 加载分组大小配置
     load_refresh_stats()  # 加载刷新统计配置
     load_orders_history()
 
     logger.info(f"📊 初始监控间隔: {get_global_monitor_interval()}秒")
+    logger.info(f"🛒 建单模式: {'统一建单' if get_global_batch_order_mode() else '单独建单'}")
+    if get_global_batch_order_mode():
+        logger.info(f"📦 分组模式: {'启用' if get_global_group_enabled() else '禁用'}")
+        if get_global_group_enabled():
+            logger.info(f"🔢 分组大小: {get_global_group_size()}个/组")
 
     # 启动Web服务
     if os.getenv("ENV") != "production":

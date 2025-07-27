@@ -138,8 +138,7 @@ def set_batch_order_mode(mode: bool):
             reset_batch_round()
         else:
             logger.info("⚡ 切换为单独建单模式：")
-            logger.info("   - 发现库存 → 立即下单")
-            logger.info("   - 不使用购物车")
+            logger.info("   - 发现库存 → 购物车 → 立即下单")
             # 清空现有购物车
             clear_batch_cart()
 
@@ -150,6 +149,33 @@ def set_batch_order_mode(mode: bool):
 
 def get_global_batch_order_mode():
     return load_batch_order_mode()
+
+# 分组配置管理
+def load_group_enabled():
+    config = _load_config()
+    return config.get('GROUP_ENABLED', False)
+
+def set_group_enabled(enabled: bool):
+    config = _load_config()
+    config['GROUP_ENABLED'] = enabled
+    _save_config(config)
+    logger.info(f"🔧 分组模式已设置为: {'启用' if enabled else '禁用'}")
+
+def get_global_group_enabled():
+    return load_group_enabled()
+
+def load_group_size():
+    config = _load_config()
+    return config.get('GROUP_SIZE', 5)
+
+def set_group_size(size: int):
+    config = _load_config()
+    config['GROUP_SIZE'] = max(1, min(20, size))  # 限制在1-20之间
+    _save_config(config)
+    logger.info(f"🔧 分组大小已设置为: {config['GROUP_SIZE']}个")
+
+def get_global_group_size():
+    return load_group_size()
 
 # --------------------------------------------
 # 测试模式管理

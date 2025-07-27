@@ -204,77 +204,7 @@ def reset_batch_round():
     state.reset_batch_state()
     logger.info("🔄 批量检测轮次已重置")
 
-def split_cart_into_orders(cart_items):
-    """
-    将购物车商品按规则分组为多个订单
-    规则：每单最多8种款号规格，总数量不超过30个，金额不超过4万元
-    """
-    if not cart_items:
-        return []
 
-    orders = []
-    current_order = []
-    current_count = 0
-    current_amount = 0.0
-    current_products = set()  # 当前订单中的款号
-
-    for item in cart_items:
-        item_price = float(item['price'])
-        item_count = int(item['count'])
-        item_total = item_price * item_count
-        product_code = item['product_code']
-
-        # 检查是否可以加入当前订单
-        can_add = True
-
-        # 规则1: 最多N种不同款号规格
-        if product_code not in current_products and len(current_products) >= config.MAX_PRODUCTS_PER_ORDER:
-            can_add = False
-
-        # 规则2: 总数量不超过N个
-        if current_count + item_count > config.MAX_QUANTITY_PER_ORDER:
-            can_add = False
-
-        # 规则3: 金额不超过N元
-        if current_amount + item_total > config.MAX_AMOUNT_PER_ORDER:
-            can_add = False
-
-        if can_add and current_order:
-            # 可以加入当前订单
-            current_order.append(item)
-            current_count += item_count
-            current_amount += item_total
-            current_products.add(product_code)
-        else:
-            # 需要创建新订单
-            if current_order:
-                orders.append({
-                    'items': current_order,
-                    'total_count': current_count,
-                    'total_amount': current_amount,
-                    'product_count': len(current_products)
-                })
-
-            # 开始新订单
-            current_order = [item]
-            current_count = item_count
-            current_amount = item_total
-            current_products = {product_code}
-
-    # 添加最后一个订单
-    if current_order:
-        orders.append({
-            'items': current_order,
-            'total_count': current_count,
-            'total_amount': current_amount,
-            'product_count': len(current_products)
-        })
-
-    logger.info(f"🛒 购物车商品已分组为 {len(orders)} 个订单")
-    for i, order in enumerate(orders, 1):
-        logger.info(f"   订单{i}: {order['product_count']}种商品, {order['total_count']}件, ¥{order['total_amount']:.2f}")
-
-    return orders
 
 def execute_batch_checkout():
     """执行批量下单"""
@@ -288,69 +218,54 @@ def execute_batch_checkout():
     # 检查是否为测试模式
     test_mode = get_global_test_mode()
 
-    if test_mode:
-        # 测试模式：所有商品合并成一个订单
-        logger.info("🧪 测试模式：将所有商品合并成一个订单")
-        orders = [{
-            'items': cart_items,
-            'total_count': sum(int(item['count']) for item in cart_items),
-            'total_amount': sum(float(item['price']) * int(item['count']) for item in cart_items),
-            'product_count': len(cart_items)
-        }]
-        logger.info(f"🛒 测试订单: {orders[0]['product_count']}种商品, {orders[0]['total_count']}件, ¥{orders[0]['total_amount']:.2f}")
-    else:
-        # 正常模式：按规则分组订单
-        orders = split_cart_into_orders(cart_items)
+    # 简化逻辑：直接将购物车商品作为一个订单
+    # 分组功能已经保证每组购物车商品数量合理，无需再拆单
+    order = {
+        'items': cart_items,
+        'total_count': sum(int(item['count']) for item in cart_items),
+        'total_amount': sum(float(item['price']) * int(item['count']) for item in cart_items),
+        'product_count': len(cart_items)
+    }
 
-    if not orders:
-        logger.error("❌ 订单分组失败")
+    logger.info(f"🛒 订单详情: {order['product_count']}种商品, {order['total_count']}件, ¥{order['total_amount']:.2f}")
+
+    if not cart_items:
+        logger.error("❌ 购物车为空")
         return
 
-    # 执行每个订单
-    for i, order in enumerate(orders, 1):
-        try:
-            logger.info(f"🚀 正在处理第 {i}/{len(orders)} 个订单...")
+    # 执行订单
+    try:
+        logger.info(f"🚀 开始处理订单...")
 
-            # 构建多商品URL
-            cart_ids = [item['cart_id'] for item in order['items']]
-            checked_params = "&".join([f"checked={cart_id}" for cart_id in cart_ids])
-            settle_url = f"https://fenxiao.clim.cn/shop/settle.do?{checked_params}"
+        # 构建多商品URL
+        cart_ids = [item['cart_id'] for item in order['items']]
+        checked_params = "&".join([f"checked={cart_id}" for cart_id in cart_ids])
+        settle_url = f"https://fenxiao.clim.cn/shop/settle.do?{checked_params}"
 
-            logger.info(f"📋 订单详情: {order['product_count']}种商品, {order['total_count']}件, ¥{order['total_amount']:.2f}")
-            logger.info(f"🔗 结算链接: {settle_url}")
+        logger.info(f"🔗 结算链接: {settle_url}")
 
-            # 执行下单
-            checkout_result = submit_batch_order(settle_url, order)
+        # 执行下单
+        order_code = submit_batch_order(settle_url, order)
 
-            if checkout_result:
-                logger.info(f"✅ 第 {i} 个订单下单成功")
+        if order_code:
+            logger.info(f"✅ 订单下单成功，订单号: {order_code}")
 
-                # 立即获取最新订单并推送（这样可以立即弹窗）
-                try:
-                    logger.info("🔍 开始立即推送流程...")
-                    from .web import push_order_to_clients
-                    from ..common.orders import get_orders
+            # 立即推送订单号（这样可以立即弹窗）
+            try:
+                logger.info(f"🔍 开始立即推送订单号: {order_code}")
+                from .web import push_order_to_clients
 
-                    # 获取最新订单
-                    latest_orders = get_orders()
-                    logger.info(f"🔍 获取到的订单列表: {latest_orders}")
+                push_order_to_clients(order_code)
+                logger.info(f"🚀 订单号推送成功: {order_code}")
 
-                    if latest_orders:
-                        # 推送最新的订单号（真实订单号）
-                        for order_code in latest_orders[-1:]:  # 只推送最新的订单
-                            logger.info(f"🚀 立即推送真实订单号: {order_code}")
-                            push_order_to_clients(order_code)
-                    else:
-                        logger.warning("⚠️ 获取到的订单列表为空，无法立即推送")
+            except Exception as e:
+                logger.error(f"❌ 推送订单失败: {e}", exc_info=True)
 
-                except Exception as e:
-                    logger.error(f"❌ 推送订单失败: {e}", exc_info=True)
+        else:
+            logger.error(f"❌ 订单下单失败")
 
-            else:
-                logger.error(f"❌ 第 {i} 个订单下单失败")
-
-        except Exception as e:
-            logger.error(f"❌ 处理第 {i} 个订单时出错: {e}", exc_info=True)
+    except Exception as e:
+        logger.error(f"❌ 处理订单时出错: {e}", exc_info=True)
 
     # 清空批量购物车
     clear_batch_cart()
@@ -460,7 +375,7 @@ def submit_batch_order(settle_url, order):
                     except Exception as e:
                         logger.warning(f"⚠️ 刷新订单列表失败: {e}")
 
-                    return True
+                    return order_code  # 返回订单号而不是True
                 else:
                     error_msg = result.get('errorMsg', '未知错误')
                     logger.error(f"❌ 订单提交失败: {error_msg}")
@@ -634,7 +549,7 @@ def selectBuyDefect(sku):
 
 # 保存到购物车
 def saveCart(soup: BeautifulSoup):
-    logger.info('saveCart')
+    logger.debug('saveCart')
     type_code = soup.find('input', {'name': 'typeCode'})['value']
     price = soup.find('input', {'name': 'price'})['value']
     product_code = soup.find('input', {'name': 'productCode'})['value']
@@ -1085,19 +1000,12 @@ def should_check_products():
 def process_keyword_direct(keyword):
     """直接处理关键词，支持单独建单和统一建单模式"""
 
-    # 检查是否已达到最大检测轮数
-    if _should_skip_keyword(keyword):
-        return False
-
-    # 初始化关键词状态
-    _initialize_keyword_state(keyword)
-
     # 查询商品
     product = query_product(keyword)
     logger.debug(f'product: {product}')
 
     if not product:
-        _handle_no_product_found(keyword)
+        logger.debug(f"📡 关键词 {keyword} 暂无库存")
         return False
 
     # 获取系统状态
@@ -1114,67 +1022,6 @@ def process_keyword_direct(keyword):
         return _handle_notification_mode(keyword, product)
 
 
-def _should_skip_keyword(keyword):
-    """检查关键词是否应该跳过处理"""
-    from ..common.status import get_global_auto_order_status
-    auto_order_enabled = get_global_auto_order_status()
-    test_mode = get_global_test_mode()
-    batch_mode = get_global_batch_order_mode()
-
-    # 纯监控模式（只开监控，不开自动下单和测试）不应该有轮数限制
-    if not auto_order_enabled and not test_mode:
-        logger.debug(f"📡 [MONITOR] 关键词 {keyword} 处于纯监控模式，无轮数限制")
-        return False
-
-    # 其他模式才应用轮数限制
-    mode_name = "批量模式" if batch_mode else "单独建单模式"
-    if test_mode:
-        mode_name = "测试模式"
-
-    with state.batch_lock:
-        if keyword in state.processed_keywords_batch:
-            keyword_info = state.processed_keywords_batch[keyword]
-            if keyword_info['count'] >= config.MAX_DETECTION_ROUNDS:
-                # 检查是否是第1轮无货导致的跳过，如果是则不显示误导性日志
-                if keyword_info.get('first_round_no_stock', False):
-                    logger.debug(f"📦 关键字 {keyword} 第1轮无货已跳过后续检测")
-                else:
-                    logger.info(f"{mode_name}下关键字 {keyword} 已检测{config.MAX_DETECTION_ROUNDS}轮，停止检测")
-                return True
-    return False
-
-
-def _initialize_keyword_state(keyword):
-    """初始化关键词状态"""
-    with state.batch_lock:
-        if keyword not in state.processed_keywords_batch:
-            state.processed_keywords_batch[keyword] = {
-                'count': 0,
-                'last_stock': 0,
-                'first_round_no_stock': False
-            }
-
-
-def _handle_no_product_found(keyword):
-    """处理未找到商品的情况"""
-    from ..common.status import get_global_auto_order_status
-    auto_order_enabled = get_global_auto_order_status()
-    test_mode = get_global_test_mode()
-    batch_mode = get_global_batch_order_mode()
-
-    # 纯监控模式不增加计数，允许持续检测
-    if not auto_order_enabled and not test_mode:
-        logger.debug(f"📡 [MONITOR] 关键词 {keyword} 纯监控模式，暂无库存，继续监控")
-        return
-
-    # 其他模式才增加计数
-    if batch_mode or (not batch_mode and not test_mode):
-        with state.batch_lock:
-            if keyword in state.processed_keywords_batch:
-                state.processed_keywords_batch[keyword]['count'] += 1
-                # 如果库存为0，直接设置为最大轮数
-                if state.processed_keywords_batch[keyword]['last_stock'] == 0:
-                    state.processed_keywords_batch[keyword]['count'] = config.MAX_DETECTION_ROUNDS
 
 
 def _handle_order_mode(keyword, product, test_mode, batch_mode):
@@ -1183,7 +1030,6 @@ def _handle_order_mode(keyword, product, test_mode, batch_mode):
 
     if not param_save_cart:
         logger.error(f"❌ [PROCESS] 关键词 {keyword} selectBuyDefect 失败")
-        _update_keyword_count_on_failure(keyword, batch_mode, test_mode)
         return True
 
     product_code_value = param_save_cart.get('productCode') or param_save_cart.get('product_code')
@@ -1201,7 +1047,7 @@ def _handle_order_mode(keyword, product, test_mode, batch_mode):
     if use_cart:
         return _handle_cart_mode(keyword, product, product_code_value, count, mode_name)
     else:
-        return _handle_direct_order_mode(keyword, product_code_value, count, mode_name, batch_mode)
+        return _handle_direct_order_mode(keyword, product_code_value, count, mode_name)
 
 
 def _determine_processing_mode(test_mode, batch_mode, keyword):
@@ -1228,9 +1074,6 @@ def _handle_cart_mode(keyword, product, product_code_value, count, mode_name):
 
     if not cart_result:
         logger.error(f"❌ [PROCESS] 关键词 {keyword} selectBuyDefect 失败")
-        batch_mode = get_global_batch_order_mode()
-        test_mode = get_global_test_mode()
-        _update_keyword_count_on_failure(keyword, batch_mode, test_mode, count)
         return True
 
     # 构建商品信息
@@ -1247,22 +1090,14 @@ def _handle_cart_mode(keyword, product, product_code_value, count, mode_name):
     return True
 
 
-def _handle_direct_order_mode(keyword, product_code_value, count, mode_name, batch_mode):
-    """处理直接下单模式"""
+def _handle_direct_order_mode(keyword, product_code_value, count, mode_name):
+    """处理直接下单模式（简化版）"""
     checkout_result = check_cart(product_code_value, count, config.PAY_TYPE_WECHAT)
 
     if not checkout_result:
         return False
 
     logger.info(f"✅ [PROCESS] {mode_name}：关键字 {keyword} 自动下单成功")
-
-    # 单独建单模式下更新计数
-    if not batch_mode:
-        with state.batch_lock:
-            if keyword in state.processed_keywords_batch:
-                state.processed_keywords_batch[keyword]['count'] += 1
-                state.processed_keywords_batch[keyword]['last_stock'] = count
-
     return True
 
 
@@ -1277,22 +1112,8 @@ def _handle_notification_mode(keyword, product):
     logger.info(f"关键字 {keyword} 通知发送成功")
     save_keyword_status(keyword)
 
-    # 通知模式下，通知一次后停止后续检测
-    with state.batch_lock:
-        if keyword in state.processed_keywords_batch:
-            logger.info(f"🛑 关键字 {keyword} 监控模式通知完成，停止后续检测。")
-            state.processed_keywords_batch[keyword]['count'] = config.MAX_DETECTION_ROUNDS
-
     return True
 
-
-def _update_keyword_count_on_failure(keyword, batch_mode, test_mode, count=0):
-    """失败时更新关键词计数"""
-    if batch_mode or test_mode:
-        with state.batch_lock:
-            if keyword in state.processed_keywords_batch:
-                state.processed_keywords_batch[keyword]['count'] += 1
-                state.processed_keywords_batch[keyword]['last_stock'] = count
 
 
 def _build_product_info(keyword, product_code_value, product):

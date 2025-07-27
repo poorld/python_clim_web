@@ -13,6 +13,8 @@ from ..common.status import load_auto_order_status, set_auto_order_status
 from ..common.status import load_monitor_interval, set_monitor_interval, get_global_monitor_interval
 from ..common.status import load_batch_order_mode, set_batch_order_mode, get_global_batch_order_mode
 from ..common.status import load_test_mode, set_test_mode, get_global_test_mode
+from ..common.status import load_group_enabled, set_group_enabled, get_global_group_enabled
+from ..common.status import load_group_size, set_group_size, get_global_group_size
 from ..common.status import get_refresh_stats
 from ..common.orders import save_orders_history, get_global_orders_history, get_orders, set_orders
 from ..jobs import OnceJobThread
@@ -343,12 +345,16 @@ def home():
     auto_order_status = load_auto_order_status()
     monitor_interval = get_global_monitor_interval()
     batch_order_mode = get_global_batch_order_mode()
+    group_enabled = get_global_group_enabled()
+    group_size = get_global_group_size()
     refresh_stats = get_refresh_stats()
     return render_template('home.html',
                          monitor_status=monitor_status,
                          auto_order_status=auto_order_status,
                          monitor_interval=monitor_interval,
                          batch_order_mode=batch_order_mode,
+                         group_enabled=group_enabled,
+                         group_size=group_size,
                          daily_refresh_count=refresh_stats['daily_count'],
                          hourly_refresh_count=refresh_stats['hourly_count'],
                          keywords=keywords,
@@ -468,6 +474,48 @@ def api_toggle_batch_mode():
             'message': message,
             'enabled': enabled,
             'mode_text': mode_text
+        })
+    except Exception as e:
+        return jsonify({'success': False, 'message': f'操作失败: {str(e)}'})
+
+# 异步分组开关
+@app.route('/api/toggle_group_enabled', methods=['POST'])
+def api_toggle_group_enabled():
+    try:
+        data = request.get_json()
+        enabled = data.get('enabled', False)
+
+        set_group_enabled(enabled)
+
+        if enabled:
+            message = '分组模式已启用'
+        else:
+            message = '分组模式已禁用'
+
+        return jsonify({
+            'success': True,
+            'message': message,
+            'enabled': enabled
+        })
+    except Exception as e:
+        return jsonify({'success': False, 'message': f'操作失败: {str(e)}'})
+
+# 异步分组大小设置
+@app.route('/api/update_group_size', methods=['POST'])
+def api_update_group_size():
+    try:
+        data = request.get_json()
+        size = data.get('size', 5)
+
+        if not isinstance(size, int) or size < 1 or size > 20:
+            return jsonify({'success': False, 'message': '分组大小必须在1-20之间'})
+
+        set_group_size(size)
+
+        return jsonify({
+            'success': True,
+            'message': f'分组大小已设置为{size}个',
+            'size': size
         })
     except Exception as e:
         return jsonify({'success': False, 'message': f'操作失败: {str(e)}'})

@@ -1,0 +1,1527 @@
+2025-07-27 19:51:08 - INFO - main:26 - 📊 初始监控间隔: 10秒
+2025-07-27 19:51:08 - INFO - web:374 - 🚀 Flask Web服务启动中...
+2025-07-27 19:51:08 - INFO - web:375 - 📡 实时日志推送系统已激活
+2025-07-27 19:51:08 - INFO - main:41 - ⏸️ 监控状态为关闭，不启动监控线程
+2025-07-27 19:51:08 - INFO - web:377 - 🌐 访问地址: http://0.0.0.0:5000
+2025-07-27 19:51:08 - INFO - job_checkout:389 - 🔍 订单状态检查线程已启动
+2025-07-27 19:51:08 - INFO - main:47 - 🔍 订单状态检查线程已启动
+2025-07-27 19:51:08 - INFO - web:378 - 🔧 日志捕获系统状态检查...
+2025-07-27 19:51:08 - INFO - main:49 - 🎛️ 监控间隔可在Web界面动态调整: http://localhost:5000
+2025-07-27 19:51:08 - INFO - web:394 - 🚀 尝试启动Flask服务...
+2025-07-27 19:51:10 - INFO - web:384 - ✅ 日志推送测试 - 这是一条测试日志
+2025-07-27 19:51:10 - INFO - web:385 - 🟢 成功：日志系统工作正常
+2025-07-27 19:51:10 - ERROR - web:386 - 🔴 错误：这是一条错误测试日志
+2025-07-27 19:51:10 - WARNING - web:387 - 🟡 警告：这是一条警告测试日志
+2025-07-27 19:51:11 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-27 19:51:11 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-27 19:51:11 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-27 19:51:11 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-27 19:51:16 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-27 19:51:20 - INFO - status:102 - ⚡ 监控间隔已调整: 10秒 → 15秒 (⚡ 正常监控模式)
+2025-07-27 19:52:29 - INFO - keywords:28 - Added keyword: F24356MTI
+2025-07-27 19:52:31 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-27 19:53:04 - INFO - keywords:28 - Added keyword: C0941LEB
+2025-07-27 19:53:06 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-27 19:53:12 - INFO - status:165 - 🧪 测试模式已启用：
+2025-07-27 19:53:12 - INFO - status:166 -    - 强制执行检测（忽略商品总数变化）
+2025-07-27 19:53:12 - INFO - status:167 -    - 只弹一次付款窗口
+2025-07-27 19:53:12 - INFO - status:168 -    - 测试完成后自动关闭
+2025-07-27 19:53:12 - INFO - web:179 - 🧪 测试模式已启用：只弹一次付款窗口
+2025-07-27 19:53:12 - ERROR - web:215 - ❌ 测试下单失败: No module named 'common'
+Traceback (most recent call last):
+  File "d:\poorld\github\python_clim_web\src\python_clim_web\service\web.py", line 182, in test_order
+    from common.keywords import get_global_keywords
+ModuleNotFoundError: No module named 'common'
+2025-07-27 19:53:12 - INFO - status:170 - 🧪 测试模式已关闭：恢复正常监控模式
+2025-07-27 19:59:22 - INFO - main:26 - 📊 初始监控间隔: 15秒
+2025-07-27 19:59:22 - INFO - web:374 - 🚀 Flask Web服务启动中...
+2025-07-27 19:59:22 - INFO - web:375 - 📡 实时日志推送系统已激活
+2025-07-27 19:59:22 - INFO - main:41 - ⏸️ 监控状态为关闭，不启动监控线程
+2025-07-27 19:59:22 - INFO - web:377 - 🌐 访问地址: http://0.0.0.0:5000
+2025-07-27 19:59:22 - INFO - web:378 - 🔧 日志捕获系统状态检查...
+2025-07-27 19:59:22 - INFO - job_checkout:389 - 🔍 订单状态检查线程已启动
+2025-07-27 19:59:22 - INFO - main:47 - 🔍 订单状态检查线程已启动
+2025-07-27 19:59:22 - INFO - web:394 - 🚀 尝试启动Flask服务...
+2025-07-27 19:59:22 - INFO - main:49 - 🎛️ 监控间隔可在Web界面动态调整: http://localhost:5000
+2025-07-27 19:59:24 - INFO - web:384 - ✅ 日志推送测试 - 这是一条测试日志
+2025-07-27 19:59:24 - INFO - web:385 - 🟢 成功：日志系统工作正常
+2025-07-27 19:59:24 - ERROR - web:386 - 🔴 错误：这是一条错误测试日志
+2025-07-27 19:59:24 - WARNING - web:387 - 🟡 警告：这是一条警告测试日志
+2025-07-27 19:59:25 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-27 19:59:26 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-27 20:01:04 - INFO - main:26 - 📊 初始监控间隔: 15秒
+2025-07-27 20:01:04 - INFO - web:374 - 🚀 Flask Web服务启动中...
+2025-07-27 20:01:04 - INFO - web:375 - 📡 实时日志推送系统已激活
+2025-07-27 20:01:04 - INFO - web:377 - 🌐 访问地址: http://0.0.0.0:5000
+2025-07-27 20:01:04 - INFO - main:41 - ⏸️ 监控状态为关闭，不启动监控线程
+2025-07-27 20:01:04 - INFO - web:378 - 🔧 日志捕获系统状态检查...
+2025-07-27 20:01:04 - INFO - job_checkout:389 - 🔍 订单状态检查线程已启动
+2025-07-27 20:01:04 - INFO - main:47 - 🔍 订单状态检查线程已启动
+2025-07-27 20:01:04 - INFO - web:394 - 🚀 尝试启动Flask服务...
+2025-07-27 20:01:04 - INFO - main:49 - 🎛️ 监控间隔可在Web界面动态调整: http://localhost:5000
+2025-07-27 20:01:06 - INFO - web:384 - ✅ 日志推送测试 - 这是一条测试日志
+2025-07-27 20:01:06 - INFO - web:385 - 🟢 成功：日志系统工作正常
+2025-07-27 20:01:06 - ERROR - web:386 - 🔴 错误：这是一条错误测试日志
+2025-07-27 20:01:06 - WARNING - web:387 - 🟡 警告：这是一条警告测试日志
+2025-07-27 20:01:06 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-27 20:01:07 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-27 22:03:06 - INFO - main:26 - 📊 初始监控间隔: 15秒
+2025-07-27 22:03:06 - INFO - web:374 - 🚀 Flask Web服务启动中...
+2025-07-27 22:03:06 - INFO - web:375 - 📡 实时日志推送系统已激活
+2025-07-27 22:03:06 - INFO - web:377 - 🌐 访问地址: http://0.0.0.0:5000
+2025-07-27 22:03:06 - INFO - main:41 - ⏸️ 监控状态为关闭，不启动监控线程
+2025-07-27 22:03:06 - INFO - web:378 - 🔧 日志捕获系统状态检查...
+2025-07-27 22:03:06 - INFO - job_checkout:389 - 🔍 订单状态检查线程已启动
+2025-07-27 22:03:06 - INFO - main:47 - 🔍 订单状态检查线程已启动
+2025-07-27 22:03:06 - INFO - web:394 - 🚀 尝试启动Flask服务...
+2025-07-27 22:03:06 - INFO - main:49 - 🎛️ 监控间隔可在Web界面动态调整: http://localhost:5000
+2025-07-27 22:03:08 - INFO - web:384 - ✅ 日志推送测试 - 这是一条测试日志
+2025-07-27 22:03:08 - INFO - web:385 - 🟢 成功：日志系统工作正常
+2025-07-27 22:03:08 - ERROR - web:386 - 🔴 错误：这是一条错误测试日志
+2025-07-27 22:03:08 - WARNING - web:387 - 🟡 警告：这是一条警告测试日志
+2025-07-27 22:03:48 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-27 22:03:56 - INFO - status:165 - 🧪 测试模式已启用：
+2025-07-27 22:03:56 - INFO - status:166 -    - 强制执行检测（忽略商品总数变化）
+2025-07-27 22:03:56 - INFO - status:167 -    - 只弹一次付款窗口
+2025-07-27 22:03:56 - INFO - status:168 -    - 测试完成后自动关闭
+2025-07-27 22:03:56 - INFO - web:179 - 🧪 测试模式已启用：只弹一次付款窗口
+2025-07-27 22:03:56 - INFO - web:190 - 🧪 测试模式：开始检测 2 个关键词
+2025-07-27 22:03:56 - INFO - job_checkout:37 - 🧪 测试单独建单模式：检测所有款号，每个有货商品立即下单
+2025-07-27 22:03:56 - INFO - product_checkout:119 - 🔄 [STATE] 批量状态已重置:
+2025-07-27 22:03:56 - INFO - product_checkout:120 -    清空购物车: 0 → 0
+2025-07-27 22:03:56 - INFO - product_checkout:121 -    清空关键词记录: 0 → 0
+2025-07-27 22:03:56 - INFO - product_checkout:122 -    重置轮次计数: → 0
+2025-07-27 22:03:56 - INFO - product_checkout:204 - 🔄 批量检测轮次已重置
+2025-07-27 22:03:56 - INFO - job_checkout:82 - 🔄 [TEST-SINGLE] 测试单独建单模式状态重置完成
+2025-07-27 22:03:56 - INFO - job_checkout:83 - 🔄 测试单独建单检测开始...
+2025-07-27 22:03:56 - INFO - status:170 - 🧪 测试模式已关闭：恢复正常监控模式
+2025-07-27 22:03:56 - INFO - product_checkout:119 - 🔄 [STATE] 批量状态已重置:
+2025-07-27 22:03:56 - INFO - product_checkout:120 -    清空购物车: 0 → 0
+2025-07-27 22:03:56 - INFO - product_checkout:121 -    清空关键词记录: 0 → 0
+2025-07-27 22:03:56 - INFO - product_checkout:122 -    重置轮次计数: → 0
+2025-07-27 22:03:56 - INFO - product_checkout:204 - 🔄 批量检测轮次已重置
+2025-07-27 22:03:56 - INFO - job_checkout:91 - 🔍 [1/2] 测试关键词: F24356MTI
+2025-07-27 22:03:56 - INFO - product_checkout:520 - query_product: F24356MTI
+2025-07-27 22:03:56 - DEBUG - product_checkout:529 - status_code: 200
+2025-07-27 22:03:56 - DEBUG - product_checkout:530 - url: https://fenxiao.clim.cn/login/login.do
+2025-07-27 22:03:56 - INFO - product_checkout:502 - do_login
+2025-07-27 22:03:57 - DEBUG - product_checkout:504 - 200
+2025-07-27 22:03:57 - DEBUG - product_checkout:506 - {'result': True}
+2025-07-27 22:03:57 - DEBUG - product_checkout:512 - JSESSIONID=287349AF9A2EC7CBDFB7143CADBE96CF;
+2025-07-27 22:03:57 - DEBUG - product_checkout:514 - loadcookie: JSESSIONID=287349AF9A2EC7CBDFB7143CADBE96CF;
+2025-07-27 22:03:57 - INFO - product_checkout:516 - --------------------------------------------------
+2025-07-27 22:03:57 - INFO - product_checkout:520 - query_product: F24356MTI
+2025-07-27 22:03:58 - DEBUG - product_checkout:529 - status_code: 200
+2025-07-27 22:03:58 - DEBUG - product_checkout:530 - url: https://fenxiao.clim.cn/shop/products.do?keyword=F24356MTI&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-27 22:03:58 - INFO - product_checkout:550 - 商品列表 [F24356MTI]: 共1条记录
+2025-07-27 22:03:58 - INFO - product_checkout:574 -   商品1: COACH 奥莱款别针 (SKU: 10105647-F24356MTI) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/oldoperation/prod/images/a505292f70774ed7867ace26c70cf664.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-27 22:03:58 - INFO - product_checkout:582 - 📦 找到 1 个有效商品
+2025-07-27 22:03:58 - INFO - product_checkout:598 - 提取的SKU: 10105647-F24356MTI
+2025-07-27 22:03:58 - INFO - job_checkout:97 - 📦 关键词 F24356MTI 有库存，准备立即下单
+2025-07-27 22:03:58 - INFO - product_checkout:623 - selectBuyDefect
+2025-07-27 22:03:58 - DEBUG - product_checkout:625 - sku: 10105647-F24356MTI
+2025-07-27 22:03:58 - DEBUG - product_checkout:627 - status_code: 200
+2025-07-27 22:03:58 - INFO - product_checkout:636 - saveCart
+2025-07-27 22:03:58 - DEBUG - product_checkout:651 - param_save_cart: {'typeCode': '68', 'price': '81.0', 'productCode': '101548701', 'count': 1}
+2025-07-27 22:03:59 - DEBUG - product_checkout:654 - status_code: 200
+2025-07-27 22:03:59 - DEBUG - product_checkout:655 - content: true
+2025-07-27 22:03:59 - INFO - product_checkout:657 - 加入购物车成功
+2025-07-27 22:04:00 - INFO - product_checkout:715 - 结算商品: 115589, 支付类型: 2
+2025-07-27 22:04:01 - INFO - product_checkout:723 - name: COACH 奥莱款别针
+2025-07-27 22:04:01 - DEBUG - product_checkout:756 - settleData: {'rankCode': '68', 'tagCode': '30', 'shippingMethod': '1', 'thirdcode': '', 'payType': '2', 'receiver': '李小峰', 'recvphone': '18529551929', 'provincecode': 19, 'citycode': 202, 'countycode': 1754, 'recvaddr': '化龙镇山门大道700号', 'zip': '', 'idno': '', 'exchangeRate': '1', 'cartCodes': '115589', 'defectNo': '', 'productcode': '101548701', 'counts': 1, 'description': ''}
+2025-07-27 22:04:01 - DEBUG - product_checkout:761 - 📤 提交状态码: 200
+2025-07-27 22:04:01 - DEBUG - product_checkout:766 - 📋 提交结果: {'data': {'childOrderCode': False, 'citycode': 202, 'cityname': '广州市', 'code': 'FX2507272375551', 'countycode': 1754, 'countyname': '番禺区', 'createtime': '2025-07-27 22:04:04', 'currency': 'CNY', 'defectNo': '', 'defectPriceCode': 0, 'description': '', 'disWarehouseCode': 2, 'distributorcode': 10025, 'distributorsettlecode': 1, 'exchangeRate': 1, 'existReturnOrder': False, 'goodsamount': 0, 'idno': '', 'issubunitorder': False, 'orderOriginType': 1, 'paid': 81, 'payType': '2', 'platformcode': 14, 'price': 0, 'productcode': '101548701', 'provincecode': 19, 'provincename': '广东省', 'rankCode': 68, 'receiver': '李小峰', 'recvaddr': '化龙镇山门大道700号', 'recvphone': '18529551929', 'rmbAmount': 81.0, 'settlecode': 1, 'shippingMethod': 1, 'statuscode': 5, 'tagCode': 30, 'thirdcode': '', 'thirdprice': 0, 'ywjCode': 0, 'zip': ''}, 'errorMsg': '成功', 'resultCode': 0}
+2025-07-27 22:04:01 - INFO - product_checkout:772 - ✅ 单独下单成功!
+2025-07-27 22:04:01 - INFO - product_checkout:773 - 📦 订单号: FX2507272375551
+2025-07-27 22:04:01 - INFO - product_checkout:774 - 💰 订单金额: ¥81
+2025-07-27 22:04:01 - INFO - product_checkout:775 - 💳 支付类型: 微信支付
+2025-07-27 22:04:02 - DEBUG - pushplus:28 - <Response [200]>
+2025-07-27 22:04:02 - INFO - orders:63 - 📝 新订单已添加到列表: FX2507272375551
+2025-07-27 22:04:02 - INFO - product_checkout:788 - 🚀 直接推送订单号: FX2507272375551
+2025-07-27 22:04:02 - DEBUG - web:256 - 📤 SSE发送订单: FX2507272375551
+2025-07-27 22:04:02 - INFO - web:313 - 📤 订单 FX2507272375551 已推送到队列，队列大小: 1
+2025-07-27 22:04:02 - INFO - job_checkout:110 - ✅ 关键词 F24356MTI 测试成功，已立即下单（第1个订单）
+2025-07-27 22:04:02 - INFO - job_checkout:91 - 🔍 [2/2] 测试关键词: C0941LEB
+2025-07-27 22:04:02 - INFO - product_checkout:520 - query_product: C0941LEB
+2025-07-27 22:04:02 - INFO - orders:20 - 📝 订单 FX2507272375551 已保存到历史记录
+2025-07-27 22:04:02 - DEBUG - product_checkout:529 - status_code: 200
+2025-07-27 22:04:02 - DEBUG - product_checkout:530 - url: https://fenxiao.clim.cn/shop/products.do?keyword=C0941LEB&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-27 22:04:02 - INFO - product_checkout:550 - 商品列表 [C0941LEB]: 共0条记录
+2025-07-27 22:04:02 - INFO - job_checkout:119 - 📦 关键词 C0941LEB 暂无库存
+2025-07-27 22:04:02 - INFO - status:165 - 🧪 测试模式已启用：
+2025-07-27 22:04:02 - INFO - status:166 -    - 强制执行检测（忽略商品总数变化）
+2025-07-27 22:04:02 - INFO - status:167 -    - 只弹一次付款窗口
+2025-07-27 22:04:02 - INFO - status:168 -    - 测试完成后自动关闭
+2025-07-27 22:04:02 - INFO - job_checkout:127 - 📊 测试单独建单检测完成：1/2 个关键词有货并已下单
+2025-07-27 22:04:02 - INFO - job_checkout:128 - 🎉 测试单独建单模式完成
+2025-07-27 22:04:02 - INFO - status:170 - 🧪 测试模式已关闭：恢复正常监控模式
+2025-07-27 22:04:02 - INFO - product_checkout:119 - 🔄 [STATE] 批量状态已重置:
+2025-07-27 22:04:02 - INFO - product_checkout:120 -    清空购物车: 0 → 0
+2025-07-27 22:04:02 - INFO - product_checkout:121 -    清空关键词记录: 0 → 0
+2025-07-27 22:04:02 - INFO - product_checkout:122 -    重置轮次计数: → 0
+2025-07-27 22:04:02 - INFO - product_checkout:204 - 🔄 批量检测轮次已重置
+2025-07-27 22:04:02 - INFO - web:202 - 🧪 测试模式已关闭
+2025-07-27 22:04:06 - INFO - product_checkout:938 - 🔍 检查 1 个订单的付款状态...
+2025-07-27 22:04:06 - INFO - product_checkout:955 - 📊 当前待付款订单总数: 1
+2025-07-27 22:04:06 - INFO - product_checkout:972 - 📋 发现待付款订单: FX2507272375551
+2025-07-27 22:04:06 - INFO - product_checkout:976 - 📊 服务器端待付款订单: ['FX2507272375551']
+2025-07-27 22:04:06 - INFO - product_checkout:977 - 📊 本地订单列表: ['FX2507272375551']
+2025-07-27 22:04:06 - INFO - product_checkout:985 - 📋 订单 FX2507272375551 仍为待付款状态
+2025-07-27 22:04:06 - INFO - product_checkout:991 - 📋 所有订单仍为待付款状态
+2025-07-27 22:04:11 - INFO - product_checkout:938 - 🔍 检查 1 个订单的付款状态...
+2025-07-27 22:04:12 - INFO - product_checkout:955 - 📊 当前待付款订单总数: 1
+2025-07-27 22:04:12 - INFO - product_checkout:972 - 📋 发现待付款订单: FX2507272375551
+2025-07-27 22:04:12 - INFO - product_checkout:976 - 📊 服务器端待付款订单: ['FX2507272375551']
+2025-07-27 22:04:12 - INFO - product_checkout:977 - 📊 本地订单列表: ['FX2507272375551']
+2025-07-27 22:04:12 - INFO - product_checkout:985 - 📋 订单 FX2507272375551 仍为待付款状态
+2025-07-27 22:04:12 - INFO - product_checkout:991 - 📋 所有订单仍为待付款状态
+2025-07-27 22:04:17 - INFO - product_checkout:938 - 🔍 检查 1 个订单的付款状态...
+2025-07-27 22:04:18 - INFO - product_checkout:955 - 📊 当前待付款订单总数: 1
+2025-07-27 22:04:18 - INFO - product_checkout:972 - 📋 发现待付款订单: FX2507272375551
+2025-07-27 22:04:18 - INFO - product_checkout:976 - 📊 服务器端待付款订单: ['FX2507272375551']
+2025-07-27 22:04:18 - INFO - product_checkout:977 - 📊 本地订单列表: ['FX2507272375551']
+2025-07-27 22:04:18 - INFO - product_checkout:985 - 📋 订单 FX2507272375551 仍为待付款状态
+2025-07-27 22:04:18 - INFO - product_checkout:991 - 📋 所有订单仍为待付款状态
+2025-07-27 22:04:23 - INFO - product_checkout:938 - 🔍 检查 1 个订单的付款状态...
+2025-07-27 22:04:23 - INFO - product_checkout:955 - 📊 当前待付款订单总数: 1
+2025-07-27 22:04:23 - INFO - product_checkout:972 - 📋 发现待付款订单: FX2507272375551
+2025-07-27 22:04:23 - INFO - product_checkout:976 - 📊 服务器端待付款订单: ['FX2507272375551']
+2025-07-27 22:04:23 - INFO - product_checkout:977 - 📊 本地订单列表: ['FX2507272375551']
+2025-07-27 22:04:23 - INFO - product_checkout:985 - 📋 订单 FX2507272375551 仍为待付款状态
+2025-07-27 22:04:23 - INFO - product_checkout:991 - 📋 所有订单仍为待付款状态
+2025-07-27 22:04:28 - INFO - product_checkout:938 - 🔍 检查 1 个订单的付款状态...
+2025-07-27 22:04:29 - INFO - product_checkout:955 - 📊 当前待付款订单总数: 1
+2025-07-27 22:04:29 - INFO - product_checkout:972 - 📋 发现待付款订单: FX2507272375551
+2025-07-27 22:04:29 - INFO - product_checkout:976 - 📊 服务器端待付款订单: ['FX2507272375551']
+2025-07-27 22:04:29 - INFO - product_checkout:977 - 📊 本地订单列表: ['FX2507272375551']
+2025-07-27 22:04:29 - INFO - product_checkout:985 - 📋 订单 FX2507272375551 仍为待付款状态
+2025-07-27 22:04:29 - INFO - product_checkout:991 - 📋 所有订单仍为待付款状态
+2025-07-27 22:04:34 - INFO - product_checkout:938 - 🔍 检查 1 个订单的付款状态...
+2025-07-27 22:04:34 - INFO - product_checkout:955 - 📊 当前待付款订单总数: 1
+2025-07-27 22:04:34 - INFO - product_checkout:972 - 📋 发现待付款订单: FX2507272375551
+2025-07-27 22:04:34 - INFO - product_checkout:976 - 📊 服务器端待付款订单: ['FX2507272375551']
+2025-07-27 22:04:34 - INFO - product_checkout:977 - 📊 本地订单列表: ['FX2507272375551']
+2025-07-27 22:04:34 - INFO - product_checkout:985 - 📋 订单 FX2507272375551 仍为待付款状态
+2025-07-27 22:04:34 - INFO - product_checkout:991 - 📋 所有订单仍为待付款状态
+2025-07-27 22:04:39 - INFO - product_checkout:938 - 🔍 检查 1 个订单的付款状态...
+2025-07-27 22:04:40 - INFO - product_checkout:955 - 📊 当前待付款订单总数: 1
+2025-07-27 22:04:40 - INFO - product_checkout:972 - 📋 发现待付款订单: FX2507272375551
+2025-07-27 22:04:40 - INFO - product_checkout:976 - 📊 服务器端待付款订单: ['FX2507272375551']
+2025-07-27 22:04:40 - INFO - product_checkout:977 - 📊 本地订单列表: ['FX2507272375551']
+2025-07-27 22:04:40 - INFO - product_checkout:985 - 📋 订单 FX2507272375551 仍为待付款状态
+2025-07-27 22:04:40 - INFO - product_checkout:991 - 📋 所有订单仍为待付款状态
+2025-07-27 22:04:45 - INFO - product_checkout:938 - 🔍 检查 1 个订单的付款状态...
+2025-07-27 22:04:46 - INFO - product_checkout:955 - 📊 当前待付款订单总数: 1
+2025-07-27 22:04:46 - INFO - product_checkout:972 - 📋 发现待付款订单: FX2507272375551
+2025-07-27 22:04:46 - INFO - product_checkout:976 - 📊 服务器端待付款订单: ['FX2507272375551']
+2025-07-27 22:04:46 - INFO - product_checkout:977 - 📊 本地订单列表: ['FX2507272375551']
+2025-07-27 22:04:46 - INFO - product_checkout:985 - 📋 订单 FX2507272375551 仍为待付款状态
+2025-07-27 22:04:46 - INFO - product_checkout:991 - 📋 所有订单仍为待付款状态
+2025-07-27 22:04:51 - INFO - product_checkout:938 - 🔍 检查 1 个订单的付款状态...
+2025-07-27 22:04:51 - INFO - product_checkout:955 - 📊 当前待付款订单总数: 0
+2025-07-27 22:04:51 - INFO - product_checkout:976 - 📊 服务器端待付款订单: []
+2025-07-27 22:04:51 - INFO - product_checkout:977 - 📊 本地订单列表: ['FX2507272375551']
+2025-07-27 22:04:51 - INFO - product_checkout:983 - ✅ 订单 FX2507272375551 已付款（不在待付款列表中）
+2025-07-27 22:04:51 - INFO - web:324 - 🗑️ 已从订单列表移除: FX2507272375551
+2025-07-27 22:04:51 - DEBUG - web:249 - 📤 SSE发送消息: {'type': 'remove_order', 'order': 'FX2507272375551', 'timestamp': 1753625091.6150794}
+2025-07-27 22:04:51 - INFO - web:333 - 📤 订单移除消息已推送: FX2507272375551
+2025-07-27 22:04:51 - INFO - product_checkout:989 - 🗑️ 已移除 1 个已付款订单
+2025-07-27 22:06:07 - INFO - keywords:28 - Added keyword: CA193LHWPU
+2025-07-27 22:06:08 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-27 22:06:11 - INFO - keywords:37 - Removed keyword: C0941LEB
+2025-07-27 22:06:12 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-27 22:06:18 - INFO - status:102 - ⚡ 监控间隔已调整: 15秒 → 60秒 (🛡️ 低频节能模式)
+2025-07-27 22:08:05 - INFO - status:43 - 🚀 启动监控线程...
+2025-07-27 22:08:05 - INFO - __init__:236 - 🚀 动态调度器启动，初始间隔: 60秒
+2025-07-27 22:08:05 - INFO - __init__:315 - ✅ 监控线程启动成功
+2025-07-27 22:08:05 - INFO - status:45 - ✅ 监控线程已启动
+2025-07-27 22:08:05 - INFO - product_checkout:998 - query_product_count
+2025-07-27 22:08:06 - DEBUG - product_checkout:1003 - status_code: 200
+2025-07-27 22:08:06 - INFO - product_checkout:1014 - 商品总数: 1719
+2025-07-27 22:08:06 - INFO - status:263 - 📊 刷新统计 - 今日: 1次, 本小时: 1次
+2025-07-27 22:08:06 - INFO - product_checkout:1076 - 📈 商品总数变化: None -> 1719，需要查询商品
+2025-07-27 22:08:06 - DEBUG - job_checkout:356 - RefreshThread handle keywords: ['F24356MTI', 'CA193LHWPU']
+2025-07-27 22:08:06 - INFO - job_checkout:409 - 📡 监控模式：检测库存变化，只发送通知
+2025-07-27 22:08:06 - DEBUG - product_checkout:1125 - 📡 [MONITOR] 关键词 F24356MTI 处于纯监控模式，无轮数限制
+2025-07-27 22:08:06 - DEBUG - product_checkout:1125 - 📡 [MONITOR] 关键词 CA193LHWPU 处于纯监控模式，无轮数限制
+2025-07-27 22:08:06 - INFO - product_checkout:520 - query_product: F24356MTI
+2025-07-27 22:08:06 - INFO - product_checkout:520 - query_product: CA193LHWPU
+2025-07-27 22:08:07 - DEBUG - product_checkout:529 - status_code: 200
+2025-07-27 22:08:07 - DEBUG - product_checkout:530 - url: https://fenxiao.clim.cn/shop/products.do?keyword=CA193LHWPU&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-27 22:08:07 - INFO - product_checkout:550 - 商品列表 [CA193LHWPU]: 共1条记录
+2025-07-27 22:08:07 - INFO - product_checkout:574 -   商品1: COACH 专柜款女士皮质短款钱包 (SKU: 10109305-CA193LHWPU) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/f3126d1c3cdf4e428dfddd54163c98bb.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-27 22:08:07 - INFO - product_checkout:582 - 📦 找到 1 个有效商品
+2025-07-27 22:08:07 - INFO - product_checkout:598 - 提取的SKU: 10109305-CA193LHWPU
+2025-07-27 22:08:07 - DEBUG - product_checkout:1096 - product: {'keyword': 'CA193LHWPU', 'sku': '10109305-CA193LHWPU', 'brand_category': 'Coach钱包', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/f3126d1c3cdf4e428dfddd54163c98bb.jpg?imageMogr2/thumbnail/100x100', 'name': 'COACH 专柜款女士皮质短款钱包', 'distribution_price': '354', 'market_price': '2600.0', 'listing_time': '2025-07-23 15:41:12'}
+2025-07-27 22:08:07 - INFO - product_checkout:1108 - 🔍 [PROCESS] 模式检查: auto_order_enabled=False, test_mode=False, batch_mode=False
+2025-07-27 22:08:07 - INFO - product_checkout:1270 - 📢 [PROCESS] 关键词 CA193LHWPU 进入通知模式（只发送库存通知）
+2025-07-27 22:08:07 - DEBUG - product_checkout:529 - status_code: 200
+2025-07-27 22:08:07 - DEBUG - product_checkout:530 - url: https://fenxiao.clim.cn/shop/products.do?keyword=F24356MTI&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-27 22:08:07 - INFO - product_checkout:550 - 商品列表 [F24356MTI]: 共1条记录
+2025-07-27 22:08:07 - INFO - product_checkout:574 -   商品1: COACH 奥莱款别针 (SKU: 10105647-F24356MTI) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/oldoperation/prod/images/a505292f70774ed7867ace26c70cf664.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-27 22:08:07 - INFO - product_checkout:582 - 📦 找到 1 个有效商品
+2025-07-27 22:08:07 - INFO - product_checkout:598 - 提取的SKU: 10105647-F24356MTI
+2025-07-27 22:08:07 - DEBUG - product_checkout:1096 - product: {'keyword': 'F24356MTI', 'sku': '10105647-F24356MTI', 'brand_category': 'Coach发饰胸针', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/oldoperation/prod/images/a505292f70774ed7867ace26c70cf664.jpg?imageMogr2/thumbnail/100x100', 'name': 'COACH 奥莱款别针', 'distribution_price': '81', 'market_price': '0.0', 'listing_time': '2022-08-08 12:07:58'}
+2025-07-27 22:08:07 - INFO - product_checkout:1108 - 🔍 [PROCESS] 模式检查: auto_order_enabled=False, test_mode=False, batch_mode=False
+2025-07-27 22:08:07 - INFO - product_checkout:1270 - 📢 [PROCESS] 关键词 F24356MTI 进入通知模式（只发送库存通知）
+2025-07-27 22:08:07 - DEBUG - pushplus:28 - <Response [200]>
+2025-07-27 22:08:07 - DEBUG - product_checkout:1275 - msg: 库存更新 COACH 专柜款女士皮质短款钱包,
+            <br />金额 354
+            <br /><img src="https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/f3126d1c3cdf4e428dfddd54163c98bb.jpg?imageMogr2/thumbnail/100x100" width="200px" height="200px" />
+2025-07-27 22:08:07 - INFO - product_checkout:1276 - 关键字 CA193LHWPU 通知发送成功
+2025-07-27 22:08:07 - ERROR - job_checkout:454 - ❌ [MONITOR] 关键词 CA193LHWPU 检测失败: name 'os' is not defined
+Traceback (most recent call last):
+  File "d:\poorld\github\python_clim_web\src\python_clim_web\jobs\job_checkout.py", line 447, in _concurrent_check
+    result = future.result()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.1520.0_x64__qbz5n2kfra8p0\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.1520.0_x64__qbz5n2kfra8p0\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.1520.0_x64__qbz5n2kfra8p0\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "d:\poorld\github\python_clim_web\src\python_clim_web\service\product_checkout.py", line 1113, in process_keyword_direct
+    return _handle_notification_mode(keyword, product)
+  File "d:\poorld\github\python_clim_web\src\python_clim_web\service\product_checkout.py", line 1277, in _handle_notification_mode
+    save_keyword_status(keyword)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "d:\poorld\github\python_clim_web\src\python_clim_web\service\product_checkout.py", line 822, in save_keyword_status
+    os.makedirs('data', exist_ok=True)
+    ^^
+NameError: name 'os' is not defined. Did you forget to import 'os'?
+2025-07-27 22:08:07 - DEBUG - pushplus:28 - <Response [200]>
+2025-07-27 22:08:07 - DEBUG - product_checkout:1275 - msg: 库存更新 COACH 奥莱款别针,
+            <br />金额 81
+            <br /><img src="https://clim-1305039671.cos.ap-beijing.myqcloud.com/oldoperation/prod/images/a505292f70774ed7867ace26c70cf664.jpg?imageMogr2/thumbnail/100x100" width="200px" height="200px" />
+2025-07-27 22:08:07 - INFO - product_checkout:1276 - 关键字 F24356MTI 通知发送成功
+2025-07-27 22:08:07 - ERROR - job_checkout:454 - ❌ [MONITOR] 关键词 F24356MTI 检测失败: name 'os' is not defined
+Traceback (most recent call last):
+  File "d:\poorld\github\python_clim_web\src\python_clim_web\jobs\job_checkout.py", line 447, in _concurrent_check
+    result = future.result()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.1520.0_x64__qbz5n2kfra8p0\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.1520.0_x64__qbz5n2kfra8p0\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.1520.0_x64__qbz5n2kfra8p0\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "d:\poorld\github\python_clim_web\src\python_clim_web\service\product_checkout.py", line 1113, in process_keyword_direct
+    return _handle_notification_mode(keyword, product)
+  File "d:\poorld\github\python_clim_web\src\python_clim_web\service\product_checkout.py", line 1277, in _handle_notification_mode
+    save_keyword_status(keyword)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "d:\poorld\github\python_clim_web\src\python_clim_web\service\product_checkout.py", line 822, in save_keyword_status
+    os.makedirs('data', exist_ok=True)
+    ^^
+NameError: name 'os' is not defined. Did you forget to import 'os'?
+2025-07-27 22:08:07 - INFO - job_checkout:416 - 📊 监控检测完成：0/2 个关键词有库存变化
+2025-07-27 22:08:07 - INFO - job_checkout:421 - 📊 暂无库存变化
+2025-07-27 22:08:30 - INFO - status:47 - 🛑 停止监控线程...
+2025-07-27 22:08:30 - INFO - __init__:281 - 🛑 收到停止信号，线程即将停止
+2025-07-27 22:08:30 - INFO - __init__:334 - ✅ 监控线程已停止
+2025-07-27 22:08:30 - INFO - status:49 - ✅ 监控线程已停止
+2025-07-27 22:17:41 - INFO - main:26 - 📊 初始监控间隔: 60秒
+2025-07-27 22:17:41 - INFO - web:374 - 🚀 Flask Web服务启动中...
+2025-07-27 22:17:41 - INFO - web:375 - 📡 实时日志推送系统已激活
+2025-07-27 22:17:41 - INFO - web:377 - 🌐 访问地址: http://0.0.0.0:5000
+2025-07-27 22:17:41 - INFO - main:41 - ⏸️ 监控状态为关闭，不启动监控线程
+2025-07-27 22:17:41 - INFO - web:378 - 🔧 日志捕获系统状态检查...
+2025-07-27 22:17:41 - INFO - job_checkout:389 - 🔍 订单状态检查线程已启动
+2025-07-27 22:17:41 - INFO - main:47 - 🔍 订单状态检查线程已启动
+2025-07-27 22:17:41 - INFO - web:394 - 🚀 尝试启动Flask服务...
+2025-07-27 22:17:41 - INFO - main:49 - 🎛️ 监控间隔可在Web界面动态调整: http://localhost:5000
+2025-07-27 22:17:42 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-27 22:17:43 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-27 22:17:43 - INFO - web:384 - ✅ 日志推送测试 - 这是一条测试日志
+2025-07-27 22:17:43 - INFO - web:385 - 🟢 成功：日志系统工作正常
+2025-07-27 22:17:43 - ERROR - web:386 - 🔴 错误：这是一条错误测试日志
+2025-07-27 22:17:43 - WARNING - web:387 - 🟡 警告：这是一条警告测试日志
+2025-07-27 22:18:22 - INFO - main:26 - 📊 初始监控间隔: 60秒
+2025-07-27 22:18:22 - INFO - web:374 - 🚀 Flask Web服务启动中...
+2025-07-27 22:18:22 - INFO - web:375 - 📡 实时日志推送系统已激活
+2025-07-27 22:18:22 - INFO - web:377 - 🌐 访问地址: http://0.0.0.0:5000
+2025-07-27 22:18:22 - INFO - main:41 - ⏸️ 监控状态为关闭，不启动监控线程
+2025-07-27 22:18:22 - INFO - web:378 - 🔧 日志捕获系统状态检查...
+2025-07-27 22:18:22 - INFO - job_checkout:389 - 🔍 订单状态检查线程已启动
+2025-07-27 22:18:22 - INFO - main:47 - 🔍 订单状态检查线程已启动
+2025-07-27 22:18:22 - INFO - web:394 - 🚀 尝试启动Flask服务...
+2025-07-27 22:18:22 - INFO - main:49 - 🎛️ 监控间隔可在Web界面动态调整: http://localhost:5000
+2025-07-27 22:18:24 - INFO - web:384 - ✅ 日志推送测试 - 这是一条测试日志
+2025-07-27 22:18:24 - INFO - web:385 - 🟢 成功：日志系统工作正常
+2025-07-27 22:18:24 - ERROR - web:386 - 🔴 错误：这是一条错误测试日志
+2025-07-27 22:18:24 - WARNING - web:387 - 🟡 警告：这是一条警告测试日志
+2025-07-27 22:18:25 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-27 22:18:25 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-27 22:18:27 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-27 22:18:30 - INFO - status:43 - 🚀 启动监控线程...
+2025-07-27 22:18:30 - INFO - __init__:236 - 🚀 动态调度器启动，初始间隔: 60秒
+2025-07-27 22:18:30 - INFO - __init__:315 - ✅ 监控线程启动成功
+2025-07-27 22:18:30 - INFO - status:45 - ✅ 监控线程已启动
+2025-07-27 22:18:30 - INFO - product_checkout:999 - query_product_count
+2025-07-27 22:18:30 - DEBUG - product_checkout:1004 - status_code: 200
+2025-07-27 22:18:30 - INFO - product_checkout:1015 - 商品总数: 1719
+2025-07-27 22:18:30 - INFO - status:263 - 📊 刷新统计 - 今日: 2次, 本小时: 2次
+2025-07-27 22:18:30 - INFO - product_checkout:1077 - 📈 商品总数变化: None -> 1719，需要查询商品
+2025-07-27 22:18:30 - DEBUG - job_checkout:356 - RefreshThread handle keywords: ['F24356MTI', 'CA193LHWPU']
+2025-07-27 22:18:30 - INFO - job_checkout:409 - 📡 监控模式：检测库存变化，只发送通知
+2025-07-27 22:18:30 - DEBUG - product_checkout:1126 - 📡 [MONITOR] 关键词 F24356MTI 处于纯监控模式，无轮数限制
+2025-07-27 22:18:30 - INFO - product_checkout:521 - query_product: F24356MTI
+2025-07-27 22:18:30 - DEBUG - product_checkout:1126 - 📡 [MONITOR] 关键词 CA193LHWPU 处于纯监控模式，无轮数限制
+2025-07-27 22:18:30 - INFO - product_checkout:521 - query_product: CA193LHWPU
+2025-07-27 22:18:31 - DEBUG - product_checkout:530 - status_code: 200
+2025-07-27 22:18:31 - DEBUG - product_checkout:531 - url: https://fenxiao.clim.cn/shop/products.do?keyword=CA193LHWPU&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-27 22:18:31 - INFO - product_checkout:551 - 商品列表 [CA193LHWPU]: 共1条记录
+2025-07-27 22:18:31 - INFO - product_checkout:575 -   商品1: COACH 专柜款女士皮质短款钱包 (SKU: 10109305-CA193LHWPU) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/f3126d1c3cdf4e428dfddd54163c98bb.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-27 22:18:31 - INFO - product_checkout:583 - 📦 找到 1 个有效商品
+2025-07-27 22:18:31 - INFO - product_checkout:599 - 提取的SKU: 10109305-CA193LHWPU
+2025-07-27 22:18:31 - DEBUG - product_checkout:1097 - product: {'keyword': 'CA193LHWPU', 'sku': '10109305-CA193LHWPU', 'brand_category': 'Coach钱包', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/f3126d1c3cdf4e428dfddd54163c98bb.jpg?imageMogr2/thumbnail/100x100', 'name': 'COACH 专柜款女士皮质短款钱包', 'distribution_price': '354', 'market_price': '2600.0', 'listing_time': '2025-07-23 15:41:12'}
+2025-07-27 22:18:31 - INFO - product_checkout:1109 - 🔍 [PROCESS] 模式检查: auto_order_enabled=False, test_mode=False, batch_mode=False
+2025-07-27 22:18:31 - INFO - product_checkout:1271 - 📢 [PROCESS] 关键词 CA193LHWPU 进入通知模式（只发送库存通知）
+2025-07-27 22:18:31 - DEBUG - product_checkout:530 - status_code: 200
+2025-07-27 22:18:31 - DEBUG - product_checkout:531 - url: https://fenxiao.clim.cn/shop/products.do?keyword=F24356MTI&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-27 22:18:31 - INFO - product_checkout:551 - 商品列表 [F24356MTI]: 共1条记录
+2025-07-27 22:18:31 - INFO - product_checkout:575 -   商品1: COACH 奥莱款别针 (SKU: 10105647-F24356MTI) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/oldoperation/prod/images/a505292f70774ed7867ace26c70cf664.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-27 22:18:31 - INFO - product_checkout:583 - 📦 找到 1 个有效商品
+2025-07-27 22:18:31 - INFO - product_checkout:599 - 提取的SKU: 10105647-F24356MTI
+2025-07-27 22:18:31 - DEBUG - product_checkout:1097 - product: {'keyword': 'F24356MTI', 'sku': '10105647-F24356MTI', 'brand_category': 'Coach发饰胸针', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/oldoperation/prod/images/a505292f70774ed7867ace26c70cf664.jpg?imageMogr2/thumbnail/100x100', 'name': 'COACH 奥莱款别针', 'distribution_price': '81', 'market_price': '0.0', 'listing_time': '2022-08-08 12:07:58'}
+2025-07-27 22:18:31 - INFO - product_checkout:1109 - 🔍 [PROCESS] 模式检查: auto_order_enabled=False, test_mode=False, batch_mode=False
+2025-07-27 22:18:31 - INFO - product_checkout:1271 - 📢 [PROCESS] 关键词 F24356MTI 进入通知模式（只发送库存通知）
+2025-07-27 22:18:31 - DEBUG - pushplus:28 - <Response [200]>
+2025-07-27 22:18:31 - DEBUG - product_checkout:1276 - msg: 库存更新 COACH 专柜款女士皮质短款钱包,
+            <br />金额 354
+            <br /><img src="https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/f3126d1c3cdf4e428dfddd54163c98bb.jpg?imageMogr2/thumbnail/100x100" width="200px" height="200px" />
+2025-07-27 22:18:31 - INFO - product_checkout:1277 - 关键字 CA193LHWPU 通知发送成功
+2025-07-27 22:18:31 - INFO - product_checkout:1283 - 🛑 关键字 CA193LHWPU 监控模式通知完成，停止后续检测。
+2025-07-27 22:18:31 - INFO - job_checkout:450 - 📢 [MONITOR] 关键词 CA193LHWPU 检测到库存变化
+2025-07-27 22:18:31 - DEBUG - pushplus:28 - <Response [200]>
+2025-07-27 22:18:31 - DEBUG - product_checkout:1276 - msg: 库存更新 COACH 奥莱款别针,
+            <br />金额 81
+            <br /><img src="https://clim-1305039671.cos.ap-beijing.myqcloud.com/oldoperation/prod/images/a505292f70774ed7867ace26c70cf664.jpg?imageMogr2/thumbnail/100x100" width="200px" height="200px" />
+2025-07-27 22:18:31 - INFO - product_checkout:1277 - 关键字 F24356MTI 通知发送成功
+2025-07-27 22:18:31 - INFO - product_checkout:1283 - 🛑 关键字 F24356MTI 监控模式通知完成，停止后续检测。
+2025-07-27 22:18:31 - INFO - job_checkout:450 - 📢 [MONITOR] 关键词 F24356MTI 检测到库存变化
+2025-07-27 22:18:31 - INFO - job_checkout:416 - 📊 监控检测完成：2/2 个关键词有库存变化
+2025-07-27 22:18:31 - INFO - job_checkout:419 - 📢 已发送库存通知，监控任务完成
+2025-07-27 22:18:47 - INFO - status:47 - 🛑 停止监控线程...
+2025-07-27 22:18:47 - INFO - __init__:281 - 🛑 收到停止信号，线程即将停止
+2025-07-27 22:18:47 - INFO - __init__:334 - ✅ 监控线程已停止
+2025-07-27 22:18:47 - INFO - status:49 - ✅ 监控线程已停止
+2025-07-27 22:18:53 - INFO - status:133 - 🛒 切换为统一建单模式：
+2025-07-27 22:18:53 - INFO - status:134 -    - 发现库存 → 加入购物车
+2025-07-27 22:18:53 - INFO - status:135 -    - 等待所有关键词检测完成
+2025-07-27 22:18:53 - INFO - status:136 -    - 批量提交订单
+2025-07-27 22:18:53 - INFO - product_checkout:120 - 🔄 [STATE] 批量状态已重置:
+2025-07-27 22:18:53 - INFO - product_checkout:121 -    清空购物车: 0 → 0
+2025-07-27 22:18:53 - INFO - product_checkout:122 -    清空关键词记录: 2 → 0
+2025-07-27 22:18:53 - INFO - product_checkout:123 -    重置轮次计数: → 0
+2025-07-27 22:18:53 - INFO - product_checkout:205 - 🔄 批量检测轮次已重置
+2025-07-27 22:18:54 - INFO - status:165 - 🧪 测试模式已启用：
+2025-07-27 22:18:54 - INFO - status:166 -    - 强制执行检测（忽略商品总数变化）
+2025-07-27 22:18:54 - INFO - status:167 -    - 只弹一次付款窗口
+2025-07-27 22:18:54 - INFO - status:168 -    - 测试完成后自动关闭
+2025-07-27 22:18:54 - INFO - web:179 - 🧪 测试模式已启用：只弹一次付款窗口
+2025-07-27 22:18:54 - INFO - web:190 - 🧪 测试模式：开始检测 2 个关键词
+2025-07-27 22:18:54 - INFO - job_checkout:34 - 🧪 测试统一建单模式：检测所有款号，合并成一个订单，只弹一次付款
+2025-07-27 22:18:54 - INFO - job_checkout:53 - 🔄 [TEST-BATCH] 测试统一建单模式状态重置:
+2025-07-27 22:18:54 - INFO - job_checkout:54 -    保留购物车: 0 件商品
+2025-07-27 22:18:54 - INFO - job_checkout:55 -    清空关键词记录: 0 → 0
+2025-07-27 22:18:54 - INFO - job_checkout:56 -    重置轮次计数: → 0
+2025-07-27 22:18:54 - INFO - job_checkout:57 - 🔄 测试统一建单检测开始...
+2025-07-27 22:18:54 - INFO - job_checkout:141 - 🔄 [CONCURRENT] 开始并发检测 2 个关键词
+2025-07-27 22:18:54 - INFO - job_checkout:147 - 🔄 [WORKER] 开始处理关键词: F24356MTI
+2025-07-27 22:18:54 - INFO - job_checkout:161 - 🚀 [CONCURRENT] 启动线程处理关键词: F24356MTI
+2025-07-27 22:18:54 - INFO - job_checkout:147 - 🔄 [WORKER] 开始处理关键词: CA193LHWPU
+2025-07-27 22:18:54 - INFO - job_checkout:161 - 🚀 [CONCURRENT] 启动线程处理关键词: CA193LHWPU
+2025-07-27 22:18:54 - INFO - job_checkout:164 - ⏳ [CONCURRENT] 等待所有线程完成...
+2025-07-27 22:18:54 - INFO - product_checkout:521 - query_product: F24356MTI
+2025-07-27 22:18:54 - INFO - product_checkout:521 - query_product: CA193LHWPU
+2025-07-27 22:18:54 - DEBUG - product_checkout:530 - status_code: 200
+2025-07-27 22:18:54 - DEBUG - product_checkout:531 - url: https://fenxiao.clim.cn/shop/products.do?keyword=F24356MTI&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-27 22:18:54 - INFO - product_checkout:551 - 商品列表 [F24356MTI]: 共1条记录
+2025-07-27 22:18:54 - INFO - product_checkout:575 -   商品1: COACH 奥莱款别针 (SKU: 10105647-F24356MTI) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/oldoperation/prod/images/a505292f70774ed7867ace26c70cf664.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-27 22:18:54 - INFO - product_checkout:583 - 📦 找到 1 个有效商品
+2025-07-27 22:18:54 - INFO - product_checkout:599 - 提取的SKU: 10105647-F24356MTI
+2025-07-27 22:18:54 - DEBUG - product_checkout:1097 - product: {'keyword': 'F24356MTI', 'sku': '10105647-F24356MTI', 'brand_category': 'Coach发饰胸针', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/oldoperation/prod/images/a505292f70774ed7867ace26c70cf664.jpg?imageMogr2/thumbnail/100x100', 'name': 'COACH 奥莱款别针', 'distribution_price': '81', 'market_price': '0.0', 'listing_time': '2022-08-08 12:07:58'}
+2025-07-27 22:18:54 - DEBUG - product_checkout:530 - status_code: 200
+2025-07-27 22:18:54 - DEBUG - product_checkout:531 - url: https://fenxiao.clim.cn/shop/products.do?keyword=CA193LHWPU&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-27 22:18:54 - INFO - product_checkout:551 - 商品列表 [CA193LHWPU]: 共1条记录
+2025-07-27 22:18:54 - INFO - product_checkout:575 -   商品1: COACH 专柜款女士皮质短款钱包 (SKU: 10109305-CA193LHWPU) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/f3126d1c3cdf4e428dfddd54163c98bb.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-27 22:18:54 - INFO - product_checkout:1109 - 🔍 [PROCESS] 模式检查: auto_order_enabled=False, test_mode=True, batch_mode=True
+2025-07-27 22:18:54 - INFO - product_checkout:583 - 📦 找到 1 个有效商品
+2025-07-27 22:18:54 - INFO - product_checkout:624 - selectBuyDefect
+2025-07-27 22:18:54 - DEBUG - product_checkout:626 - sku: 10105647-F24356MTI
+2025-07-27 22:18:54 - INFO - product_checkout:599 - 提取的SKU: 10109305-CA193LHWPU
+2025-07-27 22:18:54 - DEBUG - product_checkout:1097 - product: {'keyword': 'CA193LHWPU', 'sku': '10109305-CA193LHWPU', 'brand_category': 'Coach钱包', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/f3126d1c3cdf4e428dfddd54163c98bb.jpg?imageMogr2/thumbnail/100x100', 'name': 'COACH 专柜款女士皮质短款钱包', 'distribution_price': '354', 'market_price': '2600.0', 'listing_time': '2025-07-23 15:41:12'}
+2025-07-27 22:18:54 - INFO - product_checkout:1109 - 🔍 [PROCESS] 模式检查: auto_order_enabled=False, test_mode=True, batch_mode=True
+2025-07-27 22:18:54 - INFO - product_checkout:624 - selectBuyDefect
+2025-07-27 22:18:54 - DEBUG - product_checkout:626 - sku: 10109305-CA193LHWPU
+2025-07-27 22:18:55 - DEBUG - product_checkout:628 - status_code: 200
+2025-07-27 22:18:55 - INFO - product_checkout:637 - saveCart
+2025-07-27 22:18:55 - DEBUG - product_checkout:652 - param_save_cart: {'typeCode': '68', 'price': '81.0', 'productCode': '101548701', 'count': 1}
+2025-07-27 22:18:55 - DEBUG - product_checkout:628 - status_code: 200
+2025-07-27 22:18:55 - INFO - product_checkout:637 - saveCart
+2025-07-27 22:18:55 - DEBUG - product_checkout:652 - param_save_cart: {'typeCode': '68', 'price': '354.0', 'productCode': '101899905', 'count': 13}
+2025-07-27 22:18:56 - DEBUG - product_checkout:655 - status_code: 200
+2025-07-27 22:18:56 - DEBUG - product_checkout:656 - content: true
+2025-07-27 22:18:56 - INFO - product_checkout:658 - 加入购物车成功
+2025-07-27 22:18:56 - DEBUG - product_checkout:655 - status_code: 200
+2025-07-27 22:18:56 - DEBUG - product_checkout:656 - content: true
+2025-07-27 22:18:56 - INFO - product_checkout:658 - 加入购物车成功
+2025-07-27 22:18:56 - INFO - product_checkout:1196 - 📦 关键词 CA193LHWPU 获取到商品代码: 101899905, 数量: 13
+2025-07-27 22:18:56 - INFO - product_checkout:1211 - 🧪 [TEST] 测试统一建单模式：关键词 CA193LHWPU 加入购物车
+2025-07-27 22:18:56 - INFO - product_checkout:624 - selectBuyDefect
+2025-07-27 22:18:56 - DEBUG - product_checkout:626 - sku: 10109305-CA193LHWPU
+2025-07-27 22:18:56 - INFO - product_checkout:1196 - 📦 关键词 F24356MTI 获取到商品代码: 101548701, 数量: 1
+2025-07-27 22:18:56 - INFO - product_checkout:1211 - 🧪 [TEST] 测试统一建单模式：关键词 F24356MTI 加入购物车
+2025-07-27 22:18:56 - INFO - product_checkout:624 - selectBuyDefect
+2025-07-27 22:18:56 - DEBUG - product_checkout:626 - sku: 10105647-F24356MTI
+2025-07-27 22:18:57 - DEBUG - product_checkout:628 - status_code: 200
+2025-07-27 22:18:57 - INFO - product_checkout:637 - saveCart
+2025-07-27 22:18:57 - DEBUG - product_checkout:652 - param_save_cart: {'typeCode': '68', 'price': '81.0', 'productCode': '101548701', 'count': 1}
+2025-07-27 22:18:57 - DEBUG - product_checkout:628 - status_code: 200
+2025-07-27 22:18:57 - INFO - product_checkout:637 - saveCart
+2025-07-27 22:18:57 - DEBUG - product_checkout:652 - param_save_cart: {'typeCode': '68', 'price': '354.0', 'productCode': '101899905', 'count': 13}
+2025-07-27 22:18:58 - DEBUG - product_checkout:655 - status_code: 200
+2025-07-27 22:18:58 - DEBUG - product_checkout:656 - content: true
+2025-07-27 22:18:58 - INFO - product_checkout:658 - 加入购物车成功
+2025-07-27 22:18:58 - DEBUG - product_checkout:655 - status_code: 200
+2025-07-27 22:18:58 - DEBUG - product_checkout:656 - content: true
+2025-07-27 22:18:58 - INFO - product_checkout:658 - 加入购物车成功
+2025-07-27 22:18:58 - DEBUG - product_checkout:1227 - 🔄 [PROCESS] selectBuyDefect 结果: {'cart_id': '115591', 'product_code': '101548701', 'productCode': '101548701', 'count': 1, 'price': '81.0'}
+2025-07-27 22:18:58 - INFO - product_checkout:1239 - 🔄 [PROCESS] 准备调用 add_to_batch_cart
+2025-07-27 22:18:58 - INFO - product_checkout:161 - 🔄 [FUNC] add_to_batch_cart 被调用:
+2025-07-27 22:18:58 - DEBUG - product_checkout:162 -    product_info: {'keyword': 'F24356MTI', 'product_code': '101548701', 'price': '81', 'distribution_price': '81', 'name': 'COACH 奥莱款别针', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/oldoperation/prod/images/a505292f70774ed7867ace26c70cf664.jpg?imageMogr2/thumbnail/100x100', 'market_price': '0.0', 'brand_category': 'Coach发饰胸针'}
+2025-07-27 22:18:58 - DEBUG - product_checkout:163 -    cart_result: {'cart_id': '115591', 'product_code': '101548701', 'productCode': '101548701', 'count': 1, 'price': '81.0'}
+2025-07-27 22:18:58 - INFO - product_checkout:174 - 📦 [FUNC] 准备添加商品到购物车: {'keyword': 'F24356MTI', 'product_code': '101548701', 'cart_id': '115591', 'count': 1, 'price': '81', 'name': 'COACH 奥莱款别针'}
+2025-07-27 22:18:58 - INFO - product_checkout:141 - 📦 [STATE] 商品已添加到购物车:
+2025-07-27 22:18:58 - INFO - product_checkout:142 -    商品名称: COACH 奥莱款别针
+2025-07-27 22:18:58 - INFO - product_checkout:143 -    关键词: F24356MTI
+2025-07-27 22:18:58 - INFO - product_checkout:144 -    购物车ID: 115591
+2025-07-27 22:18:58 - INFO - product_checkout:145 -    购物车数量: 0 → 1
+2025-07-27 22:18:58 - INFO - product_checkout:129 - 🔍 [STATE] 获取购物车商品: 1 件
+2025-07-27 22:18:58 - INFO - product_checkout:131 -    商品1: COACH 奥莱款别针 (关键词: F24356MTI)
+2025-07-27 22:18:58 - INFO - product_checkout:181 - ✅ [FUNC] 添加完成，当前购物车总数: 1
+2025-07-27 22:18:58 - INFO - product_checkout:186 - 📦 商品已加入测试购物车: COACH 奥莱款别针 (购物车ID: 115591)
+2025-07-27 22:18:58 - INFO - product_checkout:1242 - ✅ [PROCESS] 测试统一建单：关键字 F24356MTI 商品已加入购物车
+2025-07-27 22:18:58 - INFO - product_checkout:1321 - 📦 商品详情: COACH 奥莱款别针
+                        💰 价格: ¥81
+                        📦 库存: 1
+                        🛒 购物车ID: 115591
+                        <br><img src="https://clim-1305039671.cos.ap-beijing.myqcloud.com/oldoperation/prod/images/a505292f70774ed7867ace26c70cf664.jpg?imageMogr2/thumbnail/100x100" style="max-width:200px;max-height:200px;border-radius:8px;" />
+2025-07-27 22:18:58 - INFO - job_checkout:150 - ✅ [WORKER] 关键词 F24356MTI 处理完成，结果: True
+2025-07-27 22:18:58 - INFO - job_checkout:167 - ✅ [CONCURRENT] 线程 1/2 完成
+2025-07-27 22:18:58 - DEBUG - product_checkout:1227 - 🔄 [PROCESS] selectBuyDefect 结果: {'cart_id': '115590', 'product_code': '101899905', 'productCode': '101899905', 'count': 13, 'price': '354.0'}
+2025-07-27 22:18:58 - INFO - product_checkout:1239 - 🔄 [PROCESS] 准备调用 add_to_batch_cart
+2025-07-27 22:18:58 - INFO - product_checkout:161 - 🔄 [FUNC] add_to_batch_cart 被调用:
+2025-07-27 22:18:58 - DEBUG - product_checkout:162 -    product_info: {'keyword': 'CA193LHWPU', 'product_code': '101899905', 'price': '354', 'distribution_price': '354', 'name': 'COACH 专柜款女士皮质短款钱包', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/f3126d1c3cdf4e428dfddd54163c98bb.jpg?imageMogr2/thumbnail/100x100', 'market_price': '2600.0', 'brand_category': 'Coach钱包'}
+2025-07-27 22:18:58 - DEBUG - product_checkout:163 -    cart_result: {'cart_id': '115590', 'product_code': '101899905', 'productCode': '101899905', 'count': 13, 'price': '354.0'}
+2025-07-27 22:18:58 - INFO - product_checkout:174 - 📦 [FUNC] 准备添加商品到购物车: {'keyword': 'CA193LHWPU', 'product_code': '101899905', 'cart_id': '115590', 'count': 13, 'price': '354', 'name': 'COACH 专柜款女士皮质短款钱包'}
+2025-07-27 22:18:58 - INFO - product_checkout:141 - 📦 [STATE] 商品已添加到购物车:
+2025-07-27 22:18:58 - INFO - product_checkout:142 -    商品名称: COACH 专柜款女士皮质短款钱包
+2025-07-27 22:18:58 - INFO - product_checkout:143 -    关键词: CA193LHWPU
+2025-07-27 22:18:58 - INFO - product_checkout:144 -    购物车ID: 115590
+2025-07-27 22:18:58 - INFO - product_checkout:145 -    购物车数量: 1 → 2
+2025-07-27 22:18:58 - INFO - product_checkout:129 - 🔍 [STATE] 获取购物车商品: 2 件
+2025-07-27 22:18:58 - INFO - product_checkout:131 -    商品1: COACH 奥莱款别针 (关键词: F24356MTI)
+2025-07-27 22:18:58 - INFO - product_checkout:131 -    商品2: COACH 专柜款女士皮质短款钱包 (关键词: CA193LHWPU)
+2025-07-27 22:18:58 - INFO - product_checkout:181 - ✅ [FUNC] 添加完成，当前购物车总数: 2
+2025-07-27 22:18:58 - INFO - product_checkout:186 - 📦 商品已加入测试购物车: COACH 专柜款女士皮质短款钱包 (购物车ID: 115590)
+2025-07-27 22:18:58 - INFO - product_checkout:1242 - ✅ [PROCESS] 测试统一建单：关键字 CA193LHWPU 商品已加入购物车
+2025-07-27 22:18:58 - INFO - product_checkout:1321 - 📦 商品详情: COACH 专柜款女士皮质短款钱包
+                        💰 价格: ¥354
+                        📦 库存: 13
+                        🛒 购物车ID: 115590
+                        <br><img src="https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/f3126d1c3cdf4e428dfddd54163c98bb.jpg?imageMogr2/thumbnail/100x100" style="max-width:200px;max-height:200px;border-radius:8px;" />
+2025-07-27 22:18:58 - INFO - job_checkout:150 - ✅ [WORKER] 关键词 CA193LHWPU 处理完成，结果: True
+2025-07-27 22:18:58 - INFO - job_checkout:167 - ✅ [CONCURRENT] 线程 2/2 完成
+2025-07-27 22:18:58 - INFO - job_checkout:169 - 🎉 [CONCURRENT] 所有线程完成，结果: {'F24356MTI': True, 'CA193LHWPU': True}
+2025-07-27 22:18:58 - INFO - job_checkout:64 - 📊 测试统一建单检测完成：2/2 个关键词有货
+2025-07-27 22:18:58 - INFO - product_checkout:192 - 🔍 [FUNC] get_batch_cart_items 被调用
+2025-07-27 22:18:58 - INFO - product_checkout:129 - 🔍 [STATE] 获取购物车商品: 2 件
+2025-07-27 22:18:58 - INFO - product_checkout:131 -    商品1: COACH 奥莱款别针 (关键词: F24356MTI)
+2025-07-27 22:18:58 - INFO - product_checkout:131 -    商品2: COACH 专柜款女士皮质短款钱包 (关键词: CA193LHWPU)
+2025-07-27 22:18:58 - INFO - product_checkout:194 - 🔍 [FUNC] 返回 2 件商品
+2025-07-27 22:18:58 - INFO - job_checkout:178 - 🔍 测试统一建单模式检查购物车状态:
+2025-07-27 22:18:58 - INFO - job_checkout:179 -    购物车商品数量: 2
+2025-07-27 22:18:58 - INFO - job_checkout:182 -    商品1: COACH 奥莱款别针 (ID: 115591)
+2025-07-27 22:18:58 - INFO - job_checkout:182 -    商品2: COACH 专柜款女士皮质短款钱包 (ID: 115590)
+2025-07-27 22:18:58 - INFO - job_checkout:185 - 🚀 测试统一建单发现 2 件商品，执行测试统一建单下单...
+2025-07-27 22:18:58 - INFO - product_checkout:192 - 🔍 [FUNC] get_batch_cart_items 被调用
+2025-07-27 22:18:58 - INFO - product_checkout:129 - 🔍 [STATE] 获取购物车商品: 2 件
+2025-07-27 22:18:58 - INFO - product_checkout:131 -    商品1: COACH 奥莱款别针 (关键词: F24356MTI)
+2025-07-27 22:18:58 - INFO - product_checkout:131 -    商品2: COACH 专柜款女士皮质短款钱包 (关键词: CA193LHWPU)
+2025-07-27 22:18:58 - INFO - product_checkout:194 - 🔍 [FUNC] 返回 2 件商品
+2025-07-27 22:18:58 - INFO - product_checkout:286 - 🛒 开始批量下单，共 2 件商品
+2025-07-27 22:18:58 - INFO - product_checkout:293 - 🧪 测试模式：将所有商品合并成一个订单
+2025-07-27 22:18:58 - INFO - product_checkout:300 - 🛒 测试订单: 2种商品, 14件, ¥4683.00
+2025-07-27 22:18:58 - INFO - product_checkout:312 - 🚀 正在处理第 1/1 个订单...
+2025-07-27 22:18:58 - INFO - product_checkout:319 - 📋 订单详情: 2种商品, 14件, ¥4683.00
+2025-07-27 22:18:58 - INFO - product_checkout:320 - 🔗 结算链接: https://fenxiao.clim.cn/shop/settle.do?checked=115591&checked=115590
+2025-07-27 22:18:58 - INFO - product_checkout:362 - 💳 正在提交批量订单: https://fenxiao.clim.cn/shop/settle.do?checked=115591&checked=115590
+2025-07-27 22:18:59 - DEBUG - product_checkout:428 - 📋 订单数据: {'cartCodes': '115590', 'defectNo': '', 'productcode': '101899905', 'counts': '13', 'rankCode': '68', 'tagCode': '30', 'shippingMethod': '1', 'thirdcode': '', 'payType': '2', 'receiver': '李小峰', 'recvphone': '18529551929', 'provincecode': '19', 'citycode': '202', 'countycode': '1754', 'recvaddr': '化龙镇山门大道700号', 'zip': '', 'idno': '', 'exchangeRate': '1', 'description': ''}
+2025-07-27 22:19:00 - DEBUG - product_checkout:433 - 📤 提交状态码: 200
+2025-07-27 22:19:00 - DEBUG - product_checkout:438 - 📋 提交结果: {'data': {'childOrderCode': False, 'citycode': 202, 'cityname': '广州市', 'code': 'FX2507272314803', 'countycode': 1754, 'countyname': '番禺区', 'createtime': '2025-07-27 22:19:03', 'currency': 'CNY', 'defectNo': ',', 'defectPriceCode': 0, 'description': '', 'disWarehouseCode': 2, 'distributorcode': 10025, 'distributorsettlecode': 1, 'exchangeRate': 1, 'existReturnOrder': False, 'goodsamount': 0, 'idno': '', 'issubunitorder': False, 'orderOriginType': 1, 'paid': 4683, 'payType': '2', 'platformcode': 14, 'price': 0, 'productcode': '101548701,101899905', 'provincecode': 19, 'provincename': '广东省', 'rankCode': 68, 'receiver': '李小峰', 'recvaddr': '化龙镇山门大道700号', 'recvphone': '18529551929', 'rmbAmount': 4683.0, 'settlecode': 1, 'shippingMethod': 1, 'statuscode': 5, 'tagCode': 30, 'thirdcode': '', 'thirdprice': 0, 'ywjCode': 0, 'zip': ''}, 'errorMsg': '成功', 'resultCode': 0}
+2025-07-27 22:19:00 - INFO - product_checkout:444 - ✅ 批量订单提交成功!
+2025-07-27 22:19:00 - INFO - product_checkout:445 - 📦 订单号: FX2507272314803
+2025-07-27 22:19:00 - INFO - product_checkout:446 - 💰 订单金额: ¥4683
+2025-07-27 22:19:00 - DEBUG - pushplus:28 - <Response [200]>
+2025-07-27 22:19:00 - INFO - product_checkout:893 - getOrder
+2025-07-27 22:19:00 - INFO - product_checkout:918 - 发现待付款订单: FX2507272314803
+2025-07-27 22:19:00 - INFO - orders:63 - 📝 新订单已添加到列表: FX2507272314803
+2025-07-27 22:19:00 - INFO - product_checkout:927 - 共找到 1 个待付款订单
+2025-07-27 22:19:00 - INFO - product_checkout:326 - ✅ 第 1 个订单下单成功
+2025-07-27 22:19:00 - INFO - product_checkout:330 - 🔍 开始立即推送流程...
+2025-07-27 22:19:00 - INFO - product_checkout:336 - 🔍 获取到的订单列表: ['FX2507272314803']
+2025-07-27 22:19:00 - INFO - product_checkout:341 - 🚀 立即推送真实订单号: FX2507272314803
+2025-07-27 22:19:00 - DEBUG - web:256 - 📤 SSE发送订单: FX2507272314803
+2025-07-27 22:19:00 - INFO - web:313 - 📤 订单 FX2507272314803 已推送到队列，队列大小: 1
+2025-07-27 22:19:00 - INFO - product_checkout:152 - 🧹 [STATE] 批量购物车已清空: 2 → 0
+2025-07-27 22:19:00 - INFO - product_checkout:200 - 🧹 批量购物车已清空
+2025-07-27 22:19:00 - INFO - product_checkout:357 - 🎉 批量下单处理完成
+2025-07-27 22:19:00 - INFO - job_checkout:69 - 🎉 测试统一建单模式完成
+2025-07-27 22:19:00 - INFO - status:170 - 🧪 测试模式已关闭：恢复正常监控模式
+2025-07-27 22:19:00 - INFO - product_checkout:120 - 🔄 [STATE] 批量状态已重置:
+2025-07-27 22:19:00 - INFO - product_checkout:121 -    清空购物车: 0 → 0
+2025-07-27 22:19:00 - INFO - product_checkout:122 -    清空关键词记录: 2 → 0
+2025-07-27 22:19:00 - INFO - product_checkout:123 -    重置轮次计数: → 0
+2025-07-27 22:19:00 - INFO - product_checkout:205 - 🔄 批量检测轮次已重置
+2025-07-27 22:19:00 - INFO - web:202 - 🧪 测试模式已关闭
+2025-07-27 22:19:00 - INFO - orders:20 - 📝 订单 FX2507272314803 已保存到历史记录
+2025-07-27 22:19:02 - INFO - product_checkout:939 - 🔍 检查 1 个订单的付款状态...
+2025-07-27 22:19:03 - INFO - product_checkout:956 - 📊 当前待付款订单总数: 1
+2025-07-27 22:19:03 - INFO - product_checkout:973 - 📋 发现待付款订单: FX2507272314803
+2025-07-27 22:19:03 - INFO - product_checkout:977 - 📊 服务器端待付款订单: ['FX2507272314803']
+2025-07-27 22:19:03 - INFO - product_checkout:978 - 📊 本地订单列表: ['FX2507272314803']
+2025-07-27 22:19:03 - INFO - product_checkout:986 - 📋 订单 FX2507272314803 仍为待付款状态
+2025-07-27 22:19:03 - INFO - product_checkout:992 - 📋 所有订单仍为待付款状态
+2025-07-27 22:19:08 - INFO - product_checkout:939 - 🔍 检查 1 个订单的付款状态...
+2025-07-27 22:19:09 - INFO - product_checkout:956 - 📊 当前待付款订单总数: 1
+2025-07-27 22:19:09 - INFO - product_checkout:973 - 📋 发现待付款订单: FX2507272314803
+2025-07-27 22:19:09 - INFO - product_checkout:977 - 📊 服务器端待付款订单: ['FX2507272314803']
+2025-07-27 22:19:09 - INFO - product_checkout:978 - 📊 本地订单列表: ['FX2507272314803']
+2025-07-27 22:19:09 - INFO - product_checkout:986 - 📋 订单 FX2507272314803 仍为待付款状态
+2025-07-27 22:19:09 - INFO - product_checkout:992 - 📋 所有订单仍为待付款状态
+2025-07-27 22:19:14 - INFO - product_checkout:939 - 🔍 检查 1 个订单的付款状态...
+2025-07-27 22:19:14 - INFO - product_checkout:956 - 📊 当前待付款订单总数: 1
+2025-07-27 22:19:14 - INFO - product_checkout:973 - 📋 发现待付款订单: FX2507272314803
+2025-07-27 22:19:14 - INFO - product_checkout:977 - 📊 服务器端待付款订单: ['FX2507272314803']
+2025-07-27 22:19:14 - INFO - product_checkout:978 - 📊 本地订单列表: ['FX2507272314803']
+2025-07-27 22:19:14 - INFO - product_checkout:986 - 📋 订单 FX2507272314803 仍为待付款状态
+2025-07-27 22:19:14 - INFO - product_checkout:992 - 📋 所有订单仍为待付款状态
+2025-07-27 22:19:19 - INFO - product_checkout:939 - 🔍 检查 1 个订单的付款状态...
+2025-07-27 22:19:20 - INFO - product_checkout:956 - 📊 当前待付款订单总数: 1
+2025-07-27 22:19:20 - INFO - product_checkout:973 - 📋 发现待付款订单: FX2507272314803
+2025-07-27 22:19:20 - INFO - product_checkout:977 - 📊 服务器端待付款订单: ['FX2507272314803']
+2025-07-27 22:19:20 - INFO - product_checkout:978 - 📊 本地订单列表: ['FX2507272314803']
+2025-07-27 22:19:20 - INFO - product_checkout:986 - 📋 订单 FX2507272314803 仍为待付款状态
+2025-07-27 22:19:20 - INFO - product_checkout:992 - 📋 所有订单仍为待付款状态
+2025-07-27 22:19:25 - INFO - product_checkout:939 - 🔍 检查 1 个订单的付款状态...
+2025-07-27 22:19:25 - INFO - product_checkout:956 - 📊 当前待付款订单总数: 1
+2025-07-27 22:19:25 - INFO - product_checkout:973 - 📋 发现待付款订单: FX2507272314803
+2025-07-27 22:19:25 - INFO - product_checkout:977 - 📊 服务器端待付款订单: ['FX2507272314803']
+2025-07-27 22:19:25 - INFO - product_checkout:978 - 📊 本地订单列表: ['FX2507272314803']
+2025-07-27 22:19:25 - INFO - product_checkout:986 - 📋 订单 FX2507272314803 仍为待付款状态
+2025-07-27 22:19:25 - INFO - product_checkout:992 - 📋 所有订单仍为待付款状态
+2025-07-27 22:19:30 - INFO - product_checkout:939 - 🔍 检查 1 个订单的付款状态...
+2025-07-27 22:19:31 - INFO - product_checkout:956 - 📊 当前待付款订单总数: 1
+2025-07-27 22:19:31 - INFO - product_checkout:973 - 📋 发现待付款订单: FX2507272314803
+2025-07-27 22:19:31 - INFO - product_checkout:977 - 📊 服务器端待付款订单: ['FX2507272314803']
+2025-07-27 22:19:31 - INFO - product_checkout:978 - 📊 本地订单列表: ['FX2507272314803']
+2025-07-27 22:19:31 - INFO - product_checkout:986 - 📋 订单 FX2507272314803 仍为待付款状态
+2025-07-27 22:19:31 - INFO - product_checkout:992 - 📋 所有订单仍为待付款状态
+2025-07-27 22:19:36 - INFO - product_checkout:939 - 🔍 检查 1 个订单的付款状态...
+2025-07-27 22:19:37 - INFO - product_checkout:956 - 📊 当前待付款订单总数: 0
+2025-07-27 22:19:37 - INFO - product_checkout:977 - 📊 服务器端待付款订单: []
+2025-07-27 22:19:37 - INFO - product_checkout:978 - 📊 本地订单列表: ['FX2507272314803']
+2025-07-27 22:19:37 - INFO - product_checkout:984 - ✅ 订单 FX2507272314803 已付款（不在待付款列表中）
+2025-07-27 22:19:37 - INFO - web:324 - 🗑️ 已从订单列表移除: FX2507272314803
+2025-07-27 22:19:37 - DEBUG - web:249 - 📤 SSE发送消息: {'type': 'remove_order', 'order': 'FX2507272314803', 'timestamp': 1753625977.117712}
+2025-07-27 22:19:37 - INFO - web:333 - 📤 订单移除消息已推送: FX2507272314803
+2025-07-27 22:19:37 - INFO - product_checkout:990 - 🗑️ 已移除 1 个已付款订单
+2025-07-27 22:20:42 - INFO - status:140 - ⚡ 切换为单独建单模式：
+2025-07-27 22:20:42 - INFO - status:141 -    - 发现库存 → 立即下单
+2025-07-27 22:20:42 - INFO - status:142 -    - 不使用购物车
+2025-07-27 22:20:42 - INFO - product_checkout:152 - 🧹 [STATE] 批量购物车已清空: 0 → 0
+2025-07-27 22:20:42 - INFO - product_checkout:200 - 🧹 批量购物车已清空
+2025-07-27 22:23:15 - INFO - main:26 - 📊 初始监控间隔: 60秒
+2025-07-27 22:23:15 - INFO - web:374 - 🚀 Flask Web服务启动中...
+2025-07-27 22:23:15 - INFO - web:375 - 📡 实时日志推送系统已激活
+2025-07-27 22:23:15 - INFO - main:41 - ⏸️ 监控状态为关闭，不启动监控线程
+2025-07-27 22:23:15 - INFO - web:377 - 🌐 访问地址: http://0.0.0.0:5000
+2025-07-27 22:23:15 - INFO - web:378 - 🔧 日志捕获系统状态检查...
+2025-07-27 22:23:15 - INFO - job_checkout:389 - 🔍 订单状态检查线程已启动
+2025-07-27 22:23:15 - INFO - main:47 - 🔍 订单状态检查线程已启动
+2025-07-27 22:23:15 - INFO - web:394 - 🚀 尝试启动Flask服务...
+2025-07-27 22:23:15 - INFO - main:49 - 🎛️ 监控间隔可在Web界面动态调整: http://localhost:5000
+2025-07-27 22:23:16 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-27 22:23:17 - INFO - web:384 - ✅ 日志推送测试 - 这是一条测试日志
+2025-07-27 22:23:17 - INFO - web:385 - 🟢 成功：日志系统工作正常
+2025-07-27 22:23:17 - ERROR - web:386 - 🔴 错误：这是一条错误测试日志
+2025-07-27 22:23:17 - WARNING - web:387 - 🟡 警告：这是一条警告测试日志
+2025-07-27 22:23:17 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-27 22:23:21 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-27 22:23:24 - INFO - status:133 - 🛒 切换为统一建单模式：
+2025-07-27 22:23:24 - INFO - status:134 -    - 发现库存 → 加入购物车
+2025-07-27 22:23:24 - INFO - status:135 -    - 等待所有关键词检测完成
+2025-07-27 22:23:24 - INFO - status:136 -    - 批量提交订单
+2025-07-27 22:23:24 - INFO - product_checkout:120 - 🔄 [STATE] 批量状态已重置:
+2025-07-27 22:23:24 - INFO - product_checkout:121 -    清空购物车: 0 → 0
+2025-07-27 22:23:24 - INFO - product_checkout:122 -    清空关键词记录: 0 → 0
+2025-07-27 22:23:24 - INFO - product_checkout:123 -    重置轮次计数: → 0
+2025-07-27 22:23:24 - INFO - product_checkout:205 - 🔄 批量检测轮次已重置
+2025-07-27 22:23:27 - INFO - status:71 - 🔗 自动下单需要监控支持，同时启动监控...
+2025-07-27 22:23:27 - INFO - status:43 - 🚀 启动监控线程...
+2025-07-27 22:23:27 - INFO - __init__:236 - 🚀 动态调度器启动，初始间隔: 60秒
+2025-07-27 22:23:27 - INFO - __init__:315 - ✅ 监控线程启动成功
+2025-07-27 22:23:27 - INFO - status:45 - ✅ 监控线程已启动
+2025-07-27 22:23:27 - INFO - status:73 - ⚡ 自动下单已启用：发现库存将自动下单
+2025-07-27 22:23:27 - INFO - product_checkout:999 - query_product_count
+2025-07-27 22:23:28 - DEBUG - product_checkout:1004 - status_code: 200
+2025-07-27 22:23:28 - INFO - product_checkout:1015 - 商品总数: 1719
+2025-07-27 22:23:28 - INFO - status:263 - 📊 刷新统计 - 今日: 3次, 本小时: 3次
+2025-07-27 22:23:28 - INFO - product_checkout:1077 - 📈 商品总数变化: None -> 1719，需要查询商品
+2025-07-27 22:23:28 - DEBUG - job_checkout:356 - RefreshThread handle keywords: ['F24356MTI', 'CA193LHWPU']
+2025-07-27 22:23:28 - INFO - job_checkout:195 - 🛒 统一建单模式：开始多轮检测...
+2025-07-27 22:23:28 - INFO - product_checkout:120 - 🔄 [STATE] 批量状态已重置:
+2025-07-27 22:23:28 - INFO - product_checkout:121 -    清空购物车: 0 → 0
+2025-07-27 22:23:28 - INFO - product_checkout:122 -    清空关键词记录: 0 → 0
+2025-07-27 22:23:28 - INFO - product_checkout:123 -    重置轮次计数: → 0
+2025-07-27 22:23:28 - INFO - product_checkout:205 - 🔄 批量检测轮次已重置
+2025-07-27 22:23:28 - INFO - job_checkout:205 - 🔄 第 1/5 轮检测开始...
+2025-07-27 22:23:28 - INFO - product_checkout:521 - query_product: F24356MTI
+2025-07-27 22:23:28 - INFO - product_checkout:521 - query_product: CA193LHWPU
+2025-07-27 22:23:28 - DEBUG - product_checkout:530 - status_code: 200
+2025-07-27 22:23:28 - DEBUG - product_checkout:531 - url: https://fenxiao.clim.cn/shop/products.do?keyword=F24356MTI&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-27 22:23:28 - INFO - product_checkout:551 - 商品列表 [F24356MTI]: 共1条记录
+2025-07-27 22:23:28 - INFO - product_checkout:575 -   商品1: COACH 奥莱款别针 (SKU: 10105647-F24356MTI) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/oldoperation/prod/images/a505292f70774ed7867ace26c70cf664.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-27 22:23:28 - DEBUG - product_checkout:530 - status_code: 200
+2025-07-27 22:23:28 - DEBUG - product_checkout:531 - url: https://fenxiao.clim.cn/shop/products.do?keyword=CA193LHWPU&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-27 22:23:28 - INFO - product_checkout:583 - 📦 找到 1 个有效商品
+2025-07-27 22:23:28 - INFO - product_checkout:551 - 商品列表 [CA193LHWPU]: 共1条记录
+2025-07-27 22:23:28 - INFO - product_checkout:599 - 提取的SKU: 10105647-F24356MTI
+2025-07-27 22:23:28 - INFO - product_checkout:575 -   商品1: COACH 专柜款女士皮质短款钱包 (SKU: 10109305-CA193LHWPU) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/f3126d1c3cdf4e428dfddd54163c98bb.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-27 22:23:28 - DEBUG - product_checkout:1097 - product: {'keyword': 'F24356MTI', 'sku': '10105647-F24356MTI', 'brand_category': 'Coach发饰胸针', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/oldoperation/prod/images/a505292f70774ed7867ace26c70cf664.jpg?imageMogr2/thumbnail/100x100', 'name': 'COACH 奥莱款别针', 'distribution_price': '81', 'market_price': '0.0', 'listing_time': '2022-08-08 12:07:58'}
+2025-07-27 22:23:28 - INFO - product_checkout:583 - 📦 找到 1 个有效商品
+2025-07-27 22:23:28 - INFO - product_checkout:599 - 提取的SKU: 10109305-CA193LHWPU
+2025-07-27 22:23:28 - DEBUG - product_checkout:1097 - product: {'keyword': 'CA193LHWPU', 'sku': '10109305-CA193LHWPU', 'brand_category': 'Coach钱包', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/f3126d1c3cdf4e428dfddd54163c98bb.jpg?imageMogr2/thumbnail/100x100', 'name': 'COACH 专柜款女士皮质短款钱包', 'distribution_price': '354', 'market_price': '2600.0', 'listing_time': '2025-07-23 15:41:12'}
+2025-07-27 22:23:28 - INFO - product_checkout:1109 - 🔍 [PROCESS] 模式检查: auto_order_enabled=True, test_mode=False, batch_mode=True
+2025-07-27 22:23:28 - INFO - product_checkout:1109 - 🔍 [PROCESS] 模式检查: auto_order_enabled=True, test_mode=False, batch_mode=True
+2025-07-27 22:23:28 - INFO - product_checkout:624 - selectBuyDefect
+2025-07-27 22:23:28 - DEBUG - product_checkout:626 - sku: 10105647-F24356MTI
+2025-07-27 22:23:28 - INFO - product_checkout:624 - selectBuyDefect
+2025-07-27 22:23:28 - DEBUG - product_checkout:626 - sku: 10109305-CA193LHWPU
+2025-07-27 22:23:29 - DEBUG - product_checkout:628 - status_code: 200
+2025-07-27 22:23:29 - DEBUG - product_checkout:628 - status_code: 200
+2025-07-27 22:23:29 - INFO - product_checkout:637 - saveCart
+2025-07-27 22:23:29 - DEBUG - product_checkout:652 - param_save_cart: {'typeCode': '68', 'price': '81.0', 'productCode': '101548701', 'count': 1}
+2025-07-27 22:23:29 - INFO - product_checkout:637 - saveCart
+2025-07-27 22:23:29 - DEBUG - product_checkout:652 - param_save_cart: {'typeCode': '68', 'price': '354.0', 'productCode': '101899905', 'count': 13}
+2025-07-27 22:23:30 - DEBUG - product_checkout:655 - status_code: 200
+2025-07-27 22:23:30 - DEBUG - product_checkout:656 - content: true
+2025-07-27 22:23:30 - INFO - product_checkout:658 - 加入购物车成功
+2025-07-27 22:23:30 - DEBUG - product_checkout:655 - status_code: 200
+2025-07-27 22:23:30 - DEBUG - product_checkout:656 - content: true
+2025-07-27 22:23:30 - INFO - product_checkout:658 - 加入购物车成功
+2025-07-27 22:23:30 - INFO - product_checkout:1196 - 📦 关键词 CA193LHWPU 获取到商品代码: 101899905, 数量: 13
+2025-07-27 22:23:30 - INFO - product_checkout:1217 - 🛒 [BATCH] 统一建单模式：关键词 CA193LHWPU 加入购物车
+2025-07-27 22:23:30 - INFO - product_checkout:624 - selectBuyDefect
+2025-07-27 22:23:30 - DEBUG - product_checkout:626 - sku: 10109305-CA193LHWPU
+2025-07-27 22:23:30 - INFO - product_checkout:1196 - 📦 关键词 F24356MTI 获取到商品代码: 101548701, 数量: 1
+2025-07-27 22:23:30 - INFO - product_checkout:1217 - 🛒 [BATCH] 统一建单模式：关键词 F24356MTI 加入购物车
+2025-07-27 22:23:30 - INFO - product_checkout:624 - selectBuyDefect
+2025-07-27 22:23:30 - DEBUG - product_checkout:626 - sku: 10105647-F24356MTI
+2025-07-27 22:23:31 - DEBUG - product_checkout:628 - status_code: 200
+2025-07-27 22:23:31 - INFO - product_checkout:637 - saveCart
+2025-07-27 22:23:31 - DEBUG - product_checkout:652 - param_save_cart: {'typeCode': '68', 'price': '81.0', 'productCode': '101548701', 'count': 1}
+2025-07-27 22:23:31 - DEBUG - product_checkout:628 - status_code: 200
+2025-07-27 22:23:31 - INFO - product_checkout:637 - saveCart
+2025-07-27 22:23:31 - DEBUG - product_checkout:652 - param_save_cart: {'typeCode': '68', 'price': '354.0', 'productCode': '101899905', 'count': 13}
+2025-07-27 22:23:32 - DEBUG - product_checkout:655 - status_code: 200
+2025-07-27 22:23:32 - DEBUG - product_checkout:656 - content: true
+2025-07-27 22:23:32 - INFO - product_checkout:658 - 加入购物车成功
+2025-07-27 22:23:32 - DEBUG - product_checkout:655 - status_code: 200
+2025-07-27 22:23:32 - DEBUG - product_checkout:656 - content: true
+2025-07-27 22:23:32 - INFO - product_checkout:658 - 加入购物车成功
+2025-07-27 22:23:33 - DEBUG - product_checkout:1227 - 🔄 [PROCESS] selectBuyDefect 结果: {'cart_id': '115593', 'product_code': '101548701', 'productCode': '101548701', 'count': 1, 'price': '81.0'}
+2025-07-27 22:23:33 - INFO - product_checkout:1239 - 🔄 [PROCESS] 准备调用 add_to_batch_cart
+2025-07-27 22:23:33 - INFO - product_checkout:161 - 🔄 [FUNC] add_to_batch_cart 被调用:
+2025-07-27 22:23:33 - DEBUG - product_checkout:162 -    product_info: {'keyword': 'F24356MTI', 'product_code': '101548701', 'price': '81', 'distribution_price': '81', 'name': 'COACH 奥莱款别针', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/oldoperation/prod/images/a505292f70774ed7867ace26c70cf664.jpg?imageMogr2/thumbnail/100x100', 'market_price': '0.0', 'brand_category': 'Coach发饰胸针'}
+2025-07-27 22:23:33 - DEBUG - product_checkout:163 -    cart_result: {'cart_id': '115593', 'product_code': '101548701', 'productCode': '101548701', 'count': 1, 'price': '81.0'}
+2025-07-27 22:23:33 - INFO - product_checkout:174 - 📦 [FUNC] 准备添加商品到购物车: {'keyword': 'F24356MTI', 'product_code': '101548701', 'cart_id': '115593', 'count': 1, 'price': '81', 'name': 'COACH 奥莱款别针'}
+2025-07-27 22:23:33 - INFO - product_checkout:141 - 📦 [STATE] 商品已添加到购物车:
+2025-07-27 22:23:33 - INFO - product_checkout:142 -    商品名称: COACH 奥莱款别针
+2025-07-27 22:23:33 - INFO - product_checkout:143 -    关键词: F24356MTI
+2025-07-27 22:23:33 - INFO - product_checkout:144 -    购物车ID: 115593
+2025-07-27 22:23:33 - INFO - product_checkout:145 -    购物车数量: 0 → 1
+2025-07-27 22:23:33 - INFO - product_checkout:129 - 🔍 [STATE] 获取购物车商品: 1 件
+2025-07-27 22:23:33 - INFO - product_checkout:131 -    商品1: COACH 奥莱款别针 (关键词: F24356MTI)
+2025-07-27 22:23:33 - INFO - product_checkout:181 - ✅ [FUNC] 添加完成，当前购物车总数: 1
+2025-07-27 22:23:33 - INFO - product_checkout:188 - 📦 商品已加入批量购物车: COACH 奥莱款别针 (购物车ID: 115593)
+2025-07-27 22:23:33 - INFO - product_checkout:1242 - ✅ [PROCESS] 统一建单：关键字 F24356MTI 商品已加入购物车
+2025-07-27 22:23:33 - INFO - product_checkout:1321 - 📦 商品详情: COACH 奥莱款别针
+                        💰 价格: ¥81
+                        📦 库存: 1
+                        🛒 购物车ID: 115593
+                        <br><img src="https://clim-1305039671.cos.ap-beijing.myqcloud.com/oldoperation/prod/images/a505292f70774ed7867ace26c70cf664.jpg?imageMogr2/thumbnail/100x100" style="max-width:200px;max-height:200px;border-radius:8px;" />
+2025-07-27 22:23:33 - DEBUG - product_checkout:1227 - 🔄 [PROCESS] selectBuyDefect 结果: {'cart_id': '115592', 'product_code': '101899905', 'productCode': '101899905', 'count': 13, 'price': '354.0'}
+2025-07-27 22:23:33 - INFO - product_checkout:1239 - 🔄 [PROCESS] 准备调用 add_to_batch_cart
+2025-07-27 22:23:33 - INFO - product_checkout:161 - 🔄 [FUNC] add_to_batch_cart 被调用:
+2025-07-27 22:23:33 - DEBUG - product_checkout:162 -    product_info: {'keyword': 'CA193LHWPU', 'product_code': '101899905', 'price': '354', 'distribution_price': '354', 'name': 'COACH 专柜款女士皮质短款钱包', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/f3126d1c3cdf4e428dfddd54163c98bb.jpg?imageMogr2/thumbnail/100x100', 'market_price': '2600.0', 'brand_category': 'Coach钱包'}
+2025-07-27 22:23:33 - DEBUG - product_checkout:163 -    cart_result: {'cart_id': '115592', 'product_code': '101899905', 'productCode': '101899905', 'count': 13, 'price': '354.0'}
+2025-07-27 22:23:33 - INFO - product_checkout:174 - 📦 [FUNC] 准备添加商品到购物车: {'keyword': 'CA193LHWPU', 'product_code': '101899905', 'cart_id': '115592', 'count': 13, 'price': '354', 'name': 'COACH 专柜款女士皮质短款钱包'}
+2025-07-27 22:23:33 - INFO - product_checkout:141 - 📦 [STATE] 商品已添加到购物车:
+2025-07-27 22:23:33 - INFO - product_checkout:142 -    商品名称: COACH 专柜款女士皮质短款钱包
+2025-07-27 22:23:33 - INFO - product_checkout:143 -    关键词: CA193LHWPU
+2025-07-27 22:23:33 - INFO - product_checkout:144 -    购物车ID: 115592
+2025-07-27 22:23:33 - INFO - product_checkout:145 -    购物车数量: 1 → 2
+2025-07-27 22:23:33 - INFO - product_checkout:129 - 🔍 [STATE] 获取购物车商品: 2 件
+2025-07-27 22:23:33 - INFO - product_checkout:131 -    商品1: COACH 奥莱款别针 (关键词: F24356MTI)
+2025-07-27 22:23:33 - INFO - product_checkout:131 -    商品2: COACH 专柜款女士皮质短款钱包 (关键词: CA193LHWPU)
+2025-07-27 22:23:33 - INFO - product_checkout:181 - ✅ [FUNC] 添加完成，当前购物车总数: 2
+2025-07-27 22:23:33 - INFO - product_checkout:188 - 📦 商品已加入批量购物车: COACH 专柜款女士皮质短款钱包 (购物车ID: 115592)
+2025-07-27 22:23:33 - INFO - product_checkout:1242 - ✅ [PROCESS] 统一建单：关键字 CA193LHWPU 商品已加入购物车
+2025-07-27 22:23:33 - INFO - product_checkout:1321 - 📦 商品详情: COACH 专柜款女士皮质短款钱包
+                        💰 价格: ¥354
+                        📦 库存: 13
+                        🛒 购物车ID: 115592
+                        <br><img src="https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/f3126d1c3cdf4e428dfddd54163c98bb.jpg?imageMogr2/thumbnail/100x100" style="max-width:200px;max-height:200px;border-radius:8px;" />
+2025-07-27 22:23:33 - INFO - job_checkout:212 - 📊 第 1 轮检测完成：2/2 个关键词有货
+2025-07-27 22:23:33 - INFO - product_checkout:192 - 🔍 [FUNC] get_batch_cart_items 被调用
+2025-07-27 22:23:33 - INFO - product_checkout:129 - 🔍 [STATE] 获取购物车商品: 2 件
+2025-07-27 22:23:33 - INFO - product_checkout:131 -    商品1: COACH 奥莱款别针 (关键词: F24356MTI)
+2025-07-27 22:23:33 - INFO - product_checkout:131 -    商品2: COACH 专柜款女士皮质短款钱包 (关键词: CA193LHWPU)
+2025-07-27 22:23:33 - INFO - product_checkout:194 - 🔍 [FUNC] 返回 2 件商品
+2025-07-27 22:23:33 - INFO - job_checkout:279 - 🚀 第 1 轮发现 2 件商品，执行批量下单...
+2025-07-27 22:23:33 - INFO - product_checkout:192 - 🔍 [FUNC] get_batch_cart_items 被调用
+2025-07-27 22:23:33 - INFO - product_checkout:129 - 🔍 [STATE] 获取购物车商品: 2 件
+2025-07-27 22:23:33 - INFO - product_checkout:131 -    商品1: COACH 奥莱款别针 (关键词: F24356MTI)
+2025-07-27 22:23:33 - INFO - product_checkout:131 -    商品2: COACH 专柜款女士皮质短款钱包 (关键词: CA193LHWPU)
+2025-07-27 22:23:33 - INFO - product_checkout:194 - 🔍 [FUNC] 返回 2 件商品
+2025-07-27 22:23:33 - INFO - product_checkout:286 - 🛒 开始批量下单，共 2 件商品
+2025-07-27 22:23:33 - INFO - product_checkout:273 - 🛒 购物车商品已分组为 1 个订单
+2025-07-27 22:23:33 - INFO - product_checkout:275 -    订单1: 2种商品, 14件, ¥4683.00
+2025-07-27 22:23:33 - INFO - product_checkout:312 - 🚀 正在处理第 1/1 个订单...
+2025-07-27 22:23:33 - INFO - product_checkout:319 - 📋 订单详情: 2种商品, 14件, ¥4683.00
+2025-07-27 22:23:33 - INFO - product_checkout:320 - 🔗 结算链接: https://fenxiao.clim.cn/shop/settle.do?checked=115593&checked=115592
+2025-07-27 22:23:33 - INFO - product_checkout:362 - 💳 正在提交批量订单: https://fenxiao.clim.cn/shop/settle.do?checked=115593&checked=115592
+2025-07-27 22:23:33 - DEBUG - product_checkout:428 - 📋 订单数据: {'cartCodes': '115592', 'defectNo': '', 'productcode': '101899905', 'counts': '13', 'rankCode': '68', 'tagCode': '30', 'shippingMethod': '1', 'thirdcode': '', 'payType': '2', 'receiver': '李小峰', 'recvphone': '18529551929', 'provincecode': '19', 'citycode': '202', 'countycode': '1754', 'recvaddr': '化龙镇山门大道700号', 'zip': '', 'idno': '', 'exchangeRate': '1', 'description': ''}
+2025-07-27 22:23:34 - DEBUG - product_checkout:433 - 📤 提交状态码: 200
+2025-07-27 22:23:34 - DEBUG - product_checkout:438 - 📋 提交结果: {'data': {'childOrderCode': False, 'citycode': 202, 'cityname': '广州市', 'code': 'FX2507272359896', 'countycode': 1754, 'countyname': '番禺区', 'createtime': '2025-07-27 22:23:37', 'currency': 'CNY', 'defectNo': ',', 'defectPriceCode': 0, 'description': '', 'disWarehouseCode': 2, 'distributorcode': 10025, 'distributorsettlecode': 1, 'exchangeRate': 1, 'existReturnOrder': False, 'goodsamount': 0, 'idno': '', 'issubunitorder': False, 'orderOriginType': 1, 'paid': 4683, 'payType': '2', 'platformcode': 14, 'price': 0, 'productcode': '101548701,101899905', 'provincecode': 19, 'provincename': '广东省', 'rankCode': 68, 'receiver': '李小峰', 'recvaddr': '化龙镇山门大道700号', 'recvphone': '18529551929', 'rmbAmount': 4683.0, 'settlecode': 1, 'shippingMethod': 1, 'statuscode': 5, 'tagCode': 30, 'thirdcode': '', 'thirdprice': 0, 'ywjCode': 0, 'zip': ''}, 'errorMsg': '成功', 'resultCode': 0}
+2025-07-27 22:23:34 - INFO - product_checkout:444 - ✅ 批量订单提交成功!
+2025-07-27 22:23:34 - INFO - product_checkout:445 - 📦 订单号: FX2507272359896
+2025-07-27 22:23:34 - INFO - product_checkout:446 - 💰 订单金额: ¥4683
+2025-07-27 22:23:34 - DEBUG - pushplus:28 - <Response [200]>
+2025-07-27 22:23:34 - INFO - product_checkout:893 - getOrder
+2025-07-27 22:23:35 - INFO - product_checkout:918 - 发现待付款订单: FX2507272359896
+2025-07-27 22:23:35 - INFO - orders:63 - 📝 新订单已添加到列表: FX2507272359896
+2025-07-27 22:23:35 - INFO - product_checkout:927 - 共找到 1 个待付款订单
+2025-07-27 22:23:35 - INFO - product_checkout:326 - ✅ 第 1 个订单下单成功
+2025-07-27 22:23:35 - INFO - product_checkout:330 - 🔍 开始立即推送流程...
+2025-07-27 22:23:35 - INFO - product_checkout:336 - 🔍 获取到的订单列表: ['FX2507272359896']
+2025-07-27 22:23:35 - INFO - product_checkout:341 - 🚀 立即推送真实订单号: FX2507272359896
+2025-07-27 22:23:35 - DEBUG - web:256 - 📤 SSE发送订单: FX2507272359896
+2025-07-27 22:23:35 - INFO - web:313 - 📤 订单 FX2507272359896 已推送到队列，队列大小: 1
+2025-07-27 22:23:35 - INFO - product_checkout:152 - 🧹 [STATE] 批量购物车已清空: 2 → 0
+2025-07-27 22:23:35 - INFO - product_checkout:200 - 🧹 批量购物车已清空
+2025-07-27 22:23:35 - INFO - product_checkout:357 - 🎉 批量下单处理完成
+2025-07-27 22:23:35 - INFO - job_checkout:227 - ⏰ 等待 4 秒后进行下一轮检测...
+2025-07-27 22:23:35 - INFO - orders:20 - 📝 订单 FX2507272359896 已保存到历史记录
+2025-07-27 22:23:37 - INFO - status:75 - 📢 自动下单已关闭：切换为通知模式，只发送库存通知
+2025-07-27 22:23:38 - INFO - status:140 - ⚡ 切换为单独建单模式：
+2025-07-27 22:23:38 - INFO - status:141 -    - 发现库存 → 立即下单
+2025-07-27 22:23:38 - INFO - status:142 -    - 不使用购物车
+2025-07-27 22:23:38 - INFO - product_checkout:152 - 🧹 [STATE] 批量购物车已清空: 0 → 0
+2025-07-27 22:23:38 - INFO - product_checkout:200 - 🧹 批量购物车已清空
+2025-07-27 22:23:38 - INFO - status:47 - 🛑 停止监控线程...
+2025-07-27 22:23:39 - INFO - job_checkout:205 - 🔄 第 2/5 轮检测开始...
+2025-07-27 22:23:39 - DEBUG - product_checkout:1126 - 📡 [MONITOR] 关键词 F24356MTI 处于纯监控模式，无轮数限制
+2025-07-27 22:23:39 - DEBUG - product_checkout:1126 - 📡 [MONITOR] 关键词 CA193LHWPU 处于纯监控模式，无轮数限制
+2025-07-27 22:23:39 - INFO - product_checkout:521 - query_product: F24356MTI
+2025-07-27 22:23:39 - INFO - product_checkout:521 - query_product: CA193LHWPU
+2025-07-27 22:23:39 - DEBUG - product_checkout:530 - status_code: 200
+2025-07-27 22:23:39 - DEBUG - product_checkout:531 - url: https://fenxiao.clim.cn/shop/products.do?keyword=CA193LHWPU&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-27 22:23:39 - INFO - product_checkout:551 - 商品列表 [CA193LHWPU]: 共1条记录
+2025-07-27 22:23:39 - INFO - product_checkout:575 -   商品1: COACH 专柜款女士皮质短款钱包 (SKU: 10109305-CA193LHWPU) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/f3126d1c3cdf4e428dfddd54163c98bb.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-27 22:23:39 - DEBUG - product_checkout:530 - status_code: 200
+2025-07-27 22:23:39 - INFO - product_checkout:583 - 📦 找到 1 个有效商品
+2025-07-27 22:23:39 - DEBUG - product_checkout:531 - url: https://fenxiao.clim.cn/shop/products.do?keyword=F24356MTI&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-27 22:23:39 - INFO - product_checkout:599 - 提取的SKU: 10109305-CA193LHWPU
+2025-07-27 22:23:39 - INFO - product_checkout:551 - 商品列表 [F24356MTI]: 共1条记录
+2025-07-27 22:23:39 - DEBUG - product_checkout:1097 - product: {'keyword': 'CA193LHWPU', 'sku': '10109305-CA193LHWPU', 'brand_category': 'Coach钱包', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/f3126d1c3cdf4e428dfddd54163c98bb.jpg?imageMogr2/thumbnail/100x100', 'name': 'COACH 专柜款女士皮质短款钱包', 'distribution_price': '354', 'market_price': '2600.0', 'listing_time': '2025-07-23 15:41:12'}
+2025-07-27 22:23:39 - INFO - product_checkout:575 -   商品1: COACH 奥莱款别针 (SKU: 10105647-F24356MTI) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/oldoperation/prod/images/a505292f70774ed7867ace26c70cf664.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-27 22:23:39 - INFO - product_checkout:583 - 📦 找到 1 个有效商品
+2025-07-27 22:23:39 - INFO - product_checkout:599 - 提取的SKU: 10105647-F24356MTI
+2025-07-27 22:23:39 - DEBUG - product_checkout:1097 - product: {'keyword': 'F24356MTI', 'sku': '10105647-F24356MTI', 'brand_category': 'Coach发饰胸针', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/oldoperation/prod/images/a505292f70774ed7867ace26c70cf664.jpg?imageMogr2/thumbnail/100x100', 'name': 'COACH 奥莱款别针', 'distribution_price': '81', 'market_price': '0.0', 'listing_time': '2022-08-08 12:07:58'}
+2025-07-27 22:23:39 - INFO - product_checkout:1109 - 🔍 [PROCESS] 模式检查: auto_order_enabled=False, test_mode=False, batch_mode=False
+2025-07-27 22:23:39 - INFO - product_checkout:1271 - 📢 [PROCESS] 关键词 CA193LHWPU 进入通知模式（只发送库存通知）
+2025-07-27 22:23:39 - INFO - product_checkout:1109 - 🔍 [PROCESS] 模式检查: auto_order_enabled=False, test_mode=False, batch_mode=False
+2025-07-27 22:23:39 - INFO - product_checkout:1271 - 📢 [PROCESS] 关键词 F24356MTI 进入通知模式（只发送库存通知）
+2025-07-27 22:23:40 - INFO - product_checkout:939 - 🔍 检查 1 个订单的付款状态...
+2025-07-27 22:23:40 - DEBUG - pushplus:28 - <Response [200]>
+2025-07-27 22:23:40 - DEBUG - product_checkout:1276 - msg: 库存更新 COACH 专柜款女士皮质短款钱包,
+            <br />金额 354
+            <br /><img src="https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/f3126d1c3cdf4e428dfddd54163c98bb.jpg?imageMogr2/thumbnail/100x100" width="200px" height="200px" />
+2025-07-27 22:23:40 - INFO - product_checkout:1277 - 关键字 CA193LHWPU 通知发送成功
+2025-07-27 22:23:40 - INFO - product_checkout:1283 - 🛑 关键字 CA193LHWPU 监控模式通知完成，停止后续检测。
+2025-07-27 22:23:40 - DEBUG - pushplus:28 - <Response [200]>
+2025-07-27 22:23:40 - DEBUG - product_checkout:1276 - msg: 库存更新 COACH 奥莱款别针,
+            <br />金额 81
+            <br /><img src="https://clim-1305039671.cos.ap-beijing.myqcloud.com/oldoperation/prod/images/a505292f70774ed7867ace26c70cf664.jpg?imageMogr2/thumbnail/100x100" width="200px" height="200px" />
+2025-07-27 22:23:40 - INFO - product_checkout:1277 - 关键字 F24356MTI 通知发送成功
+2025-07-27 22:23:40 - INFO - product_checkout:1283 - 🛑 关键字 F24356MTI 监控模式通知完成，停止后续检测。
+2025-07-27 22:23:40 - INFO - job_checkout:212 - 📊 第 2 轮检测完成：2/2 个关键词有货
+2025-07-27 22:23:40 - INFO - product_checkout:192 - 🔍 [FUNC] get_batch_cart_items 被调用
+2025-07-27 22:23:40 - INFO - product_checkout:129 - 🔍 [STATE] 获取购物车商品: 0 件
+2025-07-27 22:23:40 - INFO - product_checkout:194 - 🔍 [FUNC] 返回 0 件商品
+2025-07-27 22:23:40 - INFO - job_checkout:227 - ⏰ 等待 4 秒后进行下一轮检测...
+2025-07-27 22:23:40 - INFO - product_checkout:956 - 📊 当前待付款订单总数: 1
+2025-07-27 22:23:40 - INFO - product_checkout:973 - 📋 发现待付款订单: FX2507272359896
+2025-07-27 22:23:40 - INFO - product_checkout:977 - 📊 服务器端待付款订单: ['FX2507272359896']
+2025-07-27 22:23:40 - INFO - product_checkout:978 - 📊 本地订单列表: ['FX2507272359896']
+2025-07-27 22:23:40 - INFO - product_checkout:986 - 📋 订单 FX2507272359896 仍为待付款状态
+2025-07-27 22:23:40 - INFO - product_checkout:992 - 📋 所有订单仍为待付款状态
+2025-07-27 22:23:44 - WARNING - __init__:332 - ⚠️ 监控线程未能在5秒内停止
+2025-07-27 22:23:44 - INFO - status:49 - ✅ 监控线程已停止
+2025-07-27 22:23:44 - INFO - job_checkout:205 - 🔄 第 3/5 轮检测开始...
+2025-07-27 22:23:44 - DEBUG - product_checkout:1126 - 📡 [MONITOR] 关键词 CA193LHWPU 处于纯监控模式，无轮数限制
+2025-07-27 22:23:44 - DEBUG - product_checkout:1126 - 📡 [MONITOR] 关键词 F24356MTI 处于纯监控模式，无轮数限制
+2025-07-27 22:23:44 - INFO - product_checkout:521 - query_product: CA193LHWPU
+2025-07-27 22:23:44 - INFO - product_checkout:521 - query_product: F24356MTI
+2025-07-27 22:23:44 - DEBUG - product_checkout:530 - status_code: 200
+2025-07-27 22:23:44 - DEBUG - product_checkout:531 - url: https://fenxiao.clim.cn/shop/products.do?keyword=CA193LHWPU&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-27 22:23:44 - INFO - product_checkout:551 - 商品列表 [CA193LHWPU]: 共1条记录
+2025-07-27 22:23:44 - INFO - product_checkout:575 -   商品1: COACH 专柜款女士皮质短款钱包 (SKU: 10109305-CA193LHWPU) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/f3126d1c3cdf4e428dfddd54163c98bb.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-27 22:23:44 - INFO - product_checkout:583 - 📦 找到 1 个有效商品
+2025-07-27 22:23:44 - INFO - product_checkout:599 - 提取的SKU: 10109305-CA193LHWPU
+2025-07-27 22:23:44 - DEBUG - product_checkout:1097 - product: {'keyword': 'CA193LHWPU', 'sku': '10109305-CA193LHWPU', 'brand_category': 'Coach钱包', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/f3126d1c3cdf4e428dfddd54163c98bb.jpg?imageMogr2/thumbnail/100x100', 'name': 'COACH 专柜款女士皮质短款钱包', 'distribution_price': '354', 'market_price': '2600.0', 'listing_time': '2025-07-23 15:41:12'}
+2025-07-27 22:23:44 - INFO - product_checkout:1109 - 🔍 [PROCESS] 模式检查: auto_order_enabled=False, test_mode=False, batch_mode=False
+2025-07-27 22:23:44 - INFO - product_checkout:1271 - 📢 [PROCESS] 关键词 CA193LHWPU 进入通知模式（只发送库存通知）
+2025-07-27 22:23:44 - DEBUG - product_checkout:530 - status_code: 200
+2025-07-27 22:23:44 - DEBUG - product_checkout:531 - url: https://fenxiao.clim.cn/shop/products.do?keyword=F24356MTI&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-27 22:23:44 - INFO - product_checkout:551 - 商品列表 [F24356MTI]: 共1条记录
+2025-07-27 22:23:44 - INFO - product_checkout:575 -   商品1: COACH 奥莱款别针 (SKU: 10105647-F24356MTI) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/oldoperation/prod/images/a505292f70774ed7867ace26c70cf664.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-27 22:23:44 - INFO - product_checkout:583 - 📦 找到 1 个有效商品
+2025-07-27 22:23:44 - INFO - product_checkout:599 - 提取的SKU: 10105647-F24356MTI
+2025-07-27 22:23:44 - DEBUG - product_checkout:1097 - product: {'keyword': 'F24356MTI', 'sku': '10105647-F24356MTI', 'brand_category': 'Coach发饰胸针', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/oldoperation/prod/images/a505292f70774ed7867ace26c70cf664.jpg?imageMogr2/thumbnail/100x100', 'name': 'COACH 奥莱款别针', 'distribution_price': '81', 'market_price': '0.0', 'listing_time': '2022-08-08 12:07:58'}
+2025-07-27 22:23:44 - INFO - product_checkout:1109 - 🔍 [PROCESS] 模式检查: auto_order_enabled=False, test_mode=False, batch_mode=False
+2025-07-27 22:23:44 - INFO - product_checkout:1271 - 📢 [PROCESS] 关键词 F24356MTI 进入通知模式（只发送库存通知）
+2025-07-27 22:23:45 - DEBUG - pushplus:28 - <Response [200]>
+2025-07-27 22:23:45 - DEBUG - product_checkout:1276 - msg: 库存更新 COACH 专柜款女士皮质短款钱包,
+            <br />金额 354
+            <br /><img src="https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/f3126d1c3cdf4e428dfddd54163c98bb.jpg?imageMogr2/thumbnail/100x100" width="200px" height="200px" />
+2025-07-27 22:23:45 - INFO - product_checkout:1277 - 关键字 CA193LHWPU 通知发送成功
+2025-07-27 22:23:45 - INFO - product_checkout:1283 - 🛑 关键字 CA193LHWPU 监控模式通知完成，停止后续检测。
+2025-07-27 22:23:45 - DEBUG - pushplus:28 - <Response [200]>
+2025-07-27 22:23:45 - DEBUG - product_checkout:1276 - msg: 库存更新 COACH 奥莱款别针,
+            <br />金额 81
+            <br /><img src="https://clim-1305039671.cos.ap-beijing.myqcloud.com/oldoperation/prod/images/a505292f70774ed7867ace26c70cf664.jpg?imageMogr2/thumbnail/100x100" width="200px" height="200px" />
+2025-07-27 22:23:45 - INFO - product_checkout:1277 - 关键字 F24356MTI 通知发送成功
+2025-07-27 22:23:45 - INFO - product_checkout:1283 - 🛑 关键字 F24356MTI 监控模式通知完成，停止后续检测。
+2025-07-27 22:23:45 - INFO - job_checkout:212 - 📊 第 3 轮检测完成：2/2 个关键词有货
+2025-07-27 22:23:45 - INFO - product_checkout:192 - 🔍 [FUNC] get_batch_cart_items 被调用
+2025-07-27 22:23:45 - INFO - product_checkout:129 - 🔍 [STATE] 获取购物车商品: 0 件
+2025-07-27 22:23:45 - INFO - product_checkout:194 - 🔍 [FUNC] 返回 0 件商品
+2025-07-27 22:23:45 - INFO - job_checkout:227 - ⏰ 等待 4 秒后进行下一轮检测...
+2025-07-27 22:23:45 - INFO - product_checkout:939 - 🔍 检查 1 个订单的付款状态...
+2025-07-27 22:23:46 - INFO - product_checkout:956 - 📊 当前待付款订单总数: 1
+2025-07-27 22:23:46 - INFO - product_checkout:973 - 📋 发现待付款订单: FX2507272359896
+2025-07-27 22:23:46 - INFO - product_checkout:977 - 📊 服务器端待付款订单: ['FX2507272359896']
+2025-07-27 22:23:46 - INFO - product_checkout:978 - 📊 本地订单列表: ['FX2507272359896']
+2025-07-27 22:23:46 - INFO - product_checkout:986 - 📋 订单 FX2507272359896 仍为待付款状态
+2025-07-27 22:23:46 - INFO - product_checkout:992 - 📋 所有订单仍为待付款状态
+2025-07-27 22:23:49 - INFO - job_checkout:205 - 🔄 第 4/5 轮检测开始...
+2025-07-27 22:23:49 - DEBUG - product_checkout:1126 - 📡 [MONITOR] 关键词 F24356MTI 处于纯监控模式，无轮数限制
+2025-07-27 22:23:49 - DEBUG - product_checkout:1126 - 📡 [MONITOR] 关键词 CA193LHWPU 处于纯监控模式，无轮数限制
+2025-07-27 22:23:49 - INFO - product_checkout:521 - query_product: F24356MTI
+2025-07-27 22:23:49 - INFO - product_checkout:521 - query_product: CA193LHWPU
+2025-07-27 22:23:49 - DEBUG - product_checkout:530 - status_code: 200
+2025-07-27 22:23:49 - DEBUG - product_checkout:531 - url: https://fenxiao.clim.cn/shop/products.do?keyword=F24356MTI&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-27 22:23:49 - INFO - product_checkout:551 - 商品列表 [F24356MTI]: 共1条记录
+2025-07-27 22:23:49 - DEBUG - product_checkout:530 - status_code: 200
+2025-07-27 22:23:49 - INFO - product_checkout:575 -   商品1: COACH 奥莱款别针 (SKU: 10105647-F24356MTI) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/oldoperation/prod/images/a505292f70774ed7867ace26c70cf664.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-27 22:23:49 - DEBUG - product_checkout:531 - url: https://fenxiao.clim.cn/shop/products.do?keyword=CA193LHWPU&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-27 22:23:49 - INFO - product_checkout:583 - 📦 找到 1 个有效商品
+2025-07-27 22:23:49 - INFO - product_checkout:551 - 商品列表 [CA193LHWPU]: 共1条记录
+2025-07-27 22:23:49 - INFO - product_checkout:599 - 提取的SKU: 10105647-F24356MTI
+2025-07-27 22:23:49 - INFO - product_checkout:575 -   商品1: COACH 专柜款女士皮质短款钱包 (SKU: 10109305-CA193LHWPU) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/f3126d1c3cdf4e428dfddd54163c98bb.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-27 22:23:49 - DEBUG - product_checkout:1097 - product: {'keyword': 'F24356MTI', 'sku': '10105647-F24356MTI', 'brand_category': 'Coach发饰胸针', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/oldoperation/prod/images/a505292f70774ed7867ace26c70cf664.jpg?imageMogr2/thumbnail/100x100', 'name': 'COACH 奥莱款别针', 'distribution_price': '81', 'market_price': '0.0', 'listing_time': '2022-08-08 12:07:58'}
+2025-07-27 22:23:49 - INFO - product_checkout:583 - 📦 找到 1 个有效商品
+2025-07-27 22:23:49 - INFO - product_checkout:599 - 提取的SKU: 10109305-CA193LHWPU
+2025-07-27 22:23:49 - DEBUG - product_checkout:1097 - product: {'keyword': 'CA193LHWPU', 'sku': '10109305-CA193LHWPU', 'brand_category': 'Coach钱包', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/f3126d1c3cdf4e428dfddd54163c98bb.jpg?imageMogr2/thumbnail/100x100', 'name': 'COACH 专柜款女士皮质短款钱包', 'distribution_price': '354', 'market_price': '2600.0', 'listing_time': '2025-07-23 15:41:12'}
+2025-07-27 22:23:49 - INFO - product_checkout:1109 - 🔍 [PROCESS] 模式检查: auto_order_enabled=False, test_mode=False, batch_mode=False
+2025-07-27 22:23:49 - INFO - product_checkout:1271 - 📢 [PROCESS] 关键词 F24356MTI 进入通知模式（只发送库存通知）
+2025-07-27 22:23:49 - INFO - product_checkout:1109 - 🔍 [PROCESS] 模式检查: auto_order_enabled=False, test_mode=False, batch_mode=False
+2025-07-27 22:23:49 - INFO - product_checkout:1271 - 📢 [PROCESS] 关键词 CA193LHWPU 进入通知模式（只发送库存通知）
+2025-07-27 22:23:50 - DEBUG - pushplus:28 - <Response [200]>
+2025-07-27 22:23:50 - DEBUG - product_checkout:1276 - msg: 库存更新 COACH 专柜款女士皮质短款钱包,
+            <br />金额 354
+            <br /><img src="https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/f3126d1c3cdf4e428dfddd54163c98bb.jpg?imageMogr2/thumbnail/100x100" width="200px" height="200px" />
+2025-07-27 22:23:50 - INFO - product_checkout:1277 - 关键字 CA193LHWPU 通知发送成功
+2025-07-27 22:23:50 - INFO - product_checkout:1283 - 🛑 关键字 CA193LHWPU 监控模式通知完成，停止后续检测。
+2025-07-27 22:23:50 - DEBUG - pushplus:28 - <Response [200]>
+2025-07-27 22:23:50 - DEBUG - product_checkout:1276 - msg: 库存更新 COACH 奥莱款别针,
+            <br />金额 81
+            <br /><img src="https://clim-1305039671.cos.ap-beijing.myqcloud.com/oldoperation/prod/images/a505292f70774ed7867ace26c70cf664.jpg?imageMogr2/thumbnail/100x100" width="200px" height="200px" />
+2025-07-27 22:23:50 - INFO - product_checkout:1277 - 关键字 F24356MTI 通知发送成功
+2025-07-27 22:23:50 - INFO - product_checkout:1283 - 🛑 关键字 F24356MTI 监控模式通知完成，停止后续检测。
+2025-07-27 22:23:50 - INFO - job_checkout:212 - 📊 第 4 轮检测完成：2/2 个关键词有货
+2025-07-27 22:23:50 - INFO - product_checkout:192 - 🔍 [FUNC] get_batch_cart_items 被调用
+2025-07-27 22:23:50 - INFO - product_checkout:129 - 🔍 [STATE] 获取购物车商品: 0 件
+2025-07-27 22:23:50 - INFO - product_checkout:194 - 🔍 [FUNC] 返回 0 件商品
+2025-07-27 22:23:50 - INFO - job_checkout:227 - ⏰ 等待 4 秒后进行下一轮检测...
+2025-07-27 22:23:51 - INFO - product_checkout:939 - 🔍 检查 1 个订单的付款状态...
+2025-07-27 22:23:51 - INFO - product_checkout:956 - 📊 当前待付款订单总数: 1
+2025-07-27 22:23:51 - INFO - product_checkout:973 - 📋 发现待付款订单: FX2507272359896
+2025-07-27 22:23:51 - INFO - product_checkout:977 - 📊 服务器端待付款订单: ['FX2507272359896']
+2025-07-27 22:23:51 - INFO - product_checkout:978 - 📊 本地订单列表: ['FX2507272359896']
+2025-07-27 22:23:51 - INFO - product_checkout:986 - 📋 订单 FX2507272359896 仍为待付款状态
+2025-07-27 22:23:51 - INFO - product_checkout:992 - 📋 所有订单仍为待付款状态
+2025-07-27 22:23:54 - INFO - job_checkout:205 - 🔄 第 5/5 轮检测开始...
+2025-07-27 22:23:54 - DEBUG - product_checkout:1126 - 📡 [MONITOR] 关键词 F24356MTI 处于纯监控模式，无轮数限制
+2025-07-27 22:23:54 - INFO - product_checkout:521 - query_product: F24356MTI
+2025-07-27 22:23:54 - DEBUG - product_checkout:1126 - 📡 [MONITOR] 关键词 CA193LHWPU 处于纯监控模式，无轮数限制
+2025-07-27 22:23:54 - INFO - product_checkout:521 - query_product: CA193LHWPU
+2025-07-27 22:23:54 - DEBUG - product_checkout:530 - status_code: 200
+2025-07-27 22:23:54 - DEBUG - product_checkout:531 - url: https://fenxiao.clim.cn/shop/products.do?keyword=F24356MTI&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-27 22:23:54 - INFO - product_checkout:551 - 商品列表 [F24356MTI]: 共1条记录
+2025-07-27 22:23:54 - DEBUG - product_checkout:530 - status_code: 200
+2025-07-27 22:23:54 - DEBUG - product_checkout:531 - url: https://fenxiao.clim.cn/shop/products.do?keyword=CA193LHWPU&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-27 22:23:54 - INFO - product_checkout:575 -   商品1: COACH 奥莱款别针 (SKU: 10105647-F24356MTI) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/oldoperation/prod/images/a505292f70774ed7867ace26c70cf664.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-27 22:23:54 - INFO - product_checkout:551 - 商品列表 [CA193LHWPU]: 共1条记录
+2025-07-27 22:23:54 - INFO - product_checkout:583 - 📦 找到 1 个有效商品
+2025-07-27 22:23:54 - INFO - product_checkout:575 -   商品1: COACH 专柜款女士皮质短款钱包 (SKU: 10109305-CA193LHWPU) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/f3126d1c3cdf4e428dfddd54163c98bb.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-27 22:23:54 - INFO - product_checkout:599 - 提取的SKU: 10105647-F24356MTI
+2025-07-27 22:23:54 - DEBUG - product_checkout:1097 - product: {'keyword': 'F24356MTI', 'sku': '10105647-F24356MTI', 'brand_category': 'Coach发饰胸针', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/oldoperation/prod/images/a505292f70774ed7867ace26c70cf664.jpg?imageMogr2/thumbnail/100x100', 'name': 'COACH 奥莱款别针', 'distribution_price': '81', 'market_price': '0.0', 'listing_time': '2022-08-08 12:07:58'}
+2025-07-27 22:23:54 - INFO - product_checkout:583 - 📦 找到 1 个有效商品
+2025-07-27 22:23:54 - INFO - product_checkout:599 - 提取的SKU: 10109305-CA193LHWPU
+2025-07-27 22:23:54 - DEBUG - product_checkout:1097 - product: {'keyword': 'CA193LHWPU', 'sku': '10109305-CA193LHWPU', 'brand_category': 'Coach钱包', 'image_url': 'https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/f3126d1c3cdf4e428dfddd54163c98bb.jpg?imageMogr2/thumbnail/100x100', 'name': 'COACH 专柜款女士皮质短款钱包', 'distribution_price': '354', 'market_price': '2600.0', 'listing_time': '2025-07-23 15:41:12'}
+2025-07-27 22:23:54 - INFO - product_checkout:1109 - 🔍 [PROCESS] 模式检查: auto_order_enabled=False, test_mode=False, batch_mode=False
+2025-07-27 22:23:54 - INFO - product_checkout:1271 - 📢 [PROCESS] 关键词 F24356MTI 进入通知模式（只发送库存通知）
+2025-07-27 22:23:54 - INFO - product_checkout:1109 - 🔍 [PROCESS] 模式检查: auto_order_enabled=False, test_mode=False, batch_mode=False
+2025-07-27 22:23:54 - INFO - product_checkout:1271 - 📢 [PROCESS] 关键词 CA193LHWPU 进入通知模式（只发送库存通知）
+2025-07-27 22:23:54 - DEBUG - pushplus:28 - <Response [200]>
+2025-07-27 22:23:54 - DEBUG - product_checkout:1276 - msg: 库存更新 COACH 奥莱款别针,
+            <br />金额 81
+            <br /><img src="https://clim-1305039671.cos.ap-beijing.myqcloud.com/oldoperation/prod/images/a505292f70774ed7867ace26c70cf664.jpg?imageMogr2/thumbnail/100x100" width="200px" height="200px" />
+2025-07-27 22:23:54 - INFO - product_checkout:1277 - 关键字 F24356MTI 通知发送成功
+2025-07-27 22:23:54 - INFO - product_checkout:1283 - 🛑 关键字 F24356MTI 监控模式通知完成，停止后续检测。
+2025-07-27 22:23:54 - DEBUG - pushplus:28 - <Response [200]>
+2025-07-27 22:23:54 - DEBUG - product_checkout:1276 - msg: 库存更新 COACH 专柜款女士皮质短款钱包,
+            <br />金额 354
+            <br /><img src="https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/f3126d1c3cdf4e428dfddd54163c98bb.jpg?imageMogr2/thumbnail/100x100" width="200px" height="200px" />
+2025-07-27 22:23:54 - INFO - product_checkout:1277 - 关键字 CA193LHWPU 通知发送成功
+2025-07-27 22:23:54 - INFO - product_checkout:1283 - 🛑 关键字 CA193LHWPU 监控模式通知完成，停止后续检测。
+2025-07-27 22:23:54 - INFO - job_checkout:212 - 📊 第 5 轮检测完成：2/2 个关键词有货
+2025-07-27 22:23:54 - INFO - product_checkout:192 - 🔍 [FUNC] get_batch_cart_items 被调用
+2025-07-27 22:23:54 - INFO - product_checkout:129 - 🔍 [STATE] 获取购物车商品: 0 件
+2025-07-27 22:23:54 - INFO - product_checkout:194 - 🔍 [FUNC] 返回 0 件商品
+2025-07-27 22:23:54 - INFO - job_checkout:233 - 🎉 多轮检测完成
+2025-07-27 22:23:54 - INFO - __init__:281 - 🛑 收到停止信号，线程即将停止
+2025-07-27 22:23:56 - INFO - product_checkout:939 - 🔍 检查 1 个订单的付款状态...
+2025-07-27 22:23:57 - INFO - product_checkout:956 - 📊 当前待付款订单总数: 1
+2025-07-27 22:23:57 - INFO - product_checkout:973 - 📋 发现待付款订单: FX2507272359896
+2025-07-27 22:23:57 - INFO - product_checkout:977 - 📊 服务器端待付款订单: ['FX2507272359896']
+2025-07-27 22:23:57 - INFO - product_checkout:978 - 📊 本地订单列表: ['FX2507272359896']
+2025-07-27 22:23:57 - INFO - product_checkout:986 - 📋 订单 FX2507272359896 仍为待付款状态
+2025-07-27 22:23:57 - INFO - product_checkout:992 - 📋 所有订单仍为待付款状态
+2025-07-27 22:24:02 - INFO - product_checkout:939 - 🔍 检查 1 个订单的付款状态...
+2025-07-27 22:24:02 - INFO - product_checkout:956 - 📊 当前待付款订单总数: 1
+2025-07-27 22:24:02 - INFO - product_checkout:973 - 📋 发现待付款订单: FX2507272359896
+2025-07-27 22:24:02 - INFO - product_checkout:977 - 📊 服务器端待付款订单: ['FX2507272359896']
+2025-07-27 22:24:02 - INFO - product_checkout:978 - 📊 本地订单列表: ['FX2507272359896']
+2025-07-27 22:24:02 - INFO - product_checkout:986 - 📋 订单 FX2507272359896 仍为待付款状态
+2025-07-27 22:24:02 - INFO - product_checkout:992 - 📋 所有订单仍为待付款状态
+2025-07-27 22:24:07 - INFO - product_checkout:939 - 🔍 检查 1 个订单的付款状态...
+2025-07-27 22:24:08 - INFO - product_checkout:956 - 📊 当前待付款订单总数: 1
+2025-07-27 22:24:08 - INFO - product_checkout:973 - 📋 发现待付款订单: FX2507272359896
+2025-07-27 22:24:08 - INFO - product_checkout:977 - 📊 服务器端待付款订单: ['FX2507272359896']
+2025-07-27 22:24:08 - INFO - product_checkout:978 - 📊 本地订单列表: ['FX2507272359896']
+2025-07-27 22:24:08 - INFO - product_checkout:986 - 📋 订单 FX2507272359896 仍为待付款状态
+2025-07-27 22:24:08 - INFO - product_checkout:992 - 📋 所有订单仍为待付款状态
+2025-07-27 22:24:13 - INFO - product_checkout:939 - 🔍 检查 1 个订单的付款状态...
+2025-07-27 22:24:14 - INFO - product_checkout:956 - 📊 当前待付款订单总数: 1
+2025-07-27 22:24:14 - INFO - product_checkout:973 - 📋 发现待付款订单: FX2507272359896
+2025-07-27 22:24:14 - INFO - product_checkout:977 - 📊 服务器端待付款订单: ['FX2507272359896']
+2025-07-27 22:24:14 - INFO - product_checkout:978 - 📊 本地订单列表: ['FX2507272359896']
+2025-07-27 22:24:14 - INFO - product_checkout:986 - 📋 订单 FX2507272359896 仍为待付款状态
+2025-07-27 22:24:14 - INFO - product_checkout:992 - 📋 所有订单仍为待付款状态
+2025-07-27 22:24:19 - INFO - product_checkout:939 - 🔍 检查 1 个订单的付款状态...
+2025-07-27 22:24:19 - INFO - product_checkout:956 - 📊 当前待付款订单总数: 0
+2025-07-27 22:24:19 - INFO - product_checkout:977 - 📊 服务器端待付款订单: []
+2025-07-27 22:24:19 - INFO - product_checkout:978 - 📊 本地订单列表: ['FX2507272359896']
+2025-07-27 22:24:19 - INFO - product_checkout:984 - ✅ 订单 FX2507272359896 已付款（不在待付款列表中）
+2025-07-27 22:24:19 - INFO - web:324 - 🗑️ 已从订单列表移除: FX2507272359896
+2025-07-27 22:24:19 - DEBUG - web:249 - 📤 SSE发送消息: {'type': 'remove_order', 'order': 'FX2507272359896', 'timestamp': 1753626259.7238739}
+2025-07-27 22:24:19 - INFO - web:333 - 📤 订单移除消息已推送: FX2507272359896
+2025-07-27 22:24:19 - INFO - product_checkout:990 - 🗑️ 已移除 1 个已付款订单
+2025-07-27 22:25:22 - INFO - main:26 - 📊 初始监控间隔: 60秒
+2025-07-27 22:25:22 - INFO - web:374 - 🚀 Flask Web服务启动中...
+2025-07-27 22:25:22 - INFO - web:375 - 📡 实时日志推送系统已激活
+2025-07-27 22:25:22 - INFO - web:377 - 🌐 访问地址: http://0.0.0.0:5000
+2025-07-27 22:25:22 - INFO - main:41 - ⏸️ 监控状态为关闭，不启动监控线程
+2025-07-27 22:25:22 - INFO - web:378 - 🔧 日志捕获系统状态检查...
+2025-07-27 22:25:22 - INFO - job_checkout:389 - 🔍 订单状态检查线程已启动
+2025-07-27 22:25:22 - INFO - main:47 - 🔍 订单状态检查线程已启动
+2025-07-27 22:25:22 - INFO - main:49 - 🎛️ 监控间隔可在Web界面动态调整: http://localhost:5000
+2025-07-27 22:25:22 - INFO - web:394 - 🚀 尝试启动Flask服务...
+2025-07-27 22:25:24 - INFO - web:384 - ✅ 日志推送测试 - 这是一条测试日志
+2025-07-27 22:25:24 - INFO - web:385 - 🟢 成功：日志系统工作正常
+2025-07-27 22:25:24 - ERROR - web:386 - 🔴 错误：这是一条错误测试日志
+2025-07-27 22:25:24 - WARNING - web:387 - 🟡 警告：这是一条警告测试日志
+2025-07-27 22:25:49 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-27 22:25:50 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-27 22:25:52 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-27 22:25:55 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-27 22:26:02 - INFO - keywords:28 - Added keyword: hello
+2025-07-27 22:26:04 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-27 22:26:07 - INFO - keywords:37 - Removed keyword: hello
+2025-07-27 22:26:34 - INFO - main:26 - 📊 初始监控间隔: 60秒
+2025-07-27 22:26:34 - INFO - web:374 - 🚀 Flask Web服务启动中...
+2025-07-27 22:26:34 - INFO - web:375 - 📡 实时日志推送系统已激活
+2025-07-27 22:26:34 - INFO - web:377 - 🌐 访问地址: http://0.0.0.0:5000
+2025-07-27 22:26:34 - INFO - web:378 - 🔧 日志捕获系统状态检查...
+2025-07-27 22:26:34 - INFO - web:394 - 🚀 尝试启动Flask服务...
+2025-07-27 22:26:34 - INFO - main:41 - ⏸️ 监控状态为关闭，不启动监控线程
+2025-07-27 22:26:34 - INFO - job_checkout:389 - 🔍 订单状态检查线程已启动
+2025-07-27 22:26:34 - INFO - main:47 - 🔍 订单状态检查线程已启动
+2025-07-27 22:26:34 - INFO - main:49 - 🎛️ 监控间隔可在Web界面动态调整: http://localhost:5000
+2025-07-27 22:26:36 - INFO - web:384 - ✅ 日志推送测试 - 这是一条测试日志
+2025-07-27 22:26:36 - INFO - web:385 - 🟢 成功：日志系统工作正常
+2025-07-27 22:26:36 - ERROR - web:386 - 🔴 错误：这是一条错误测试日志
+2025-07-27 22:26:36 - WARNING - web:387 - 🟡 警告：这是一条警告测试日志
+2025-07-27 22:26:37 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-27 22:26:41 - INFO - main:26 - 📊 初始监控间隔: 60秒
+2025-07-27 22:26:41 - INFO - web:374 - 🚀 Flask Web服务启动中...
+2025-07-27 22:26:41 - INFO - web:375 - 📡 实时日志推送系统已激活
+2025-07-27 22:26:41 - INFO - web:377 - 🌐 访问地址: http://0.0.0.0:5000
+2025-07-27 22:26:41 - INFO - main:41 - ⏸️ 监控状态为关闭，不启动监控线程
+2025-07-27 22:26:41 - INFO - web:378 - 🔧 日志捕获系统状态检查...
+2025-07-27 22:26:41 - INFO - job_checkout:389 - 🔍 订单状态检查线程已启动
+2025-07-27 22:26:41 - INFO - main:47 - 🔍 订单状态检查线程已启动
+2025-07-27 22:26:41 - INFO - web:394 - 🚀 尝试启动Flask服务...
+2025-07-27 22:26:41 - INFO - main:49 - 🎛️ 监控间隔可在Web界面动态调整: http://localhost:5000
+2025-07-27 22:26:41 - INFO - keywords:28 - Added keyword: hello
+2025-07-27 22:26:43 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-27 22:26:43 - INFO - web:384 - ✅ 日志推送测试 - 这是一条测试日志
+2025-07-27 22:26:43 - INFO - web:385 - 🟢 成功：日志系统工作正常
+2025-07-27 22:26:43 - ERROR - web:386 - 🔴 错误：这是一条错误测试日志
+2025-07-27 22:26:43 - WARNING - web:387 - 🟡 警告：这是一条警告测试日志
+2025-07-27 22:26:47 - INFO - keywords:37 - Removed keyword: hello
+2025-07-27 22:26:48 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-27 22:31:07 - INFO - main:26 - 📊 初始监控间隔: 60秒
+2025-07-27 22:31:07 - INFO - web:374 - 🚀 Flask Web服务启动中...
+2025-07-27 22:31:07 - INFO - web:375 - 📡 实时日志推送系统已激活
+2025-07-27 22:31:07 - INFO - web:377 - 🌐 访问地址: http://0.0.0.0:5000
+2025-07-27 22:31:07 - INFO - main:41 - ⏸️ 监控状态为关闭，不启动监控线程
+2025-07-27 22:31:07 - INFO - web:378 - 🔧 日志捕获系统状态检查...
+2025-07-27 22:31:07 - INFO - job_checkout:389 - 🔍 订单状态检查线程已启动
+2025-07-27 22:31:07 - INFO - main:47 - 🔍 订单状态检查线程已启动
+2025-07-27 22:31:07 - INFO - web:394 - 🚀 尝试启动Flask服务...
+2025-07-27 22:31:07 - INFO - main:49 - 🎛️ 监控间隔可在Web界面动态调整: http://localhost:5000
+2025-07-27 22:31:09 - INFO - web:384 - ✅ 日志推送测试 - 这是一条测试日志
+2025-07-27 22:31:09 - INFO - web:385 - 🟢 成功：日志系统工作正常
+2025-07-27 22:31:09 - ERROR - web:386 - 🔴 错误：这是一条错误测试日志
+2025-07-27 22:31:09 - WARNING - web:387 - 🟡 警告：这是一条警告测试日志
+2025-07-27 22:32:15 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-27 22:32:23 - INFO - keywords:28 - Added keyword: 11111
+2025-07-27 22:32:24 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-27 22:32:27 - INFO - keywords:37 - Removed keyword: 11111
+2025-07-27 22:32:29 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-27 22:49:26 - INFO - main:26 - 📊 初始监控间隔: 60秒
+2025-07-27 22:49:26 - INFO - web:374 - 🚀 Flask Web服务启动中...
+2025-07-27 22:49:26 - INFO - web:375 - 📡 实时日志推送系统已激活
+2025-07-27 22:49:26 - INFO - web:377 - 🌐 访问地址: http://0.0.0.0:5000
+2025-07-27 22:49:26 - INFO - main:41 - ⏸️ 监控状态为关闭，不启动监控线程
+2025-07-27 22:49:26 - INFO - web:378 - 🔧 日志捕获系统状态检查...
+2025-07-27 22:49:26 - INFO - job_checkout:345 - 🔍 订单状态检查线程已启动
+2025-07-27 22:49:26 - INFO - main:47 - 🔍 订单状态检查线程已启动
+2025-07-27 22:49:26 - INFO - web:394 - 🚀 尝试启动Flask服务...
+2025-07-27 22:49:26 - INFO - main:49 - 🎛️ 监控间隔可在Web界面动态调整: http://localhost:5000
+2025-07-27 22:49:26 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-27 22:49:28 - INFO - web:384 - ✅ 日志推送测试 - 这是一条测试日志
+2025-07-27 22:49:28 - INFO - web:385 - 🟢 成功：日志系统工作正常
+2025-07-27 22:49:28 - ERROR - web:386 - 🔴 错误：这是一条错误测试日志
+2025-07-27 22:49:28 - WARNING - web:387 - 🟡 警告：这是一条警告测试日志
+2025-07-27 23:24:30 - INFO - main:26 - 📊 初始监控间隔: 60秒
+2025-07-27 23:24:30 - INFO - web:374 - 🚀 Flask Web服务启动中...
+2025-07-27 23:24:30 - INFO - web:375 - 📡 实时日志推送系统已激活
+2025-07-27 23:24:30 - INFO - web:377 - 🌐 访问地址: http://0.0.0.0:5000
+2025-07-27 23:24:30 - INFO - main:41 - ⏸️ 监控状态为关闭，不启动监控线程
+2025-07-27 23:24:30 - INFO - web:378 - 🔧 日志捕获系统状态检查...
+2025-07-27 23:24:30 - INFO - job_checkout:345 - 🔍 订单状态检查线程已启动
+2025-07-27 23:24:30 - INFO - main:47 - 🔍 订单状态检查线程已启动
+2025-07-27 23:24:30 - INFO - web:394 - 🚀 尝试启动Flask服务...
+2025-07-27 23:24:30 - INFO - main:49 - 🎛️ 监控间隔可在Web界面动态调整: http://localhost:5000
+2025-07-27 23:24:30 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-27 23:24:32 - INFO - web:384 - ✅ 日志推送测试 - 这是一条测试日志
+2025-07-27 23:24:32 - INFO - web:385 - 🟢 成功：日志系统工作正常
+2025-07-27 23:24:32 - ERROR - web:386 - 🔴 错误：这是一条错误测试日志
+2025-07-27 23:24:32 - WARNING - web:387 - 🟡 警告：这是一条警告测试日志
+2025-07-27 23:24:35 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-27 23:24:39 - INFO - status:133 - 🛒 切换为统一建单模式：
+2025-07-27 23:24:39 - INFO - status:134 -    - 发现库存 → 加入购物车
+2025-07-27 23:24:39 - INFO - status:135 -    - 等待所有关键词检测完成
+2025-07-27 23:24:39 - INFO - status:136 -    - 批量提交订单
+2025-07-27 23:24:39 - INFO - product_checkout:120 - 🔄 [STATE] 批量状态已重置:
+2025-07-27 23:24:39 - INFO - product_checkout:121 -    清空购物车: 0 → 0
+2025-07-27 23:24:39 - INFO - product_checkout:122 -    清空关键词记录: 0 → 0
+2025-07-27 23:24:39 - INFO - product_checkout:123 -    重置轮次计数: → 0
+2025-07-27 23:24:39 - INFO - product_checkout:205 - 🔄 批量检测轮次已重置
+2025-07-27 23:24:54 - INFO - status:140 - ⚡ 切换为单独建单模式：
+2025-07-27 23:24:54 - INFO - status:141 -    - 发现库存 → 立即下单
+2025-07-27 23:24:54 - INFO - status:142 -    - 不使用购物车
+2025-07-27 23:24:54 - INFO - product_checkout:152 - 🧹 [STATE] 批量购物车已清空: 0 → 0
+2025-07-27 23:24:54 - INFO - product_checkout:200 - 🧹 批量购物车已清空
+2025-07-27 23:29:47 - INFO - web:278 - 📡 新的日志SSE客户端已连接
+2025-07-27 23:30:19 - INFO - main:29 - 📊 初始监控间隔: 60秒
+2025-07-27 23:31:13 - INFO - main:29 - 📊 初始监控间隔: 60秒
+2025-07-27 23:31:13 - INFO - main:30 - 🛒 建单模式: 单独建单
+2025-07-27 23:31:13 - INFO - web:380 - 🚀 Flask Web服务启动中...
+2025-07-27 23:31:13 - INFO - web:381 - 📡 实时日志推送系统已激活
+2025-07-27 23:31:13 - INFO - web:383 - 🌐 访问地址: http://0.0.0.0:5000
+2025-07-27 23:31:13 - INFO - main:49 - ⏸️ 监控状态为关闭，不启动监控线程
+2025-07-27 23:31:13 - INFO - web:384 - 🔧 日志捕获系统状态检查...
+2025-07-27 23:31:13 - INFO - job_checkout:345 - 🔍 订单状态检查线程已启动
+2025-07-27 23:31:13 - INFO - main:55 - 🔍 订单状态检查线程已启动
+2025-07-27 23:31:13 - INFO - web:400 - 🚀 尝试启动Flask服务...
+2025-07-27 23:31:13 - INFO - main:57 - 🎛️ 监控间隔可在Web界面动态调整: http://localhost:5000
+2025-07-27 23:31:15 - INFO - web:390 - ✅ 日志推送测试 - 这是一条测试日志
+2025-07-27 23:31:15 - INFO - web:391 - 🟢 成功：日志系统工作正常
+2025-07-27 23:31:15 - ERROR - web:392 - 🔴 错误：这是一条错误测试日志
+2025-07-27 23:31:15 - WARNING - web:393 - 🟡 警告：这是一条警告测试日志
+2025-07-27 23:31:17 - INFO - web:280 - 📡 新的日志SSE客户端已连接
+2025-07-27 23:31:56 - INFO - web:280 - 📡 新的日志SSE客户端已连接
+2025-07-27 23:31:58 - INFO - status:133 - 🛒 切换为统一建单模式：
+2025-07-27 23:31:58 - INFO - status:134 -    - 发现库存 → 加入购物车
+2025-07-27 23:31:58 - INFO - status:135 -    - 等待所有关键词检测完成
+2025-07-27 23:31:58 - INFO - status:136 -    - 批量提交订单
+2025-07-27 23:31:58 - INFO - product_checkout:120 - 🔄 [STATE] 批量状态已重置:
+2025-07-27 23:31:58 - INFO - product_checkout:121 -    清空购物车: 0 → 0
+2025-07-27 23:31:58 - INFO - product_checkout:122 -    清空关键词记录: 0 → 0
+2025-07-27 23:31:58 - INFO - product_checkout:123 -    重置轮次计数: → 0
+2025-07-27 23:31:58 - INFO - product_checkout:205 - 🔄 批量检测轮次已重置
+2025-07-27 23:31:59 - INFO - web:280 - 📡 新的日志SSE客户端已连接
+2025-07-27 23:32:07 - INFO - status:162 - 🔧 分组模式已设置为: 启用
+2025-07-27 23:34:48 - INFO - main:29 - 📊 初始监控间隔: 60秒
+2025-07-27 23:34:48 - INFO - main:30 - 🛒 建单模式: 统一建单
+2025-07-27 23:34:48 - INFO - main:32 - 📦 分组模式: 启用
+2025-07-27 23:34:48 - INFO - main:34 - 🔢 分组大小: 5个/组
+2025-07-27 23:34:48 - INFO - web:380 - 🚀 Flask Web服务启动中...
+2025-07-27 23:34:48 - INFO - web:381 - 📡 实时日志推送系统已激活
+2025-07-27 23:34:48 - INFO - web:383 - 🌐 访问地址: http://0.0.0.0:5000
+2025-07-27 23:34:48 - INFO - main:49 - ⏸️ 监控状态为关闭，不启动监控线程
+2025-07-27 23:34:48 - INFO - web:384 - 🔧 日志捕获系统状态检查...
+2025-07-27 23:34:48 - INFO - job_checkout:421 - 🔍 订单状态检查线程已启动
+2025-07-27 23:34:48 - INFO - main:55 - 🔍 订单状态检查线程已启动
+2025-07-27 23:34:48 - INFO - web:400 - 🚀 尝试启动Flask服务...
+2025-07-27 23:34:48 - INFO - main:57 - 🎛️ 监控间隔可在Web界面动态调整: http://localhost:5000
+2025-07-27 23:34:48 - INFO - web:280 - 📡 新的日志SSE客户端已连接
+2025-07-27 23:34:50 - INFO - web:390 - ✅ 日志推送测试 - 这是一条测试日志
+2025-07-27 23:34:50 - INFO - web:391 - 🟢 成功：日志系统工作正常
+2025-07-27 23:34:50 - ERROR - web:392 - 🔴 错误：这是一条错误测试日志
+2025-07-27 23:34:50 - WARNING - web:393 - 🟡 警告：这是一条警告测试日志
+2025-07-27 23:39:28 - INFO - main:29 - 📊 初始监控间隔: 60秒
+2025-07-27 23:39:28 - INFO - main:30 - 🛒 建单模式: 统一建单
+2025-07-27 23:39:28 - INFO - main:32 - 📦 分组模式: 启用
+2025-07-27 23:39:28 - INFO - main:34 - 🔢 分组大小: 5个/组
+2025-07-27 23:39:28 - INFO - web:380 - 🚀 Flask Web服务启动中...
+2025-07-27 23:39:28 - INFO - web:381 - 📡 实时日志推送系统已激活
+2025-07-27 23:39:28 - INFO - web:383 - 🌐 访问地址: http://0.0.0.0:5000
+2025-07-27 23:39:28 - INFO - main:49 - ⏸️ 监控状态为关闭，不启动监控线程
+2025-07-27 23:39:28 - INFO - web:384 - 🔧 日志捕获系统状态检查...
+2025-07-27 23:39:28 - INFO - job_checkout:421 - 🔍 订单状态检查线程已启动
+2025-07-27 23:39:28 - INFO - main:55 - 🔍 订单状态检查线程已启动
+2025-07-27 23:39:28 - INFO - web:400 - 🚀 尝试启动Flask服务...
+2025-07-27 23:39:28 - INFO - main:57 - 🎛️ 监控间隔可在Web界面动态调整: http://localhost:5000
+2025-07-27 23:39:30 - INFO - web:390 - ✅ 日志推送测试 - 这是一条测试日志
+2025-07-27 23:39:30 - INFO - web:391 - 🟢 成功：日志系统工作正常
+2025-07-27 23:39:30 - ERROR - web:392 - 🔴 错误：这是一条错误测试日志
+2025-07-27 23:39:30 - WARNING - web:393 - 🟡 警告：这是一条警告测试日志
+2025-07-27 23:39:31 - INFO - web:280 - 📡 新的日志SSE客户端已连接
+2025-07-27 23:39:31 - INFO - web:280 - 📡 新的日志SSE客户端已连接
+2025-07-27 23:40:01 - INFO - status:175 - 🔧 分组大小已设置为: 8个
+2025-07-27 23:44:03 - INFO - main:29 - 📊 初始监控间隔: 60秒
+2025-07-27 23:44:03 - INFO - main:30 - 🛒 建单模式: 统一建单
+2025-07-27 23:44:03 - INFO - main:32 - 📦 分组模式: 启用
+2025-07-27 23:44:03 - INFO - main:34 - 🔢 分组大小: 8个/组
+2025-07-27 23:44:03 - INFO - web:380 - 🚀 Flask Web服务启动中...
+2025-07-27 23:44:03 - INFO - web:381 - 📡 实时日志推送系统已激活
+2025-07-27 23:44:03 - INFO - web:383 - 🌐 访问地址: http://0.0.0.0:5000
+2025-07-27 23:44:03 - INFO - main:49 - ⏸️ 监控状态为关闭，不启动监控线程
+2025-07-27 23:44:03 - INFO - web:384 - 🔧 日志捕获系统状态检查...
+2025-07-27 23:44:03 - INFO - job_checkout:421 - 🔍 订单状态检查线程已启动
+2025-07-27 23:44:03 - INFO - main:55 - 🔍 订单状态检查线程已启动
+2025-07-27 23:44:03 - INFO - web:400 - 🚀 尝试启动Flask服务...
+2025-07-27 23:44:03 - INFO - main:57 - 🎛️ 监控间隔可在Web界面动态调整: http://localhost:5000
+2025-07-27 23:44:03 - INFO - web:280 - 📡 新的日志SSE客户端已连接
+2025-07-27 23:44:04 - INFO - web:280 - 📡 新的日志SSE客户端已连接
+2025-07-27 23:44:05 - INFO - web:390 - ✅ 日志推送测试 - 这是一条测试日志
+2025-07-27 23:44:05 - INFO - web:391 - 🟢 成功：日志系统工作正常
+2025-07-27 23:44:05 - ERROR - web:392 - 🔴 错误：这是一条错误测试日志
+2025-07-27 23:44:05 - WARNING - web:393 - 🟡 警告：这是一条警告测试日志
+2025-07-27 23:44:14 - INFO - main:29 - 📊 初始监控间隔: 60秒
+2025-07-27 23:44:14 - INFO - main:30 - 🛒 建单模式: 统一建单
+2025-07-27 23:44:14 - INFO - main:32 - 📦 分组模式: 启用
+2025-07-27 23:44:14 - INFO - main:34 - 🔢 分组大小: 8个/组
+2025-07-27 23:44:14 - INFO - web:380 - 🚀 Flask Web服务启动中...
+2025-07-27 23:44:14 - INFO - web:381 - 📡 实时日志推送系统已激活
+2025-07-27 23:44:14 - INFO - main:49 - ⏸️ 监控状态为关闭，不启动监控线程
+2025-07-27 23:44:14 - INFO - web:383 - 🌐 访问地址: http://0.0.0.0:5000
+2025-07-27 23:44:14 - INFO - job_checkout:421 - 🔍 订单状态检查线程已启动
+2025-07-27 23:44:14 - INFO - web:384 - 🔧 日志捕获系统状态检查...
+2025-07-27 23:44:14 - INFO - main:55 - 🔍 订单状态检查线程已启动
+2025-07-27 23:44:14 - INFO - main:57 - 🎛️ 监控间隔可在Web界面动态调整: http://localhost:5000
+2025-07-27 23:44:14 - INFO - web:400 - 🚀 尝试启动Flask服务...
+2025-07-27 23:44:15 - INFO - web:280 - 📡 新的日志SSE客户端已连接
+2025-07-27 23:44:16 - INFO - web:390 - ✅ 日志推送测试 - 这是一条测试日志
+2025-07-27 23:44:16 - INFO - web:391 - 🟢 成功：日志系统工作正常
+2025-07-27 23:44:16 - ERROR - web:392 - 🔴 错误：这是一条错误测试日志
+2025-07-27 23:44:16 - WARNING - web:393 - 🟡 警告：这是一条警告测试日志
+2025-07-27 23:44:16 - INFO - web:280 - 📡 新的日志SSE客户端已连接
+2025-07-27 23:44:17 - INFO - web:280 - 📡 新的日志SSE客户端已连接
+2025-07-27 23:44:22 - INFO - status:175 - 🔧 分组大小已设置为: 5个
+2025-07-27 23:51:20 - INFO - main:29 - 📊 初始监控间隔: 60秒
+2025-07-27 23:51:20 - INFO - main:30 - 🛒 建单模式: 统一建单
+2025-07-27 23:51:20 - INFO - main:32 - 📦 分组模式: 启用
+2025-07-27 23:51:20 - INFO - main:34 - 🔢 分组大小: 5个/组
+2025-07-27 23:51:20 - INFO - web:380 - 🚀 Flask Web服务启动中...
+2025-07-27 23:51:20 - INFO - web:381 - 📡 实时日志推送系统已激活
+2025-07-27 23:51:20 - INFO - web:383 - 🌐 访问地址: http://0.0.0.0:5000
+2025-07-27 23:51:20 - INFO - main:49 - ⏸️ 监控状态为关闭，不启动监控线程
+2025-07-27 23:51:20 - INFO - web:384 - 🔧 日志捕获系统状态检查...
+2025-07-27 23:51:20 - INFO - job_checkout:543 - 🔍 订单状态检查线程已启动
+2025-07-27 23:51:20 - INFO - main:55 - 🔍 订单状态检查线程已启动
+2025-07-27 23:51:20 - INFO - web:400 - 🚀 尝试启动Flask服务...
+2025-07-27 23:51:20 - INFO - main:57 - 🎛️ 监控间隔可在Web界面动态调整: http://localhost:5000
+2025-07-27 23:51:21 - INFO - web:280 - 📡 新的日志SSE客户端已连接
+2025-07-27 23:51:21 - INFO - web:280 - 📡 新的日志SSE客户端已连接
+2025-07-27 23:51:22 - INFO - web:390 - ✅ 日志推送测试 - 这是一条测试日志
+2025-07-27 23:51:22 - INFO - web:391 - 🟢 成功：日志系统工作正常
+2025-07-27 23:51:22 - ERROR - web:392 - 🔴 错误：这是一条错误测试日志
+2025-07-27 23:51:22 - WARNING - web:393 - 🟡 警告：这是一条警告测试日志
+2025-07-27 23:51:24 - INFO - web:280 - 📡 新的日志SSE客户端已连接
+2025-07-27 23:51:41 - INFO - keywords:28 - Added keyword: CAQ76IMTAM
+2025-07-27 23:51:43 - INFO - web:280 - 📡 新的日志SSE客户端已连接
+2025-07-27 23:52:05 - INFO - keywords:28 - Added keyword: 35F4G4VC0L
+2025-07-27 23:52:06 - INFO - web:280 - 📡 新的日志SSE客户端已连接
+2025-07-27 23:52:10 - INFO - status:175 - 🔧 分组大小已设置为: 2个
+2025-07-27 23:52:26 - INFO - status:71 - 🔗 自动下单需要监控支持，同时启动监控...
+2025-07-27 23:52:26 - INFO - status:43 - 🚀 启动监控线程...
+2025-07-27 23:52:26 - INFO - __init__:236 - 🚀 动态调度器启动，初始间隔: 60秒
+2025-07-27 23:52:26 - INFO - __init__:315 - ✅ 监控线程启动成功
+2025-07-27 23:52:26 - INFO - status:45 - ✅ 监控线程已启动
+2025-07-27 23:52:26 - INFO - status:73 - ⚡ 自动下单已启用：发现库存将自动下单
+2025-07-27 23:52:26 - INFO - product_checkout:924 - query_product_count
+2025-07-27 23:52:27 - DEBUG - product_checkout:929 - status_code: 200
+2025-07-27 23:52:27 - INFO - product_checkout:940 - 商品总数: 1717
+2025-07-27 23:52:27 - INFO - status:289 - 📊 刷新统计 - 今日: 4次, 本小时: 1次
+2025-07-27 23:52:27 - INFO - product_checkout:1002 - 📈 商品总数变化: None -> 1717，需要查询商品
+2025-07-27 23:52:27 - DEBUG - job_checkout:510 - RefreshThread handle keywords: ['F24356MTI', 'CA193LHWPU', 'CAQ76IMTAM', '35F4G4VC0L']
+2025-07-27 23:52:27 - INFO - job_checkout:200 - 🛒 统一建单模式：启用分组执行...
+2025-07-27 23:52:27 - INFO - job_checkout:235 - 📦 关键词分组完成：4个关键词分为2组，每组2个
+2025-07-27 23:52:27 - INFO - job_checkout:269 - 🔄 [组1] 开始检测: F24356MTI, CA193LHWPU
+2025-07-27 23:52:27 - INFO - job_checkout:269 - 🔄 [组2] 开始检测: CAQ76IMTAM, 35F4G4VC0L
+2025-07-27 23:52:27 - INFO - product_checkout:446 - query_product: F24356MTI
+2025-07-27 23:52:27 - INFO - product_checkout:446 - query_product: CA193LHWPU
+2025-07-27 23:52:27 - INFO - product_checkout:446 - query_product: CAQ76IMTAM
+2025-07-27 23:52:27 - INFO - product_checkout:446 - query_product: 35F4G4VC0L
+2025-07-27 23:52:28 - DEBUG - product_checkout:455 - status_code: 200
+2025-07-27 23:52:28 - DEBUG - product_checkout:456 - url: https://fenxiao.clim.cn/shop/products.do?keyword=35F4G4VC0L&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-27 23:52:28 - INFO - product_checkout:476 - 商品列表 [35F4G4VC0L]: 共1条记录
+2025-07-27 23:52:28 - INFO - product_checkout:500 -   商品1: Michael Kors 奥莱款 Avril 超小号皮革绒面革女士单肩斜挎手提包 (SKU: 10203981-35F4G4VC0L  POWDBL) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/affeb8cdea60426b86bb66d2e8ee7ecb.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-27 23:52:28 - INFO - product_checkout:508 - 📦 找到 1 个有效商品
+2025-07-27 23:52:28 - INFO - product_checkout:524 - 提取的SKU: 10203981-35F4G4VC0L  POWDBL
+2025-07-27 23:52:28 - INFO - product_checkout:549 - selectBuyDefect
+2025-07-27 23:52:28 - DEBUG - product_checkout:551 - sku: 10203981-35F4G4VC0L%20%20POWDBL
+2025-07-27 23:52:28 - DEBUG - product_checkout:455 - status_code: 200
+2025-07-27 23:52:28 - DEBUG - product_checkout:456 - url: https://fenxiao.clim.cn/shop/products.do?keyword=CA193LHWPU&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-27 23:52:28 - INFO - product_checkout:476 - 商品列表 [CA193LHWPU]: 共1条记录
+2025-07-27 23:52:28 - DEBUG - product_checkout:455 - status_code: 200
+2025-07-27 23:52:28 - INFO - product_checkout:500 -   商品1: COACH 专柜款女士皮质短款钱包 (SKU: 10109305-CA193LHWPU) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/f3126d1c3cdf4e428dfddd54163c98bb.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-27 23:52:28 - DEBUG - product_checkout:456 - url: https://fenxiao.clim.cn/shop/products.do?keyword=CAQ76IMTAM&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-27 23:52:28 - INFO - product_checkout:508 - 📦 找到 1 个有效商品
+2025-07-27 23:52:28 - INFO - product_checkout:476 - 商品列表 [CAQ76IMTAM]: 共1条记录
+2025-07-27 23:52:28 - INFO - product_checkout:524 - 提取的SKU: 10109305-CA193LHWPU
+2025-07-27 23:52:28 - INFO - product_checkout:500 -   商品1: COACH 奥莱款女士PVC配皮手拿包 (SKU: 10109779-CAQ76IMTAM) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/product/online/images/b0b4c268a7b240778c2e293d8ec9eaf8.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-27 23:52:28 - INFO - product_checkout:508 - 📦 找到 1 个有效商品
+2025-07-27 23:52:28 - INFO - product_checkout:524 - 提取的SKU: 10109779-CAQ76IMTAM
+2025-07-27 23:52:28 - INFO - product_checkout:549 - selectBuyDefect
+2025-07-27 23:52:28 - DEBUG - product_checkout:551 - sku: 10109305-CA193LHWPU
+2025-07-27 23:52:28 - INFO - product_checkout:549 - selectBuyDefect
+2025-07-27 23:52:28 - DEBUG - product_checkout:551 - sku: 10109779-CAQ76IMTAM
+2025-07-27 23:52:28 - DEBUG - product_checkout:455 - status_code: 200
+2025-07-27 23:52:28 - DEBUG - product_checkout:456 - url: https://fenxiao.clim.cn/shop/products.do?keyword=F24356MTI&recommendTypeCode=1&sort=desc&sortFiled=online_time
+2025-07-27 23:52:28 - INFO - product_checkout:476 - 商品列表 [F24356MTI]: 共1条记录
+2025-07-27 23:52:28 - INFO - product_checkout:500 -   商品1: COACH 奥莱款别针 (SKU: 10105647-F24356MTI) <br><img src='https://clim-1305039671.cos.ap-beijing.myqcloud.com/oldoperation/prod/images/a505292f70774ed7867ace26c70cf664.jpg?imageMogr2/thumbnail/100x100' style='max-width:100px;max-height:100px;' />
+2025-07-27 23:52:28 - INFO - product_checkout:508 - 📦 找到 1 个有效商品
+2025-07-27 23:52:28 - INFO - product_checkout:524 - 提取的SKU: 10105647-F24356MTI
+2025-07-27 23:52:28 - INFO - product_checkout:549 - selectBuyDefect
+2025-07-27 23:52:28 - DEBUG - product_checkout:551 - sku: 10105647-F24356MTI
+2025-07-27 23:52:29 - DEBUG - product_checkout:553 - status_code: 200
+2025-07-27 23:52:29 - INFO - product_checkout:562 - saveCart
+2025-07-27 23:52:29 - DEBUG - product_checkout:577 - param_save_cart: {'typeCode': '68', 'price': '646.0', 'productCode': '102370605', 'count': 3}
+2025-07-27 23:52:29 - DEBUG - product_checkout:553 - status_code: 200
+2025-07-27 23:52:29 - INFO - product_checkout:562 - saveCart
+2025-07-27 23:52:29 - DEBUG - product_checkout:577 - param_save_cart: {'typeCode': '68', 'price': '288.0', 'productCode': '101947401', 'count': 1}
+2025-07-27 23:52:29 - DEBUG - product_checkout:553 - status_code: 200
+2025-07-27 23:52:29 - INFO - product_checkout:562 - saveCart
+2025-07-27 23:52:29 - DEBUG - product_checkout:577 - param_save_cart: {'typeCode': '68', 'price': '354.0', 'productCode': '101899905', 'count': 13}
+2025-07-27 23:52:29 - DEBUG - product_checkout:553 - status_code: 200
+2025-07-27 23:52:29 - INFO - product_checkout:562 - saveCart
+2025-07-27 23:52:29 - DEBUG - product_checkout:577 - param_save_cart: {'typeCode': '68', 'price': '81.0', 'productCode': '101548701', 'count': 1}
+2025-07-27 23:52:30 - DEBUG - product_checkout:580 - status_code: 200
+2025-07-27 23:52:30 - DEBUG - product_checkout:581 - content: true
+2025-07-27 23:52:30 - INFO - product_checkout:583 - 加入购物车成功
+2025-07-27 23:52:30 - DEBUG - product_checkout:580 - status_code: 200
+2025-07-27 23:52:30 - DEBUG - product_checkout:581 - content: true
+2025-07-27 23:52:30 - INFO - product_checkout:583 - 加入购物车成功
+2025-07-27 23:52:30 - DEBUG - product_checkout:580 - status_code: 200
+2025-07-27 23:52:30 - DEBUG - product_checkout:581 - content: true
+2025-07-27 23:52:30 - INFO - product_checkout:583 - 加入购物车成功
+2025-07-27 23:52:30 - DEBUG - product_checkout:580 - status_code: 200
+2025-07-27 23:52:30 - DEBUG - product_checkout:581 - content: true
+2025-07-27 23:52:30 - INFO - product_checkout:583 - 加入购物车成功
+2025-07-27 23:52:30 - INFO - job_checkout:368 - ✅ [组购物车] 关键字 35F4G4VC0L 商品已加入组购物车
+2025-07-27 23:52:31 - INFO - job_checkout:368 - ✅ [组购物车] 关键字 F24356MTI 商品已加入组购物车
+2025-07-27 23:52:31 - INFO - job_checkout:368 - ✅ [组购物车] 关键字 CA193LHWPU 商品已加入组购物车
+2025-07-27 23:52:31 - INFO - job_checkout:280 - 📊 [组1] 检测完成：2/2 个关键词有货
+2025-07-27 23:52:31 - INFO - job_checkout:378 - 🛒 [组1] 开始下单，共 2 件商品
+2025-07-27 23:52:31 - INFO - job_checkout:388 - 🛒 [组1] 订单详情: 2种商品, 14件, ¥4683.00
+2025-07-27 23:52:31 - INFO - job_checkout:392 - 🚀 [组1] 开始处理订单...
+2025-07-27 23:52:31 - INFO - job_checkout:399 - 🔗 [组1] 结算链接: https://fenxiao.clim.cn/shop/settle.do?checked=115596&checked=115598
+2025-07-27 23:52:31 - INFO - product_checkout:287 - 💳 正在提交批量订单: https://fenxiao.clim.cn/shop/settle.do?checked=115596&checked=115598
+2025-07-27 23:52:31 - INFO - job_checkout:368 - ✅ [组购物车] 关键字 CAQ76IMTAM 商品已加入组购物车
+2025-07-27 23:52:31 - INFO - job_checkout:280 - 📊 [组2] 检测完成：2/2 个关键词有货
+2025-07-27 23:52:31 - INFO - job_checkout:378 - 🛒 [组2] 开始下单，共 2 件商品
+2025-07-27 23:52:31 - INFO - job_checkout:388 - 🛒 [组2] 订单详情: 2种商品, 4件, ¥2226.00
+2025-07-27 23:52:31 - INFO - job_checkout:392 - 🚀 [组2] 开始处理订单...
+2025-07-27 23:52:31 - INFO - job_checkout:399 - 🔗 [组2] 结算链接: https://fenxiao.clim.cn/shop/settle.do?checked=115595&checked=115597
+2025-07-27 23:52:31 - INFO - product_checkout:287 - 💳 正在提交批量订单: https://fenxiao.clim.cn/shop/settle.do?checked=115595&checked=115597
+2025-07-27 23:52:32 - DEBUG - product_checkout:353 - 📋 订单数据: {'cartCodes': '115598', 'defectNo': '', 'productcode': '101899905', 'counts': '13', 'rankCode': '68', 'tagCode': '30', 'shippingMethod': '1', 'thirdcode': '', 'payType': '2', 'receiver': '李小峰', 'recvphone': '18529551929', 'provincecode': '19', 'citycode': '202', 'countycode': '1754', 'recvaddr': '化龙镇山门大道700号', 'zip': '', 'idno': '', 'exchangeRate': '1', 'description': ''}
+2025-07-27 23:52:32 - DEBUG - product_checkout:353 - 📋 订单数据: {'cartCodes': '115597', 'defectNo': '', 'productcode': '101947401', 'counts': '1', 'rankCode': '68', 'tagCode': '30', 'shippingMethod': '1', 'thirdcode': '', 'payType': '2', 'receiver': '李小峰', 'recvphone': '18529551929', 'provincecode': '19', 'citycode': '202', 'countycode': '1754', 'recvaddr': '化龙镇山门大道700号', 'zip': '', 'idno': '', 'exchangeRate': '1', 'description': ''}
+2025-07-27 23:52:32 - DEBUG - product_checkout:358 - 📤 提交状态码: 200
+2025-07-27 23:52:32 - DEBUG - product_checkout:363 - 📋 提交结果: {'data': {'childOrderCode': False, 'citycode': 202, 'cityname': '广州市', 'code': 'FX2507272527448', 'countycode': 1754, 'countyname': '番禺区', 'createtime': '2025-07-27 23:52:36', 'currency': 'CNY', 'defectNo': ',', 'defectPriceCode': 0, 'description': '', 'disWarehouseCode': 2, 'distributorcode': 10025, 'distributorsettlecode': 1, 'exchangeRate': 1, 'existReturnOrder': False, 'goodsamount': 0, 'idno': '', 'issubunitorder': False, 'orderOriginType': 1, 'paid': 4683, 'payType': '2', 'platformcode': 14, 'price': 0, 'productcode': '101548701,101899905', 'provincecode': 19, 'provincename': '广东省', 'rankCode': 68, 'receiver': '李小峰', 'recvaddr': '化龙镇山门大道700号', 'recvphone': '18529551929', 'rmbAmount': 4683.0, 'settlecode': 1, 'shippingMethod': 1, 'statuscode': 5, 'tagCode': 30, 'thirdcode': '', 'thirdprice': 0, 'ywjCode': 0, 'zip': ''}, 'errorMsg': '成功', 'resultCode': 0}
+2025-07-27 23:52:32 - INFO - product_checkout:369 - ✅ 批量订单提交成功!
+2025-07-27 23:52:32 - INFO - product_checkout:370 - 📦 订单号: FX2507272527448
+2025-07-27 23:52:32 - INFO - product_checkout:371 - 💰 订单金额: ¥4683
+2025-07-27 23:52:32 - DEBUG - product_checkout:358 - 📤 提交状态码: 200
+2025-07-27 23:52:32 - DEBUG - product_checkout:363 - 📋 提交结果: {'data': {'childOrderCode': False, 'citycode': 202, 'cityname': '广州市', 'code': 'FX2507272587449', 'countycode': 1754, 'countyname': '番禺区', 'createtime': '2025-07-27 23:52:36', 'currency': 'CNY', 'defectNo': ',', 'defectPriceCode': 0, 'description': '', 'disWarehouseCode': 2, 'distributorcode': 10025, 'distributorsettlecode': 1, 'exchangeRate': 1, 'existReturnOrder': False, 'goodsamount': 0, 'idno': '', 'issubunitorder': False, 'orderOriginType': 1, 'paid': 2226, 'payType': '2', 'platformcode': 14, 'price': 0, 'productcode': '102370605,101947401', 'provincecode': 19, 'provincename': '广东省', 'rankCode': 68, 'receiver': '李小峰', 'recvaddr': '化龙镇山门大道700号', 'recvphone': '18529551929', 'rmbAmount': 2226.0, 'settlecode': 1, 'shippingMethod': 1, 'statuscode': 5, 'tagCode': 30, 'thirdcode': '', 'thirdprice': 0, 'ywjCode': 0, 'zip': ''}, 'errorMsg': '成功', 'resultCode': 0}
+2025-07-27 23:52:32 - INFO - product_checkout:369 - ✅ 批量订单提交成功!
+2025-07-27 23:52:32 - INFO - product_checkout:370 - 📦 订单号: FX2507272587449
+2025-07-27 23:52:32 - INFO - product_checkout:371 - 💰 订单金额: ¥2226
+2025-07-27 23:52:32 - DEBUG - pushplus:28 - <Response [200]>
+2025-07-27 23:52:32 - INFO - product_checkout:818 - getOrder
+2025-07-27 23:52:32 - DEBUG - pushplus:28 - <Response [200]>
+2025-07-27 23:52:32 - INFO - product_checkout:818 - getOrder
+2025-07-27 23:52:33 - INFO - product_checkout:843 - 发现待付款订单: FX2507272587449
+2025-07-27 23:52:33 - INFO - orders:63 - 📝 新订单已添加到列表: FX2507272587449
+2025-07-27 23:52:33 - INFO - product_checkout:843 - 发现待付款订单: FX2507272527448
+2025-07-27 23:52:33 - INFO - orders:63 - 📝 新订单已添加到列表: FX2507272527448
+2025-07-27 23:52:33 - INFO - product_checkout:852 - 共找到 2 个待付款订单
+2025-07-27 23:52:33 - INFO - job_checkout:405 - ✅ [组2] 订单下单成功
+2025-07-27 23:52:33 - INFO - job_checkout:250 - ✅ [组2] 处理完成
+2025-07-27 23:52:33 - INFO - product_checkout:843 - 发现待付款订单: FX2507272587449
+2025-07-27 23:52:33 - WARNING - orders:65 - ⚠️ 订单已存在，跳过添加: FX2507272587449
+2025-07-27 23:52:33 - INFO - product_checkout:843 - 发现待付款订单: FX2507272527448
+2025-07-27 23:52:33 - WARNING - orders:65 - ⚠️ 订单已存在，跳过添加: FX2507272527448
+2025-07-27 23:52:33 - INFO - product_checkout:852 - 共找到 2 个待付款订单
+2025-07-27 23:52:33 - INFO - job_checkout:405 - ✅ [组1] 订单下单成功
+2025-07-27 23:52:33 - INFO - job_checkout:250 - ✅ [组1] 处理完成
+2025-07-27 23:52:33 - INFO - job_checkout:254 - 🎉 分组执行完成：总计4个关键词有货并下单
+2025-07-27 23:52:35 - INFO - product_checkout:864 - 🔍 检查 2 个订单的付款状态...
+2025-07-27 23:52:36 - INFO - product_checkout:881 - 📊 当前待付款订单总数: 2
+2025-07-27 23:52:36 - INFO - product_checkout:898 - 📋 发现待付款订单: FX2507272587449
+2025-07-27 23:52:36 - INFO - product_checkout:898 - 📋 发现待付款订单: FX2507272527448
+2025-07-27 23:52:36 - INFO - product_checkout:902 - 📊 服务器端待付款订单: ['FX2507272527448', 'FX2507272587449']
+2025-07-27 23:52:36 - INFO - product_checkout:903 - 📊 本地订单列表: ['FX2507272587449', 'FX2507272527448']
+2025-07-27 23:52:36 - INFO - product_checkout:911 - 📋 订单 FX2507272587449 仍为待付款状态
+2025-07-27 23:52:36 - INFO - product_checkout:911 - 📋 订单 FX2507272527448 仍为待付款状态
+2025-07-27 23:52:36 - INFO - product_checkout:917 - 📋 所有订单仍为待付款状态
+2025-07-27 23:52:41 - INFO - status:75 - 📢 自动下单已关闭：切换为通知模式，只发送库存通知
+2025-07-27 23:52:41 - INFO - product_checkout:864 - 🔍 检查 2 个订单的付款状态...
+2025-07-27 23:52:41 - INFO - product_checkout:881 - 📊 当前待付款订单总数: 2
+2025-07-27 23:52:41 - INFO - product_checkout:898 - 📋 发现待付款订单: FX2507272527448
+2025-07-27 23:52:41 - INFO - product_checkout:898 - 📋 发现待付款订单: FX2507272587449
+2025-07-27 23:52:41 - INFO - product_checkout:902 - 📊 服务器端待付款订单: ['FX2507272527448', 'FX2507272587449']
+2025-07-27 23:52:41 - INFO - product_checkout:903 - 📊 本地订单列表: ['FX2507272587449', 'FX2507272527448']
+2025-07-27 23:52:41 - INFO - product_checkout:911 - 📋 订单 FX2507272587449 仍为待付款状态
+2025-07-27 23:52:41 - INFO - product_checkout:911 - 📋 订单 FX2507272527448 仍为待付款状态
+2025-07-27 23:52:41 - INFO - product_checkout:917 - 📋 所有订单仍为待付款状态
+2025-07-27 23:52:44 - INFO - status:47 - 🛑 停止监控线程...
+2025-07-27 23:52:44 - INFO - __init__:281 - 🛑 收到停止信号，线程即将停止
+2025-07-27 23:52:44 - INFO - __init__:334 - ✅ 监控线程已停止
+2025-07-27 23:52:44 - INFO - status:49 - ✅ 监控线程已停止
+2025-07-27 23:52:46 - INFO - product_checkout:864 - 🔍 检查 2 个订单的付款状态...
+2025-07-27 23:52:49 - INFO - product_checkout:881 - 📊 当前待付款订单总数: 2
+2025-07-27 23:52:49 - INFO - product_checkout:898 - 📋 发现待付款订单: FX2507272587449
+2025-07-27 23:52:49 - INFO - product_checkout:898 - 📋 发现待付款订单: FX2507272527448
+2025-07-27 23:52:49 - INFO - product_checkout:902 - 📊 服务器端待付款订单: ['FX2507272527448', 'FX2507272587449']
+2025-07-27 23:52:49 - INFO - product_checkout:903 - 📊 本地订单列表: ['FX2507272587449', 'FX2507272527448']
+2025-07-27 23:52:49 - INFO - product_checkout:911 - 📋 订单 FX2507272587449 仍为待付款状态
+2025-07-27 23:52:49 - INFO - product_checkout:911 - 📋 订单 FX2507272527448 仍为待付款状态
+2025-07-27 23:52:49 - INFO - product_checkout:917 - 📋 所有订单仍为待付款状态
+2025-07-27 23:52:54 - INFO - product_checkout:864 - 🔍 检查 2 个订单的付款状态...
+2025-07-27 23:52:54 - INFO - product_checkout:881 - 📊 当前待付款订单总数: 2
+2025-07-27 23:52:54 - INFO - product_checkout:898 - 📋 发现待付款订单: FX2507272587449
+2025-07-27 23:52:54 - INFO - product_checkout:898 - 📋 发现待付款订单: FX2507272527448
+2025-07-27 23:52:54 - INFO - product_checkout:902 - 📊 服务器端待付款订单: ['FX2507272527448', 'FX2507272587449']
+2025-07-27 23:52:54 - INFO - product_checkout:903 - 📊 本地订单列表: ['FX2507272587449', 'FX2507272527448']
+2025-07-27 23:52:54 - INFO - product_checkout:911 - 📋 订单 FX2507272587449 仍为待付款状态
+2025-07-27 23:52:54 - INFO - product_checkout:911 - 📋 订单 FX2507272527448 仍为待付款状态
+2025-07-27 23:52:54 - INFO - product_checkout:917 - 📋 所有订单仍为待付款状态
+2025-07-27 23:52:59 - INFO - product_checkout:864 - 🔍 检查 2 个订单的付款状态...
+2025-07-27 23:53:00 - INFO - product_checkout:881 - 📊 当前待付款订单总数: 2
+2025-07-27 23:53:00 - INFO - product_checkout:898 - 📋 发现待付款订单: FX2507272587449
+2025-07-27 23:53:00 - INFO - product_checkout:898 - 📋 发现待付款订单: FX2507272527448
+2025-07-27 23:53:00 - INFO - product_checkout:902 - 📊 服务器端待付款订单: ['FX2507272527448', 'FX2507272587449']
+2025-07-27 23:53:00 - INFO - product_checkout:903 - 📊 本地订单列表: ['FX2507272587449', 'FX2507272527448']
+2025-07-27 23:53:00 - INFO - product_checkout:911 - 📋 订单 FX2507272587449 仍为待付款状态
+2025-07-27 23:53:00 - INFO - product_checkout:911 - 📋 订单 FX2507272527448 仍为待付款状态
+2025-07-27 23:53:00 - INFO - product_checkout:917 - 📋 所有订单仍为待付款状态
+2025-07-27 23:53:05 - INFO - product_checkout:864 - 🔍 检查 2 个订单的付款状态...
+2025-07-27 23:53:05 - INFO - product_checkout:881 - 📊 当前待付款订单总数: 2
+2025-07-27 23:53:05 - INFO - product_checkout:898 - 📋 发现待付款订单: FX2507272587449
+2025-07-27 23:53:05 - INFO - product_checkout:898 - 📋 发现待付款订单: FX2507272527448
+2025-07-27 23:53:05 - INFO - product_checkout:902 - 📊 服务器端待付款订单: ['FX2507272527448', 'FX2507272587449']
+2025-07-27 23:53:05 - INFO - product_checkout:903 - 📊 本地订单列表: ['FX2507272587449', 'FX2507272527448']
+2025-07-27 23:53:05 - INFO - product_checkout:911 - 📋 订单 FX2507272587449 仍为待付款状态
+2025-07-27 23:53:05 - INFO - product_checkout:911 - 📋 订单 FX2507272527448 仍为待付款状态
+2025-07-27 23:53:05 - INFO - product_checkout:917 - 📋 所有订单仍为待付款状态
+2025-07-27 23:53:10 - INFO - product_checkout:864 - 🔍 检查 2 个订单的付款状态...
+2025-07-27 23:53:11 - INFO - product_checkout:881 - 📊 当前待付款订单总数: 2
+2025-07-27 23:53:11 - INFO - product_checkout:898 - 📋 发现待付款订单: FX2507272587449
+2025-07-27 23:53:11 - INFO - product_checkout:898 - 📋 发现待付款订单: FX2507272527448
+2025-07-27 23:53:11 - INFO - product_checkout:902 - 📊 服务器端待付款订单: ['FX2507272527448', 'FX2507272587449']
+2025-07-27 23:53:11 - INFO - product_checkout:903 - 📊 本地订单列表: ['FX2507272587449', 'FX2507272527448']
+2025-07-27 23:53:11 - INFO - product_checkout:911 - 📋 订单 FX2507272587449 仍为待付款状态
+2025-07-27 23:53:11 - INFO - product_checkout:911 - 📋 订单 FX2507272527448 仍为待付款状态
+2025-07-27 23:53:11 - INFO - product_checkout:917 - 📋 所有订单仍为待付款状态
+2025-07-27 23:53:16 - INFO - product_checkout:864 - 🔍 检查 2 个订单的付款状态...
+2025-07-27 23:53:17 - INFO - product_checkout:881 - 📊 当前待付款订单总数: 2
+2025-07-27 23:53:17 - INFO - product_checkout:898 - 📋 发现待付款订单: FX2507272527448
+2025-07-27 23:53:17 - INFO - product_checkout:898 - 📋 发现待付款订单: FX2507272587449
+2025-07-27 23:53:17 - INFO - product_checkout:902 - 📊 服务器端待付款订单: ['FX2507272527448', 'FX2507272587449']
+2025-07-27 23:53:17 - INFO - product_checkout:903 - 📊 本地订单列表: ['FX2507272587449', 'FX2507272527448']
+2025-07-27 23:53:17 - INFO - product_checkout:911 - 📋 订单 FX2507272587449 仍为待付款状态
+2025-07-27 23:53:17 - INFO - product_checkout:911 - 📋 订单 FX2507272527448 仍为待付款状态
+2025-07-27 23:53:17 - INFO - product_checkout:917 - 📋 所有订单仍为待付款状态
+2025-07-27 23:53:22 - INFO - product_checkout:864 - 🔍 检查 2 个订单的付款状态...
+2025-07-27 23:53:22 - INFO - product_checkout:881 - 📊 当前待付款订单总数: 1
+2025-07-27 23:53:22 - INFO - product_checkout:898 - 📋 发现待付款订单: FX2507272587449
+2025-07-27 23:53:22 - INFO - product_checkout:902 - 📊 服务器端待付款订单: ['FX2507272587449']
+2025-07-27 23:53:22 - INFO - product_checkout:903 - 📊 本地订单列表: ['FX2507272587449', 'FX2507272527448']
+2025-07-27 23:53:22 - INFO - product_checkout:911 - 📋 订单 FX2507272587449 仍为待付款状态
+2025-07-27 23:53:22 - INFO - product_checkout:909 - ✅ 订单 FX2507272527448 已付款（不在待付款列表中）
+2025-07-27 23:53:22 - INFO - web:326 - 🗑️ 已从订单列表移除: FX2507272527448
+2025-07-27 23:53:22 - DEBUG - web:251 - 📤 SSE发送消息: {'type': 'remove_order', 'order': 'FX2507272527448', 'timestamp': 1753631602.6637065}
+2025-07-27 23:53:22 - INFO - web:335 - 📤 订单移除消息已推送: FX2507272527448
+2025-07-27 23:53:22 - INFO - product_checkout:915 - 🗑️ 已移除 1 个已付款订单
+2025-07-27 23:53:27 - INFO - product_checkout:864 - 🔍 检查 1 个订单的付款状态...
+2025-07-27 23:53:28 - INFO - product_checkout:881 - 📊 当前待付款订单总数: 0
+2025-07-27 23:53:28 - INFO - product_checkout:902 - 📊 服务器端待付款订单: []
+2025-07-27 23:53:28 - INFO - product_checkout:903 - 📊 本地订单列表: ['FX2507272587449']
+2025-07-27 23:53:28 - INFO - product_checkout:909 - ✅ 订单 FX2507272587449 已付款（不在待付款列表中）
+2025-07-27 23:53:28 - INFO - web:326 - 🗑️ 已从订单列表移除: FX2507272587449
+2025-07-27 23:53:28 - DEBUG - web:251 - 📤 SSE发送消息: {'type': 'remove_order', 'order': 'FX2507272587449', 'timestamp': 1753631608.260822}
+2025-07-27 23:53:28 - INFO - web:335 - 📤 订单移除消息已推送: FX2507272587449
+2025-07-27 23:53:28 - INFO - product_checkout:915 - 🗑️ 已移除 1 个已付款订单
