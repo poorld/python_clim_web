@@ -17,7 +17,7 @@
 
 ## 项目结构
 
-```
+```d
 python_clim_web/
 ├── README.md                    # 项目说明文档
 ├── main.py                      # 应用入口点
@@ -70,7 +70,6 @@ python_clim_web/
 ## 环境要求
 
 - Python 3.8+
-- Flask 2.3.3
 - 其他依赖见 `requirements.txt`
 
 ## 安装指南
@@ -82,25 +81,13 @@ git clone <repository-url>
 cd python_clim_web
 ```
 
-### 2. 创建虚拟环境
-
-```bash
-python -m venv venv
-
-# Windows
-venv\Scripts\activate
-
-# Linux/Mac
-source venv/bin/activate
-```
-
-### 3. 安装依赖
+### 2. 安装依赖
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. 配置文件
+### 3. 配置文件
 
 确保 `config/config.json` 文件存在并配置正确。
 
