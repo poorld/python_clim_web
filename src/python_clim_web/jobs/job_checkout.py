@@ -370,56 +370,82 @@ class BatchModeStrategy(CheckoutStrategy):
         return True
 
     def _execute_group_checkout(self, group_id, group_cart):
-        """执行分组下单"""
+        """执行分组下单，并应用拆单逻辑"""
         if not group_cart:
             logger.info(f"📦 [组{group_id}] 购物车为空，无需下单")
             return
 
-        logger.info(f"🛒 [组{group_id}] 开始下单，共 {len(group_cart)} 件商品")
+        logger.info(f"🛒 [组{group_id}] 开始下单，共 {len(group_cart)} 种商品。将根据限制进行拆单...")
 
-        # 简化逻辑：直接将购物车商品作为一个订单
-        order = {
-            'items': group_cart,
-            'total_count': sum(int(item['count']) for item in group_cart),
-            'total_amount': sum(float(item['price']) * int(item['count']) for item in group_cart),
-            'product_count': len(group_cart)
-        }
+        # --- 订单拆分逻辑 (从 product_checkout.py 移植) ---
+        orders_to_submit = []
+        current_order_items = []
+        current_quantity = 0
+        current_amount = 0
 
-        logger.info(f"🛒 [组{group_id}] 订单详情: {order['product_count']}种商品, {order['total_count']}件, ¥{order['total_amount']:.2f}")
+        splittable_items = [item.copy() for item in group_cart]
 
-        # 执行订单
-        try:
-            logger.info(f"🚀 [组{group_id}] 开始处理订单...")
+        for item in splittable_items:
+            item['remaining_qty'] = int(item.get('count', 0))
 
-            # 构建多商品URL
-            cart_ids = [item['cart_id'] for item in order['items']]
-            checked_params = "&".join([f"checked={cart_id}" for cart_id in cart_ids])
-            settle_url = f"{config.URL_SETTLE}?{checked_params}"
+        for item in splittable_items:
+            item_price = float(item.get('price', 0))
+            
+            while item['remaining_qty'] > 0:
+                if not current_order_items:
+                    qty_to_add = min(item['remaining_qty'], config.MAX_QUANTITY_PER_ORDER)
+                    if item_price > 0:
+                        qty_to_add = min(qty_to_add, int(config.MAX_AMOUNT_PER_ORDER / item_price))
+                else:
+                    space_by_qty = config.MAX_QUANTITY_PER_ORDER - current_quantity
+                    space_by_amt = (config.MAX_AMOUNT_PER_ORDER - current_amount)
+                    qty_to_add = min(item['remaining_qty'], space_by_qty)
+                    if item_price > 0:
+                        qty_to_add = min(qty_to_add, int(space_by_amt / item_price))
 
-            logger.info(f"🔗 [组{group_id}] 结算链接: {settle_url}")
+                if qty_to_add <= 0:
+                    if current_order_items:
+                        orders_to_submit.append({'items': current_order_items, 'total_count': current_quantity, 'total_amount': current_amount, 'product_count': len(current_order_items)})
+                    current_order_items, current_quantity, current_amount = [], 0, 0
+                    continue
 
-            # 执行下单
-            order_code = submit_batch_order(settle_url, order)
+                order_item = item.copy()
+                order_item['count'] = qty_to_add
+                current_order_items.append(order_item)
+                current_quantity += qty_to_add
+                current_amount += qty_to_add * item_price
+                item['remaining_qty'] -= qty_to_add
 
-            if order_code:
-                logger.info(f"✅ [组{group_id}] 订单下单成功，订单号: {order_code}")
+        if current_order_items:
+            orders_to_submit.append({'items': current_order_items, 'total_count': current_quantity, 'total_amount': current_amount, 'product_count': len(current_order_items)})
 
-                # 立即推送订单号（这样可以立即弹窗）
-                try:
-                    logger.info(f"🔍 [组{group_id}] 开始立即推送订单号: {order_code}")
-                    from ..service.web import push_order_to_clients
+        logger.info(f"📦 [组{group_id}] 购物车商品已拆分为 {len(orders_to_submit)} 个子订单。")
 
-                    push_order_to_clients(order_code)
-                    logger.info(f"🚀 [组{group_id}] 订单号推送成功: {order_code}")
+        # --- 提交所有拆分好的订单 ---
+        for i, order in enumerate(orders_to_submit, 1):
+            try:
+                logger.info(f"🚀 [组{group_id}] 开始处理子订单 {i}/{len(orders_to_submit)}...")
+                logger.info(f"   订单详情: {order['product_count']}种商品, {order['total_count']}件, ¥{order['total_amount']:.2f}")
 
-                except Exception as e:
-                    logger.error(f"❌ [组{group_id}] 推送订单失败: {e}", exc_info=True)
+                cart_ids = [item['cart_id'] for item in order['items']]
+                checked_params = "&".join([f"checked={cart_id}" for cart_id in cart_ids])
+                settle_url = f"{config.URL_SETTLE}?{checked_params}"
 
-            else:
-                logger.error(f"❌ [组{group_id}] 订单下单失败")
+                logger.info(f"🔗 [组{group_id}] 结算链接: {settle_url}")
+                order_code = submit_batch_order(settle_url, order)
 
-        except Exception as e:
-            logger.error(f"❌ [组{group_id}] 处理订单时出错: {e}", exc_info=True)
+                if order_code:
+                    logger.info(f"✅ [组{group_id}] 子订单 {i} 下单成功，订单号: {order_code}")
+                    try:
+                        from ..service.web import push_order_to_clients
+                        push_order_to_clients(order_code)
+                        logger.info(f"🚀 [组{group_id}] 订单号推送成功: {order_code}")
+                    except Exception as e:
+                        logger.error(f"❌ [组{group_id}] 推送订单失败: {e}", exc_info=True)
+                else:
+                    logger.error(f"❌ [组{group_id}] 子订单 {i} 下单失败")
+            except Exception as e:
+                logger.error(f"❌ [组{group_id}] 处理子订单 {i} 时出错: {e}", exc_info=True)
 
 
 

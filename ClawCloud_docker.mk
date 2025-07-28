@@ -185,3 +185,4 @@ PORT=80
 TZ=Asia/Shanghai
   
 wfzznhagltds.ap-southeast-1.clawcloudrun.com
+https://toviomybnkov.ap-northeast-1.clawcloudrun.com
