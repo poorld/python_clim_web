@@ -394,7 +394,7 @@ class BatchModeStrategy(CheckoutStrategy):
             # 构建多商品URL
             cart_ids = [item['cart_id'] for item in order['items']]
             checked_params = "&".join([f"checked={cart_id}" for cart_id in cart_ids])
-            settle_url = f"https://fenxiao.clim.cn/shop/settle.do?{checked_params}"
+            settle_url = f"{config.URL_SETTLE}?{checked_params}"
 
             logger.info(f"🔗 [组{group_id}] 结算链接: {settle_url}")
 

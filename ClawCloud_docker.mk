@@ -180,8 +180,8 @@ CMD ["gunicorn", "--workers", "4", "--bind", "0.0.0.0:5000", "service.web:app"]
   部署完成后，ClawCloud 会为您提供一个公开的访问域名，您就可以通过这个域名访问您的应用了。
   
   
-  Environment Variables 
-  添加 PORT=80
-      TZ=Asia/Shanghai
+Environment Variables 添加 
+PORT=80
+TZ=Asia/Shanghai
   
-  wfzznhagltds.ap-southeast-1.clawcloudrun.com
+wfzznhagltds.ap-southeast-1.clawcloudrun.com

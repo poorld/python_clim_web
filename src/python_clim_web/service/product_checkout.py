@@ -10,6 +10,7 @@ import threading
 import concurrent.futures
 import os
 from ..pushplus import PushPlus
+from ..config import config  # 引入新的配置文件
 import re
 from ..common.orders import set_orders
 from ..common.status import get_global_batch_order_mode, get_global_test_mode
@@ -17,80 +18,6 @@ import json
 from ..common.logger import get_logger
 
 logger = get_logger()
-
-class ProductCheckoutConfig:
-    """产品下单配置管理类"""
-
-    # 系统配置
-    MAX_MONEY = 35000  # 最大金额限制
-
-    # 登录配置
-    LOGIN_USER = {
-        'name': '琴琴境内-境内',
-        'password': '888888'
-    }
-
-    # 批量下单配置
-    MAX_PRODUCTS_PER_ORDER = 8  # 每单最多商品种类
-    MAX_QUANTITY_PER_ORDER = 30  # 每单最多数量
-    MAX_AMOUNT_PER_ORDER = 40000  # 每单最大金额
-
-    # 多轮检测配置
-    MAX_DETECTION_ROUNDS = 5  # 最多检测轮数
-    ROUND_INTERVAL = 4  # 轮次间隔（秒）
-    THREAD_TIMEOUT = 30  # 线程超时时间（秒）
-    MAX_CONCURRENT_THREADS = 10  # 最大并发线程数
-
-    # API URL配置
-    BASE_URL = 'https://fenxiao.clim.cn'
-
-    # 登录相关URL
-    URL_LOGIN = f'{BASE_URL}/login/checkLogin.do'
-
-    # 商品相关URL
-    URL_QUERY_PRODUCT = f'{BASE_URL}/shop/products.do'
-    URL_QUERY_PRODUCT_COUNTS = f'{BASE_URL}/shop/products.do'
-    URL_SELECT_BUY_PRODUCT = f'{BASE_URL}/shop/selectBuyProduct.do'
-
-    # 购物车相关URL
-    URL_SAVE_CART = f'{BASE_URL}/shop/saveCart.do'
-    URL_CART = f'{BASE_URL}/shop/cart.do?v=4.0'
-
-    # 结算相关URL
-    URL_SETTLE = f'{BASE_URL}/shop/settle.do'
-    URL_SETTLE_SAVE = f'{BASE_URL}/shop/settlesave.do?statuscode=5'
-
-    # 订单相关URL
-    URL_ORDERLIST = f'{BASE_URL}/order/orderlist.do?statuscode=10&startTime=&endTime=&orderCode=&receiver=&phone=18529551929&thirdCode=&pageIndex=&pageSize='
-
-    # 支付相关URL
-    URL_PAY_ALIPAY = f'{BASE_URL}/alipay/topay.do'  # 支付宝支付
-    URL_PAY_WECHAT = f'{BASE_URL}/pay/topay.do'     # 微信支付
-
-    # 支付类型配置
-    PAY_TYPE_ALIPAY = '1'  # 支付宝
-    PAY_TYPE_WECHAT = '2'  # 微信支付（默认）
-
-    # 请求头配置
-    HEADERS = {
-        'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
-        'accept-encoding': 'gzip, deflate, br, zstd',
-        'content-type': 'application/x-www-form-urlencoded',
-        'cookie': 'JSESSIONID=52E75FA6DCC05C4858625F412666175C',
-        'host': 'fenxiao.clim.cn',
-        'origin': f'{BASE_URL}',
-        'referer': f'{BASE_URL}/shop/products.do',
-        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36'
-    }
-
-    # 查询商品参数配置
-    PARAM_QUERY_PRODUCT = {
-        'keyword': '',
-        'recommendTypeCode': 1,
-        'sort': 'desc',
-        'sortFiled': 'online_time'
-    }
-
 
 class ProductCheckoutState:
     """产品下单状态管理类"""
@@ -123,7 +50,6 @@ class ProductCheckoutState:
             logger.info(f"   重置轮次计数: → 0")
 
     def get_batch_cart_items(self):
-        """获取批量购物车商品"""
         with self.batch_lock:
             items = self.batch_cart_items.copy()
             logger.info(f"🔍 [STATE] 获取购物车商品: {len(items)} 件")
@@ -132,7 +58,6 @@ class ProductCheckoutState:
             return items
 
     def add_batch_cart_item(self, item):
-        """添加商品到批量购物车"""
         with self.batch_lock:
             old_count = len(self.batch_cart_items)
             self.batch_cart_items.append(item)
@@ -145,15 +70,12 @@ class ProductCheckoutState:
             logger.info(f"   购物车数量: {old_count} → {new_count}")
 
     def clear_batch_cart(self):
-        """清空批量购物车"""
         with self.batch_lock:
             old_count = len(self.batch_cart_items)
             self.batch_cart_items.clear()
             logger.info(f"🧹 [STATE] 批量购物车已清空: {old_count} → 0")
 
 
-# 全局实例
-config = ProductCheckoutConfig()
 state = ProductCheckoutState()
 
 def add_to_batch_cart(product_info, cart_result):
@@ -208,64 +130,92 @@ def reset_batch_round():
 
 def execute_batch_checkout():
     """执行批量下单"""
+    from ..config import config
     cart_items = get_batch_cart_items()
     if not cart_items:
         logger.info("📦 批量购物车为空，无需下单")
         return
 
-    logger.info(f"🛒 开始批量下单，共 {len(cart_items)} 件商品")
+    logger.info(f"🛒 开始批量下单，共 {len(cart_items)} 种商品。将根据限制进行拆单...")
 
-    # 检查是否为测试模式
-    test_mode = get_global_test_mode()
+    # --- 订单拆分逻辑 ---
+    orders_to_submit = []
+    current_order_items = []
+    current_quantity = 0
+    current_amount = 0
 
-    # 简化逻辑：直接将购物车商品作为一个订单
-    # 分组功能已经保证每组购物车商品数量合理，无需再拆单
-    order = {
-        'items': cart_items,
-        'total_count': sum(int(item['count']) for item in cart_items),
-        'total_amount': sum(float(item['price']) * int(item['count']) for item in cart_items),
-        'product_count': len(cart_items)
-    }
+    # 复制一份可修改的商品列表
+    splittable_items = [item.copy() for item in cart_items]
 
-    logger.info(f"🛒 订单详情: {order['product_count']}种商品, {order['total_count']}件, ¥{order['total_amount']:.2f}")
+    for item in splittable_items:
+        item['remaining_qty'] = int(item.get('count', 0))
 
-    if not cart_items:
-        logger.error("❌ 购物车为空")
-        return
+    for item in splittable_items:
+        item_price = float(item.get('price', 0))
+        
+        while item['remaining_qty'] > 0:
+            # 如果当前订单为空，直接计算能放多少
+            if not current_order_items:
+                qty_to_add = min(item['remaining_qty'], config.MAX_QUANTITY_PER_ORDER)
+                if item_price > 0:
+                    qty_to_add = min(qty_to_add, int(config.MAX_AMOUNT_PER_ORDER / item_price))
+            else:
+                # 计算当前订单剩余容量
+                space_by_qty = config.MAX_QUANTITY_PER_ORDER - current_quantity
+                space_by_amt = (config.MAX_AMOUNT_PER_ORDER - current_amount)
+                
+                qty_to_add = min(item['remaining_qty'], space_by_qty)
+                if item_price > 0:
+                    qty_to_add = min(qty_to_add, int(space_by_amt / item_price))
 
-    # 执行订单
-    try:
-        logger.info(f"🚀 开始处理订单...")
+            if qty_to_add <= 0:
+                # 当前订单已满，提交并开启新订单
+                if current_order_items:
+                    orders_to_submit.append({'items': current_order_items, 'total_count': current_quantity, 'total_amount': current_amount, 'product_count': len(current_order_items)})
+                current_order_items, current_quantity, current_amount = [], 0, 0
+                continue # 重新循环，在新订单中添加
 
-        # 构建多商品URL
-        cart_ids = [item['cart_id'] for item in order['items']]
-        checked_params = "&".join([f"checked={cart_id}" for cart_id in cart_ids])
-        settle_url = f"https://fenxiao.clim.cn/shop/settle.do?{checked_params}"
+            # 将计算出的数量添加到当前订单
+            order_item = item.copy()
+            order_item['count'] = qty_to_add
+            current_order_items.append(order_item)
+            
+            current_quantity += qty_to_add
+            current_amount += qty_to_add * item_price
+            item['remaining_qty'] -= qty_to_add
 
-        logger.info(f"🔗 结算链接: {settle_url}")
+    # 添加最后一个未提交的订单
+    if current_order_items:
+        orders_to_submit.append({'items': current_order_items, 'total_count': current_quantity, 'total_amount': current_amount, 'product_count': len(current_order_items)})
 
-        # 执行下单
-        order_code = submit_batch_order(settle_url, order)
+    logger.info(f"📦 购物车商品已拆分为 {len(orders_to_submit)} 个子订单。")
 
-        if order_code:
-            logger.info(f"✅ 订单下单成功，订单号: {order_code}")
+    # --- 提交所有拆分好的订单 ---
+    for i, order in enumerate(orders_to_submit, 1):
+        try:
+            logger.info(f"🚀 开始处理子订单 {i}/{len(orders_to_submit)}...")
+            logger.info(f"   订单详情: {order['product_count']}种商品, {order['total_count']}件, ¥{order['total_amount']:.2f}")
 
-            # 立即推送订单号（这样可以立即弹窗）
-            try:
-                logger.info(f"🔍 开始立即推送订单号: {order_code}")
-                from .web import push_order_to_clients
+            cart_ids = [item['cart_id'] for item in order['items']]
+            checked_params = "&".join([f"checked={cart_id}" for cart_id in cart_ids])
+            settle_url = f"{config.URL_SETTLE}?{checked_params}"
 
-                push_order_to_clients(order_code)
-                logger.info(f"🚀 订单号推送成功: {order_code}")
+            logger.info(f"🔗 结算链接: {settle_url}")
 
-            except Exception as e:
-                logger.error(f"❌ 推送订单失败: {e}", exc_info=True)
+            order_code = submit_batch_order(settle_url, order)
 
-        else:
-            logger.error(f"❌ 订单下单失败")
-
-    except Exception as e:
-        logger.error(f"❌ 处理订单时出错: {e}", exc_info=True)
+            if order_code:
+                logger.info(f"✅ 子订单 {i} 下单成功，订单号: {order_code}")
+                try:
+                    from .web import push_order_to_clients
+                    push_order_to_clients(order_code)
+                    logger.info(f"🚀 订单号推送成功: {order_code}")
+                except Exception as e:
+                    logger.error(f"❌ 推送订单失败: {e}", exc_info=True)
+            else:
+                logger.error(f"❌ 子订单 {i} 下单失败")
+        except Exception as e:
+            logger.error(f"❌ 处理子订单 {i} 时出错: {e}", exc_info=True)
 
     # 清空批量购物车
     clear_batch_cart()
@@ -290,14 +240,7 @@ def submit_batch_order(settle_url, order):
             'tagCode': '30',
             'shippingMethod': '1',
             'thirdcode': '',
-            'payType': '2',  # 1=支付宝, 2=微信
-            'receiver': '李小峰',
-            'recvphone': '18529551929',
-            'provincecode': '19',
-            'citycode': '202',
-            'countycode': '1754',
-            'recvaddr': '化龙镇山门大道700号',
-            'zip': '',
+            'payType': config.PAY_TYPE_WECHAT,
             'idno': '',
             'exchangeRate': '1',
             'description': ''
@@ -306,6 +249,7 @@ def submit_batch_order(settle_url, order):
         # 3. 从页面获取基础数据（如果存在）
         try:
             if soup.find('input', {'name': 'rankCode'}):
+                # 合并收货人信息
                 settle_data['rankCode'] = soup.find('input', {'name': 'rankCode'})['value']
             if soup.find('input', {'name': 'tagCode'}):
                 settle_data['tagCode'] = soup.find('input', {'name': 'tagCode'})['value']
@@ -313,6 +257,9 @@ def submit_batch_order(settle_url, order):
                 settle_data['shippingMethod'] = soup.find('input', {'name': 'shippingMethod'})['value']
             if soup.find('input', {'name': 'exchangeRate'}):
                 settle_data['exchangeRate'] = soup.find('input', {'name': 'exchangeRate'})['value']
+            
+            # 合并收货人信息
+            settle_data.update(config.RECEIVER_INFO)
         except Exception as e:
             logger.warning(f"⚠️ 获取页面数据时出错: {e}，使用默认值")
 
@@ -640,11 +587,10 @@ def checkout(checkId, count, payType='2'):
 
     settleData = {
         'rankCode': 0, 'tagCode': 0, 'shippingMethod': 1, 'thirdcode': '',
-        'payType': payType,
-        'receiver': '李小峰', 'recvphone': '18529551929', 'provincecode': 19, 'citycode': 202, 'countycode': 1754,
-        'recvaddr': '化龙镇山门大道700号', 'zip': '', 'idno': '', 'exchangeRate': 1,
+        'payType': payType, 'zip': '', 'idno': '', 'exchangeRate': 1,
         'cartCodes': checkId, 'defectNo': '', 'productcode': '0', 'counts': count, 'description': ''
     }
+    settleData.update(config.RECEIVER_INFO)
     try:
         settleData.update({
             'rankCode': soup.find('input', {'name': 'rankCode'})['value'],
@@ -1047,7 +993,7 @@ def _handle_order_mode(keyword, product, test_mode, batch_mode):
     if use_cart:
         return _handle_cart_mode(keyword, product, product_code_value, count, mode_name)
     else:
-        return _handle_direct_order_mode(keyword, product_code_value, count, mode_name)
+        return _handle_direct_order_mode(keyword, product, product_code_value, count, mode_name)
 
 
 def _determine_processing_mode(test_mode, batch_mode, keyword):
@@ -1090,9 +1036,32 @@ def _handle_cart_mode(keyword, product, product_code_value, count, mode_name):
     return True
 
 
-def _handle_direct_order_mode(keyword, product_code_value, count, mode_name):
-    """处理直接下单模式（简化版）"""
-    checkout_result = check_cart(product_code_value, count, config.PAY_TYPE_WECHAT)
+def _handle_direct_order_mode(keyword, product, product_code_value, count, mode_name):
+    """处理直接下单模式，并应用数量和金额限制"""
+    from ..config import config
+    try:
+        price = float(product.get('distribution_price', 0))
+    except (ValueError, TypeError):
+        price = 0
+    
+    available_quantity = int(count)
+    
+    # 1. 应用数量上限
+    order_quantity = min(available_quantity, config.MAX_QUANTITY_PER_ORDER)
+    
+    # 2. 应用金额上限
+    if price > 0:
+        max_qty_by_amount = int(config.MAX_AMOUNT_PER_ORDER / price)
+        order_quantity = min(order_quantity, max_qty_by_amount)
+
+    if order_quantity <= 0:
+        logger.warning(f"⚠️ {mode_name}：商品 {product['name']} 单价过高或库存为0，无法下单。")
+        return False
+
+    if order_quantity < available_quantity:
+        logger.info(f"⚡️ {mode_name}：商品 {product['name']} 库存({available_quantity})超限，调整下单数量为: {order_quantity}")
+
+    checkout_result = check_cart(product_code_value, order_quantity, config.PAY_TYPE_WECHAT)
 
     if not checkout_result:
         return False
@@ -1140,3 +1109,83 @@ def _log_product_details(product_info, count, cart_result):
                         🛒 购物车ID: {cart_result['cart_id']}
                         <br><img src="{image_url}" style="max-width:200px;max-height:200px;border-radius:8px;" />'''
         logger.info(html_msg)
+
+def find_latest_updated_products(sort_field_override=None):
+    """
+    智能发现最新商品。
+    - 如果提供了 sort_field_override，则只测试该字段。
+    - 否则，将自动遍历候选列表，直到找到有效的排序字段。
+    """
+    all_successful_results = {}  # 用于存储所有成功字段的结果
+
+    if sort_field_override:
+        fields_to_try = [sort_field_override]
+        logger.info(f"🚀 开始手动智能发现：测试指定字段 '{sort_field_override}'...")
+    else:
+        fields_to_try = config.SORT_FIELD_CANDIDATES
+        logger.info(f"🚀 开始自动智能发现：将尝试 {len(fields_to_try)} 个可能的排序字段...")
+    
+    headers['cookie'] = load_cookie()
+    if not headers['cookie']:
+        logger.info("Cookie为空，尝试登录...")
+        do_login()
+        headers['cookie'] = load_cookie()
+
+    for i, field in enumerate(fields_to_try):
+        logger.info(f"  [尝试 {i+1}/{len(fields_to_try)}] 使用排序字段: '{field}'")
+        
+        query_params = config.PARAM_QUERY_PRODUCT.copy()
+        query_params['keyword'] = ''  # 全局搜索
+        query_params['sortFiled'] = field
+        query_params['sort'] = 'desc'
+
+        try:
+            resp = requests.post(url=config.URL_QUERY_PRODUCT, headers=headers, params=query_params, timeout=15)
+
+            if 'login.do' in resp.url:
+                logger.warning("会话已过期，重新登录并重试本次请求...")
+                do_login()
+                headers['cookie'] = load_cookie()
+                resp = requests.post(url=config.URL_QUERY_PRODUCT, headers=headers, params=query_params, timeout=15)
+
+            if resp.status_code == 200:
+                soup = BeautifulSoup(resp.content, "html.parser", from_encoding="utf-8")
+                rows = soup.select('tbody tr')
+
+                if not rows:
+                    logger.info(f"    -> 字段 '{field}' 未返回任何商品。")
+                    continue
+
+                logger.info(f"✅ 成功! 字段 '{field}' 返回了 {len(rows)} 条记录。这很可能就是我们要找的字段！")
+                logger.info(f"以下是按 '{field}' 排序的TOP 5商品：")
+                
+                found_products = []
+                for j, row in enumerate(rows[:5]):
+                    try:
+                        sku_input = row.find('input', {'name': 'skc'})
+                        if not sku_input: continue
+
+                        name_element = row.find('a')
+                        name = name_element.get_text(strip=True) if name_element else '未知商品'
+                        listing_time = row.find_all('td')[7].get_text(strip=True)
+                        
+                        product_info = {'name': name, 'sku': sku_input['value'], 'listing_time': listing_time, 'sort_field': field}
+                        found_products.append(product_info)
+                        logger.info(f"  TOP {j+1}: {name} (上架/更新时间: {listing_time})")
+                    except Exception as e:
+                        logger.warning(f"解析商品行失败: {e}")
+                
+                if found_products:
+                    all_successful_results[field] = found_products
+            else:
+                logger.error(f"    -> 字段 '{field}' 请求失败，状态码: {resp.status_code}")
+        except requests.exceptions.RequestException as e:
+            logger.error(f"    -> 字段 '{field}' 网络错误: {e}")
+            continue
+
+    if not all_successful_results:
+        logger.warning("⚠️ 自动智能发现完成，未能从候选列表中找到有效的排序字段。")
+    else:
+        logger.info(f"🎉 自动智能发现完成，共找到 {len(all_successful_results)} 个有效的排序字段。")
+
+    return all_successful_results

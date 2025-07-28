@@ -80,13 +80,13 @@ def get_global_auto_order_status():
 # --------------------------------------------
 # 监控间隔管理
 def load_monitor_interval():
-    return _load_config().get('MONITOR_INTERVAL', 10)
+    return _load_config().get('MONITOR_INTERVAL', 15)
 
 def set_monitor_interval(interval: int):
     # 限制间隔范围：1-300秒
     if 1 <= interval <= 300:
         config = _load_config()
-        old_interval = config.get('MONITOR_INTERVAL', 10)
+        old_interval = config.get('MONITOR_INTERVAL', 15)
         config['MONITOR_INTERVAL'] = interval
         _save_config(config)
 

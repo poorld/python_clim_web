@@ -7,7 +7,7 @@ import time
 import sys
 import datetime
 from flask import Flask, request, jsonify, render_template, redirect, url_for, Response
-from ..common.keywords import load_keywords, save_keyword, remove_keyword
+from ..common.keywords import load_keywords, save_keyword, remove_keyword, get_global_keywords
 from ..common.status import load_monitor_status, set_monitor_status
 from ..common.status import load_auto_order_status, set_auto_order_status
 from ..common.status import load_monitor_interval, set_monitor_interval, get_global_monitor_interval
@@ -20,6 +20,8 @@ from ..common.orders import save_orders_history, get_global_orders_history, get_
 from ..jobs import OnceJobThread
 from ..jobs.job_checkout import RefreshThread
 import threading
+from flask import send_file
+import io
 import queue
 import logging
 from ..common.logger import get_logger
@@ -341,6 +343,7 @@ def remove_paid_orders(paid_orders):
 def home():
     keywords = load_keywords()
     error_message = request.args.get('error', '')
+    success_message = request.args.get('success', '')
     monitor_status = load_monitor_status()
     auto_order_status = load_auto_order_status()
     monitor_interval = get_global_monitor_interval()
@@ -358,7 +361,8 @@ def home():
                          daily_refresh_count=refresh_stats['daily_count'],
                          hourly_refresh_count=refresh_stats['hourly_count'],
                          keywords=keywords,
-                         error_message=error_message)
+                         error_message=error_message,
+                         success_message=success_message)
 
 
 @app.route('/health')
@@ -667,6 +671,100 @@ def api_check_order_status():
     except Exception as e:
         return jsonify({'success': False, 'message': f'检查失败: {str(e)}'})
     
+# 关键词导出
+@app.route('/api/export_keywords', methods=['GET'])
+def api_export_keywords():
+    try:
+        keywords = get_global_keywords()
+        if not keywords:
+            return redirect(url_for('home', error='没有关键词可以导出'))
+
+        # 创建一个包含所有关键词的字符串，每行一个
+        file_content = "\n".join(keywords)
+        
+        # 创建一个内存中的文本文件
+        buffer = io.BytesIO(file_content.encode('utf-8'))
+        buffer.seek(0)
+
+        # 创建带时间戳的文件名
+        timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = f"keywords_export_{timestamp}.txt"
+
+        return send_file(
+            buffer,
+            as_attachment=True,
+            download_name=filename,
+            mimetype='text/plain'
+        )
+    except Exception as e:
+        logger.error(f"❌ 导出关键词失败: {e}", exc_info=True)
+        return redirect(url_for('home', error=f'导出失败: {str(e)}'))
+
+# 关键词导入
+@app.route('/api/import_keywords', methods=['POST'])
+def api_import_keywords():
+    if 'file' not in request.files:
+        return redirect(url_for('home', error='未选择文件'))
+    
+    file = request.files['file']
+
+    if file.filename == '':
+        return redirect(url_for('home', error='未选择文件'))
+
+    if file and file.filename.endswith('.txt'):
+        try:
+            content = file.read().decode('utf-8')
+            imported_keywords = [line.strip() for line in content.splitlines() if line.strip()]
+            
+            if not imported_keywords:
+                return redirect(url_for('home', error='文件为空或格式不正确'))
+
+            current_keywords = get_global_keywords()
+            new_keywords_count = 0
+            for keyword in set(imported_keywords): # 使用set去重
+                if keyword not in current_keywords:
+                    save_keyword(keyword)
+                    new_keywords_count += 1
+            
+            message = f"导入成功！新增 {new_keywords_count} 个关键词。"
+            logger.info(message)
+            return redirect(url_for('home', success=message))
+        except Exception as e:
+            logger.error(f"❌ 导入关键词失败: {e}", exc_info=True)
+            return redirect(url_for('home', error=f'导入失败: {str(e)}'))
+    else:
+        return redirect(url_for('home', error='请上传.txt格式的文件'))
+
+# 智能发现API
+@app.route('/api/find_updates', methods=['GET'])
+def api_find_updates():
+    """
+    一个用于测试智能发现功能的API端点。
+    支持手动指定排序字段进行测试, e.g., /api/find_updates?sort_field=update_time
+    """
+    try:
+        # 从查询参数获取用户手动指定的排序字段
+        sort_field_override = request.args.get('sort_field', None)
+
+        from ..service.product_checkout import find_latest_updated_products
+        latest_products_by_field = find_latest_updated_products(sort_field_override=sort_field_override)
+        
+        if latest_products_by_field:
+            num_found_fields = len(latest_products_by_field)
+            return jsonify({
+                'success': True,
+                'message': f"扫描完成！共发现 {num_found_fields} 个有效的排序字段。",
+                'results': latest_products_by_field
+            })
+        else:
+            if sort_field_override:
+                message = f"使用指定字段 '{sort_field_override}' 未发现商品，或该字段无效。"
+            else:
+                message = "自动扫描完成，未能找到有效的更新排序字段或无新商品。"
+            return jsonify({'success': True, 'message': message, 'results': {}})
+    except Exception as e:
+        logger.error(f"执行智能发现时出错: {e}", exc_info=True)
+        return jsonify({'success': False, 'message': f'执行智能发现时出错: {str(e)}'})
 
 if __name__ == '__main__':
     # run_flask()
