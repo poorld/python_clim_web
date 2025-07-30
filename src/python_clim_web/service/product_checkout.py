@@ -922,6 +922,15 @@ def load_count_cache(keyword):
 
 def should_check_products():
     """检查是否需要查询商品（全局级别）"""
+    from ..common.status import load_monitor_status, get_global_test_mode
+    monitor_enabled = load_monitor_status()
+    test_mode = get_global_test_mode()
+
+    # 只有在监控开启或测试模式下才执行检查
+    if not monitor_enabled and not test_mode:
+        logger.debug("监控关闭且非测试模式，跳过商品总数变化检查。")
+        return False
+
     current_count = query_product_count()
     current_time = datetime.now()
 
@@ -945,6 +954,14 @@ def should_check_products():
 
 def process_keyword_direct(keyword):
     """直接处理关键词，支持单独建单和统一建单模式"""
+    from ..common.status import load_monitor_status, get_global_test_mode
+    monitor_enabled = load_monitor_status()
+    test_mode = get_global_test_mode()
+
+    # 只有在监控开启或测试模式下才执行查询
+    if not monitor_enabled and not test_mode:
+        logger.debug(f"监控关闭且非测试模式，跳过关键词 '{keyword}' 查询。")
+        return False
 
     # 查询商品
     product = query_product(keyword)
@@ -955,9 +972,8 @@ def process_keyword_direct(keyword):
         return False
 
     # 获取系统状态
-    from ..common.status import get_global_auto_order_status
+    from ..common.status import get_global_auto_order_status, get_global_batch_order_mode
     auto_order_enabled = get_global_auto_order_status()
-    test_mode = get_global_test_mode()
     batch_mode = get_global_batch_order_mode()
 
     logger.info(f"🔍 [PROCESS] 模式检查: auto_order_enabled={auto_order_enabled}, test_mode={test_mode}, batch_mode={batch_mode}")
