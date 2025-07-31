@@ -19,6 +19,8 @@ from ..common.logger import get_logger
 
 logger = get_logger()
 
+login_lock = threading.Lock()
+
 class ProductCheckoutState:
     """产品下单状态管理类"""
 
@@ -33,6 +35,7 @@ class ProductCheckoutState:
         self.last_product_count = {}  # 保存上次查询的总数
         self._last_total_count = None  # 上次总数
         self._last_check_time = None  # 上次检查时间
+        self.last_login_success_time = None  # 新增：上次成功登录时间
 
     def reset_batch_state(self):
         """重置批量状态"""
@@ -344,6 +347,35 @@ def submit_batch_order(settle_url, order):
 # 全局headers实例（动态更新cookie）
 headers = config.HEADERS.copy()
 
+def _is_login_required(response: requests.Response) -> bool:
+    """
+    检查响应是否表明需要登录。
+    通过多种方式判断，增强鲁棒性。
+    """
+    # 1. 检查是否重定向到登录页面
+    if 'login.do' in response.url:
+        logger.info("检测到重定向到登录页面，需要登录。")
+        return True
+
+    # 2. 检查非200状态码（例如 401, 403），这些通常也意味着会话问题
+    if response.status_code != 200:
+        logger.warning(f"响应状态码为 {response.status_code}，可能需要登录。")
+        return True
+
+    # 3. 检查200 OK响应的内容是否为登录页面
+    #    (寻找登录页面的特征，如密码输入框和登录表单)
+    try:
+        content = response.text
+        # 寻找一个在登录页存在，但在正常页面不存在的组合
+        if 'name="password"' in content and 'login/checkLogin.do' in content:
+            logger.info("响应内容为登录页面（但状态码为200），需要登录。")
+            return True
+    except Exception:
+        # 如果响应不是文本（如图片），则忽略此检查
+        pass
+
+    return False
+
 def getOrder():
     resp = requests.get(url=config.URL_ORDERLIST, headers=headers)
     soup = BeautifulSoup(resp.content, "html.parser", from_encoding="utf-8")
@@ -362,21 +394,30 @@ def getOrder():
 
 # 登录
 def do_login():
-    logger.info('do_login')
-    response = requests.post(url=config.URL_LOGIN, data=config.LOGIN_USER)
-    logger.debug(response.status_code)
-    data = response.json()
-    logger.debug(data)
-    if data['result'] is True:
-        cookies = requests.utils.dict_from_cookiejar(response.cookies)
-        cookiesValue = ''
-        for key in cookies.keys():
-            cookiesValue += key + '=' + cookies.get(key) + ';'
-        logger.debug(cookiesValue)
-        save_cookie(cookiesValue)
-        logger.debug(f'loadcookie: {load_cookie()}')
-        headers['cookie'] = cookiesValue
-        logger.info('-' * 50)
+    with login_lock:
+        # 双重检查锁定模式，防止“登录风暴”
+        if state.last_login_success_time and (datetime.now() - state.last_login_success_time) < timedelta(seconds=10):
+            logger.info("A recent successful login was detected. Skipping redundant login.")
+            # 确保当前线程的headers也使用最新的cookie
+            headers['cookie'] = load_cookie()
+            return
+
+        logger.info('do_login (lock acquired)')
+        # 锁内执行登录，防止并发登录导致cookie混乱
+        response = requests.post(url=config.URL_LOGIN, data=config.LOGIN_USER)
+        logger.debug(response.status_code)
+        data = response.json()
+        logger.debug(data)
+        if data.get('result') is True:
+            cookies = requests.utils.dict_from_cookiejar(response.cookies)
+            cookiesValue = ''.join([f'{key}={value};' for key, value in cookies.items()])
+            logger.debug(f"新cookie: {cookiesValue}")
+            save_cookie(cookiesValue)
+            headers['cookie'] = cookiesValue # 更新全局headers
+            state.last_login_success_time = datetime.now()  # 记录成功登录的时间
+            logger.info('✅ 登录成功，Cookie已更新')
+        else:
+            logger.error(f"❌ 登录失败: {data.get('errorMsg', '未知错误')}")
 
 # 查询商品信息
 def query_product(keyword):
@@ -389,96 +430,95 @@ def query_product(keyword):
     query_params['keyword'] = keyword
     headers['cookie'] = load_cookie()
     resp = requests.post(url=config.URL_QUERY_PRODUCT, headers=headers, params=query_params)
-    logger.debug(f'status_code: {resp.status_code}')
-    logger.debug(f'url: {resp.url}')
-    if 'login.do' in resp.url:
+
+    if _is_login_required(resp):
         do_login()
         return query_product(keyword)
-    else:
-        if resp.status_code == 200:
-            soup = BeautifulSoup(resp.content, "html.parser", from_encoding="utf-8")
 
-            # 从页面统计信息获取真正的商品总数
-            message_div = soup.find('div', class_='message')
-            total_count = 0
-            if message_div:
-                blue_element = message_div.find('i', class_='blue')
-                if blue_element:
-                    try:
-                        total_count = int(blue_element.get_text(strip=True))
-                    except ValueError:
-                        total_count = 0
+    # 只有在确认无需登录且响应成功后才继续
+    soup = BeautifulSoup(resp.content, "html.parser", from_encoding="utf-8")
 
-            rows = soup.select('tbody tr')
-            logger.info(f'商品列表 [{keyword}]: 共{total_count}条记录')
+    # 从页面统计信息获取真正的商品总数
+    message_div = soup.find('div', class_='message')
+    total_count = 0
+    if message_div:
+        blue_element = message_div.find('i', class_='blue')
+        if blue_element:
+            try:
+                total_count = int(blue_element.get_text(strip=True))
+            except ValueError:
+                total_count = 0
 
-            if rows:
-                # 只显示有效商品，不显示无效行信息
-                valid_products = []
-                for row in rows:
-                    try:
-                        # 检查是否有SKU input（真正的商品行必须有这个）
-                        sku_input = row.find('input', {'name': 'skc'})
-                        name_element = row.find('a')
+    rows = soup.select('tbody tr')
+    logger.info(f'商品列表 [{keyword}]: 共{total_count}条记录')
 
-                        if sku_input and name_element:
-                            # 这是有效的商品行
-                            name = name_element.get_text(strip=True)
-                            sku_value = sku_input['value']
+    if rows:
+        # 只显示有效商品，不显示无效行信息
+        valid_products = []
+        for row in rows:
+            try:
+                # 检查是否有SKU input（真正的商品行必须有这个）
+                sku_input = row.find('input', {'name': 'skc'})
+                name_element = row.find('a')
 
-                            # 获取图片URL
-                            image_element = row.find('img')
-                            image_url = image_element['src'] if image_element else ''
+                if sku_input and name_element:
+                    # 这是有效的商品行
+                    name = name_element.get_text(strip=True)
+                    sku_value = sku_input['value']
 
-                            valid_products.append((name, sku_value, image_url))
+                    # 获取图片URL
+                    image_element = row.find('img')
+                    image_url = image_element['src'] if image_element else ''
 
-                            # 显示商品信息和图片
-                            if image_url:
-                                logger.info(f"  商品{len(valid_products)}: {name} (SKU: {sku_value}) <br><img src='{image_url}' style='max-width:100px;max-height:100px;' />")
-                            else:
-                                logger.info(f"  商品{len(valid_products)}: {name} (SKU: {sku_value})")
-                    except Exception:
-                        # 静默处理错误，不显示
-                        pass
+                    valid_products.append((name, sku_value, image_url))
 
-                if len(valid_products) != len(rows):
-                    logger.info(f"📦 找到 {len(valid_products)} 个有效商品")
+                    # 显示商品信息和图片
+                    if image_url:
+                        logger.info(f"  商品{len(valid_products)}: {name} (SKU: {sku_value}) <br><img src='{image_url}' style='max-width:100px;max-height:100px;' />")
+                    else:
+                        logger.info(f"  商品{len(valid_products)}: {name} (SKU: {sku_value})")
+            except Exception:
+                # 静默处理错误，不显示
+                pass
 
-                # 处理第一个商品
-                row_0 = rows[0]
-                row_0_td = row_0.find_all('td')
+        if len(valid_products) != len(rows):
+            logger.info(f"📦 找到 {len(valid_products)} 个有效商品")
 
-                # 从hidden input获取SKU（更准确）
-                sku_input = row_0.find('input', {'name': 'skc'})
-                sku = sku_input['value'] if sku_input else None
+        # 处理第一个商品
+        row_0 = rows[0]
+        row_0_td = row_0.find_all('td')
 
-                if not sku:
-                    # 备用方案：从按钮获取
-                    buttons = row_0.find_all('button')
-                    button_titles = [button.get('title') for button in buttons if button.get('title')]
-                    sku = button_titles[0] if button_titles else None
+        # 从hidden input获取SKU（更准确）
+        sku_input = row_0.find('input', {'name': 'skc'})
+        sku = sku_input['value'] if sku_input else None
 
-                logger.info(f'提取的SKU: {sku}')
+        if not sku:
+            # 备用方案：从按钮获取
+            buttons = row_0.find_all('button')
+            button_titles = [button.get('title') for button in buttons if button.get('title')]
+            sku = button_titles[0] if button_titles else None
 
-                brand_category = row_0_td[1].get_text(strip=True) if len(row_0_td) > 1 else ''
-                image_element = row_0.find('img')
-                image_url = image_element['src'] if image_element else ''
-                name_element = row_0.find('a')
-                name = name_element.get_text(strip=True) if name_element else '未知商品'
-                distribution_price = row_0_td[5].get_text(strip=True) if len(row_0_td) > 5 else ''
-                market_price = row_0_td[6].get_text(strip=True) if len(row_0_td) > 6 else ''
-                listing_time = row_0_td[7].get_text(strip=True) if len(row_0_td) > 7 else ''
+        logger.info(f'提取的SKU: {sku}')
 
-                product = {
-                    'keyword': keyword,
-                    'sku': sku,
-                    'brand_category': brand_category,
-                    'image_url': image_url,
-                    'name': name,
-                    'distribution_price': distribution_price,
-                    'market_price': market_price,
-                    'listing_time': listing_time,
-                }
+        brand_category = row_0_td[1].get_text(strip=True) if len(row_0_td) > 1 else ''
+        image_element = row_0.find('img')
+        image_url = image_element['src'] if image_element else ''
+        name_element = row_0.find('a')
+        name = name_element.get_text(strip=True) if name_element else '未知商品'
+        distribution_price = row_0_td[5].get_text(strip=True) if len(row_0_td) > 5 else ''
+        market_price = row_0_td[6].get_text(strip=True) if len(row_0_td) > 6 else ''
+        listing_time = row_0_td[7].get_text(strip=True) if len(row_0_td) > 7 else ''
+
+        product = {
+            'keyword': keyword,
+            'sku': sku,
+            'brand_category': brand_category,
+            'image_url': image_url,
+            'name': name,
+            'distribution_price': distribution_price,
+            'market_price': market_price,
+            'listing_time': listing_time,
+        }
     return product
 
 # 选择商品并保存到购物车
@@ -862,23 +902,23 @@ def query_product_count():
     try:
         headers['cookie'] = load_cookie()
         resp = requests.get(url=config.URL_QUERY_PRODUCT_COUNTS, headers=headers, timeout=10)
-        logger.debug(f'status_code: {resp.status_code}')
-        
-        if 'login.do' in resp.url:
+
+        if _is_login_required(resp):
             do_login()
             return query_product_count()
-        
-        if resp.status_code == 200:
-            soup = BeautifulSoup(resp.content, "html.parser", from_encoding="utf-8")
-            message_div = soup.find('div', class_='message')
-            if message_div:
-                total_records = message_div.find('i', class_='blue').text
+
+        soup = BeautifulSoup(resp.content, "html.parser", from_encoding="utf-8")
+        message_div = soup.find('div', class_='message')
+        if message_div:
+            blue_element = message_div.find('i', class_='blue')
+            if blue_element and blue_element.text.isdigit():
+                total_records = blue_element.text
                 logger.info(f'商品总数: {total_records}')
                 return int(total_records)
-        
-            logger.warning("⚠️ 未找到商品总数信息")
-            return None
-        
+
+        logger.warning("⚠️ 未找到商品总数信息，可能页面结构已更改。")
+        logger.debug(f"无法解析的页面内容(前500字符): {resp.text[:500]}")
+        return None
     except requests.exceptions.RequestException as e:
         logger.error(f"❌ 网络请求失败: {e}")
         return None
@@ -923,6 +963,7 @@ def load_count_cache(keyword):
 def should_check_products():
     """检查是否需要查询商品（全局级别）"""
     from ..common.status import load_monitor_status, get_global_test_mode
+
     monitor_enabled = load_monitor_status()
     test_mode = get_global_test_mode()
 
@@ -930,6 +971,8 @@ def should_check_products():
     if not monitor_enabled and not test_mode:
         logger.debug("监控关闭且非测试模式，跳过商品总数变化检查。")
         return False
+    logger.info(f"监控状态: monitor_enabled={monitor_enabled}, test_mode={test_mode}")
+
 
     current_count = query_product_count()
     current_time = datetime.now()
