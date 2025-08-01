@@ -227,6 +227,7 @@ def execute_batch_checkout():
 def submit_batch_order(settle_url, order):
     """提交批量订单"""
     try:
+        check_and_refresh_login()
         logger.info(f"💳 正在提交批量订单: {settle_url}")
 
         # 1. 访问结算页面获取表单数据
@@ -347,36 +348,8 @@ def submit_batch_order(settle_url, order):
 # 全局headers实例（动态更新cookie）
 headers = config.HEADERS.copy()
 
-def _is_login_required(response: requests.Response) -> bool:
-    """
-    检查响应是否表明需要登录。
-    通过多种方式判断，增强鲁棒性。
-    """
-    # 1. 检查是否重定向到登录页面
-    if 'login.do' in response.url:
-        logger.info("检测到重定向到登录页面，需要登录。")
-        return True
-
-    # 2. 检查非200状态码（例如 401, 403），这些通常也意味着会话问题
-    if response.status_code != 200:
-        logger.warning(f"响应状态码为 {response.status_code}，可能需要登录。")
-        return True
-
-    # 3. 检查200 OK响应的内容是否为登录页面
-    #    (寻找登录页面的特征，如密码输入框和登录表单)
-    try:
-        content = response.text
-        # 寻找一个在登录页存在，但在正常页面不存在的组合
-        if 'name="password"' in content and 'login/checkLogin.do' in content:
-            logger.info("响应内容为登录页面（但状态码为200），需要登录。")
-            return True
-    except Exception:
-        # 如果响应不是文本（如图片），则忽略此检查
-        pass
-
-    return False
-
 def getOrder():
+    check_and_refresh_login()
     resp = requests.get(url=config.URL_ORDERLIST, headers=headers)
     soup = BeautifulSoup(resp.content, "html.parser", from_encoding="utf-8")
 
@@ -391,18 +364,32 @@ def getOrder():
                 logger.info(f"提取的订单号: {order_number}")
 
 
+def check_and_refresh_login():
+    """
+    检查登录会话是否需要刷新（超过2小时）。
+    这是所有网络请求前必须调用的函数。
+    """
+    if state.last_login_success_time is None or \
+       (datetime.now() - state.last_login_success_time) > timedelta(hours=2):
+        logger.info(f"登录会话需要刷新（上次登录: {state.last_login_success_time}）。")
+        do_login()
+    elif not headers.get('cookie'):
+        headers['cookie'] = load_cookie()
 
 # 登录
 def do_login():
     with login_lock:
-        # 双重检查锁定模式，防止“登录风暴”
-        if state.last_login_success_time and (datetime.now() - state.last_login_success_time) < timedelta(seconds=10):
-            logger.info("A recent successful login was detected. Skipping redundant login.")
+        # 双重检查锁定：在获取锁后，再次检查是否需要登录。
+        # 这可以防止在等待锁的过程中，其他线程已经完成了登录，从而避免“登录风暴”。
+        if state.last_login_success_time and \
+           (datetime.now() - state.last_login_success_time) < timedelta(hours=2):
+            logger.info("登录会话已被其他线程刷新，跳过本次多余的登录请求。")
             # 确保当前线程的headers也使用最新的cookie
-            headers['cookie'] = load_cookie()
+            if not headers.get('cookie'):
+                 headers['cookie'] = load_cookie()
             return
 
-        logger.info('do_login (lock acquired)')
+        logger.info('正在执行登录...')
         # 锁内执行登录，防止并发登录导致cookie混乱
         response = requests.post(url=config.URL_LOGIN, data=config.LOGIN_USER)
         logger.debug(response.status_code)
@@ -421,6 +408,7 @@ def do_login():
 
 # 查询商品信息
 def query_product(keyword):
+    check_and_refresh_login()
     logger.info(f'query_product: {keyword}')
 
     sku = None
@@ -428,14 +416,7 @@ def query_product(keyword):
 
     query_params = config.PARAM_QUERY_PRODUCT.copy()
     query_params['keyword'] = keyword
-    headers['cookie'] = load_cookie()
     resp = requests.post(url=config.URL_QUERY_PRODUCT, headers=headers, params=query_params)
-
-    if _is_login_required(resp):
-        do_login()
-        return query_product(keyword)
-
-    # 只有在确认无需登录且响应成功后才继续
     soup = BeautifulSoup(resp.content, "html.parser", from_encoding="utf-8")
 
     # 从页面统计信息获取真正的商品总数
@@ -523,6 +504,7 @@ def query_product(keyword):
 
 # 选择商品并保存到购物车
 def selectBuyDefect(sku):
+    check_and_refresh_login()
     logger.info('selectBuyDefect')
     sku = urllib.parse.quote(sku)
     logger.debug(f'sku: {sku}')
@@ -615,6 +597,7 @@ def checkout(checkId, count, payType='2'):
     :param count: 数量
     :param payType: 支付类型 ('1'=支付宝, '2'=微信支付)
     """
+    check_and_refresh_login()
     logger.info(f'结算商品: {checkId}, 支付类型: {payType}')
     resp = requests.get(url=f'{config.URL_SETTLE}?checked={checkId}', headers=headers)
     soup = BeautifulSoup(resp.content, "html.parser", from_encoding="utf-8")
@@ -791,6 +774,7 @@ def process_keyword(keyword):
     
 def refresh_orders():
     """刷新订单列表，只获取待付款的订单"""
+    check_and_refresh_login()
     logger.info('getOrder')
     resp = requests.get(url=config.URL_ORDERLIST, headers=headers)
     soup = BeautifulSoup(resp.content, "html.parser", from_encoding="utf-8")
@@ -840,6 +824,7 @@ def check_order_payment_status():
     logger.info(f"🔍 检查 {len(current_orders)} 个订单的付款状态...")
 
     try:
+        check_and_refresh_login()
         resp = requests.get(url=config.URL_ORDERLIST, headers=headers)
         soup = BeautifulSoup(resp.content, "html.parser", from_encoding="utf-8")
 
@@ -900,12 +885,13 @@ def query_product_count():
     logger.info('query_product_count')
     
     try:
-        headers['cookie'] = load_cookie()
+        check_and_refresh_login()
         resp = requests.get(url=config.URL_QUERY_PRODUCT_COUNTS, headers=headers, timeout=10)
 
-        if _is_login_required(resp):
-            do_login()
-            return query_product_count()
+        if resp.status_code != 200:
+            logger.error(f"查询商品总数失败，状态码: {resp.status_code}")
+            logger.debug(f"无法解析的页面内容(前500字符): {resp.text[:500]}")
+            return None
 
         soup = BeautifulSoup(resp.content, "html.parser", from_encoding="utf-8")
         message_div = soup.find('div', class_='message')
@@ -1183,12 +1169,7 @@ def find_latest_updated_products(sort_field_override=None):
     else:
         fields_to_try = config.SORT_FIELD_CANDIDATES
         logger.info(f"🚀 开始自动智能发现：将尝试 {len(fields_to_try)} 个可能的排序字段...")
-    
-    headers['cookie'] = load_cookie()
-    if not headers['cookie']:
-        logger.info("Cookie为空，尝试登录...")
-        do_login()
-        headers['cookie'] = load_cookie()
+    check_and_refresh_login()
 
     for i, field in enumerate(fields_to_try):
         logger.info(f"  [尝试 {i+1}/{len(fields_to_try)}] 使用排序字段: '{field}'")
@@ -1200,12 +1181,6 @@ def find_latest_updated_products(sort_field_override=None):
 
         try:
             resp = requests.post(url=config.URL_QUERY_PRODUCT, headers=headers, params=query_params, timeout=15)
-
-            if 'login.do' in resp.url:
-                logger.warning("会话已过期，重新登录并重试本次请求...")
-                do_login()
-                headers['cookie'] = load_cookie()
-                resp = requests.post(url=config.URL_QUERY_PRODUCT, headers=headers, params=query_params, timeout=15)
 
             if resp.status_code == 200:
                 soup = BeautifulSoup(resp.content, "html.parser", from_encoding="utf-8")
