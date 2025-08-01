@@ -377,19 +377,24 @@ def check_and_refresh_login():
         headers['cookie'] = load_cookie()
 
 # 登录
-def do_login():
+def do_login(force=False):
+    """
+    执行登录操作。
+    :param force: 如果为True，则无视时间限制强制执行登录。
+    """
     with login_lock:
         # 双重检查锁定：在获取锁后，再次检查是否需要登录。
-        # 这可以防止在等待锁的过程中，其他线程已经完成了登录，从而避免“登录风暴”。
-        if state.last_login_success_time and \
+        # 仅在非强制模式下生效，以避免登录风暴。
+        if not force and state.last_login_success_time and \
            (datetime.now() - state.last_login_success_time) < timedelta(hours=2):
             logger.info("登录会话已被其他线程刷新，跳过本次多余的登录请求。")
             # 确保当前线程的headers也使用最新的cookie
             if not headers.get('cookie'):
                  headers['cookie'] = load_cookie()
             return
-
-        logger.info('正在执行登录...')
+        
+        log_message = '正在执行强制登录...' if force else '正在执行登录...'
+        logger.info(log_message)
         # 锁内执行登录，防止并发登录导致cookie混乱
         response = requests.post(url=config.URL_LOGIN, data=config.LOGIN_USER)
         logger.debug(response.status_code)
@@ -417,6 +422,14 @@ def query_product(keyword):
     query_params = config.PARAM_QUERY_PRODUCT.copy()
     query_params['keyword'] = keyword
     resp = requests.post(url=config.URL_QUERY_PRODUCT, headers=headers, params=query_params)
+
+    # 主动重试逻辑：如果会话失效，则强制登录并重试一次
+    if resp.status_code in [401, 403]:
+        logger.warning(f"查询商品时收到 {resp.status_code} 错误，会话可能已失效。尝试强制重新登录并重试...")
+        do_login(force=True)
+        logger.info("正在重试查询商品...")
+        resp = requests.post(url=config.URL_QUERY_PRODUCT, headers=headers, params=query_params)
+
     soup = BeautifulSoup(resp.content, "html.parser", from_encoding="utf-8")
 
     # 从页面统计信息获取真正的商品总数
@@ -887,6 +900,13 @@ def query_product_count():
     try:
         check_and_refresh_login()
         resp = requests.get(url=config.URL_QUERY_PRODUCT_COUNTS, headers=headers, timeout=10)
+
+        # 主动重试逻辑：如果会话失效，则强制登录并重试一次
+        if resp.status_code in [401, 403]:
+            logger.warning(f"查询总数时收到 {resp.status_code} 错误，会话可能已失效。尝试强制重新登录并重试...")
+            do_login(force=True)
+            logger.info("正在重试查询商品总数...")
+            resp = requests.get(url=config.URL_QUERY_PRODUCT_COUNTS, headers=headers, timeout=10)
 
         if resp.status_code != 200:
             logger.error(f"查询商品总数失败，状态码: {resp.status_code}")
