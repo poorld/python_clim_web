@@ -983,8 +983,10 @@ def should_check_products():
     current_count = query_product_count()
     current_time = datetime.now()
 
+    # 规则1：如果查询商品总数失败，则不进行任何操作，防止因临时错误（如502）导致不必要的扫描
     if current_count is None:
-        return True
+        logger.warning("查询商品总数失败，跳过本次关键词检测。")
+        return False
 
     try:
         from ..common.status import increment_refresh_count
@@ -992,13 +994,28 @@ def should_check_products():
     except Exception as e:
         logger.warning(f"⚠️ 记录刷新次数失败: {e}")
 
-    if state._last_total_count != current_count:
-        logger.info(f'📈 商品总数变化: {state._last_total_count} -> {current_count}，需要查询商品')
+    # 首次运行，记录初始总数并执行一次扫描以建立基线
+    if state._last_total_count is None:
+        logger.info(f'首次运行，记录初始商品总数: {current_count}，将执行一次基线扫描。')
         state._last_total_count = current_count
         state._last_check_time = current_time
         return True
 
-    logger.info(f'📊 商品总数未变化: {current_count}，跳过查询')
+    # 规则2：只有当商品总数增加时，才触发查询
+    if current_count > state._last_total_count:
+        logger.info(f'📈 商品总数增加: {state._last_total_count} -> {current_count}，需要查询商品')
+        state._last_total_count = current_count
+        state._last_check_time = current_time
+        return True
+    
+    # 规则3：如果商品总数减少或未变，则不查询
+    if current_count < state._last_total_count:
+        logger.info(f'📉 商品总数减少: {state._last_total_count} -> {current_count}，跳过查询')
+    else:  # current_count == state._last_total_count
+        logger.info(f'📊 商品总数未变化: {current_count}，跳过查询')
+
+    # 无论如何都更新总数，以便下次比较
+    state._last_total_count = current_count
     return False
 
 def process_keyword_direct(keyword):
